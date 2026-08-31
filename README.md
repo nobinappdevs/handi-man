@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Handiman
 
-## Getting Started
+Next.js 16 App Router, fully static SPA (`output: "export"`), Tailwind v4,
+against a Laravel REST backend.
 
-First, run the development server:
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Set the backend host in `.env` before anything will load data:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+NEXT_PUBLIC_API_URL=https://<host>/api/v1
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> Do **not** create `.env.local` — it silently overrides `.env` and you end up
+> debugging the wrong API host.
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Command | Does |
+|---|---|
+| `npm run dev` | dev server |
+| `npm run build` | static export → `out/` |
+| `npm run start` | custom Node server (`server.js`) — not used by the static deploy |
+| `npm run lint` | eslint |
+| `npx tsc --noEmit` | typecheck — must be clean before any work is done |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploying
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`npm run build` produces a self-contained `out/` folder: `index.html`, one
+`.html` per route, `404.html`, hashed `_next/` assets and everything in
+`public/`. Upload it to any static host — no Node process required.
 
-## Deploy on Vercel
+## Architecture
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Read these in order:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **[docs/PROJECT_BLUEPRINT.md](docs/PROJECT_BLUEPRINT.md)** — the binding spec:
+   folder structure, routing, design tokens, typography, theming, i18n, the
+   API layer, forms, the UI kit, image handling, and the static-export rules.
+2. **[docs/SCAFFOLD_STATUS.md](docs/SCAFFOLD_STATUS.md)** — what exists today,
+   what is still a placeholder, and where each incoming design or API drops in.
+3. **[docs/API_INTEGRATION_GUIDE.md](docs/API_INTEGRATION_GUIDE.md)** — the
+   step-by-step recipe for wiring one endpoint (Bangla).
+4. **[docs/DYNAMIC_CONTENT_ON_STATIC.md](docs/DYNAMIC_CONTENT_ON_STATIC.md)** —
+   serving admin-editable content from a static build (Bangla).
+
+The one architectural rule — a component never calls axios:
+
+```
+Component  →  Hook (React Query)  →  Service (axios)  →  axios instance
+  UI only      toast/navigate/cache    endpoint + shape     baseURL/token/401
+```
+
+`demo/` is the reference project: a complete worked example of every pattern
+above. It is excluded from the typecheck and the lint. Read from it; never
+import from it.

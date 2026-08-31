@@ -9,6 +9,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Reference material, kept for lookup only — never compiled.
+    "demo/**",   // the escroc reference project
+    "home/**",   // the Claude Design canvas export + its runtime
   ]),
 ]);
 

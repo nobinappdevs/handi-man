@@ -1,0 +1,227 @@
+{
+  "brand": {
+    "name": "Handiman",
+    "tagline": "Trusted help for every job around your home"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "howItWorks": "How it works",
+    "blog": "Blog",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "login": "Sign in",
+    "register": "Get started",
+    "dashboard": "Dashboard",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "vendors": "Vendors",
+    "delivery": "Delivery",
+    "pricing": "Pricing",
+    "getQuote": "Get a quote"
+  },
+  "theme": {
+    "toggle": "Colour theme",
+    "light": "Light mode",
+    "dark": "Dark mode"
+  },
+  "language": {
+    "label": "Language",
+    "select": "Select language"
+  },
+  "auth": {
+    "labelEmail": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "labelPassword": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "labelConfirmPassword": "Confirm password",
+    "labelFirstName": "First name",
+    "labelLastName": "Last name",
+    "labelPhone": "Phone number",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Sign in to manage your bookings.",
+    "loginButton": "Sign in",
+    "loggingIn": "Signing in…",
+    "registerTitle": "Create your account",
+    "registerSubtitle": "Book a trusted pro in minutes.",
+    "registerButton": "Create account",
+    "registering": "Creating account…",
+    "noAccount": "New here?",
+    "haveAccount": "Already have an account?",
+    "acceptTerms": "I agree to the Terms and Privacy Policy",
+    "forgotTitle": "Reset your password",
+    "forgotSubtitle": "We will email you a verification code.",
+    "sendCode": "Send code",
+    "sendingCode": "Sending…",
+    "otpTitle": "Enter your code",
+    "otpSubtitle": "We sent a 6-digit code to {email}.",
+    "otpButton": "Verify",
+    "verifying": "Verifying…",
+    "resendCode": "Resend code",
+    "backToLogin": "Back to sign in",
+    "resetTitle": "Choose a new password",
+    "resetButton": "Update password",
+    "twoFaTitle": "Two-factor verification",
+    "twoFaSubtitle": "Enter the code from your authenticator app."
+  },
+  "common": {
+    "search": "Search",
+    "loading": "Loading…",
+    "save": "Save",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "viewAll": "View all",
+    "readMore": "Read more",
+    "learnMore": "Learn more",
+    "getStarted": "Get started",
+    "noResults": "Nothing found",
+    "somethingWentWrong": "Something went wrong. Please try again."
+  },
+  "banner": {},
+  "about": {},
+  "services": {},
+  "howItWorks": {},
+  "testimonials": {},
+  "partners": {},
+  "blog": {},
+  "download": {},
+  "cookie": {},
+  "footer": {},
+  "home": {
+    "hero": {
+      "eyebrow": "Welcome to Handiman",
+      "titleLine1": "On-Demand Services",
+      "titleLine2": "And Parcel Delivery",
+      "lead": "Book handyman services or send a parcel in a few taps. Vendors list their services, admins verify every listing, and you track the job from request to completion.",
+      "discover": "Discover more",
+      "howItWorks": "How it works",
+      "workerAlt": "Handiman professional holding a cordless drill and a tool box",
+      "verifiedLabel": "Verified pros",
+      "verifiedCount": "2400",
+      "stats": {
+        "categories": "Categories",
+        "delivery": "Delivery",
+        "rating": "Rating"
+      },
+      "supportText": "24/7 support for handyman & delivery jobs — call",
+      "supportPhone": "+00-11-00-2222",
+      "namePlaceholder": "Name",
+      "emailPlaceholder": "Enter Email",
+      "cityLabel": "City",
+      "serviceLabel": "Service",
+      "bookNow": "Booking now",
+      "bookSent": "Request sent"
+    },
+    "services": {
+      "handyman": "Handyman",
+      "cleaning": "Cleaning",
+      "acRepair": "AC repair",
+      "plumbing": "Plumbing",
+      "parcelPickup": "Parcel pickup",
+      "beauty": "Beauty"
+    },
+    "categories": {
+      "eyebrow": "Browse categories",
+      "title": "What do you need today?",
+      "pros": "pros",
+      "allDay": "24/7",
+      "items": {
+        "handyman": "Handyman",
+        "cleaning": "Cleaning",
+        "delivery": "Delivery",
+        "plumbing": "Plumbing",
+        "electrics": "Electrics",
+        "acRepair": "AC repair",
+        "beauty": "Beauty",
+        "shifting": "Shifting"
+      }
+    },
+    "about": {
+      "eyebrow": "Who we are",
+      "title": "Our goal is one platform for every service you need.",
+      "lead": "Handiman connects users, vendors and admins in a single system — handyman bookings, a multi-vendor marketplace and parcel delivery, with verification and analytics built in.",
+      "badgeValue": "60+",
+      "badgeLabel": "Service categories on demand",
+      "discover": "Discover more",
+      "callLabel": "Call anytime",
+      "callNumber": "+00-11-00-2222",
+      "photoOneAlt": "Technician working on an electrical panel",
+      "photoTwoAlt": "Technician in a hard hat and safety glasses",
+      "checks": {
+        "marketplace": "Multi-vendor marketplace",
+        "tracking": "Live pickup & delivery tracking",
+        "security": "KYC & two-factor security",
+        "payments": "Cash, e-Wallet & gateways",
+        "scheduling": "Flexible service scheduling",
+        "support": "Live chat & support tickets"
+      }
+    },
+    "contact": {
+      "eyebrow": "Contact us",
+      "title": "Let's talk about your next job.",
+      "photoAlt": "Handiman vendor checking stock against a job sheet",
+      "badge": "Verified vendors, tracked jobs — every request covered.",
+      "fullName": "Full Name*",
+      "email": "Email",
+      "phone": "Phone",
+      "serviceLabel": "Service",
+      "message": "Message",
+      "submit": "Submit request",
+      "sent": "Request sent",
+      "replyNote": "Replies within 2 hours, 24/7."
+    }
+  },
+  "aboutPage": {},
+  "servicesPage": {},
+  "blogPage": {},
+  "blogDetail": {},
+  "contactPage": {},
+  "faqPage": {},
+  "legalPages": {},
+  "dashboard": {
+    "common": {
+      "showing": "Showing",
+      "of": "of",
+      "previous": "Previous",
+      "next": "Next",
+      "empty": "Nothing here yet"
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The page you are looking for does not exist or has moved.",
+    "cta": "Back to home"
+  },
+  "cart": {
+    "title": "Your cart",
+    "empty": "Your cart is empty.",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "keepBrowsing": "Keep browsing",
+    "increase": "Increase quantity",
+    "decrease": "Decrease quantity",
+    "seed": {
+      "ac": {
+        "title": "AC service & gas refill",
+        "meta": "Today · 2–4 pm"
+      },
+      "parcel": {
+        "title": "Parcel pickup — 5 kg",
+        "meta": "Express · Troy"
+      }
+    }
+  }
+}
