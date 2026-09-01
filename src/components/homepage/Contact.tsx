@@ -24,24 +24,25 @@ import {
 } from "@/schemas/contact.schema";
 import { cn } from "@/components/ui/cn";
 import contactPhoto from "@public/assets/home/contact-photo.webp";
-import contactFigure from "@public/assets/home/contact-figure.webp";
-import contactPattern from "@public/assets/home/contact-pattern.webp";
 
 /* Fields sit on the plum panel, so they are translucent white rather than the
    `field-*` tokens the booking band uses on its light panel. */
 const FIELD =
-  "h-[46px] w-full border bg-white/[0.12] px-4 text-[15px] font-medium text-white outline-none transition-colors placeholder:text-white/55 focus:border-white/60";
+  "h-[54px] w-full border bg-white/[0.12] px-4 text-[14.5px] font-medium text-white outline-none transition-colors placeholder:text-white/55 focus:border-white/60";
 
-const ERROR_TEXT =
-  "mt-1.5 block text-[12.5px] font-medium text-red-300";
+const ERROR_TEXT = "mt-1.5 block text-[12.5px] font-medium text-red-300";
 
 /**
- * Contact section: a photo panel with a "verified" badge on the left, and a
- * plum request form on the right with the cut-out figure standing in it.
+ * Contact section: a worksite photo with a "verified" badge on the left, and
+ * a frosted plum request form floating over the seam on the right — the
+ * form card is pulled left with a negative margin so it overlaps the photo
+ * panel rather than sitting flush beside it, matching the design's glass
+ * card treatment. Below `wide:` it drops the blur/shadow/overlap and just
+ * stacks full-width.
  *
  * Validation is local (Zod + RHF); on submit the button switches to its sent
- * label, matching how the hero band behaves. Wire the mutation in when the
- * contact endpoint exists — toast and navigation belong in that hook, not here.
+ * label. Wire the mutation in when the contact endpoint exists — toast and
+ * navigation belong in that hook, not here.
  */
 export function Contact() {
   const { t } = useLang();
@@ -68,101 +69,65 @@ export function Contact() {
   });
 
   return (
-    <section className="relative bg-bg px-[clamp(18px,3vw,44px)] pt-[clamp(20px,3vw,40px)] pb-[clamp(48px,6vw,96px)]">
-      <div className="mx-auto grid max-w-[1240px] grid-cols-1 items-stretch overflow-hidden wide:grid-cols-[minmax(0,1.14fr)_minmax(0,0.86fr)]">
-
+    <section className="brand-wash relative [--wash-angle:332deg] [--wash-strength:6%] pb-[clamp(40px,5vw,80px)]">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-stretch wide:grid-cols-[0.6fr_0.4fr]">
         {/* ── Photo + verified badge ── */}
-        <div className="relative z-0 min-h-[300px] mid:min-h-[380px] wide:min-h-[560px]">
+        <div className="relative min-h-[360px] min-w-0 overflow-hidden wide:min-h-[640px]">
           <Image
             src={contactPhoto}
             alt={t("home.contact.photoAlt")}
             fill
-            sizes="(max-width: 980px) 100vw, 57vw"
+            sizes="(max-width: 980px) 100vw, 60vw"
             className="object-cover"
           />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(18,16,15,0)_40%,rgba(18,16,15,0.35)_100%)]" />
 
-          <div className="absolute bottom-0 left-0 flex w-[min(100%,86%)] items-center gap-4 bg-ink px-[clamp(16px,2vw,24px)] py-[clamp(14px,1.8vw,20px)] wide:w-[min(100%,78%)]">
-            <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-primary text-white">
-              <ShieldCheck
-                size={18}
-                strokeWidth={2.2}
-                aria-hidden
-              />
+          <div className="absolute bottom-0 left-0 flex w-[min(340px,72%)] items-center gap-4 bg-ink px-[22px] py-[18px] text-white">
+            <span className="flex h-[42px] w-[42px] flex-none items-center justify-center rounded-full bg-primary">
+              <ShieldCheck size={20} strokeWidth={2} aria-hidden />
             </span>
-
-            <span className="text-[clamp(13.5px,1.1vw,15px)] font-bold leading-[1.35] text-white">
+            <p className="text-[clamp(15px,1.4vw,18px)] leading-[1.3] font-extrabold tracking-[-0.02em]">
               {t("home.contact.badge")}
-            </span>
+            </p>
           </div>
         </div>
 
-        {/* ── Request form ── */}
-        <div className="relative z-10 overflow-visible px-[clamp(20px,2.4vw,34px)] py-[clamp(28px,4.4vw,64px)]">
-
-          {/* Purple background layer */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-[linear-gradient(160deg,rgb(var(--primary__color))_0%,rgb(var(--primary-dark))_100%)]"
-          >
-            {/* Topographic contour overlay */}
-            <Image
-              src={contactPattern}
-              alt=""
-              aria-hidden
-              fill
-              sizes="(max-width: 980px) 100vw, 43vw"
-              className="object-cover opacity-70"
-            />
-
-            {/* Soft highlight in the upper right */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(90%_80%_at_80%_8%,rgba(255,255,255,0.14),rgba(255,255,255,0)_62%)]"
-            />
+        {/* ── Plum panel ──
+            No `overflow-hidden` here: the frosted card below is deliberately
+            pulled left past this panel's own edge (see its comment). Clipping
+            it here would hard-cut the blur mid-photo instead of letting it
+            bleed over the seam. The decorative circles/dots below have their
+            own scoped `overflow-hidden` so they still can't leak past the
+            section. */}
+        <div className="relative min-w-0 bg-primary p-[clamp(34px,4.4vw,64px)_clamp(20px,3vw,56px)]">
+          <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_88%_6%,rgba(255,255,255,0.18),rgba(255,255,255,0)_60%)]" />
+            <div className="absolute -top-[16%] -right-[8%] h-[clamp(280px,32vw,460px)] w-[clamp(280px,32vw,460px)] rounded-full border border-white/[0.18]" />
+            <div className="absolute -top-[4%] right-[2%] h-[clamp(190px,22vw,330px)] w-[clamp(190px,22vw,330px)] rounded-full border border-white/[0.12]" />
+            <div className="absolute right-[12%] bottom-[8%] h-[clamp(110px,12vw,170px)] w-[clamp(110px,12vw,170px)] rotate-[22deg] rounded-[22px] border border-white/[0.16]" />
+            <div className="absolute bottom-[6%] left-[5%] h-[clamp(110px,13vw,180px)] w-[clamp(110px,13vw,180px)] opacity-45 bg-[radial-gradient(rgba(255,255,255,0.55)_1.3px,transparent_1.3px)] bg-[length:16px_16px]" />
+            <div className="absolute inset-y-0 left-[14%] w-px skew-x-[-13deg] bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.2)_45%,rgba(255,255,255,0)_100%)]" />
           </div>
 
-          {/* The figure */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-[10%] bottom-0 z-20 hidden aspect-[433/577] h-[62%] wide:block"
-          >
-            <Image
-              src={contactFigure}
-              alt=""
-              fill
-              sizes="20vw"
-              className="object-contain object-bottom"
-            />
-          </div>
-
-          {/* ── Form content ── */}
-          <div className="relative z-30 flex flex-col gap-[clamp(14px,1.6vw,20px)] wide:max-w-[90%] wide:-translate-x-[30%]">
-
+          {/* Frosted card — floats over the photo/panel seam from `wide:` up. */}
+          <div className="relative z-[3] flex flex-col gap-[clamp(16px,2vw,22px)] wide:max-w-[560px] wide:-ml-[46%] wide:bg-[color-mix(in_oklab,rgb(var(--primary__color))_55%,transparent)] wide:p-[clamp(26px,2.6vw,38px)] wide:shadow-[0_40px_90px_-40px_rgba(0,0,0,0.55)] wide:backdrop-blur-[18px]">
             <Eyebrow
-              className="text-white"
-              icon={
-                <MessageSquare
-                  size={16}
-                  strokeWidth={2.4}
-                  aria-hidden
-                />
-              }
+              className="text-white/85"
+              icon={<MessageSquare size={16} strokeWidth={2.6} aria-hidden />}
             >
               {t("home.contact.eyebrow")}
             </Eyebrow>
 
-            <h2 className="text-[clamp(28px,3.6vw,50px)] leading-[1.06] text-white text-balance">
+            <h2 className="text-[clamp(28px,3.4vw,46px)] leading-[1.06] text-white text-balance">
               {t("home.contact.title")}
             </h2>
 
             <form
               noValidate
               onSubmit={handleSubmit(() => setSent(true))}
-              className="mt-1 flex flex-col gap-5"
+              className="flex flex-col gap-3"
             >
-              <div className="grid grid-cols-1 gap-5 mid:grid-cols-2">
-
-                {/* Full Name */}
+              <div className="grid grid-cols-1 gap-3 mid:grid-cols-2">
                 <Field
                   name="full_name"
                   control={control}
@@ -170,8 +135,6 @@ export function Contact() {
                   placeholder={t("home.contact.fullName")}
                   onEdit={() => setSent(false)}
                 />
-
-                {/* Email */}
                 <Field
                   name="email"
                   type="email"
@@ -180,8 +143,6 @@ export function Contact() {
                   placeholder={t("home.contact.email")}
                   onEdit={() => setSent(false)}
                 />
-
-                {/* Phone */}
                 <Field
                   name="phone"
                   type="tel"
@@ -191,9 +152,8 @@ export function Contact() {
                   onEdit={() => setSent(false)}
                 />
 
-                {/* Service */}
                 <div>
-                  <label className="relative flex h-[46px] items-center border border-white/25 bg-white/[0.12] px-4">
+                  <label className="relative flex h-[54px] items-center border border-white/[0.28] bg-white/[0.12] px-4">
                     <Controller
                       name="service"
                       control={control}
@@ -205,32 +165,26 @@ export function Contact() {
                             field.onChange(e);
                             setSent(false);
                           }}
-                          className="w-full cursor-pointer appearance-none border-0 bg-transparent pe-5 text-[15px] font-semibold text-white outline-none"
+                          className="w-full cursor-pointer appearance-none border-0 bg-transparent pe-[18px] text-[14.5px] font-semibold text-white outline-none"
                         >
                           {serviceOptions.map((option) => (
-                            <option
-                              key={option.value}
-                              value={option.value}
-                              className="bg-card text-heading"
-                            >
+                            <option key={option.value} value={option.value} style={{ color: "#12100f" }}>
                               {option.label}
                             </option>
                           ))}
                         </select>
                       )}
                     />
-
                     <ChevronDown
-                      size={14}
+                      size={12}
                       strokeWidth={2.6}
                       aria-hidden
-                      className="pointer-events-none absolute end-4 text-white/70"
+                      className="pointer-events-none absolute end-[14px] text-white/70"
                     />
                   </label>
                 </div>
               </div>
 
-              {/* Message */}
               <div>
                 <Controller
                   name="message"
@@ -238,11 +192,9 @@ export function Contact() {
                   render={({ field }) => (
                     <textarea
                       {...field}
-                      rows={3}
+                      rows={4}
                       aria-label={t("home.contact.message")}
-                      aria-invalid={
-                        errors.message ? true : undefined
-                      }
+                      aria-invalid={errors.message ? true : undefined}
                       placeholder={t("home.contact.message")}
                       onChange={(e) => {
                         field.onChange(e);
@@ -250,44 +202,25 @@ export function Contact() {
                       }}
                       className={cn(
                         FIELD,
-                        "h-auto min-h-[92px] resize-y py-3 leading-[1.5]",
-                        errors.message
-                          ? "border-red-400"
-                          : "border-white/25",
+                        "h-auto resize-y py-3.5 leading-[1.5]",
+                        errors.message ? "border-red-400" : "border-white/[0.28]",
                       )}
                     />
                   )}
                 />
-
-                {errors.message && (
-                  <span className={ERROR_TEXT}>
-                    {errors.message.message}
-                  </span>
-                )}
+                {errors.message && <span className={ERROR_TEXT}>{errors.message.message}</span>}
               </div>
 
-              {/* Submit */}
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+              <div className="flex flex-wrap items-center gap-3.5">
                 <button
                   type="submit"
-                  className="flex h-[46px] w-full cursor-pointer items-center justify-center gap-2.5 bg-ink font-display text-[15px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-primary-dark mid:w-[56%]"
+                  className="flex h-14 flex-1 min-w-[200px] cursor-pointer items-center justify-center gap-2.5 bg-ink font-display text-[15px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-white hover:text-ink"
                 >
-                  {t(
-                    sent
-                      ? "home.contact.sent"
-                      : "home.contact.submit",
-                  )}
-
-                  <ArrowRight
-                    size={15}
-                    strokeWidth={2.6}
-                    aria-hidden
-                  />
+                  {t(sent ? "home.contact.sent" : "home.contact.submit")}
+                  <ArrowRight size={15} strokeWidth={2.6} aria-hidden />
                 </button>
 
-                <span className="text-[12.5px] font-medium text-white/70">
-                  {t("home.contact.replyNote")}
-                </span>
+                <p className="text-[12.5px] font-semibold text-white/80">{t("home.contact.replyNote")}</p>
               </div>
             </form>
           </div>
@@ -332,21 +265,11 @@ function Field({
               field.onChange(e);
               onEdit();
             }}
-            className={cn(
-              FIELD,
-              error
-                ? "border-red-400"
-                : "border-white/25",
-            )}
+            className={cn(FIELD, error ? "border-red-400" : "border-white/[0.28]")}
           />
         )}
       />
-
-      {error && (
-        <span className={ERROR_TEXT}>
-          {error.message}
-        </span>
-      )}
+      {error && <span className={ERROR_TEXT}>{error.message}</span>}
     </div>
   );
 }

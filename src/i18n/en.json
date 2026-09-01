@@ -99,7 +99,39 @@
   "blog": {},
   "download": {},
   "cookie": {},
-  "footer": {},
+  "footer": {
+    "tagline": "Ultimate on-demand service and handyman solution for Android, iOS, and the web.",
+    "contacts": {
+      "phone": "(555) 123-4567",
+      "email": "support@handiman.com",
+      "address": "20-22 Wenlock Road, London"
+    },
+    "language": "English",
+    "newsletter": {
+      "eyebrow": "Newsletter",
+      "title": "Stay connected with us for regular updates by providing your name and email address:",
+      "namePlaceholder": "Name",
+      "emailPlaceholder": "Email",
+      "subscribe": "Subscribe",
+      "subscribed": "Subscribed"
+    },
+    "links": {
+      "title": "Useful Links",
+      "items": {
+        "privacyPolicy": "Privacy Policy",
+        "termsConditions": "Terms & Conditions"
+      }
+    },
+    "download": {
+      "title": "Download App",
+      "text": "Our apps are available for download",
+      "appStore": "App Store",
+      "googlePlay": "Google Play"
+    },
+    "copyrightLabel": "Copyright ©",
+    "copyrightNote": "All Rights Reserved by Handiman.",
+    "backToTop": "Back to top"
+  },
   "home": {
     "hero": {
       "eyebrow": "Welcome to Handiman",
@@ -149,6 +181,78 @@
         "shifting": "Shifting"
       }
     },
+    "listings": {
+      "tabs": {
+        "recommended": "Recommended",
+        "trending": "Trending"
+      },
+      "viewAll": "View all",
+      "items": {
+        "fitnessPotential": { "title": "Unleashing Your Full Fitness Potential", "unit": "1 item" },
+        "totalBodyFitness": { "title": "A Comprehensive Guide to Total Body Fitness", "unit": "1 day" },
+        "kitchenBathroomDeepClean": { "title": "Deep Clean for Kitchens and Bathrooms", "unit": "1 visit" },
+        "sameDayParcel": { "title": "Same-Day Parcel Pickup and Delivery", "unit": "per parcel" },
+        "acServiceGasRefill": { "title": "Split AC Service with Gas Refill", "unit": "1 unit" },
+        "emergencyPlumbing": { "title": "Emergency Plumbing Callout", "unit": "1 hour" },
+        "electricalSafetyCheck": { "title": "Full Home Electrical Safety Check", "unit": "1 visit" },
+        "salonAtHome": { "title": "Salon at Home — Facial and Care", "unit": "1 session" }
+      }
+    },
+    "categoryGroups": {
+      "startsAt": "Starts at",
+      "allOf": "All",
+      "groups": {
+        "cleaning": { "name": "Cleaning", "eyebrow": "Top rated" },
+        "mechanics": { "name": "Mechanics", "eyebrow": "Most booked" }
+      },
+      "items": {
+        "cleaningSolutions": { "title": "Professional Cleaning Solutions", "unit": "1 day" },
+        "deepCleaning": { "title": "Deep Cleaning Services", "unit": "1 day" },
+        "residentialCleaning": { "title": "Customized Residential Cleaning", "unit": "2 day" },
+        "janitorial": { "title": "Commercial Janitorial Services", "unit": "1 day" },
+        "autoDiagnostics": { "title": "Auto Diagnostics & Repairs", "unit": "1 day" },
+        "routineMaintenance": { "title": "Routine Maintenance Services", "unit": "1 day" },
+        "transmission": { "title": "Transmission Solutions", "unit": "1 day" },
+        "suspension": { "title": "Suspension & Steering Repairs", "unit": "2 day" }
+      }
+    },
+    "howItWorks": {
+      "eyebrow": "How it works",
+      "title": "Simply follow the moves",
+      "lead": "Discovering and availing services on Handyman is a breeze! Follow these simple steps to experience seamless solutions tailored to your needs",
+      "timing": "Timing",
+      "steps": {
+        "signUp": { "title": "Sign Up", "meta": "1 min", "body": "Create an account effortlessly to unlock a world of convenient services" },
+        "browseServices": { "title": "Browse Services", "meta": "Anytime", "body": "Explore a diverse range of services offered by our skilled vendors" },
+        "selectService": { "title": "Select Your Service", "meta": "Instant", "body": "Our intuitive interface makes it easy to find exactly what you're looking for" },
+        "placeOrder": { "title": "Place Your Order", "meta": "1 min", "body": "Once you've found the right service, place your order with a simple click" },
+        "connectVendor": { "title": "Connect with Your Vendor", "meta": "Instant", "body": "Connect with the dedicated vendor assigned to your service" },
+        "dedicatedTeams": { "title": "Dedicated Teams in Action", "meta": "24/7", "body": "Our dedicated teams for vendors and business owners swing into action, ensuring a smooth process" },
+        "qualityService": { "title": "Quality Service Every Time", "meta": "Always", "body": "We prioritize quality to guarantee satisfaction with every interaction" },
+        "shareFeedback": { "title": "Share Your Feedback", "meta": "Anytime", "body": "Your feedback helps maintain high standards and aids others in making informed decisions" }
+      }
+    },
+    "impact": {
+      "eyebrow": "About us",
+      "title": "Empowering businesses and connecting people",
+      "lead": "We are on a mission to simplify your daily life by providing a comprehensive on-demand service solution. From home maintenance to creative endeavors, we strive to create a community where users and vendors come together for extraordinary service experiences",
+      "photoAlt": "Vendor and customer shaking hands in a kitchen",
+      "ratingValue": "4.9",
+      "ratingLabel": "Average job rating",
+      "features": {
+        "onDemand": "On-Demand Services",
+        "dedicatedTeams": "Dedicated Teams",
+        "userFriendly": "User-Friendly Interface",
+        "budgetFriendly": "Budget-Friendly",
+        "transparentPricing": "Transparent and Competitive",
+        "innovation": "Innovation and Community"
+      },
+      "stats": {
+        "providers": { "num": "20K", "label": "Service Providers" },
+        "orders": { "num": "4M", "label": "Order Served" },
+        "clients": { "num": "5M", "label": "Happy Clients" }
+      }
+    },
     "about": {
       "eyebrow": "Who we are",
       "title": "Our goal is one platform for every service you need.",
@@ -167,6 +271,40 @@
         "payments": "Cash, e-Wallet & gateways",
         "scheduling": "Flexible service scheduling",
         "support": "Live chat & support tickets"
+      }
+    },
+    "team": {
+      "eyebrow": "Our team",
+      "title": "Meet the Handiman team.",
+      "lead": "From vendor verification to live support, this team keeps every booking, pickup and delivery running on schedule.",
+      "members": {
+        "owenBaxter": { "name": "Owen Baxter", "role": "Founder" },
+        "priyaNandan": { "name": "Priya Nandan", "role": "Operations Lead" },
+        "marcusCole": { "name": "Marcus Cole", "role": "Vendor Success" },
+        "saraAhmed": { "name": "Sara Ahmed", "role": "Product Design" }
+      }
+    },
+    "blog": {
+      "eyebrow": "Announcement",
+      "title": "Our Recent Announcement",
+      "lead": "Ultimate on-demand service and handyman solution for Android, iOS, and the web.",
+      "author": "Super Admin",
+      "posts": {
+        "communityConnections": { "cat": "Handiman Lifestyle", "title": "Community Connections: The Handiman Lifestyle", "date": "28 February, 2024", "read": "6 mins read" },
+        "pricingPhilosophy": { "cat": "Quality service", "title": "Innovation on a Budget: Handiman's Pricing Philosophy", "date": "26 January, 2024", "read": "5 mins read" },
+        "onDemandAdvantage": { "cat": "Revolutionizing is Handiman", "title": "Revolutionizing On-Demand: The Handiman Advantage", "date": "28 February, 2024", "read": "6 mins read" }
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Frequently Asked Questions",
+      "lead": "streamlining information for users and enhancing their understanding of a product, service, or topic",
+      "items": {
+        "howItWorks": { "q": "How does Handiman work for users?", "a": "Handiman simplifies the process for users. Sign up, browse services, select what you need, place an order, connect with your vendor, and enjoy top-notch service. Our dedicated teams ensure a smooth experience, and your feedback is always valued" },
+        "servicesOffered": { "q": "What services are offered on Handiman?", "a": "Handiman offers a diverse range of services, including but not limited to home maintenance, tech assistance, cleaning, plumbing, landscaping, beauty treatments, delivery, event planning, creative arts, fitness, and professional consultations." },
+        "vendorsJoin": { "q": "How do vendors join Handiman?", "a": "Vendors can easily join Handiman by signing up, showcasing their services, and becoming part of our community. Our platform provides a space for vendors to connect with users and deliver exceptional services." },
+        "whatSetsApart": { "q": "What sets Handiman apart from other on-demand service platforms?", "a": "Handiman stands out with its user-friendly interface, dedicated teams for vendors and business owners, budget-friendly solutions, transparent pricing, and a community-focused approach. We prioritize innovation and aim to make every service experience extraordinary" },
+        "mobileApps": { "q": "Is Handiman available on mobile devices?", "a": "Yes, Handiman is available on both Android and iOS platforms. Users and vendors can access the platform seamlessly through our user-friendly mobile apps, ensuring convenience on the go" }
       }
     },
     "contact": {

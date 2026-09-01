@@ -14,7 +14,7 @@ export function About() {
   const { t } = useLang();
 
   return (
-    <section className="relative overflow-hidden bg-bg px-[clamp(18px,3vw,44px)] pt-[clamp(20px,3vw,40px)] pb-[clamp(48px,6vw,96px)]">
+    <section className="brand-wash relative overflow-hidden [--wash-angle:332deg] [--wash-strength:6%] px-[clamp(18px,3vw,44px)] pt-[clamp(20px,3vw,40px)] pb-[clamp(48px,6vw,96px)]">
       <div className="relative mx-auto grid max-w-[1240px] grid-cols-1 items-center gap-[clamp(32px,5vw,72px)] wide:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)]">
         {/*
           ── Photo cluster ──
@@ -25,34 +25,18 @@ export function About() {
         */}
         <div className="relative min-w-0 max-w-none ps-[clamp(20px,5vw,64px)] pt-[clamp(30px,4vw,54px)] pb-[clamp(56px,6vw,74px)] mid:max-w-[min(480px,64%)] wide:max-w-none">
           {/* Organic plum blobs behind the photos. */}
-    <div
-  aria-hidden
-  className="absolute top-0 left-0 h-[clamp(190px,24vw,290px)] w-[clamp(190px,24vw,290px)] -rotate-12 bg-primary opacity-[0.92] [border-radius:62%_38%_46%_54%/55%_48%_52%_45%]"
-  style={{
-    animation: "aboutBlobFloat 4s ease-in-out infinite",
-  }}
->
-  <style jsx>{`
-    @keyframes aboutBlobFloat {
-      0%,
-      100% {
-        transform: translateY(0) rotate(-12deg);
-      }
-
-      50% {
-        transform: translatex(-12px) rotate(-8deg);
-      }
-    }
-  `}</style>
-</div>
+          <div
+            aria-hidden
+            className="absolute top-0 left-0 h-[clamp(190px,24vw,290px)] w-[clamp(190px,24vw,290px)] -rotate-12 bg-primary opacity-[0.92] [border-radius:62%_38%_46%_54%/55%_48%_52%_45%]"
+            style={{ animation: "about-blob-float 4s ease-in-out infinite" }}
+          />
           <div
             aria-hidden
             className="absolute bottom-0 left-1.5 h-[clamp(90px,11vw,140px)] w-[clamp(90px,11vw,140px)] bg-primary opacity-[0.18] [border-radius:45%_55%_62%_38%/52%_42%_58%_48%]"
           />
 
           <div className="relative flex items-end gap-[clamp(12px,1.6vw,20px)]">
-            <div className="relative h-[260px] min-w-0 flex-1 shadow-[0_30px_60px_-34px_rgba(0,0,0,0.5)] wide:h-80"
-            >
+            <div className="relative h-[260px] min-w-0 flex-1 shadow-[0_30px_60px_-34px_rgba(0,0,0,0.5)] wide:h-80">
               <Image
                 src={aboutOne}
                 alt={t("home.about.photoOneAlt")}
@@ -72,33 +56,18 @@ export function About() {
             </div>
           </div>
 
- <div
-  className="absolute bottom-[clamp(6px,2vw,18px)] left-0 flex items-center gap-3 bg-primary px-5 py-3.5 text-white shadow-[0_22px_44px_-22px_rgba(0,0,0,0.5)]"
-  style={{
-    animation: "aboutBadgeFloat 3.5s ease-in-out infinite",
-  }}
->
-  <style jsx>{`
-    @keyframes aboutBadgeFloat {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
+          <div
+            className="absolute bottom-[clamp(6px,2vw,18px)] left-0 flex items-center gap-3 bg-primary px-5 py-3.5 text-white shadow-[0_22px_44px_-22px_rgba(0,0,0,0.5)]"
+            style={{ animation: "about-badge-float 3.5s ease-in-out infinite" }}
+          >
+            <span className="text-[clamp(30px,3.4vw,40px)] font-black leading-none tracking-[-0.03em]">
+              {t("home.about.badgeValue")}
+            </span>
 
-      50% {
-        transform: translateY(-8px);
-      }
-    }
-  `}</style>
-
-  <span className="text-[clamp(30px,3.4vw,40px)] font-black leading-none tracking-[-0.03em]">
-    {t("home.about.badgeValue")}
-  </span>
-
-  <span className="max-w-[92px] font-display text-[12.5px] font-bold uppercase leading-[1.25] tracking-[0.12em]">
-    {t("home.about.badgeLabel")}
-  </span>
-</div>
+            <span className="max-w-[92px] font-display text-[12.5px] font-bold uppercase leading-[1.25] tracking-[0.12em]">
+              {t("home.about.badgeLabel")}
+            </span>
+          </div>
         </div>
 
         {/* ── Copy ── */}
@@ -143,32 +112,17 @@ export function About() {
               </div>
             </div>
 
-<div
-  className="absolute -right-60 -bottom-6 hidden h-[clamp(120px,13vw,172px)] w-[clamp(170px,19vw,250px)] opacity-60 mid:block"
-  style={{
-    animation: "floatTool 4s ease-in-out infinite",
-  }}
->
-  <style jsx>{`
-    @keyframes floatTool {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-14px);
-      }
-    }
-  `}</style>
-
-  <Image
-    src={aboutTool}
-    alt=""
-    aria-hidden
-    className="h-full w-full object-contain dark:brightness-0 dark:invert"
-  />
-</div>
+            <div
+              className="absolute -right-60 -bottom-6 hidden h-[clamp(120px,13vw,172px)] w-[clamp(170px,19vw,250px)] opacity-60 mid:block"
+              style={{ animation: "about-tool-float 4s ease-in-out infinite" }}
+            >
+              <Image
+                src={aboutTool}
+                alt=""
+                aria-hidden
+                className="h-full w-full object-contain dark:brightness-0 dark:invert"
+              />
+            </div>
           </div>
         </div>
       </div>

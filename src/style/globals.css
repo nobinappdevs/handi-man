@@ -26,6 +26,12 @@
      highlighted headline words and inline accents — never `text-primary`. */
   --brand-ink: var(--primary__color);
 
+  /* The brand colour mixed into section backgrounds by `.brand-wash`. Same
+     problem as `--brand-ink`, mirrored: plum mixed into the near-black dark
+     page barely moves it, so the dark theme mixes the lighter shade instead
+     and both themes end up visibly branded. */
+  --wash-ink: var(--primary__color);
+
   --bg: 255, 255, 255;      /* page background                          */
   --surface: 244, 242, 240; /* panels, chips, subtle fills   #f4f2f0    */
   --card: 255, 255, 255;    /* cards sitting on the page                */
@@ -93,6 +99,7 @@
   color-scheme: dark;
 
   --brand-ink: var(--primary-on-dark);
+  --wash-ink: var(--primary-lite);
 
   --bg: 18, 16, 15;         /* #12100f */
   --surface: 23, 21, 20;    /* #171514 */
@@ -429,6 +436,18 @@ input[type="number"] {
   from { stroke-dashoffset: 1; }
   to   { stroke-dashoffset: 0; }
 }
+@keyframes about-blob-float {
+  0%, 100% { transform: translateY(0) rotate(-12deg); }
+  50%      { transform: translateX(-12px) rotate(-8deg); }
+}
+@keyframes about-badge-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+@keyframes about-tool-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
 
 .pause-on-hover:hover [data-marquee] {
   animation-play-state: paused;
@@ -438,6 +457,37 @@ input[type="number"] {
 .slider-mask {
   -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+/*--------------------------------------------------------------
+    # Brand washes - plum-tinted section backgrounds
+    The landing page is a long run of full-width sections, and a flat page
+    background on every one of them reads as untinted and off-brand. These
+    mix `--primary__color` into the page background so each band carries the
+    brand colour, and they flip with the theme for free because the mix is
+    against `rgb(var(--bg))` rather than a fixed light/dark value.
+
+    Tune per section with two custom properties (Tailwind arbitrary
+    properties: `brand-wash [--wash-strength:12%] [--wash-angle:152deg]`):
+
+      --wash-strength   how much plum mixes in. ~5% is a whisper (the page
+                        still reads as white/near-black), ~12% is a visible
+                        band. Past ~18% the body copy starts to lose contrast.
+      --wash-angle      gradient direction. Mirror it between neighbouring
+                        sections (152deg / 332deg) so consecutive bands read
+                        as alternating rather than as one long ramp.
+
+    Do NOT also set a `bg-*` utility on the same element: this sets the
+    `background` shorthand, so the two fight over `background-color`.
+--------------------------------------------------------------*/
+.brand-wash {
+  background: linear-gradient(
+    var(--wash-angle, 152deg),
+    color-mix(in oklab, rgb(var(--wash-ink)) var(--wash-strength, 12%), rgb(var(--bg))) 0%,
+    rgb(var(--bg)) 50%,
+    color-mix(in oklab, rgb(var(--wash-ink)) calc(var(--wash-strength, 12%) * 0.75), rgb(var(--bg)))
+      100%
+  );
 }
 
 /*--------------------------------------------------------------
@@ -458,8 +508,8 @@ input[type="number"] {
   background-color: rgb(var(--primary__color));
 }
 
-/* Drag-scrolled marquee track (the category slider): scrolls, but shows no
-   scrollbar in any engine. Tailwind has no utility for the WebKit half. */
+/* Horizontally scrolled track that shows no scrollbar in any engine. Tailwind
+   has no utility for the WebKit half. */
 .no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;

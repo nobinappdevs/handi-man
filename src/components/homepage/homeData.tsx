@@ -130,3 +130,203 @@ export const ABOUT_CHECK_KEYS = [
   "scheduling",
   "support",
 ];
+
+/* ─────────────────────────── Listings (Popular services) ───────────────────
+ * Tabbed card grid. `key` resolves i18n title/unit; price and vendor are raw
+ * catalogue data (not translated), same convention as `Category.pros`.
+ */
+
+export type ListingCard = { key: string; price: string; vendor: string };
+
+export const LISTING_TABS: { key: string; cards: ListingCard[] }[] = [
+  {
+    key: "recommended",
+    cards: [
+      { key: "fitnessPotential", price: "10 USD", vendor: "Vendor 1" },
+      { key: "totalBodyFitness", price: "15 USD", vendor: "Vendor 1" },
+      { key: "kitchenBathroomDeepClean", price: "38 USD", vendor: "Vendor 2" },
+      { key: "sameDayParcel", price: "12 USD", vendor: "Vendor 4" },
+    ],
+  },
+  {
+    key: "trending",
+    cards: [
+      { key: "acServiceGasRefill", price: "49 USD", vendor: "Vendor 3" },
+      { key: "emergencyPlumbing", price: "32 USD", vendor: "Vendor 5" },
+      { key: "electricalSafetyCheck", price: "55 USD", vendor: "Vendor 2" },
+      { key: "salonAtHome", price: "28 USD", vendor: "Vendor 6" },
+    ],
+  },
+];
+
+/* ─────────────────────────── Category listing groups ───────────────────── */
+
+export type GroupCard = { key: string; tag: string; price: string; vendor: string };
+
+export const SERVICE_GROUPS: { key: string; cards: GroupCard[] }[] = [
+  {
+    key: "cleaning",
+    cards: [
+      { key: "cleaningSolutions", tag: "Home", price: "10 USD", vendor: "Vendor 1" },
+      { key: "deepCleaning", tag: "Home", price: "10 USD", vendor: "Vendor 1" },
+      { key: "residentialCleaning", tag: "Residential", price: "15 USD", vendor: "Vendor 1" },
+      { key: "janitorial", tag: "Commercial", price: "12 USD", vendor: "Vendor 1" },
+    ],
+  },
+  {
+    key: "mechanics",
+    cards: [
+      { key: "autoDiagnostics", tag: "Garage", price: "10 USD", vendor: "Vendor 1" },
+      { key: "routineMaintenance", tag: "Garage", price: "15 USD", vendor: "Vendor 1" },
+      { key: "transmission", tag: "Drivetrain", price: "12 USD", vendor: "Vendor 1" },
+      { key: "suspension", tag: "Chassis", price: "20 USD", vendor: "Vendor 1" },
+    ],
+  },
+];
+
+/* ─────────────────────────── How it works ─────────────────────────── */
+
+export type StepGlyph = ReactNode;
+
+export const HOW_IT_WORKS_STEPS: { key: string; icon: StepGlyph }[] = [
+  {
+    key: "signUp",
+    icon: (
+      <>
+        <path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
+        <circle cx="9.5" cy="7" r="4" />
+        <path d="M19 8v6M22 11h-6" />
+      </>
+    ),
+  },
+  {
+    key: "browseServices",
+    icon: (
+      <>
+        <circle cx="11" cy="11" r="7" />
+        <path d="M20 20l-4.4-4.4" />
+      </>
+    ),
+  },
+  {
+    key: "selectService",
+    icon: (
+      <>
+        <path d="M9 11l3 3 8-8" />
+        <path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9" />
+      </>
+    ),
+  },
+  {
+    key: "placeOrder",
+    icon: (
+      <>
+        <path d="M4 5h3l2.4 10.2A2 2 0 0 0 11.4 17h6.9a2 2 0 0 0 2-1.6L22 8H7" />
+        <circle cx="11" cy="20" r="1.4" />
+        <circle cx="18" cy="20" r="1.4" />
+      </>
+    ),
+  },
+  {
+    key: "connectVendor",
+    icon: <path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />,
+  },
+  {
+    key: "dedicatedTeams",
+    icon: (
+      <>
+        <circle cx="9" cy="8" r="3.4" />
+        <path d="M2.5 21v-1.6A4.4 4.4 0 0 1 7 15h4a4.4 4.4 0 0 1 4.5 4.4V21" />
+        <path d="M16.5 4.6a3.4 3.4 0 0 1 0 6.8M18.5 15.2A4.4 4.4 0 0 1 21.5 19.4V21" />
+      </>
+    ),
+  },
+  {
+    key: "qualityService",
+    icon: <path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1.1 5.9L12 16.4 6.7 19.2l1.1-5.9L3.5 9.2l5.9-.8z" />,
+  },
+  {
+    key: "shareFeedback",
+    icon: (
+      <>
+        <path d="M12 20.5l-3.6-3.6H5.5a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v9.4a2 2 0 0 1-2 2h-2.9z" />
+        <path d="M8.5 9h7M8.5 12.5h4.5" />
+      </>
+    ),
+  },
+];
+
+/* ─────────────────────────── Impact (about-us stats) ───────────────────── */
+
+export const IMPACT_FEATURE_KEYS = [
+  "onDemand",
+  "dedicatedTeams",
+  "userFriendly",
+  "budgetFriendly",
+  "transparentPricing",
+  "innovation",
+];
+
+export const IMPACT_STAT_KEYS = ["providers", "orders", "clients"];
+
+/* ─────────────────────────── Team ─────────────────────────── */
+
+const socialIconProps = {
+  width: 13,
+  height: 13,
+  viewBox: "0 0 24 24",
+  "aria-hidden": true,
+};
+
+export const TEAM_SOCIAL_ICONS: ReactNode[] = [
+  <svg key="x" {...socialIconProps} fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round">
+    <path d="M4 4l16 16M20 4L4 20" />
+  </svg>,
+  <svg key="facebook" {...socialIconProps} fill="currentColor">
+    <path d="M14 8h-2c-.6 0-1 .4-1 1v2h3l-.4 3H11v7H8v-7H6v-3h2V9c0-2.2 1.8-4 4-4h2v3z" />
+  </svg>,
+  <svg key="pinterest" {...socialIconProps} fill="currentColor">
+    <path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.1-2 0-2.9l1.2-5s-.3-.6-.3-1.4c0-1.4.8-2.4 1.8-2.4.8 0 1.3.6 1.3 1.4 0 .8-.6 2-.8 3.2-.2 1 .5 1.8 1.5 1.8 1.8 0 3.1-2.3 3.1-5 0-2.1-1.5-3.6-3.8-3.6-2.6 0-4.2 1.9-4.2 4 0 .7.2 1.2.5 1.6.1.1.1.2.1.4l-.3.9c0 .2-.2.3-.4.2-1.1-.4-1.6-1.7-1.6-3.1 0-2.3 2-5 5.9-5 3.2 0 5.3 2.3 5.3 4.7 0 3.2-1.8 5.6-4.4 5.6-.9 0-1.7-.5-2-1l-.5 2c-.2.8-.6 1.7-1 2.3.8.2 1.6.4 2.5.4a10 10 0 0 0 0-20z" />
+  </svg>,
+  <svg key="instagram" {...socialIconProps} fill="none" stroke="currentColor" strokeWidth={2}>
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="1" />
+  </svg>,
+];
+
+export const TEAM_MEMBER_KEYS = ["owenBaxter", "priyaNandan", "marcusCole", "saraAhmed"];
+
+/* ─────────────────────────── Blog / Announcement ───────────────────── */
+
+export const BLOG_POST_KEYS = ["communityConnections", "pricingPhilosophy", "onDemandAdvantage"];
+
+/* ─────────────────────────── FAQ ─────────────────────────── */
+
+export const FAQ_KEYS = ["howItWorks", "servicesOffered", "vendorsJoin", "whatSetsApart", "mobileApps"];
+
+/* ─────────────────────────── Footer ─────────────────────────── */
+
+/** Lucide dropped brand/social glyphs, so these four are drawn verbatim from
+ *  the design (X, Facebook and LinkedIn are filled marks; Instagram is the
+ *  same stroke rect+circle+dot as the team hover panel). */
+export const FOOTER_SOCIAL_ICONS: ReactNode[] = [
+  <svg key="x" {...socialIconProps} fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 4l16 16M20 4L4 20" />
+  </svg>,
+  <svg key="facebook" {...socialIconProps} fill="currentColor">
+    <path d="M14 8h-2c-.6 0-1 .4-1 1v2h3l-.4 3H11v7H8v-7H6v-3h2V9c0-2.2 1.8-4 4-4h2v3z" />
+  </svg>,
+  <svg key="instagram" {...socialIconProps} fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="1" />
+  </svg>,
+  <svg key="linkedin" {...socialIconProps} fill="currentColor">
+    <path d="M4 9h4v11H4zM6 3.5a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4zM11 20V9h4v1.6c.7-1.1 2-1.9 3.6-1.9 2.6 0 4.4 1.7 4.4 5.1V20h-4v-5.4c0-1.5-.6-2.5-2-2.5-1.1 0-1.8.8-2 1.6V20z" />
+  </svg>,
+];
+
+export const FOOTER_CONTACT_KEYS = ["phone", "email", "address"];
+
+export const FOOTER_LINK_KEYS = ["privacyPolicy", "termsConditions"];

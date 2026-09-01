@@ -16,24 +16,13 @@ const HERO_BG: StaticImageData | null = null;
    bottom; above it, it cuts diagonally down the right-hand side. */
 const WEDGE =
   "pointer-events-none absolute inset-y-0 end-0 w-full [clip-path:polygon(0_62%,100%_47%,100%_100%,0_100%)] " +
-  "wide:w-[52%] wide:[clip-path:polygon(22%_0,100%_0,100%_100%,0_100%)]";
+  "wide:w-[54%] wide:[clip-path:polygon(19%_0,100%_0,100%_100%,0_100%)]";
 
 export function Hero() {
   const { t } = useLang();
 
   return (
     <section className="relative bg-bg">
-      {/*
-        Backdrop + its scrim. The design asks for "a dark workshop photo" here
-        but shipped with the canvas's blurred stock placeholder still in the
-        slot, so `--hero-backdrop` stands in for it: a dark neutral tuned so the
-        scrim lands on the same tonal ramp the photo would have produced. Drop a
-        real .webp into public/assets/home/ and point HERO_BG at it to swap in.
-
-        The backdrop must stay dark either way — the scrim fading 95% → 38% over
-        it is what creates the wash behind the headline and what the white 14%
-        seam below reads against.
-      */}
       <div className="absolute inset-0 overflow-hidden bg-hero-backdrop">
         {HERO_BG && (
           <Image src={HERO_BG} alt="" fill priority sizes="100vw" className="object-cover" />
@@ -47,8 +36,8 @@ export function Hero() {
       <div className={`${WEDGE} bg-[linear-gradient(200deg,rgba(255,255,255,0.16),rgba(0,0,0,0.18))]`} />
 
       {/* Angled seam where the wedge meets the photo. */}
-      <div className="pointer-events-none absolute inset-y-0 left-[calc(48%-30px)] hidden w-2 skew-x-[-13deg] bg-white/[0.14] wide:block" />
-      <div className="pointer-events-none absolute inset-y-0 left-[calc(48%-54px)] hidden w-[3px] skew-x-[-13deg] bg-primary/75 wide:block" />
+      <div className="pointer-events-none absolute inset-y-0 left-[calc(49%-30px)] hidden w-2 skew-x-[-13deg] bg-white/[0.14] wide:block" />
+      <div className="pointer-events-none absolute inset-y-0 left-[calc(49%-54px)] hidden w-[3px] skew-x-[-13deg] bg-primary/75 wide:block" />
 
       {/* Line-work, clipped to the wedge. */}
       <div className={`${WEDGE} overflow-hidden`} aria-hidden>
@@ -62,7 +51,7 @@ export function Hero() {
       </div>
 
       <div className="relative mx-auto grid max-w-[1440px] grid-cols-1 items-end gap-[clamp(16px,2vw,24px)] px-[clamp(18px,3vw,44px)] mid:min-h-[520px] wide:min-h-[600px] wide:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
-        <div className="flex min-w-0 flex-col gap-[clamp(14px,1.6vw,20px)] pt-[clamp(38px,5vw,64px)] pb-[clamp(40px,9vw,132px)]">
+        <div className="flex min-w-0 flex-col gap-[clamp(14px,1.6vw,20px)] pt-[clamp(38px,5vw,64px)] pb-[70px]">
           <Eyebrow>{t("home.hero.eyebrow")}</Eyebrow>
 
           <h1 className="text-[clamp(34px,5.4vw,78px)] leading-[0.98] text-balance">
@@ -105,8 +94,8 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative flex h-full min-w-0 items-end justify-center">
-          <div className="relative mb-0 aspect-[330/366] w-full max-w-[330px] drop-shadow-[0_24px_40px_rgba(0,0,0,0.35)] mid:mb-[-74px] wide:mb-[-92px] wide:max-w-[430px]">
+        <div className="relative flex left-[165px] h-full min-w-0 items-end justify-center">
+          <div className="relative mb-0 aspect-[330/366] w-full max-w-[330px] drop-shadow-[0_24px_40px_rgba(0,0,0,0.35)] mid:mb-[-74px] wide:mb-[-92px] wide:max-w-[640px]">
             <Image
               src={heroWorker}
               alt={t("home.hero.workerAlt")}
@@ -114,17 +103,10 @@ export function Hero() {
               priority
               sizes="(max-width: 980px) 330px, 430px"
               className="object-contain object-bottom"
+              
             />
           </div>
 
-          <div className="absolute top-[clamp(12px,2vw,28px)] right-1 flex h-[clamp(92px,9vw,124px)] w-[clamp(92px,9vw,124px)] flex-col items-center justify-center rounded-full bg-invert shadow-[0_20px_46px_-18px_rgba(0,0,0,0.55),0_0_0_9px_rgba(255,255,255,0.18)] wide:-right-1.5">
-            <span className="font-display text-[10.5px] font-bold uppercase leading-none tracking-[0.14em] text-invert-muted">
-              {t("home.hero.verifiedLabel")}
-            </span>
-            <span className="text-[clamp(26px,2.8vw,34px)] font-black leading-none tracking-[-0.03em] text-invert-ink">
-              {t("home.hero.verifiedCount")}
-            </span>
-          </div>
         </div>
       </div>
 

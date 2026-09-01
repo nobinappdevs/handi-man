@@ -46,7 +46,7 @@ export function HeroBookingBand() {
 
   return (
     <div className="relative z-[6] mx-auto max-w-[1440px] translate-y-0 px-[clamp(18px,3vw,44px)] mid:translate-y-[42%]">
-      <div className="grid grid-cols-1 items-stretch shadow-[0_34px_70px_-40px_rgba(0,0,0,0.55)] wide:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)]">
+      <div className="grid grid-cols-1 items-stretch  wide:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)]">
         <div className="relative flex items-center overflow-hidden bg-[linear-gradient(120deg,rgb(var(--primary-lite))_0%,rgb(var(--primary__color))_45%,rgb(var(--primary-dark))_100%)] px-[clamp(16px,2.4vw,34px)] py-[clamp(20px,2.4vw,26px)] wide:pe-[clamp(56px,5.5vw,84px)]">
           <p className="relative z-2 text-[clamp(16px,1.5vw,21px)] font-bold leading-[1.3] text-white">
             {t("home.hero.supportText")}{" "}
