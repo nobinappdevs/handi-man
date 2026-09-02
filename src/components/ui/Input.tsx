@@ -9,7 +9,6 @@ type Size = "sm" | "md" | "lg";
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * Any native input type (`text`, `password`, `email`, `number`, `tel`,
-   * `url`, `search`, `date`, …) plus two extras handled specially:
 
    */
   type?: string;
