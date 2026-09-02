@@ -12,6 +12,8 @@ export interface RegisterPayload {
   last_name: string;
   email: string;
   password: string;
+  /** Laravel confirmed rule — sent whenever the form collects it. */
+  password_confirmation?: string;
   policy?: "on";
 }
 

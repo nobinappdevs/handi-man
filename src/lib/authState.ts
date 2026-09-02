@@ -27,6 +27,16 @@ export const OTP_ORIGIN_KEY = "handiman_otp_origin";
 /** The address the code was mailed to, so the OTP screen can show it. */
 export const OTP_EMAIL_KEY = "handiman_otp_email";
 
+/* ── forgot → OTP → reset hand-off ──
+ *
+ * The reset token is minted by `/user/forgot/password/send/otp` and spent two
+ * screens later by `/user/forgot/password/reset`, so it has to outlive both
+ * navigations without ever reaching localStorage — it is a password-change
+ * capability, not a session.
+ */
+export const RESET_TOKEN_KEY = "handiman_reset_token";
+export const RESET_EMAIL_KEY = "handiman_reset_email";
+
 export type OtpOrigin = "register" | "login";
 
 export function setEmailVerified(verified: boolean) {
@@ -111,6 +121,50 @@ export function readOtpOrigin(): OtpOrigin {
 export function readOtpEmail(): string {
   if (typeof window === "undefined") return "";
   return window.sessionStorage.getItem(OTP_EMAIL_KEY) ?? "";
+}
+
+/** Which flow the OTP screen is serving — it verifies an email OR a reset. */
+export type OtpFlow = "email" | "reset";
+
+export function readOtpFlow(): OtpFlow {
+  if (typeof window === "undefined") return "email";
+  return window.sessionStorage.getItem(OTP_FLOW_KEY) === "reset" ? "reset" : "email";
+}
+
+/**
+ * Point the OTP screen at the password-reset flow. The mirror of
+ * `startEmailOtpFlow`, and the only place the reset keys are written on the way
+ * in — the OTP screen needs the email to resend, the reset screen needs the
+ * token to spend.
+ */
+export function startResetOtpFlow(email: string, token?: string) {
+  if (typeof window === "undefined") return;
+  window.sessionStorage.setItem(OTP_FLOW_KEY, "reset");
+  window.sessionStorage.setItem(RESET_EMAIL_KEY, email);
+  setOtpEmail(email);
+  if (token) setResetToken(token);
+}
+
+export function setResetToken(token: string) {
+  if (typeof window === "undefined") return;
+  window.sessionStorage.setItem(RESET_TOKEN_KEY, token);
+}
+
+export function readResetToken(): string {
+  if (typeof window === "undefined") return "";
+  return window.sessionStorage.getItem(RESET_TOKEN_KEY) ?? "";
+}
+
+export function readResetEmail(): string {
+  if (typeof window === "undefined") return "";
+  return window.sessionStorage.getItem(RESET_EMAIL_KEY) ?? "";
+}
+
+/** Everything the reset flow left behind, once the password is changed. */
+export function clearResetFlow() {
+  if (typeof window === "undefined") return;
+  [RESET_TOKEN_KEY, RESET_EMAIL_KEY].forEach((k) => window.sessionStorage.removeItem(k));
+  clearOtpFlow();
 }
 
 export function clearOtpFlow() {

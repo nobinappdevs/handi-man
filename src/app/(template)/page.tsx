@@ -6,6 +6,7 @@ import { HowItWorks } from "@/components/homepage/HowItWorks";
 import { Impact } from "@/components/homepage/Impact";
 import { About } from "@/components/homepage/About";
 import { Team } from "@/components/homepage/Team";
+import { Testimonials } from "@/components/homepage/Testimonials";
 import { Blog } from "@/components/homepage/Blog";
 import { Faq } from "@/components/homepage/Faq";
 import { Contact } from "@/components/homepage/Contact";
@@ -27,6 +28,7 @@ export default function HomePage() {
       <HowItWorks />
       <Impact />
       <Team />
+      <Testimonials />
       <Blog />
       <Faq />
       <Contact />

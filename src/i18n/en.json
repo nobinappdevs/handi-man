@@ -31,43 +31,106 @@
     "select": "Select language"
   },
   "auth": {
+    "step": "Step",
+    "or": "or",
     "labelEmail": "Email address",
     "emailPlaceholder": "you@example.com",
     "labelPassword": "Password",
     "passwordPlaceholder": "Enter your password",
+    "choosePasswordPlaceholder": "Choose a password",
     "labelConfirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Repeat your password",
     "labelFirstName": "First name",
+    "firstNamePlaceholder": "Jordan",
     "labelLastName": "Last name",
+    "lastNamePlaceholder": "Rivera",
     "labelPhone": "Phone number",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
-    "rememberMe": "Remember me",
     "forgotPassword": "Forgot password?",
+    "strengthWeak": "Weak",
+    "strengthFair": "Fair",
+    "strengthGood": "Good",
+    "strengthStrong": "Strong",
     "loginTitle": "Welcome back",
-    "loginSubtitle": "Sign in to manage your bookings.",
+    "loginSubtitle": "Sign in to manage your bookings and jobs.",
     "loginButton": "Sign in",
     "loggingIn": "Signing in…",
+    "noAccount": "New here?",
     "registerTitle": "Create your account",
     "registerSubtitle": "Book a trusted pro in minutes.",
     "registerButton": "Create account",
     "registering": "Creating account…",
-    "noAccount": "New here?",
     "haveAccount": "Already have an account?",
-    "acceptTerms": "I agree to the Terms and Privacy Policy",
+    "agreePrefix": "I agree to the",
+    "terms": "Terms of Service",
+    "and": "and",
+    "privacy": "Privacy Policy",
     "forgotTitle": "Reset your password",
-    "forgotSubtitle": "We will email you a verification code.",
+    "forgotSubtitle": "Tell us the email on your account and we will send a 6-digit code.",
     "sendCode": "Send code",
     "sendingCode": "Sending…",
+    "backToLogin": "Back to sign in",
     "otpTitle": "Enter your code",
-    "otpSubtitle": "We sent a 6-digit code to {email}.",
+    "otpSubtitle": "We sent a 6-digit code to your email.",
+    "otpSentTo": "We sent a 6-digit code to",
     "otpButton": "Verify",
     "verifying": "Verifying…",
-    "resendCode": "Resend code",
-    "backToLogin": "Back to sign in",
+    "digitLabel": "Digit",
+    "resendIn": "Request a new code in",
+    "resendCode": "Send a new code",
+    "resending": "Sending…",
+    "wrongEmail": "Wrong email address?",
+    "useDifferentEmail": "Start over",
+    "backToForgot": "Back to reset",
     "resetTitle": "Choose a new password",
+    "resetSubtitle": "Pick something you have not used on another site.",
     "resetButton": "Update password",
+    "resetting": "Updating…",
+    "resetExpiredTitle": "This reset has expired",
+    "resetExpiredBody": "Start again and we will email you a fresh code.",
+    "startOver": "Start again",
     "twoFaTitle": "Two-factor verification",
-    "twoFaSubtitle": "Enter the code from your authenticator app."
+    "twoFaSubtitle": "Enter the code from your authenticator app.",
+    "twoFaHelp": "Open your authenticator app and enter the current 6-digit code for Handiman.",
+    "useDifferentAccount": "Use a different account",
+    "social": {
+      "google": "Continue with Google",
+      "apple": "Continue with Apple",
+      "x": "Continue with X",
+      "unavailable": "Social sign-in is coming soon."
+    },
+    "aside": {
+      "label": "Why Handiman",
+      "back": "Back to home",
+      "badge": "Vetted local pros",
+      "claim": "Trusted help for every job around your home.",
+      "prev": "Previous quote",
+      "next": "Next quote",
+      "showQuote": "Show quote",
+      "stats": {
+        "pros": "Verified pros",
+        "rating": "Average rating",
+        "support": "Support"
+      },
+      "quotes": {
+        "fourJobs": {
+          "quote": "I had four paid jobs within a week of signing up, which is more than I ever got from an agency. I've been recommending it to everyone I know since!",
+          "name": "Owen Baxter",
+          "role": "Electrician | Austin, United States"
+        },
+        "vettedPros": {
+          "quote": "Every pro who turned up was vetted, on time and tidy. Booking a plumber stopped being the thing I dread about owning a house.",
+          "name": "Priya Nandan",
+          "role": "Homeowner | Portland, United States"
+        },
+        "sameDayFix": {
+          "quote": "Our office AC died on a Friday afternoon and someone was on site within the hour. Same-day cover is the reason we stayed.",
+          "name": "Marcus Cole",
+          "role": "Office manager | Denver, United States"
+        }
+      }
+    }
   },
   "common": {
     "search": "Search",
@@ -188,32 +251,86 @@
       },
       "viewAll": "View all",
       "items": {
-        "fitnessPotential": { "title": "Unleashing Your Full Fitness Potential", "unit": "1 item" },
-        "totalBodyFitness": { "title": "A Comprehensive Guide to Total Body Fitness", "unit": "1 day" },
-        "kitchenBathroomDeepClean": { "title": "Deep Clean for Kitchens and Bathrooms", "unit": "1 visit" },
-        "sameDayParcel": { "title": "Same-Day Parcel Pickup and Delivery", "unit": "per parcel" },
-        "acServiceGasRefill": { "title": "Split AC Service with Gas Refill", "unit": "1 unit" },
-        "emergencyPlumbing": { "title": "Emergency Plumbing Callout", "unit": "1 hour" },
-        "electricalSafetyCheck": { "title": "Full Home Electrical Safety Check", "unit": "1 visit" },
-        "salonAtHome": { "title": "Salon at Home — Facial and Care", "unit": "1 session" }
+        "fitnessPotential": {
+          "title": "Unleashing Your Full Fitness Potential",
+          "unit": "1 item"
+        },
+        "totalBodyFitness": {
+          "title": "A Comprehensive Guide to Total Body Fitness",
+          "unit": "1 day"
+        },
+        "kitchenBathroomDeepClean": {
+          "title": "Deep Clean for Kitchens and Bathrooms",
+          "unit": "1 visit"
+        },
+        "sameDayParcel": {
+          "title": "Same-Day Parcel Pickup and Delivery",
+          "unit": "per parcel"
+        },
+        "acServiceGasRefill": {
+          "title": "Split AC Service with Gas Refill",
+          "unit": "1 unit"
+        },
+        "emergencyPlumbing": {
+          "title": "Emergency Plumbing Callout",
+          "unit": "1 hour"
+        },
+        "electricalSafetyCheck": {
+          "title": "Full Home Electrical Safety Check",
+          "unit": "1 visit"
+        },
+        "salonAtHome": {
+          "title": "Salon at Home — Facial and Care",
+          "unit": "1 session"
+        }
       }
     },
     "categoryGroups": {
       "startsAt": "Starts at",
       "allOf": "All",
       "groups": {
-        "cleaning": { "name": "Cleaning", "eyebrow": "Top rated" },
-        "mechanics": { "name": "Mechanics", "eyebrow": "Most booked" }
+        "cleaning": {
+          "name": "Cleaning",
+          "eyebrow": "Top rated"
+        },
+        "mechanics": {
+          "name": "Mechanics",
+          "eyebrow": "Most booked"
+        }
       },
       "items": {
-        "cleaningSolutions": { "title": "Professional Cleaning Solutions", "unit": "1 day" },
-        "deepCleaning": { "title": "Deep Cleaning Services", "unit": "1 day" },
-        "residentialCleaning": { "title": "Customized Residential Cleaning", "unit": "2 day" },
-        "janitorial": { "title": "Commercial Janitorial Services", "unit": "1 day" },
-        "autoDiagnostics": { "title": "Auto Diagnostics & Repairs", "unit": "1 day" },
-        "routineMaintenance": { "title": "Routine Maintenance Services", "unit": "1 day" },
-        "transmission": { "title": "Transmission Solutions", "unit": "1 day" },
-        "suspension": { "title": "Suspension & Steering Repairs", "unit": "2 day" }
+        "cleaningSolutions": {
+          "title": "Professional Cleaning Solutions",
+          "unit": "1 day"
+        },
+        "deepCleaning": {
+          "title": "Deep Cleaning Services",
+          "unit": "1 day"
+        },
+        "residentialCleaning": {
+          "title": "Customized Residential Cleaning",
+          "unit": "2 day"
+        },
+        "janitorial": {
+          "title": "Commercial Janitorial Services",
+          "unit": "1 day"
+        },
+        "autoDiagnostics": {
+          "title": "Auto Diagnostics & Repairs",
+          "unit": "1 day"
+        },
+        "routineMaintenance": {
+          "title": "Routine Maintenance Services",
+          "unit": "1 day"
+        },
+        "transmission": {
+          "title": "Transmission Solutions",
+          "unit": "1 day"
+        },
+        "suspension": {
+          "title": "Suspension & Steering Repairs",
+          "unit": "2 day"
+        }
       }
     },
     "howItWorks": {
@@ -222,14 +339,46 @@
       "lead": "Discovering and availing services on Handyman is a breeze! Follow these simple steps to experience seamless solutions tailored to your needs",
       "timing": "Timing",
       "steps": {
-        "signUp": { "title": "Sign Up", "meta": "1 min", "body": "Create an account effortlessly to unlock a world of convenient services" },
-        "browseServices": { "title": "Browse Services", "meta": "Anytime", "body": "Explore a diverse range of services offered by our skilled vendors" },
-        "selectService": { "title": "Select Your Service", "meta": "Instant", "body": "Our intuitive interface makes it easy to find exactly what you're looking for" },
-        "placeOrder": { "title": "Place Your Order", "meta": "1 min", "body": "Once you've found the right service, place your order with a simple click" },
-        "connectVendor": { "title": "Connect with Your Vendor", "meta": "Instant", "body": "Connect with the dedicated vendor assigned to your service" },
-        "dedicatedTeams": { "title": "Dedicated Teams in Action", "meta": "24/7", "body": "Our dedicated teams for vendors and business owners swing into action, ensuring a smooth process" },
-        "qualityService": { "title": "Quality Service Every Time", "meta": "Always", "body": "We prioritize quality to guarantee satisfaction with every interaction" },
-        "shareFeedback": { "title": "Share Your Feedback", "meta": "Anytime", "body": "Your feedback helps maintain high standards and aids others in making informed decisions" }
+        "signUp": {
+          "title": "Sign Up",
+          "meta": "1 min",
+          "body": "Create an account effortlessly to unlock a world of convenient services"
+        },
+        "browseServices": {
+          "title": "Browse Services",
+          "meta": "Anytime",
+          "body": "Explore a diverse range of services offered by our skilled vendors"
+        },
+        "selectService": {
+          "title": "Select Your Service",
+          "meta": "Instant",
+          "body": "Our intuitive interface makes it easy to find exactly what you're looking for"
+        },
+        "placeOrder": {
+          "title": "Place Your Order",
+          "meta": "1 min",
+          "body": "Once you've found the right service, place your order with a simple click"
+        },
+        "connectVendor": {
+          "title": "Connect with Your Vendor",
+          "meta": "Instant",
+          "body": "Connect with the dedicated vendor assigned to your service"
+        },
+        "dedicatedTeams": {
+          "title": "Dedicated Teams in Action",
+          "meta": "24/7",
+          "body": "Our dedicated teams for vendors and business owners swing into action, ensuring a smooth process"
+        },
+        "qualityService": {
+          "title": "Quality Service Every Time",
+          "meta": "Always",
+          "body": "We prioritize quality to guarantee satisfaction with every interaction"
+        },
+        "shareFeedback": {
+          "title": "Share Your Feedback",
+          "meta": "Anytime",
+          "body": "Your feedback helps maintain high standards and aids others in making informed decisions"
+        }
       }
     },
     "impact": {
@@ -248,9 +397,18 @@
         "innovation": "Innovation and Community"
       },
       "stats": {
-        "providers": { "num": "20K", "label": "Service Providers" },
-        "orders": { "num": "4M", "label": "Order Served" },
-        "clients": { "num": "5M", "label": "Happy Clients" }
+        "providers": {
+          "num": "20K",
+          "label": "Service Providers"
+        },
+        "orders": {
+          "num": "4M",
+          "label": "Order Served"
+        },
+        "clients": {
+          "num": "5M",
+          "label": "Happy Clients"
+        }
       }
     },
     "about": {
@@ -278,10 +436,74 @@
       "title": "Meet the Handiman team.",
       "lead": "From vendor verification to live support, this team keeps every booking, pickup and delivery running on schedule.",
       "members": {
-        "owenBaxter": { "name": "Owen Baxter", "role": "Founder" },
-        "priyaNandan": { "name": "Priya Nandan", "role": "Operations Lead" },
-        "marcusCole": { "name": "Marcus Cole", "role": "Vendor Success" },
-        "saraAhmed": { "name": "Sara Ahmed", "role": "Product Design" }
+        "owenBaxter": {
+          "name": "Owen Baxter",
+          "role": "Founder"
+        },
+        "priyaNandan": {
+          "name": "Priya Nandan",
+          "role": "Operations Lead"
+        },
+        "marcusCole": {
+          "name": "Marcus Cole",
+          "role": "Vendor Success"
+        },
+        "saraAhmed": {
+          "name": "Sara Ahmed",
+          "role": "Product Design"
+        }
+      }
+    },
+    "testimonials": {
+      "eyebrow": "Testimonials",
+      "title": "What our customers say.",
+      "lead": "Every quote here comes from a finished job — a repair, a clean or a parcel that turned up when it was promised. Keep scrolling; the wall carries on.",
+      "ratingValue": "4.9",
+      "ratingLabel": "Average job rating",
+      "starsLabel": "out of 5 stars",
+      "reviewCount": "2.4K",
+      "reviewLabel": "Verified reviews",
+      "items": {
+        "nadiaKarim": {
+          "name": "Nadia Karim",
+          "role": "Homeowner, London",
+          "quote": "I booked an electrician at nine in the morning and the socket was replaced before lunch. The price I saw when I tapped confirm is exactly what I paid — no call-out fee bolted on at the end."
+        },
+        "tomasRiley": {
+          "name": "Tomas Riley",
+          "role": "Cafe owner",
+          "quote": "We run a small cafe, so a dead fridge is a lost day. Handiman found a refrigeration engineer inside the hour and I could watch him make his way to us on the map."
+        },
+        "graceOkafor": {
+          "name": "Grace Okafor",
+          "role": "Property manager",
+          "quote": "I look after eleven flats and I used to keep a spreadsheet of tradespeople. Now every job, invoice and photo sits in one place, and I can hand a landlord the whole history in a click."
+        },
+        "lukeMendes": {
+          "name": "Luke Mendes",
+          "role": "Plumber, vendor",
+          "quote": "As a vendor, the difference is not having to chase anyone. The job comes in, I accept it, and the payment clears the same evening. That predictability is the whole thing."
+        },
+        "hannahBell": {
+          "name": "Hannah Bell",
+          "role": "Retail buyer",
+          "quote": "I send parcels to three shops every week. Live tracking means I stop fielding \"has it arrived yet\" calls, and the proof-of-delivery photo has already settled two disputes."
+        },
+        "devPatel": {
+          "name": "Dev Patel",
+          "role": "Homeowner, Manchester",
+          "quote": "What sold me was the vetting. Every profile shows the checks, the insurance and real reviews from jobs done on this platform — not a wall of stars imported from somewhere else."
+        },
+        "amaraSolis": {
+          "name": "Amara Solis",
+          "role": "Studio manager",
+          "quote": "We had a leak on a Sunday evening and I expected to wait until Monday. Someone was here in forty minutes, and the out-of-hours rate was still shown to me up front."
+        },
+        "victorNwosu": {
+          "name": "Victor Nwosu",
+          "role": "Small business owner",
+          "quote": "Support answered in under two minutes when a courier was running late, told me exactly where the parcel was, and followed it up the next day without me having to ask."
+        }
       }
     },
     "blog": {
@@ -290,9 +512,24 @@
       "lead": "Ultimate on-demand service and handyman solution for Android, iOS, and the web.",
       "author": "Super Admin",
       "posts": {
-        "communityConnections": { "cat": "Handiman Lifestyle", "title": "Community Connections: The Handiman Lifestyle", "date": "28 February, 2024", "read": "6 mins read" },
-        "pricingPhilosophy": { "cat": "Quality service", "title": "Innovation on a Budget: Handiman's Pricing Philosophy", "date": "26 January, 2024", "read": "5 mins read" },
-        "onDemandAdvantage": { "cat": "Revolutionizing is Handiman", "title": "Revolutionizing On-Demand: The Handiman Advantage", "date": "28 February, 2024", "read": "6 mins read" }
+        "communityConnections": {
+          "cat": "Handiman Lifestyle",
+          "title": "Community Connections: The Handiman Lifestyle",
+          "date": "28 February, 2024",
+          "read": "6 mins read"
+        },
+        "pricingPhilosophy": {
+          "cat": "Quality service",
+          "title": "Innovation on a Budget: Handiman's Pricing Philosophy",
+          "date": "26 January, 2024",
+          "read": "5 mins read"
+        },
+        "onDemandAdvantage": {
+          "cat": "Revolutionizing is Handiman",
+          "title": "Revolutionizing On-Demand: The Handiman Advantage",
+          "date": "28 February, 2024",
+          "read": "6 mins read"
+        }
       }
     },
     "faq": {
@@ -300,11 +537,26 @@
       "title": "Frequently Asked Questions",
       "lead": "streamlining information for users and enhancing their understanding of a product, service, or topic",
       "items": {
-        "howItWorks": { "q": "How does Handiman work for users?", "a": "Handiman simplifies the process for users. Sign up, browse services, select what you need, place an order, connect with your vendor, and enjoy top-notch service. Our dedicated teams ensure a smooth experience, and your feedback is always valued" },
-        "servicesOffered": { "q": "What services are offered on Handiman?", "a": "Handiman offers a diverse range of services, including but not limited to home maintenance, tech assistance, cleaning, plumbing, landscaping, beauty treatments, delivery, event planning, creative arts, fitness, and professional consultations." },
-        "vendorsJoin": { "q": "How do vendors join Handiman?", "a": "Vendors can easily join Handiman by signing up, showcasing their services, and becoming part of our community. Our platform provides a space for vendors to connect with users and deliver exceptional services." },
-        "whatSetsApart": { "q": "What sets Handiman apart from other on-demand service platforms?", "a": "Handiman stands out with its user-friendly interface, dedicated teams for vendors and business owners, budget-friendly solutions, transparent pricing, and a community-focused approach. We prioritize innovation and aim to make every service experience extraordinary" },
-        "mobileApps": { "q": "Is Handiman available on mobile devices?", "a": "Yes, Handiman is available on both Android and iOS platforms. Users and vendors can access the platform seamlessly through our user-friendly mobile apps, ensuring convenience on the go" }
+        "howItWorks": {
+          "q": "How does Handiman work for users?",
+          "a": "Handiman simplifies the process for users. Sign up, browse services, select what you need, place an order, connect with your vendor, and enjoy top-notch service. Our dedicated teams ensure a smooth experience, and your feedback is always valued"
+        },
+        "servicesOffered": {
+          "q": "What services are offered on Handiman?",
+          "a": "Handiman offers a diverse range of services, including but not limited to home maintenance, tech assistance, cleaning, plumbing, landscaping, beauty treatments, delivery, event planning, creative arts, fitness, and professional consultations."
+        },
+        "vendorsJoin": {
+          "q": "How do vendors join Handiman?",
+          "a": "Vendors can easily join Handiman by signing up, showcasing their services, and becoming part of our community. Our platform provides a space for vendors to connect with users and deliver exceptional services."
+        },
+        "whatSetsApart": {
+          "q": "What sets Handiman apart from other on-demand service platforms?",
+          "a": "Handiman stands out with its user-friendly interface, dedicated teams for vendors and business owners, budget-friendly solutions, transparent pricing, and a community-focused approach. We prioritize innovation and aim to make every service experience extraordinary"
+        },
+        "mobileApps": {
+          "q": "Is Handiman available on mobile devices?",
+          "a": "Yes, Handiman is available on both Android and iOS platforms. Users and vendors can access the platform seamlessly through our user-friendly mobile apps, ensuring convenience on the go"
+        }
       }
     },
     "contact": {

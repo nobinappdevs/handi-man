@@ -13,7 +13,9 @@ import { TOKEN_KEY } from "@/lib/axios";
 import {
   setEmailVerified,
   startEmailOtpFlow,
-  setOtpEmail,
+  startResetOtpFlow,
+  setResetToken,
+  clearResetFlow,
   clearOtpFlow,
   clearAuthState,
   emailVerifiedFromResponse,
@@ -31,10 +33,6 @@ import type { LoginRequest, LoginResponse } from "@/schemas/auth.schema";
 function postAuthDestination(): string {
   return "/dashboard";
 }
-
-/* ── sessionStorage keys shared across the reset flow ── */
-const RESET_TOKEN = "handiman_reset_token";
-const RESET_EMAIL = "handiman_reset_email";
 
 /* ── message helpers (Laravel wraps messages as { success: [...] } / { error: [...] }) ── */
 export function getApiErrorMessage(err: unknown): string {
@@ -158,13 +156,7 @@ export function useForgotSendOtp() {
   return useMutation<unknown, unknown, string>({
     mutationFn: (email) => authService.forgotSendOtp(email),
     onSuccess: (res, email) => {
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem("handiman_otp_flow", "reset");
-        sessionStorage.setItem(RESET_EMAIL, email);
-        setOtpEmail(email);
-        const token = extractToken(res);
-        if (token) sessionStorage.setItem(RESET_TOKEN, token);
-      }
+      startResetOtpFlow(email, extractToken(res));
       toast.success(getApiSuccessMessage(res, "OTP sent to your email"));
       router.push("/verify-otp");
     },
@@ -180,7 +172,7 @@ export function useForgotVerifyOtp() {
     onSuccess: (res) => {
       // If the API returns a fresh token after OTP verify, update it for the reset step.
       const newToken = extractToken(res);
-      if (newToken && typeof window !== "undefined") sessionStorage.setItem(RESET_TOKEN, newToken);
+      if (newToken) setResetToken(newToken);
       toast.success(getApiSuccessMessage(res, "Code verified"));
       router.push("/reset-password");
     },
@@ -194,10 +186,7 @@ export function useResetPassword() {
   return useMutation<unknown, unknown, ResetPasswordPayload>({
     mutationFn: (payload) => authService.resetPassword(payload),
     onSuccess: (res) => {
-      if (typeof window !== "undefined") {
-        clearOtpFlow();
-        [RESET_EMAIL, RESET_TOKEN].forEach((k) => sessionStorage.removeItem(k));
-      }
+      clearResetFlow();
       toast.success(getApiSuccessMessage(res, "Password reset — please sign in"));
       router.push("/login");
     },

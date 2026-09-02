@@ -1,12 +1,12 @@
 import { GuestGuard } from "@/components/guards/GuestGuard";
-import { PagePlaceholder } from "@/components/share/PagePlaceholder";
+import { RegisterForm } from "@/components/auth/RegisterForm";
 
 export const metadata = { title: "Create Account — Handiman" };
 
 export default function Page() {
   return (
     <GuestGuard>
-      <PagePlaceholder title="Create account" />
+      <RegisterForm />
     </GuestGuard>
   );
 }

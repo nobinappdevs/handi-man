@@ -27,6 +27,10 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   required?: boolean;
   /** Rows for the multiline (`type="textarea"`) variant. */
   rows?: number;
+  /** Classes for the bordered box around the field — `className` lands on the
+   *  input itself, so this is the only way to restyle the shell (e.g. a screen
+   *  that wants a white field rather than the default `bg-surface`). */
+  wrapperClassName?: string;
 }
 
 const SIZES: Record<Size, string> = {
@@ -48,6 +52,7 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
     rows = 4,
     id,
     className,
+    wrapperClassName,
     disabled,
     ...props
   },
@@ -117,6 +122,7 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
             ? "border-red-500 focus-within:border-red-500 focus-within:ring-red-500/20"
             : "border-border focus-within:border-primary focus-within:ring-primary/20",
           disabled && "opacity-50",
+          wrapperClassName,
         )}
       >
         {leftIcon && (

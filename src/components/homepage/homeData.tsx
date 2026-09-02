@@ -327,6 +327,21 @@ export const TEAM_MEMBERS: TeamMember[] = [
   { key: "saraAhmed", photo: teamFour },
 ];
 
+/* ─────────────────────────── Testimonials ─────────────────────────── */
+
+/**
+ * The testimonial wall, authored as the two columns it renders in rather than
+ * as one flat list. The design offsets the second column against the first, so
+ * which quote lands beside which is a layout decision — keeping it here means
+ * the section never has to slice an array to find out.
+ *
+ * Keys resolve against `home.testimonials.items.*`.
+ */
+export const TESTIMONIAL_COLUMNS: string[][] = [
+  ["nadiaKarim", "tomasRiley", "graceOkafor", "lukeMendes"],
+  ["hannahBell", "devPatel", "amaraSolis", "victorNwosu"],
+];
+
 /* ─────────────────────────── Blog / Announcement ───────────────────── */
 
 export const BLOG_POST_KEYS = ["communityConnections", "pricingPhilosophy", "onDemandAdvantage"];

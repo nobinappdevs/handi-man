@@ -510,6 +510,32 @@ input[type="number"] {
   background-color: rgb(var(--primary__color));
 }
 
+/* Auth photo panel, notched at the top-left so the circular back button nests
+   into the card with an even gap all round.
+
+   A radial-gradient mask, because `border-radius` cannot describe a CONCAVE
+   corner and an SVG `clip-path` would have to be re-authored for every panel
+   size. The stop pair is 0.5px apart rather than coincident: a hard stop
+   aliases into a staircase on the arc.
+
+   Driven off `--back` (the button's diameter, set on the panel) so the bite and
+   the button can never drift apart as the button scales. `--notch-gap` is the
+   white channel between them. */
+.photo-notch {
+  --notch-c: calc(var(--back, 64px) / 2);
+  --notch-r: calc(var(--back, 64px) / 2 + var(--notch-gap, 10px));
+  -webkit-mask-image: radial-gradient(
+    circle var(--notch-r) at var(--notch-c) var(--notch-c),
+    transparent calc(var(--notch-r) - 0.5px),
+    #000 var(--notch-r)
+  );
+  mask-image: radial-gradient(
+    circle var(--notch-r) at var(--notch-c) var(--notch-c),
+    transparent calc(var(--notch-r) - 0.5px),
+    #000 var(--notch-r)
+  );
+}
+
 /* Horizontally scrolled track that shows no scrollbar in any engine. Tailwind
    has no utility for the WebKit half. */
 .no-scrollbar {
