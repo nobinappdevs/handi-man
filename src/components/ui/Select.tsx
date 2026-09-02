@@ -60,7 +60,7 @@ type SelectProps = {
   "aria-label"?: string;
 };
 
-const MENU_H = 320; // rough popup height used to decide flip-up vs flip-down
+const MENU_H = 320; 
 
 const MENU_SCROLL =
   "scrollbar-thin [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-track]:bg-transparent";
@@ -112,7 +112,6 @@ export function Select({
     setRect({ top: r.top, bottom: r.bottom, left: r.left, right: Math.max(12, window.innerWidth - r.right), width: r.width, dropUp });
   }, []);
 
-  // Reset transient state on open/close — adjust-state-during-render (no effect).
   const [prevOpen, setPrevOpen] = useState(false);
   if (prevOpen !== open) {
     setPrevOpen(open);
@@ -129,7 +128,6 @@ export function Select({
     setOpen(true);
   };
 
-  // Outside-click / Escape / reposition while open.
   useEffect(() => {
     if (!open) return;
     const onPointer = (e: MouseEvent) => {
@@ -147,7 +145,7 @@ export function Select({
     };
   }, [open, place]);
 
-  // Focus the search box on open (keyboard nav then flows from the input).
+
   useEffect(() => {
     if (open && showSearch) inputRef.current?.focus();
   }, [open, showSearch]);
@@ -201,7 +199,6 @@ export function Select({
 
   const chip = variant === "chip";
 
-  /* trigger icon: persistent leftIcon wins, else the selected option's visual */
   const trigIcon =
     leftIcon ??
     (sel?.image ? (

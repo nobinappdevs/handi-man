@@ -3,37 +3,49 @@
 import Image from "next/image";
 import { ArrowRight, Clock } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
+import { useGsapScope } from "@/hooks/useGsap";
 import { Eyebrow } from "@/components/share/Eyebrow";
 import { SERVICE_GROUPS } from "@/components/homepage/homeData";
-import servicePhoto from "@public/assets/home/oneinall.webp";
 
 /** Category-grouped listing rails (Cleaning, Mechanics…), each card carrying
  *  a numbered plum spine with the card's tag running vertically. */
 export function CategoryListings() {
   const { t } = useLang();
+  const scope = useGsapScope();
 
   return (
-    <section className="brand-wash relative [--wash-angle:332deg] [--wash-strength:5%] px-[clamp(18px,3vw,44px)] pt-[clamp(14px,2vw,26px)] pb-[clamp(46px,5.4vw,84px)]">
+    <section
+      ref={scope}
+      className="brand-wash relative [--wash-angle:332deg] [--wash-strength:5%] px-[clamp(18px,3vw,44px)] pt-[clamp(14px,2vw,26px)] pb-[clamp(46px,5.4vw,84px)]"
+    >
       <div className="mx-auto flex max-w-[1240px] flex-col gap-[clamp(42px,5vw,74px)]">
         {SERVICE_GROUPS.map((group) => (
           <div key={group.key} className="flex flex-col gap-[clamp(26px,2.8vw,38px)]">
             <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
               <div className="flex min-w-0 flex-col gap-2">
-                <Eyebrow>{t(`home.categoryGroups.groups.${group.key}.eyebrow`)}</Eyebrow>
-                <h2 className="text-[clamp(24px,2.6vw,36px)] leading-[1.06]">
+                <Eyebrow data-anim="up">
+                  {t(`home.categoryGroups.groups.${group.key}.eyebrow`)}
+                </Eyebrow>
+                <h2 className="text-[clamp(24px,2.6vw,36px)] leading-[1.06]" data-anim-split>
                   {t(`home.categoryGroups.groups.${group.key}.name`)}
                 </h2>
               </div>
               <a
                 href="/services"
                 className="flex items-center gap-2 font-display text-[13.5px] font-bold uppercase tracking-[0.14em] text-brand"
+                data-anim="right"
+                data-anim-delay="0.12"
               >
                 {t("home.categoryGroups.allOf")} {t(`home.categoryGroups.groups.${group.key}.name`)}
                 <ArrowRight size={14} strokeWidth={2.6} aria-hidden />
               </a>
             </div>
 
-            <div className="grid grid-cols-1 gap-[clamp(20px,2.2vw,30px)] mid:grid-cols-2 wide:grid-cols-4">
+            <div
+              className="grid grid-cols-1 gap-[clamp(20px,2.2vw,30px)] mid:grid-cols-2 wide:grid-cols-4"
+              data-anim-stagger="rise"
+              data-anim-gap="0.09"
+            >
               {group.cards.map((card, i) => (
                 <a
                   key={card.key}
@@ -55,7 +67,7 @@ export function CategoryListings() {
                   <div className="flex min-w-0 flex-col">
                     <div className="relative aspect-[1.42] overflow-hidden bg-form">
                       <Image
-                        src={servicePhoto}
+                        src={card.photo}
                         alt=""
                         aria-hidden
                         fill

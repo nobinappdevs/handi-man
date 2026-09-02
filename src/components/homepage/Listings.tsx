@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ArrowRight, Clock } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
+import { useGsapScope } from "@/hooks/useGsap";
 import { LISTING_TABS } from "@/components/homepage/homeData";
 import { cn } from "@/components/ui/cn";
 import servicePhoto from "@public/assets/home/oneinall.webp";
@@ -15,13 +16,30 @@ import servicePhoto from "@public/assets/home/oneinall.webp";
 export function Listings() {
   const { t } = useLang();
   const [tab, setTab] = useState(LISTING_TABS[0].key);
+
+  /*
+   * Two scopes, because the section has two lifetimes. The header is mounted
+   * once and reveals once; the grid is thrown away and rebuilt on every tab
+   * change, and its fresh cards start hidden under the `.anim-ready` rule. The
+   * `tab` reset key is what re-runs the stagger over them - without it the
+   * second tab you click would be a blank grid.
+   */
+  const header = useGsapScope();
+  const grid = useGsapScope<HTMLDivElement>(undefined, tab);
   const active = LISTING_TABS.find((group) => group.key === tab) ?? LISTING_TABS[0];
 
   return (
-    <section className="brand-wash relative [--wash-angle:152deg] [--wash-strength:13%] px-[clamp(18px,3vw,44px)] py-[clamp(40px,4.6vw,72px)]">
+    <section
+      ref={header}
+      className="brand-wash relative [--wash-angle:152deg] [--wash-strength:13%] px-[clamp(18px,3vw,44px)] py-[clamp(40px,4.6vw,72px)]"
+    >
       <div className="mx-auto flex max-w-[1240px] flex-col gap-[clamp(22px,2.6vw,34px)]">
         <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-5 border-b border-border">
-          <div className="flex min-w-0 items-end gap-[clamp(18px,2.4vw,34px)]">
+          <div
+            className="flex min-w-0 items-end gap-[clamp(18px,2.4vw,34px)]"
+            data-anim-stagger="down"
+            data-anim-gap="0.08"
+          >
             {LISTING_TABS.map((group) => {
               const on = group.key === tab;
               return (
@@ -58,13 +76,20 @@ export function Listings() {
           <a
             href="/services"
             className="flex items-center gap-2 pb-3.5 font-display text-[13.5px] font-bold uppercase tracking-[0.14em] text-brand"
+            data-anim="right"
+            data-anim-delay="0.15"
           >
             {t("home.listings.viewAll")}
             <ArrowRight size={14} strokeWidth={2.6} aria-hidden />
           </a>
         </div>
 
-        <div className="grid grid-cols-1 gap-[clamp(18px,2vw,26px)] mid:grid-cols-2 wide:grid-cols-4">
+        <div
+          ref={grid}
+          className="grid grid-cols-1 gap-[clamp(18px,2vw,26px)] mid:grid-cols-2 wide:grid-cols-4"
+          data-anim-stagger="rise"
+          data-anim-gap="0.09"
+        >
           {active.cards.map((card) => (
             <a
               key={card.key}

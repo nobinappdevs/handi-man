@@ -397,7 +397,9 @@ input[type="number"] {
 }
 
 /*--------------------------------------------------------------
-    # Motion - all animation is CSS keyframes, no animation library.
+    # Motion - looping, decorative keyframes.
+    Scroll-triggered motion is GSAP (src/lib/animations.ts); everything here
+    is an ambient loop that never needs a trigger.
     Apply with style={{ animation: "fade-up .5s ease both" }}.
 --------------------------------------------------------------*/
 @keyframes progress-fill {
@@ -556,4 +558,128 @@ input[type="number"] {
 }
 [data-theme="dark"] .glass-fields div:has(> input:not([type="checkbox"]):not([type="radio"])) {
   background: rgba(255, 255, 255, 0.05);
+}
+
+/*--------------------------------------------------------------
+    # GSAP scroll reveals - the pre-paint hidden state
+    Companion to src/lib/animations.ts. Every element tagged with a
+    `data-anim*` reveal attribute starts invisible; GSAP fades it in when its
+    ScrollTrigger fires.
+
+    Behind `.anim-ready`, which the blocking script in app/layout.tsx sets on
+    <html> BEFORE first paint. Two reasons it is a class and not a bare
+    selector:
+
+      1. Hiding before paint is what removes the flash. A useEffect that hides
+         the element runs a frame too late and the content visibly jumps.
+      2. If the script never runs - JS disabled, or it threw - the class is
+         absent, the rule never applies, and the page reads as plain static
+         HTML with every section visible. Content is never hidden by a
+         stylesheet alone.
+
+    `opacity` only. Transforms stay out of here so the reveal's own
+    `clearProps` can hand the element back to its Tailwind hover classes.
+--------------------------------------------------------------*/
+.anim-ready :is([data-anim], [data-anim-split]),
+.anim-ready [data-anim-stagger] > *:not([data-anim]):not([data-anim-skip]) {
+  opacity: 0;
+}
+
+/* Asked for less motion: useGsapScope builds no tweens at all, so nothing is
+   ever going to fade these in. Show them. */
+@media (prefers-reduced-motion: reduce) {
+  .anim-ready :is([data-anim], [data-anim-split]),
+  .anim-ready [data-anim-stagger] > * {
+    opacity: 1 !important;
+  }
+}
+
+/* SplitText mask wrappers.
+   `mask: "lines"` clones each line into an `overflow: clip` box sized to the
+   line box. The headings on this page run at leading 0.98-1.06, so that box is
+   SHORTER than the glyphs and descenders (g, y, p) get shaved off. Padding the
+   line gives the mask room; the matching negative margin on the wrapper keeps
+   the heading the exact height it was before the split. */
+.anim-line {
+  padding-bottom: 0.14em;
+}
+.anim-line-mask {
+  margin-bottom: -0.14em;
+}
+
+/*--------------------------------------------------------------
+    # Above-the-fold entrance - CSS, deliberately NOT GSAP
+    The hero plays this. It is the one part of the page whose motion must not
+    wait for React.
+
+    The GSAP layer above hides a tagged element at first paint and only reveals
+    it once `useGsapScope` runs - which is after the client bundle has
+    downloaded, parsed and hydrated. Measured on the exported build: the hero
+    headline appeared 557ms after navigation unthrottled, 2.2s at CPU x4 and
+    6.7s at x8, all of it AFTER first contentful paint. A blank hero on a slow
+    phone is not an animation, it is a bug.
+
+    A CSS animation starts when the element is first painted, and
+    `animation-fill-mode: both` applies the keyframe's `from` state before it
+    does - so there is no flash, no hidden state to un-hide, and nothing to go
+    wrong if a JS chunk never arrives.
+
+    Set the offset with `[--enter-delay:0.24s]`; `.enter-group` cascades its own
+    children so a row of CTAs or stats needs one class, not one per child.
+    Vertical distance is `[--enter-y:40px]`. No horizontal preset on purpose:
+    `dir` is only stamped on <html> after mount, so a left/right entrance would
+    play from the wrong side for an RTL visitor every time.
+
+    ── `.enter-rise` is for the LCP element, and it moves ONLY ──
+
+    Chrome records no paint for an element that is transparent or clipped away,
+    so fading in the biggest thing on screen postpones Largest Contentful Paint
+    by the animation's whole delay + duration. Measured on this page with the
+    headline on an opacity+clip-path entrance: FCP 504ms, **LCP 3484ms**. Same
+    build, same headline, transform only: LCP 552ms.
+
+    So whatever the LCP candidate is - the hero headline, the hero figure -
+    animates with `transform` and nothing else. A transform does not stop the
+    paint being recorded, so the reveal is free. Everything smaller can fade.
+--------------------------------------------------------------*/
+@keyframes enter-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes enter-up {
+  from { opacity: 0; transform: translateY(var(--enter-y, 26px)); }
+  to   { opacity: 1; transform: none; }
+}
+/* Transform only - see the LCP note above. Never add opacity or clip-path. */
+@keyframes enter-rise {
+  from { transform: translateY(var(--enter-y, 22px)); }
+  to   { transform: none; }
+}
+
+.enter-fade,
+.enter-up,
+.enter-rise,
+.enter-group > * {
+  animation-duration: 0.62s;
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation-fill-mode: both;
+  animation-delay: var(--enter-delay, 0s);
+}
+
+.enter-fade { animation-name: enter-fade; }
+.enter-up { animation-name: enter-up; }
+.enter-rise { animation-name: enter-rise; }
+
+.enter-group > * { animation-name: enter-up; }
+.enter-group > *:nth-child(2) { animation-delay: calc(var(--enter-delay, 0s) + 0.07s); }
+.enter-group > *:nth-child(3) { animation-delay: calc(var(--enter-delay, 0s) + 0.14s); }
+.enter-group > *:nth-child(4) { animation-delay: calc(var(--enter-delay, 0s) + 0.21s); }
+
+@media (prefers-reduced-motion: reduce) {
+  .enter-fade,
+  .enter-up,
+  .enter-rise,
+  .enter-group > * {
+    animation: none;
+  }
 }

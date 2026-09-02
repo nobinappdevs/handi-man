@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
+import { useGsapScope } from "@/hooks/useGsap";
 import { Eyebrow } from "@/components/share/Eyebrow";
 import { BLOG_POST_KEYS } from "@/components/homepage/homeData";
 import { cn } from "@/components/ui/cn";
@@ -21,11 +22,19 @@ const ASPECT = ["aspect-[1.34]", "aspect-[1.18]", "aspect-[1.18]"];
 
 export function Blog() {
   const { t } = useLang();
+  const scope = useGsapScope();
 
   return (
-    <section className="brand-wash relative [--wash-angle:332deg] [--wash-strength:5%] px-[clamp(18px,3vw,44px)] py-[clamp(40px,5vw,84px)]">
+    <section
+      ref={scope}
+      className="brand-wash relative [--wash-angle:332deg] [--wash-strength:5%] px-[clamp(18px,3vw,44px)] py-[clamp(40px,5vw,84px)]"
+    >
       <div className="mx-auto flex max-w-[1240px] flex-col gap-[clamp(26px,3vw,42px)]">
-        <div className="flex flex-col items-center gap-3 text-center">
+        <div
+          className="flex flex-col items-center gap-3 text-center"
+          data-anim-stagger="up"
+          data-anim-gap="0.1"
+        >
           <Eyebrow>{t("home.blog.eyebrow")}</Eyebrow>
           <h2 className="text-[clamp(28px,3.4vw,46px)] leading-[1.04] tracking-[-0.035em]">
             {t("home.blog.title")}
@@ -35,7 +44,11 @@ export function Blog() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 border-t border-border mid:grid-cols-2 wide:grid-cols-[1.25fr_1fr_1fr]">
+        <div
+          className="grid grid-cols-1 border-t border-border mid:grid-cols-2 wide:grid-cols-[1.25fr_1fr_1fr]"
+          data-anim-stagger="clip"
+          data-anim-gap="0.13"
+        >
           {BLOG_POST_KEYS.map((key, i) => (
             <a
               key={key}

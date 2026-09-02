@@ -9,6 +9,22 @@
 // data that the API will own.
 
 import type { ReactNode } from "react";
+import type { StaticImageData } from "next/image";
+
+import teamOne from "@public/assets/team/team1.webp";
+import teamTwo from "@public/assets/team/team2.webp";
+import teamThree from "@public/assets/team/team3.webp";
+import teamFour from "@public/assets/team/team4.webp";
+
+import cleaningTeam from "@public/assets/services/cleaning-team.webp";
+import homeVacuum from "@public/assets/services/home-vacuum.webp";
+import janitorialCart from "@public/assets/services/janitorial-cart.webp";
+import autoDiagnosticsPhoto from "@public/assets/services/auto-diagnostics.webp";
+import engineService from "@public/assets/services/engine-service.webp";
+import gearbox from "@public/assets/services/gearbox.webp";
+import suspensionPhoto from "@public/assets/services/suspension.webp";
+/* Stand-in for any card that has no photo of its own yet. */
+import genericService from "@public/assets/home/oneinall.webp";
 
 /* ─────────────────────────── Category icons ───────────────────────────
  * Drawn to match the design's own glyph set; lucide has no equivalent for
@@ -161,25 +177,32 @@ export const LISTING_TABS: { key: string; cards: ListingCard[] }[] = [
 
 /* ─────────────────────────── Category listing groups ───────────────────── */
 
-export type GroupCard = { key: string; tag: string; price: string; vendor: string };
+export type GroupCard = {
+  key: string;
+  tag: string;
+  price: string;
+  vendor: string;
+  photo: StaticImageData;
+};
 
 export const SERVICE_GROUPS: { key: string; cards: GroupCard[] }[] = [
   {
     key: "cleaning",
     cards: [
-      { key: "cleaningSolutions", tag: "Home", price: "10 USD", vendor: "Vendor 1" },
-      { key: "deepCleaning", tag: "Home", price: "10 USD", vendor: "Vendor 1" },
-      { key: "residentialCleaning", tag: "Residential", price: "15 USD", vendor: "Vendor 1" },
-      { key: "janitorial", tag: "Commercial", price: "12 USD", vendor: "Vendor 1" },
+      { key: "cleaningSolutions", tag: "Home", price: "10 USD", vendor: "Vendor 1", photo: cleaningTeam },
+      /* No deep-clean photo in the set yet — falls back to the generic pro. */
+      { key: "deepCleaning", tag: "Home", price: "10 USD", vendor: "Vendor 1", photo: genericService },
+      { key: "residentialCleaning", tag: "Residential", price: "15 USD", vendor: "Vendor 1", photo: homeVacuum },
+      { key: "janitorial", tag: "Commercial", price: "12 USD", vendor: "Vendor 1", photo: janitorialCart },
     ],
   },
   {
     key: "mechanics",
     cards: [
-      { key: "autoDiagnostics", tag: "Garage", price: "10 USD", vendor: "Vendor 1" },
-      { key: "routineMaintenance", tag: "Garage", price: "15 USD", vendor: "Vendor 1" },
-      { key: "transmission", tag: "Drivetrain", price: "12 USD", vendor: "Vendor 1" },
-      { key: "suspension", tag: "Chassis", price: "20 USD", vendor: "Vendor 1" },
+      { key: "autoDiagnostics", tag: "Garage", price: "10 USD", vendor: "Vendor 1", photo: autoDiagnosticsPhoto },
+      { key: "routineMaintenance", tag: "Garage", price: "15 USD", vendor: "Vendor 1", photo: engineService },
+      { key: "transmission", tag: "Drivetrain", price: "12 USD", vendor: "Vendor 1", photo: gearbox },
+      { key: "suspension", tag: "Chassis", price: "20 USD", vendor: "Vendor 1", photo: suspensionPhoto },
     ],
   },
 ];
@@ -295,7 +318,14 @@ export const TEAM_SOCIAL_ICONS: ReactNode[] = [
   </svg>,
 ];
 
-export const TEAM_MEMBER_KEYS = ["owenBaxter", "priyaNandan", "marcusCole", "saraAhmed"];
+export type TeamMember = { key: string; photo: StaticImageData };
+
+export const TEAM_MEMBERS: TeamMember[] = [
+  { key: "owenBaxter", photo: teamOne },
+  { key: "priyaNandan", photo: teamTwo },
+  { key: "marcusCole", photo: teamThree },
+  { key: "saraAhmed", photo: teamFour },
+];
 
 /* ─────────────────────────── Blog / Announcement ───────────────────── */
 

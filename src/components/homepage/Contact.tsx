@@ -16,6 +16,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
+import { useGsapScope } from "@/hooks/useGsap";
 import { Eyebrow } from "@/components/share/Eyebrow";
 import { SERVICE_KEYS } from "@/components/homepage/homeData";
 import {
@@ -46,6 +47,7 @@ const ERROR_TEXT = "mt-1.5 block text-[12.5px] font-medium text-red-300";
  */
 export function Contact() {
   const { t } = useLang();
+  const scope = useGsapScope();
   const [sent, setSent] = useState(false);
 
   const serviceOptions = SERVICE_KEYS.map((key) => ({
@@ -69,7 +71,10 @@ export function Contact() {
   });
 
   return (
-    <section className="brand-wash relative [--wash-angle:332deg] [--wash-strength:6%] pb-[clamp(40px,5vw,80px)]">
+    <section
+      ref={scope}
+      className="brand-wash relative [--wash-angle:332deg] [--wash-strength:6%] pb-[clamp(40px,5vw,80px)]"
+    >
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-stretch wide:grid-cols-[0.6fr_0.4fr]">
         {/* ── Photo + verified badge ── */}
         <div className="relative min-h-[360px] min-w-0 overflow-hidden wide:min-h-[640px]">
@@ -79,10 +84,15 @@ export function Contact() {
             fill
             sizes="(max-width: 980px) 100vw, 60vw"
             className="object-cover"
+            data-anim-parallax="-46"
+            data-anim-scale="1.08"
           />
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(18,16,15,0)_40%,rgba(18,16,15,0.35)_100%)]" />
 
-          <div className="absolute bottom-0 left-0 flex w-[min(340px,72%)] items-center gap-4 bg-ink px-[22px] py-[18px] text-white">
+          <div
+            className="absolute bottom-0 left-0 flex w-[min(340px,72%)] items-center gap-4 bg-ink px-[22px] py-[18px] text-white"
+            data-anim="left"
+          >
             <span className="flex h-[42px] w-[42px] flex-none items-center justify-center rounded-full bg-primary">
               <ShieldCheck size={20} strokeWidth={2} aria-hidden />
             </span>
@@ -100,7 +110,11 @@ export function Contact() {
             own scoped `overflow-hidden` so they still can't leak past the
             section. */}
         <div className="relative min-w-0 bg-primary p-[clamp(34px,4.4vw,64px)_clamp(20px,3vw,56px)]">
-          <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
+            data-anim="fade"
+          >
             <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_88%_6%,rgba(255,255,255,0.18),rgba(255,255,255,0)_60%)]" />
             <div className="absolute -top-[16%] -right-[8%] h-[clamp(280px,32vw,460px)] w-[clamp(280px,32vw,460px)] rounded-full border border-white/[0.18]" />
             <div className="absolute -top-[4%] right-[2%] h-[clamp(190px,22vw,330px)] w-[clamp(190px,22vw,330px)] rounded-full border border-white/[0.12]" />
@@ -114,11 +128,15 @@ export function Contact() {
             <Eyebrow
               className="text-white/85"
               icon={<MessageSquare size={16} strokeWidth={2.6} aria-hidden />}
+              data-anim="up"
             >
               {t("home.contact.eyebrow")}
             </Eyebrow>
 
-            <h2 className="text-[clamp(28px,3.4vw,46px)] leading-[1.06] text-white text-balance">
+            <h2
+              className="text-[clamp(28px,3.4vw,46px)] leading-[1.06] text-white text-balance"
+              data-anim-split
+            >
               {t("home.contact.title")}
             </h2>
 
@@ -127,7 +145,11 @@ export function Contact() {
               onSubmit={handleSubmit(() => setSent(true))}
               className="flex flex-col gap-3"
             >
-              <div className="grid grid-cols-1 gap-3 mid:grid-cols-2">
+              <div
+                className="grid grid-cols-1 gap-3 mid:grid-cols-2"
+                data-anim-stagger="up"
+                data-anim-gap="0.07"
+              >
                 <Field
                   name="full_name"
                   control={control}
@@ -185,7 +207,7 @@ export function Contact() {
                 </div>
               </div>
 
-              <div>
+              <div data-anim="up" data-anim-delay="0.1">
                 <Controller
                   name="message"
                   control={control}
@@ -211,7 +233,7 @@ export function Contact() {
                 {errors.message && <span className={ERROR_TEXT}>{errors.message.message}</span>}
               </div>
 
-              <div className="flex flex-wrap items-center gap-3.5">
+              <div className="flex flex-wrap items-center gap-3.5" data-anim="up" data-anim-delay="0.16">
                 <button
                   type="submit"
                   className="flex h-14 flex-1 min-w-[200px] cursor-pointer items-center justify-center gap-2.5 bg-ink font-display text-[15px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-white hover:text-ink"

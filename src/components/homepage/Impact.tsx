@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useLang } from "@/hooks/useLang";
+import { useGsapScope } from "@/hooks/useGsap";
 import { Eyebrow } from "@/components/share/Eyebrow";
 import { IMPACT_FEATURE_KEYS, IMPACT_STAT_KEYS } from "@/components/homepage/homeData";
 import impactPhoto from "@public/assets/home/aboutus-photo.webp";
@@ -15,9 +16,12 @@ import impactPhoto from "@public/assets/home/aboutus-photo.webp";
  */
 export function Impact() {
   const { t } = useLang();
+  const scope = useGsapScope();
 
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(152deg,color-mix(in_oklab,rgb(var(--primary__color))_12%,rgb(var(--bg)))_0%,rgb(var(--bg))_46%,color-mix(in_oklab,rgb(var(--primary__color))_8%,rgb(var(--bg)))_72%,color-mix(in_oklab,rgb(var(--primary__color))_20%,rgb(var(--bg)))_100%)] px-[clamp(18px,3vw,44px)] py-[clamp(48px,6vw,96px)]">
+    <section
+      ref={scope}
+      className="relative overflow-hidden bg-[linear-gradient(152deg,color-mix(in_oklab,rgb(var(--primary__color))_12%,rgb(var(--bg)))_0%,rgb(var(--bg))_46%,color-mix(in_oklab,rgb(var(--primary__color))_8%,rgb(var(--bg)))_72%,color-mix(in_oklab,rgb(var(--primary__color))_20%,rgb(var(--bg)))_100%)] px-[clamp(18px,3vw,44px)] py-[clamp(48px,6vw,96px)]">
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-[24%] -left-[10%] h-[80%] w-[46%] rounded-full bg-[radial-gradient(circle_at_50%_50%,color-mix(in_oklab,rgb(var(--primary__color))_26%,transparent),transparent_68%)]" />
         <div className="absolute -right-[14%] -bottom-[32%] h-[92%] w-[52%] rounded-full bg-[radial-gradient(circle_at_50%_50%,color-mix(in_oklab,rgb(var(--primary__color))_22%,transparent),transparent_66%)]" />
@@ -32,19 +36,30 @@ export function Impact() {
       <div className="relative mx-auto flex max-w-[1240px] flex-col gap-[clamp(40px,4.6vw,68px)]">
         <div className="grid grid-cols-1 items-center gap-[clamp(32px,4.4vw,72px)] wide:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
           <div className="flex min-w-0 flex-col gap-[clamp(16px,1.8vw,22px)]">
-            <Eyebrow icon={<span className="h-0.5 w-9 bg-primary" />}>
+            <Eyebrow icon={<span className="h-0.5 w-9 bg-primary" />} data-anim="up">
               {t("home.impact.eyebrow")}
             </Eyebrow>
 
-            <h2 className="text-[clamp(32px,4vw,58px)] leading-[0.98] tracking-[-0.038em] text-balance">
+            <h2
+              className="text-[clamp(32px,4vw,58px)] leading-[0.98] tracking-[-0.038em] text-balance"
+              data-anim-split
+            >
               {t("home.impact.title")}
             </h2>
 
-            <p className="max-w-[540px] text-[clamp(15px,1.3vw,17px)] leading-[1.7] text-body text-pretty">
+            <p
+              className="max-w-[540px] text-[clamp(15px,1.3vw,17px)] leading-[1.7] text-body text-pretty"
+              data-anim="up"
+              data-anim-delay="0.12"
+            >
               {t("home.impact.lead")}
             </p>
 
-            <div className="mt-[clamp(8px,1.2vw,16px)] grid grid-cols-1 gap-x-[clamp(20px,2.4vw,40px)] mid:grid-cols-2">
+            <div
+              className="mt-[clamp(8px,1.2vw,16px)] grid grid-cols-1 gap-x-[clamp(20px,2.4vw,40px)] mid:grid-cols-2"
+              data-anim-stagger="left"
+              data-anim-gap="0.06"
+            >
               {IMPACT_FEATURE_KEYS.map((key, i) => (
                 <div
                   key={key}
@@ -61,13 +76,13 @@ export function Impact() {
             </div>
           </div>
 
-          <div className="relative min-w-0">
+          <div className="relative min-w-0" data-anim-parallax="-52">
             <div aria-hidden className="absolute -top-4.5 -right-4.5 h-[52%] w-[58%] bg-primary opacity-[0.16]" />
             <div
               aria-hidden
               className="absolute -bottom-5.5 -left-5.5 h-[clamp(110px,12vw,160px)] w-[clamp(110px,12vw,160px)] opacity-45 bg-[radial-gradient(rgb(var(--primary__color))_1.4px,transparent_1.4px)] bg-[length:15px_15px]"
             />
-            <div className="relative z-[2] aspect-[1.4] wide:aspect-[0.92]">
+            <div className="relative z-[2] aspect-[1.4] wide:aspect-[0.92]" data-anim="clip">
               <Image
                 src={impactPhoto}
                 alt={t("home.impact.photoAlt")}
@@ -76,7 +91,11 @@ export function Impact() {
                 className="object-cover"
               />
             </div>
-            <div className="absolute bottom-6.5 left-3.5 z-[3] flex items-center gap-3 bg-primary px-5 py-4 text-white shadow-[0_26px_50px_-26px_rgba(0,0,0,0.5)]">
+            <div
+              className="absolute bottom-6.5 left-3.5 z-[3] flex items-center gap-3 bg-primary px-5 py-4 text-white shadow-[0_26px_50px_-26px_rgba(0,0,0,0.5)]"
+              data-anim="zoom"
+              data-anim-delay="0.35"
+            >
               <span className="text-[clamp(26px,2.6vw,34px)] leading-none font-black tracking-[-0.03em]">
                 {t("home.impact.ratingValue")}
               </span>
@@ -87,13 +106,22 @@ export function Impact() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-[clamp(20px,2.4vw,36px)] mid:grid-cols-3">
+        <div
+          className="grid grid-cols-1 gap-[clamp(20px,2.4vw,36px)] mid:grid-cols-3"
+          data-anim-stagger="up"
+          data-anim-gap="0.12"
+        >
           {IMPACT_STAT_KEYS.map((key) => (
             <div
               key={key}
               className="flex min-w-0 flex-col gap-2.5 border-t-[3px] border-primary pt-[clamp(18px,2vw,26px)]"
             >
-              <span className="text-[clamp(40px,5vw,72px)] leading-[0.9] font-black tracking-[-0.05em] text-heading">
+              {/* "20K" / "4M" - the engine counts the digits and re-attaches
+                  the unit on every frame, then restores the authored string. */}
+              <span
+                className="text-[clamp(40px,5vw,72px)] leading-[0.9] font-black tracking-[-0.05em] text-heading"
+                data-anim-count
+              >
                 {t(`home.impact.stats.${key}.num`)}
               </span>
               <span className="font-display text-[clamp(13px,1.2vw,15px)] font-bold tracking-[0.14em] text-body uppercase">
