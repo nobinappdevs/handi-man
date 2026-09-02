@@ -10,7 +10,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   /**
    * Any native input type (`text`, `password`, `email`, `number`, `tel`,
    * `url`, `search`, `date`, …) plus two extras handled specially:
-   * an inline control with the label beside it.
+
    */
   type?: string;
   /** Text shown above the field (or beside it for checkbox/radio). */
