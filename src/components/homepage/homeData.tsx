@@ -16,6 +16,11 @@ import teamTwo from "@public/assets/team/team2.webp";
 import teamThree from "@public/assets/team/team3.webp";
 import teamFour from "@public/assets/team/team4.webp";
 
+import avatarOne from "@public/assets/testimonials/avatar-1.webp";
+import avatarTwo from "@public/assets/testimonials/avatar-2.webp";
+import avatarThree from "@public/assets/testimonials/avatar-3.webp";
+import avatarFour from "@public/assets/testimonials/avatar-4.webp";
+
 import cleaningTeam from "@public/assets/services/cleaning-team.webp";
 import homeVacuum from "@public/assets/services/home-vacuum.webp";
 import janitorialCart from "@public/assets/services/janitorial-cart.webp";
@@ -341,6 +346,35 @@ export const TESTIMONIAL_COLUMNS: string[][] = [
   ["nadiaKarim", "tomasRiley", "graceOkafor", "lukeMendes"],
   ["hannahBell", "devPatel", "amaraSolis", "victorNwosu"],
 ];
+
+/**
+ * Portraits, keyed by the same testimonial id.
+ *
+ * Four stock avatars cover eight quotes, so every face appears TWICE. The
+ * pairing is not arbitrary - read down the two columns above and the sequence
+ * is 1,2,3,4 against 3,4,1,2, which is the one arrangement where no avatar
+ * ever lands next to or directly above its own repeat. Re-order
+ * `TESTIMONIAL_COLUMNS` and that property is lost; re-check it here.
+ *
+ * Swap in eight real photos and the duplication just disappears - only the
+ * right-hand side of these lines changes.
+ *
+ * Encode to 96x96 before adding one. The tile is 40px and `images.unoptimized`
+ * ships the imported file byte-for-byte with no `srcset`, so a full-size
+ * headshot here is a full-size headshot on every phone - blueprint 14.1.
+ */
+export const TESTIMONIAL_PHOTOS: Record<string, StaticImageData> = {
+  // column 1
+  nadiaKarim: avatarOne,
+  tomasRiley: avatarTwo,
+  graceOkafor: avatarThree,
+  lukeMendes: avatarFour,
+  // column 2 - same four, rotated by two so no repeat sits beside its twin
+  hannahBell: avatarThree,
+  devPatel: avatarFour,
+  amaraSolis: avatarOne,
+  victorNwosu: avatarTwo,
+};
 
 /* ─────────────────────────── Blog / Announcement ───────────────────── */
 

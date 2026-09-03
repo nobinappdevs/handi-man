@@ -5,15 +5,8 @@ import { X, ArrowRight } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { useShell } from "@/components/context/ShellContext";
 import { CircleIconButton } from "@/components/share/CircleIconButton";
-
-const LINKS = [
-  { href: "/", key: "nav.home" },
-  { href: "/services", key: "nav.services" },
-  { href: "/vendors", key: "nav.vendors" },
-  { href: "/delivery", key: "nav.delivery" },
-  { href: "/pricing", key: "nav.pricing" },
-  { href: "/contact", key: "nav.contact" },
-];
+import { Logo } from "@/components/share/Logo";
+import { SITE_LINKS } from "@/components/share/navLinks";
 
 /** Left slide-over navigation, shown below the design's 980px nav breakpoint. */
 export function MobileMenu() {
@@ -30,14 +23,14 @@ export function MobileMenu() {
       }`}
     >
       <div className="flex items-center justify-between gap-3 border-b border-drawer-line px-[22px] py-5">
-        <span className="text-xl font-extrabold tracking-[-0.02em]">{t("brand.name")}</span>
+        <Logo size="sm" />
         <CircleIconButton size={32} tone="soft" onClick={closeDrawer} aria-label={t("common.close")}>
           <X size={15} strokeWidth={2.6} aria-hidden />
         </CircleIconButton>
       </div>
 
-      <nav className="flex flex-1 flex-col overflow-y-auto py-2.5 font-display text-base font-bold uppercase tracking-[0.12em]">
-        {LINKS.map(({ href, key }) => (
+      <nav className="flex flex-1 flex-col overflow-y-auto py-2.5 font-nav text-[14px] font-medium ">
+        {SITE_LINKS.map(({ href, key }) => (
           <Link
             key={href}
             href={href}
@@ -51,11 +44,11 @@ export function MobileMenu() {
 
       <div className="px-[22px] py-[18px]">
         <Link
-          href="/contact"
+          href="/services"
           onClick={closeDrawer}
-          className="flex h-12 items-center justify-center gap-[9px] bg-primary font-display text-[14.5px] font-bold uppercase leading-none tracking-[0.13em] text-white transition-colors hover:bg-primary-dark hover:text-white"
+          className="flex h-12 items-center justify-center gap-[9px] bg-primary font-nav text-[14px] font-medium  leading-none  text-white transition-colors hover:bg-primary-dark hover:text-white"
         >
-          {t("nav.getQuote")}
+          {t("nav.bookService")}
           <ArrowRight size={14} strokeWidth={2.6} aria-hidden />
         </Link>
       </div>

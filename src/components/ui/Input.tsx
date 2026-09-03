@@ -68,7 +68,7 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
 
   /* shared description line */
   const description = (error || hint) && (
-    <p id={`${fieldId}-desc`} className={cn("text-xs", invalid ? "text-red-500" : "text-muted")}>
+    <p id={`${fieldId}-desc`} className={cn("text-xs", invalid ? "text-danger" : "text-muted")}>
       {error || hint}
     </p>
   );
@@ -94,7 +94,7 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
             {...props}
           />
           {label && (
-            <span className={cn("text-sm  font-medium", invalid ? "text-red-500" : "text-heading")}>
+            <span className={cn("text-sm  font-medium", invalid ? "text-danger" : "text-heading")}>
               {label}
          
             </span>
@@ -109,8 +109,13 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
   return (
     <div className="flex w-full flex-col gap-1.5">
       {label && (
-        <label htmlFor={fieldId} className={cn("text-sm font-medium", invalid ? "text-red-500" : "text-heading")}>
+        <label htmlFor={fieldId} className={cn("text-sm font-medium", invalid ? "text-danger" : "text-heading")}>
           {label}
+          {/* The prop always promised this and never drew it, so a form mixing
+              `Input` with a hand-rolled label marked only half its required
+              fields. `aria-hidden` because the input already carries
+              `required` - a screen reader would otherwise say it twice. */}
+          {required && <span aria-hidden className="ms-1 inline text-danger">*</span>}
         </label>
       )}
 
@@ -119,7 +124,7 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
           "flex overflow-hidden rounded-xl border bg-surface transition focus-within:ring-2",
           isArea ? "items-stretch" : "items-center",
           invalid
-            ? "border-red-500 focus-within:border-red-500 focus-within:ring-red-500/20"
+            ? "border-danger focus-within:border-danger focus-within:ring-danger/20"
             : "border-border focus-within:border-primary focus-within:ring-primary/20",
           disabled && "opacity-50",
           wrapperClassName,

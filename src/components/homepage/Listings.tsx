@@ -31,7 +31,7 @@ export function Listings() {
   return (
     <section
       ref={header}
-      className="brand-wash relative [--wash-angle:152deg] [--wash-strength:13%] px-[clamp(18px,3vw,44px)] py-[clamp(40px,4.6vw,72px)]"
+      className="bg-page relative px-[clamp(18px,3vw,44px)] py-[clamp(40px,4.6vw,72px)]"
     >
       <div className="mx-auto flex max-w-[1240px] flex-col gap-[clamp(22px,2.6vw,34px)]">
         <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-5 border-b border-border">

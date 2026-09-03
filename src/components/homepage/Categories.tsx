@@ -49,9 +49,9 @@ export function Categories() {
   return (
     <section
       ref={scope}
-      className="brand-wash relative [--wash-angle:332deg] [--wash-strength:5%] pt-[clamp(48px,6vw,96px)] pb-[clamp(34px,4vw,58px)] mid:pt-[150px] wide:pt-[180px]"
+      className="bg-page relative pt-[clamp(48px,6vw,96px)] pb-[clamp(34px,4vw,58px)] mid:pt-[150px] wide:pt-[180px]"
     >
-      <div className="mx-auto flex max-w-[1240px] flex-wrap items-end justify-between gap-5 px-[clamp(18px,3vw,44px)]">
+      <div className="mx-auto flex max-w-[1440px] flex-wrap items-end justify-between gap-5 px-[clamp(18px,3vw,44px)]">
         <div className="flex min-w-0 flex-col gap-2">
           <Eyebrow data-anim="up">{t("home.categories.eyebrow")}</Eyebrow>
           <h2 className="text-[clamp(24px,2.6vw,36px)] leading-[1.06]" data-anim-split>
@@ -75,7 +75,16 @@ export function Categories() {
         a per-slide tween would either be overwritten mid-step or leave a clone
         stuck at `opacity: 0` the first time the rail wraps around.
       */}
-      <div data-anim="up" data-anim-start="top 90%">
+      {/* Same `max-w-[1240px]` + page padding as the heading above, so the rail
+          starts and ends on the section's own edges instead of running to the
+          viewport. Swiper clips at its padding box, so the padding has to live
+          out here on the wrapper — left on the Swiper itself the slides render
+          straight through it and the rail reads as full-bleed. */}
+      <div
+        data-anim="up"
+        data-anim-start="top 90%"
+        className="mx-auto max-w-[1440px] px-[clamp(18px,3vw,44px)]"
+      >
         <Swiper
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
@@ -92,7 +101,7 @@ export function Categories() {
           speed={SPEED_MS}
           grabCursor
           autoplay={{ delay: AUTOPLAY_MS, disableOnInteraction: false, pauseOnMouseEnter: true }}
-          className="mt-[clamp(20px,2.4vw,30px)] px-[clamp(18px,3vw,44px)] pt-1.5 pb-[18px]"
+          className="mt-[clamp(20px,2.4vw,30px)] pt-1.5 pb-[18px]"
         >
           {SLIDES.map((category, i) => (
             <SwiperSlide key={`${category.key}-${i}`} className="h-auto! w-[clamp(150px,15vw,186px)]!">

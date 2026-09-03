@@ -1,21 +1,31 @@
-import { Barlow, Barlow_Condensed } from "next/font/google";
+import { Poppins, Ubuntu } from "next/font/google";
 import "../style/globals.css";
 import { ThemeProvider } from "@/hooks/useTheme";
 import { LangProvider } from "@/hooks/useLang";
 import { QueryProvider } from "@/providers/QueryProvider";
 
-// Barlow carries the whole design; Barlow Condensed is reserved for the
-// uppercase, letter-spaced labels and CTAs (`font-display`).
-const barlow = Barlow({
-  variable: "--font-barlow",
+/*
+ * Two families, the pairing the reference design uses.
+ *
+ * POPPINS is the display face — `font-display`, and every `h1`-`h6`. It gets
+ * the full heavy end because that is where the weight lives: `h1`/`h2` are
+ * `font-black` (900) and `h3` is `font-extrabold` (800).
+ *
+ * UBUNTU is the text face — body copy, labels, controls, the nav. Ubuntu ships
+ * only 300/400/500/700, so 600/800/900 asked of it resolve to the nearest
+ * available weight (700) rather than a synthesised fake. That is fine for text
+ * and is the reason the heavy end belongs to Poppins.
+ */
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const barlowCondensed = Barlow_Condensed({
-  variable: "--font-barlow-condensed",
+const ubuntu = Ubuntu({
+  variable: "--font-ubuntu",
   subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata = {
@@ -62,7 +72,7 @@ export default function RootLayout({ children }) {
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${barlow.variable} ${barlowCondensed.variable} h-full antialiased`}
+      className={`${poppins.variable} ${ubuntu.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />

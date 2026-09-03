@@ -62,8 +62,11 @@ type SelectProps = {
 
 const MENU_H = 320; 
 
-const MENU_SCROLL =
-  "scrollbar-thin [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-track]:bg-transparent";
+/* Just the width. The thumb, track and radius come from the global scrollbar
+   block in globals.css, so this menu gets the same plum bar as everything else
+   instead of its own grey one - and `scrollbar-width` is the half that does
+   NOT inherit from <html>, so it still has to be named here. */
+const MENU_SCROLL = "scrollbar-thin";
 
 export function Select({
   value,

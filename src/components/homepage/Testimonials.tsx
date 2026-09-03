@@ -1,22 +1,25 @@
 "use client";
 
+import Image from "next/image";
 import { MessageSquareQuote, Quote, Star } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { useGsapScope } from "@/hooks/useGsap";
 import { Eyebrow } from "@/components/share/Eyebrow";
-import { TESTIMONIAL_COLUMNS } from "@/components/homepage/homeData";
+import { TESTIMONIAL_COLUMNS, TESTIMONIAL_PHOTOS } from "@/components/homepage/homeData";
 import { cn } from "@/components/ui/cn";
 
 const STARS = [0, 1, 2, 3, 4];
 
 /**
- * A monogram rather than a portrait.
+ * The fallback for a quote with no portrait in `TESTIMONIAL_PHOTOS`.
  *
- * Eight more face photos would be eight more full-size files on a page that
- * already ships the team grid — `images.unoptimized` sends every byte of each
- * one to every phone (blueprint §14.1) — and initials taken from the
- * translated name follow the copy into every dictionary. Two letters, because
- * the design's tile is square and three start to crowd it.
+ * Every quote has one today, so this renders nowhere - it is the guard for the
+ * fact that the columns and the photo map are two separate structures, and a
+ * ninth testimonial key can be added to one without the other.
+ *
+ * Initials are taken from the translated name, so they follow the copy into
+ * every dictionary instead of needing their own key. Two letters, because the
+ * design's tile is square and three start to crowd it.
  */
 function initials(name: string) {
   return name
@@ -29,11 +32,11 @@ function initials(name: string) {
 }
 
 /*
- * The quote sits on `bg-bg`, not `bg-card`, and that is deliberate:
- * the dark theme gives `--card` and `--surface` the same triplet, so a
- * `bg-card` card on this `bg-surface` band disappears into it and only the
- * hairline is left to say where one quote ends. Against the band, `bg-bg` reads
- * as white-on-warm-grey in light and as a darker inset in dark.
+ * The quote sits on `bg-bg`, not `bg-card` — the same pairing the cards in
+ * Listings, CategoryListings, Team and Blog use, and for the same reason: the
+ * band is `bg-page`, and white against it is what gives a card its edge.
+ * `bg-card` would say nothing at all — it is identical to `--bg` in light, and
+ * in dark it is `--surface`, which sits 3/255 off `--page`.
  *
  * Accents are `text-brand` rather than `text-primary` for the same reason - the
  * base plum is nearly invisible on a near-black page; `--brand-ink` is the
@@ -42,6 +45,7 @@ function initials(name: string) {
 function TestimonialCard({ id }: { id: string }) {
   const { t } = useLang();
   const name = t(`home.testimonials.items.${id}.name`);
+  const photo = TESTIMONIAL_PHOTOS[id];
 
   return (
     <figure
@@ -57,9 +61,21 @@ function TestimonialCard({ id }: { id: string }) {
       </blockquote>
 
       <figcaption className="mt-auto flex items-center gap-3 border-t border-border/70 pt-[clamp(13px,1.4vw,17px)]">
-        <span className="flex h-10 w-10 flex-none items-center justify-center bg-primary/12 font-display text-[14px] font-bold tracking-[0.06em] text-brand">
-          {initials(name)}
-        </span>
+        {photo ? (
+          /* `alt=""` on purpose - the name is right there in the caption, and
+             repeating it here just makes a screen reader say it twice. */
+          <Image
+            src={photo}
+            alt=""
+            width={40}
+            height={40}
+            className="h-10 w-10 flex-none object-cover"
+          />
+        ) : (
+          <span className="flex h-10 w-10 flex-none items-center justify-center bg-primary/12 font-display text-[14px] font-bold tracking-[0.06em] text-brand">
+            {initials(name)}
+          </span>
+        )}
         <span className="min-w-0">
           <span className="truncate text-[15px] font-extrabold tracking-[-0.01em] text-heading">
             {name}
@@ -80,13 +96,11 @@ export function Testimonials() {
   return (
     /* No `overflow-hidden` here, and none on any wrapper between this and
        <body>: an `overflow` other than `visible` on ANY ancestor silently
-       turns the sticky rail below back into a static block. That rules out the
-       blurred corner glows the neighbouring sections use, so the band is a
-       flat `bg-surface` instead — which is also the band the quote cards
-       need to sit apart from (see the note on TestimonialCard above). */
+       turns the sticky rail below back into a static block. Anything decorative
+       added here has to stay inside the section's own box. */
     <section
       ref={scope}
-      className="relative bg-surface px-[clamp(18px,3vw,44px)] py-[clamp(48px,6vw,90px)]"
+      className="bg-page relative px-[clamp(18px,3vw,44px)] py-[clamp(48px,6vw,90px)]"
     >
       <div className="mx-auto grid max-w-[1240px] grid-cols-1 items-start gap-x-[clamp(28px,3.4vw,68px)] gap-y-[clamp(30px,4vw,48px)] wide:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)]">
         {/* ── The rail ──────────────────────────────────────────────────

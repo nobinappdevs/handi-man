@@ -1,11 +1,9 @@
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
-import { Play } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { useGsapScope } from "@/hooks/useGsap";
 import { gsap } from "@/lib/gsap";
-import { Eyebrow } from "@/components/share/Eyebrow";
 import { CtaLink } from "@/components/share/CtaLink";
 import { HeroBookingBand } from "@/components/homepage/HeroBookingBand";
 import { HERO_STATS } from "@/components/homepage/homeData";
@@ -68,7 +66,7 @@ export function Hero() {
   const scope = useGsapScope(heroParallax);
 
   return (
-    <section ref={scope} className="relative bg-bg">
+    <section ref={scope} className="relative overflow-x-clip bg-bg">
       <div className="absolute inset-0 overflow-hidden bg-hero-backdrop">
         {HERO_BG && (
           <Image src={HERO_BG} alt="" fill priority sizes="100vw" className="object-cover" />
@@ -80,10 +78,6 @@ export function Hero() {
 
       <div className={`${WEDGE} bg-primary`} />
       <div className={`${WEDGE} bg-[linear-gradient(200deg,rgba(255,255,255,0.16),rgba(0,0,0,0.18))]`} />
-
-      {/* Angled seam where the wedge meets the photo. */}
-      <div className="pointer-events-none absolute inset-y-0 left-[calc(49%-30px)] hidden w-2 skew-x-[-13deg] bg-white/[0.14] wide:block" />
-      <div className="pointer-events-none absolute inset-y-0 left-[calc(49%-54px)] hidden w-[3px] skew-x-[-13deg] bg-primary/75 wide:block" />
 
       {/*
         Line-work, clipped to the wedge. Faded rather than moved: the shapes are
@@ -100,13 +94,11 @@ export function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_78%_8%,rgba(255,255,255,0.16),rgba(255,255,255,0)_62%)]" />
       </div>
 
-      <div className="relative mx-auto grid max-w-[1440px] grid-cols-1 items-end gap-[clamp(16px,2vw,24px)] px-[clamp(18px,3vw,44px)] mid:min-h-[520px] wide:min-h-[600px] wide:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+      <div className="relative mx-auto grid max-w-[1440px] grid-cols-1 items-end gap-[clamp(16px,2vw,24px)] px-[clamp(18px,3vw,44px)] mid:min-h-[520px] mid:pt-10 wide:min-h-[600px] wide:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
         <div
           data-hero="copy"
-          className="flex min-w-0 flex-col gap-[clamp(14px,1.6vw,20px)] pt-[clamp(38px,5vw,64px)] pb-[70px]"
+          className="flex min-w-0 flex-col gap-[clamp(14px,1.6vw,20px)] pt-[clamp(38px,5vw,64px)] pb-[clamp(28px,6vw,70px)] wide:pb-[70px]"
         >
-          <Eyebrow className="enter-up [--enter-delay:0.05s]">{t("home.hero.eyebrow")}</Eyebrow>
-
           {/*
             The LCP element on a desktop viewport. `enter-rise` moves it and
             nothing else — a fade or a clip here costs ~3s of LCP, because Chrome
@@ -125,21 +117,9 @@ export function Hero() {
 
           <div className="enter-group mt-2.5 flex flex-wrap items-center gap-[clamp(14px,1.8vw,22px)] [--enter-delay:0.32s]">
             <CtaLink href="/services">{t("home.hero.discover")}</CtaLink>
-
-            <button
-              type="button"
-              className="flex cursor-pointer items-center gap-[11px] p-0 text-heading"
-            >
-              <span className="flex h-[46px] w-[46px] flex-none items-center justify-center rounded-full border-[1.5px] border-hero-line">
-                <Play size={14} aria-hidden fill="currentColor" strokeWidth={0} />
-              </span>
-              <span className="font-display text-sm font-bold uppercase leading-none tracking-[0.12em] text-heading">
-                {t("home.hero.howItWorks")}
-              </span>
-            </button>
           </div>
 
-          <div className="enter-group mt-3.5 flex flex-wrap items-center gap-x-[clamp(14px,1.6vw,26px)] gap-y-3 border-t border-hero-line pt-5 [--enter-delay:0.42s]">
+          <div className="enter-group mt-4 flex flex-wrap items-center gap-x-[clamp(14px,1.6vw,26px)] gap-y-3 [--enter-delay:0.42s]">
             {HERO_STATS.map((stat) => (
               <div key={stat.labelKey} className="flex items-baseline gap-2">
                 <span className="text-[clamp(22px,2.2vw,26px)] font-black tracking-[-0.03em] text-brand">
@@ -153,14 +133,34 @@ export function Hero() {
           </div>
         </div>
 
+        {/*
+          No horizontal offset here, at any breakpoint.
+
+          This column used to carry `left-[165px]`, and a `position: relative`
+          offset does not shrink to fit — it pushes visual overflow out of the
+          document. Measured against the dev server it widened the page at every
+          width the site actually ships to: 107-129px of horizontal scroll from
+          700px through 1440px, and on a phone the worse failure mode, where
+          Chrome widens the layout viewport to swallow the overflow instead
+          (`innerWidth` came back 507 on a 360px device) so the whole hero
+          rendered zoomed out with the lead paragraph sliced off. It only looked
+          right above ~1900px, where the `max-w-[1440px]` container has enough
+          side slack to absorb 165px.
+
+          None of it was needed. The figure is `max-w-[640px]` inside the grid's
+          `1fr` track, which lands its right edge on the container's right
+          padding edge unaided — 1381px against a 1382px content edge at 1440,
+          and flush at 980, 1024 and 1280 too. The wedge behind it is sized in
+          percentages, so the two stay registered on their own.
+        */}
         <div
           data-hero="worker"
-          className="relative flex left-[165px] h-full min-w-0 items-end justify-center"
+          className="relative flex h-full min-w-0 items-end justify-center"
         >
           {/* `enter-rise`, not `enter-up`: on a narrow viewport the figure is
               the largest paint instead of the headline, so it carries the same
               no-fade rule. */}
-          <div className="enter-rise relative mb-0 aspect-[330/366] w-full max-w-[330px] drop-shadow-[0_24px_40px_rgba(0,0,0,0.35)] mid:mb-[-74px] wide:mb-[-92px] wide:max-w-[640px] [--enter-delay:0.12s] [--enter-y:40px]">
+          <div className="enter-rise relative mb-0 aspect-[330/366] w-full max-w-[330px] drop-shadow-[0_24px_40px_rgba(0,0,0,0.35)] mid:mb-[-74px] mid:max-w-[420px] wide:mb-[-92px] wide:max-w-[640px] [--enter-delay:0.12s] [--enter-y:40px]">
             {/*
               The LCP element on every viewport.
 
@@ -168,9 +168,9 @@ export function Hero() {
               priority hint, which is what Lighthouse's "LCP request discovery"
               audit asks for - so `fetchPriority` is set explicitly.
 
-              `sizes` matches the real slot: 330px capped below the design's
-              980px breakpoint, 640px above it (`wide:max-w-[640px]`). It was
-              430px, which never corresponded to anything. `output: "export"`
+              `sizes` matches the real slot, all three of them: 330px on a
+              phone, 420px across the 700-979px band (`mid:max-w-[420px]`) and
+              640px above it (`wide:max-w-[640px]`). `output: "export"`
               forces `images.unoptimized`, so there is no srcset for the browser
               to pick from and `sizes` is only a hint today - but it is the
               number an optimizer would read the day this moves off a static
@@ -182,7 +182,7 @@ export function Hero() {
               fill
               priority
               fetchPriority="high"
-              sizes="(max-width: 980px) 330px, 640px"
+              sizes="(max-width: 700px) 330px, (max-width: 980px) 420px, 640px"
               className="object-contain object-bottom"
             />
           </div>

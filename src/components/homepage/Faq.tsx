@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { useGsapScope } from "@/hooks/useGsap";
+import { Eyebrow } from "@/components/share/Eyebrow";
 import { FAQ_KEYS } from "@/components/homepage/homeData";
 import { cn } from "@/components/ui/cn";
 
@@ -15,7 +16,7 @@ export function Faq() {
   return (
     <section
       ref={scope}
-      className="brand-wash relative [--wash-angle:152deg] [--wash-strength:15%] px-[clamp(18px,3vw,44px)] py-[clamp(48px,6vw,96px)]"
+      className="bg-page relative px-[clamp(18px,3vw,44px)] py-[clamp(48px,6vw,96px)]"
     >
       <div className="mx-auto flex max-w-[900px] flex-col gap-[clamp(28px,3.4vw,44px)]">
         <div
@@ -23,11 +24,7 @@ export function Faq() {
           data-anim-stagger="up"
           data-anim-gap="0.1"
         >
-          <div className="flex items-center gap-3 font-display text-[clamp(13px,1.2vw,15px)] font-bold tracking-[0.2em] text-brand uppercase">
-            <span className="h-0.5 w-[30px] bg-primary" />
-            {t("home.faq.eyebrow")}
-            <span className="h-0.5 w-[30px] bg-primary" />
-          </div>
+          <Eyebrow data-anim="up">{t("home.faq.eyebrow")}</Eyebrow>
           <h2 className="text-[clamp(30px,3.8vw,54px)] leading-[1.02] tracking-[-0.038em] text-balance">
             {t("home.faq.title")}
           </h2>
@@ -53,7 +50,7 @@ export function Faq() {
                 }}
                 className={cn(
                   "cursor-pointer border p-[clamp(16px,1.8vw,22px)] px-[clamp(16px,2vw,26px)] transition-colors",
-                  isOpen ? "border-primary bg-bg shadow-[0_26px_54px_-34px_rgba(0,0,0,0.45)]" : "border-transparent bg-surface",
+                  isOpen ? "border-primary bg-bg shadow-[0_26px_54px_-34px_rgba(0,0,0,0.45)]" : "border-border bg-surface",
                 )}
               >
                 <div className="flex items-center gap-[clamp(12px,1.4vw,18px)]">

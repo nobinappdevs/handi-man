@@ -18,7 +18,7 @@ export function About() {
   return (
     <section
       ref={scope}
-      className="brand-wash relative overflow-hidden [--wash-angle:332deg] [--wash-strength:6%] px-[clamp(18px,3vw,44px)] pt-[clamp(20px,3vw,40px)] pb-[clamp(48px,6vw,96px)]"
+      className="bg-page relative overflow-hidden px-[clamp(18px,3vw,44px)] pt-[clamp(20px,3vw,40px)] pb-[clamp(48px,6vw,96px)]"
     >
       <div className="relative mx-auto grid max-w-[1240px] grid-cols-1 items-center gap-[clamp(32px,5vw,72px)] wide:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)]">
         {/*

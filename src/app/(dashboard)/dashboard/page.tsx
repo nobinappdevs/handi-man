@@ -1,5 +1,7 @@
-import { PagePlaceholder } from "@/components/share/PagePlaceholder";
+import { DashboardView } from "@/components/dashboard/DashboardView";
+
+export const metadata = { title: "Overview — Handiman" };
 
 export default function Page() {
-  return <PagePlaceholder title="Dashboard overview" />;
+  return <DashboardView page="overview" />;
 }

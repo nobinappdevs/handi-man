@@ -9,11 +9,12 @@ import { cn } from "@/components/ui/cn";
  * close. Fills with plum on hover.
  *
  * `tone="soft"` is the drawer variant: filled with the drawer's soft surface
- * and no border.
+ * and no border. `tone="ghost"` is borderless like `soft`, but transparent —
+ * for a circle button sitting directly on the page rather than a drawer.
  */
 export interface CircleIconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: number;
-  tone?: "outline" | "soft";
+  tone?: "outline" | "soft" | "ghost";
 }
 
 export const CircleIconButton = forwardRef<HTMLButtonElement, CircleIconButtonProps>(
@@ -26,9 +27,9 @@ export const CircleIconButton = forwardRef<HTMLButtonElement, CircleIconButtonPr
         className={cn(
           "flex shrink-0 cursor-pointer items-center justify-center rounded-full transition-colors",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
-          tone === "outline"
-            ? "border border-border bg-transparent text-heading hover:border-primary hover:bg-primary hover:text-white"
-            : "border-0 bg-drawer-soft text-drawer-ink hover:bg-primary hover:text-white",
+          tone === "outline" && "border border-border bg-transparent text-heading hover:border-primary hover:bg-primary hover:text-white",
+          tone === "soft" && "border-0 bg-drawer-soft text-drawer-ink hover:bg-primary hover:text-white",
+          tone === "ghost" && "border-0 bg-transparent text-heading hover:bg-primary hover:text-white",
           className,
         )}
         {...props}

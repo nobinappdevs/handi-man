@@ -26,14 +26,54 @@
      highlighted headline words and inline accents — never `text-primary`. */
   --brand-ink: var(--primary__color);
 
-  /* The brand colour mixed into section backgrounds by `.brand-wash`. Same
-     problem as `--brand-ink`, mirrored: plum mixed into the near-black dark
-     page barely moves it, so the dark theme mixes the lighter shade instead
-     and both themes end up visibly branded. */
+  /* The brand colour used in decoration that sits ON a background - the dot
+     grid and outline shapes behind Impact. Same problem as `--brand-ink`,
+     mirrored: plum over the near-black dark page barely registers, so the dark
+     theme uses the lighter shade and the texture stays visible in both. */
   --wash-ink: var(--primary__color);
 
+  /* The brand colour as a scrollbar thumb. Third member of the same family as
+     `--brand-ink` and `--wash-ink`, and it flips for the same reason: at 8px
+     wide, plum on the near-black dark page is a bar you cannot find. */
+  --bar-ink: var(--primary__color);
+
   --bg: 255, 255, 255;      /* page background                          */
+
+  /*
+   * The landing page band colour, and the ONE value the whole home page sits
+   * on. It is not picked - it is measured: the hero ramps `--scrim` from 0.95
+   * down to 0.38 across the headline column over `--hero-backdrop`, and at 0%
+   * that composites to exactly this. So the bands below the hero continue the
+   * hero's own left edge instead of cutting to a different surface at the fold.
+   *
+   * Change `--scrim` or `--hero-backdrop` and this has to be recomputed:
+   *   round(scrim * 0.95 + backdrop * 0.05)
+   *
+   * Cards on these bands are `bg-bg`, which is why `--bg` stays pure white -
+   * the gap between the two is what gives a card its edge.
+   */
+  --page: 237, 234, 232;    /* #edeae8 - hero left edge, light           */
   --surface: 244, 242, 240; /* panels, chips, subtle fills   #f4f2f0    */
+
+  /*
+   * A recess INSIDE a card - table header strips, row hover, the track behind
+   * a progress bar. Identical to `--surface` in light, and it exists for the
+   * dark theme, where `--card` and `--surface` are the same triplet and a
+   * "slightly sunk" area inside a panel would otherwise have nothing to be.
+   */
+  --sunk: 244, 242, 240;    /* #f4f2f0                                  */
+
+  /* The dashboard rail. Near-black in both themes like `--color-ink`, but it
+     goes DARKER in dark mode, not lighter - it has to stay distinct from a
+     page that is itself near-black. */
+  --rail: 18, 16, 15;       /* #12100f                                  */
+
+  /* Status inks - the two the dashboard needs that the plum ramp cannot say.
+     Both lift in dark for the usual reason: a mid teal and a brown-amber on a
+     near-black page are unreadable. */
+  --ok: 14, 138, 122;       /* #0e8a7a - settled, on time, paid         */
+  --warn: 168, 106, 18;     /* #a86a12 - awaiting, at hub, pending      */
+  --danger: 200, 38, 28;    /* #c8261c - sign out, destructive          */
   --card: 255, 255, 255;    /* cards sitting on the page                */
 
   --heading: 18, 16, 15;    /* h1-h6, strong text            #12100f    */
@@ -100,10 +140,17 @@
 
   --brand-ink: var(--primary-on-dark);
   --wash-ink: var(--primary-lite);
+  --bar-ink: var(--primary-lite);
 
   --bg: 18, 16, 15;         /* #12100f */
+  --page: 20, 18, 17;       /* #141211 - same composite, dark scrim */
   --surface: 23, 21, 20;    /* #171514 */
   --card: 23, 21, 20;
+  --sunk: 29, 26, 25;       /* #1d1a19 - the one that must NOT equal --card */
+  --rail: 11, 10, 9;        /* #0b0a09 */
+  --ok: 47, 176, 160;       /* #2fb0a0 */
+  --warn: 214, 154, 60;     /* #d69a3c */
+  --danger: 255, 106, 94;   /* #ff6a5e */
 
   --heading: 255, 255, 255;
   --text: 200, 195, 192;    /* #c8c3c0 */
@@ -128,10 +175,14 @@
 }
 
 @theme {
-  /* Barlow for everything; Barlow Condensed for the uppercase, letter-spaced
-     labels and CTAs (`font-display`). */
-  --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-barlow-condensed), var(--font-barlow), sans-serif;
+  /* Two families. Ubuntu is the text face and the document default; Poppins is
+     the display face — every `h1`-`h6` (see the base layer) and anything
+     wearing `font-display`: eyebrows, uppercase tracked labels, CTAs. */
+  --font-sans: var(--font-ubuntu), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-poppins), var(--font-ubuntu), sans-serif;
+  /* Same face as `--font-sans` today, kept as its own token so the site nav
+     can be retyped without touching body copy. */
+  --font-nav: var(--font-ubuntu), ui-sans-serif, sans-serif;
 
   /* The design switches layout at 700px ("mobile") and 980px ("narrow"),
      which do not line up with any Tailwind default. Both are min-width. */
@@ -151,7 +202,13 @@
 
   /* Surfaces */
   --color-bg: rgb(var(--bg));
+  --color-page: rgb(var(--page));
   --color-surface: rgb(var(--surface));
+  --color-sunk: rgb(var(--sunk));
+  --color-rail: rgb(var(--rail));
+  --color-ok: rgb(var(--ok));
+  --color-warn: rgb(var(--warn));
+  --color-danger: rgb(var(--danger));
   --color-card: rgb(var(--card));
   --color-invert: rgb(var(--invert));
   --color-invert-ink: rgb(var(--invert-ink));
@@ -189,6 +246,13 @@
     font-size classes. Use <h2>, not <div class="text-4xl">.
 --------------------------------------------------------------*/
 @layer base {
+  /* Every heading takes the display face. Stated once here rather than as a
+     `font-display` class on each `<h1>` — a heading that forgot the class
+     would silently render in the text face. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+
   h1 {
     @apply text-heading
     font-black
@@ -315,10 +379,14 @@
       border-collapse;
   }
 
+  /* Tokens, not `gray-*`. These were raw greys, which meant the header strip
+     of any table painted near-white on the dark page. `--sunk` is the recess
+     colour and is the only one of the three surfaces that differs from
+     `--card` in dark - see its note at the top of this file. */
   table thead tr {
-    @apply bg-gray-50
+    @apply bg-sunk
       border-b
-      border-gray-200;
+      border-border;
   }
 
   table th {
@@ -332,7 +400,7 @@
   table td {
     @apply p-4
       border-b
-      border-gray-100
+      border-border
       text-body
       text-[13px]
       md:text-[15px];
@@ -361,6 +429,44 @@
 html {
   font-size: 100%;
   scroll-behavior: smooth;
+}
+
+/*--------------------------------------------------------------
+    # Scrollbars - thin, brand-coloured, everywhere
+    Written twice on purpose, because no single syntax covers every engine:
+
+      `scrollbar-width`/`scrollbar-color`  the standard pair. Firefox, and
+                                          Chromium 121+ / Safari 18.4+.
+      `::-webkit-scrollbar`                older WebKit and Chromium.
+
+    They do not stack - an element that sets the standard properties makes
+    Chromium ignore its `::-webkit-scrollbar` rules entirely. That is fine and
+    is the point: whichever pair an engine understands, it lands on the same
+    8px plum bar on a transparent track.
+
+    The pseudo-element block is deliberately unqualified, so every scroll
+    container gets the treatment and not just the page. The two utilities that
+    want something else - `.scroll-x` and `.no-scrollbar` - carry a class in
+    their selector and outrank it.
+--------------------------------------------------------------*/
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--bar-ink), 0.55) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(var(--bar-ink), 0.55);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--bar-ink));
 }
 
 body {
@@ -462,52 +568,24 @@ input[type="number"] {
 }
 
 /*--------------------------------------------------------------
-    # Brand washes - plum-tinted section backgrounds
-    The landing page is a long run of full-width sections, and a flat page
-    background on every one of them reads as untinted and off-brand. These
-    mix `--primary__color` into the page background so each band carries the
-    brand colour, and they flip with the theme for free because the mix is
-    against `rgb(var(--bg))` rather than a fixed light/dark value.
-
-    Tune per section with two custom properties (Tailwind arbitrary
-    properties: `brand-wash [--wash-strength:12%] [--wash-angle:152deg]`):
-
-      --wash-strength   how much plum mixes in. ~5% is a whisper (the page
-                        still reads as white/near-black), ~12% is a visible
-                        band. Past ~18% the body copy starts to lose contrast.
-      --wash-angle      gradient direction. Mirror it between neighbouring
-                        sections (152deg / 332deg) so consecutive bands read
-                        as alternating rather than as one long ramp.
-
-    Do NOT also set a `bg-*` utility on the same element: this sets the
-    `background` shorthand, so the two fight over `background-color`.
---------------------------------------------------------------*/
-.brand-wash {
-  background: linear-gradient(
-    var(--wash-angle, 152deg),
-    color-mix(in oklab, rgb(var(--wash-ink)) var(--wash-strength, 12%), rgb(var(--bg))) 0%,
-    rgb(var(--bg)) 50%,
-    color-mix(in oklab, rgb(var(--wash-ink)) calc(var(--wash-strength, 12%) * 0.75), rgb(var(--bg)))
-      100%
-  );
-}
-
-/*--------------------------------------------------------------
     # Dashboard tables - horizontal scroll + slim themed scrollbar
 --------------------------------------------------------------*/
 .scroll-x {
   overflow-x: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(var(--primary__color), 0.55) transparent;
+  scrollbar-color: rgba(var(--bar-ink), 0.55) transparent;
 }
+/* Only `overflow-x` and the height differ from the global bars above now, but
+   the rules have to be restated: naming a class here is what stops Chromium
+   falling back to the unqualified pseudo-elements. */
 .scroll-x::-webkit-scrollbar { height: 8px; }
 .scroll-x::-webkit-scrollbar-track { background: transparent; }
 .scroll-x::-webkit-scrollbar-thumb {
-  background-color: rgba(var(--primary__color), 0.5);
+  background-color: rgba(var(--bar-ink), 0.55);
   border-radius: 9999px;
 }
 .scroll-x::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(var(--primary__color));
+  background-color: rgb(var(--bar-ink));
 }
 
 /* Auth photo panel, notched at the top-left so the circular back button nests

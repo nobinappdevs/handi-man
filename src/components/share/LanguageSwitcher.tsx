@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Globe, ChevronDown } from "lucide-react";
+import { Languages, ChevronDown } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
+import { SquareIconButton } from "@/components/ui/SquareIconButton";
 
 function Chevron({ open }) {
   return (
@@ -15,7 +16,14 @@ function Chevron({ open }) {
   );
 }
 
-export function LanguageSwitcher({ className = "" }) {
+/**
+ * `variant` picks the trigger, not the menu:
+ *
+ *   pill    globe + "EN" + caret, for the public header
+ *   square  globe only, 40px hairline square, for the dashboard toolbar where
+ *           it has to line up with the notification and theme buttons
+ */
+export function LanguageSwitcher({ className = "", variant = "pill" }) {
   const { lang, setLang, languages, t } = useLang();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -46,23 +54,35 @@ export function LanguageSwitcher({ className = "" }) {
 
   return (
     <div ref={ref} className={`relative ${className}`}>
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        aria-label={t("language.select")}
-        className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-sm font-semibold text-body transition-colors hover:border-primary/50 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-      >
-        <Globe size={15} strokeWidth={2} aria-hidden />
-        <span>{current.code.toUpperCase()}</span>
-        <Chevron open={open} />
-      </button>
+      {variant === "square" ? (
+        <SquareIconButton
+          onClick={() => setOpen((v) => !v)}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          aria-label={t("language.select")}
+          title={current.name}
+        >
+          <Languages size={18} strokeWidth={2} aria-hidden />
+        </SquareIconButton>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          aria-label={t("language.select")}
+          className="inline-flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-body transition-colors hover:bg-primary hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          <Languages size={15} strokeWidth={2} aria-hidden />
+          <span>{current.code.toUpperCase()}</span>
+          <Chevron open={open} />
+        </button>
+      )}
 
       {open && (
         <ul
           role="listbox"
-          className="absolute inset-e-0 z-50 mt-2 w-48 overflow-hidden rounded-xl border border-border bg-bg py-1 shadow-card"
+          className="absolute end-0 z-50 mt-2 w-48 overflow-hidden rounded-xl border border-border bg-bg py-1 shadow-card"
         >
           {languages.map((l) => {
             const active = l.code === current.code;

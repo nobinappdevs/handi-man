@@ -9,8 +9,8 @@ import impactPhoto from "@public/assets/home/aboutus-photo.webp";
 
 /**
  * "Empowering businesses…" — the design's second about-style section: a
- * plum-tinted gradient wash, a numbered feature list, and the company's
- * headline stats. Distinct from `About.tsx` ("Who we are" — the
+ * numbered feature list and the company's headline stats, over the same flat
+ * `bg-page` every other band uses. Distinct from `About.tsx` ("Who we are" — the
  * checklist/CTA section further down), which the design also calls
  * "About us" but is a different block entirely.
  */
@@ -21,11 +21,12 @@ export function Impact() {
   return (
     <section
       ref={scope}
-      className="relative overflow-hidden bg-[linear-gradient(152deg,color-mix(in_oklab,rgb(var(--primary__color))_12%,rgb(var(--bg)))_0%,rgb(var(--bg))_46%,color-mix(in_oklab,rgb(var(--primary__color))_8%,rgb(var(--bg)))_72%,color-mix(in_oklab,rgb(var(--primary__color))_20%,rgb(var(--bg)))_100%)] px-[clamp(18px,3vw,44px)] py-[clamp(48px,6vw,96px)]">
+      className="bg-page relative overflow-hidden px-[clamp(18px,3vw,44px)] py-[clamp(48px,6vw,96px)]">
+      {/* Texture only - no colour field. The page is one flat surface from
+          the hero down, so anything that tints a whole corner would put this
+          section back on its own band. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-[24%] -left-[10%] h-[80%] w-[46%] rounded-full bg-[radial-gradient(circle_at_50%_50%,color-mix(in_oklab,rgb(var(--primary__color))_26%,transparent),transparent_68%)]" />
-        <div className="absolute -right-[14%] -bottom-[32%] h-[92%] w-[52%] rounded-full bg-[radial-gradient(circle_at_50%_50%,color-mix(in_oklab,rgb(var(--primary__color))_22%,transparent),transparent_66%)]" />
-        <div className="absolute top-[12%] left-[6%] h-[clamp(90px,10vw,140px)] w-[clamp(90px,10vw,140px)] opacity-30 bg-[radial-gradient(rgb(var(--primary__color))_1.3px,transparent_1.3px)] bg-[length:16px_16px]" />
+        <div className="absolute top-[12%] left-[6%] h-[clamp(90px,10vw,140px)] w-[clamp(90px,10vw,140px)] opacity-30 bg-[radial-gradient(rgb(var(--wash-ink))_1.3px,transparent_1.3px)] bg-[length:16px_16px]" />
         <div className="absolute bottom-[6%] left-[44%] h-[clamp(120px,13vw,190px)] w-[clamp(120px,13vw,190px)] rotate-[18deg] rounded-[26px] border border-border" />
       </div>
       <div

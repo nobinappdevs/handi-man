@@ -6,7 +6,7 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "services": "Services",
+    "services": "Service",
     "howItWorks": "How it works",
     "blog": "Blog",
     "contact": "Contact",
@@ -19,7 +19,9 @@
     "vendors": "Vendors",
     "delivery": "Delivery",
     "pricing": "Pricing",
-    "getQuote": "Get a quote"
+    "bookService": "Book a service",
+    "pickup": "Pickup",
+    "joinVendor": "Join as Vendor"
   },
   "theme": {
     "toggle": "Colour theme",
@@ -338,6 +340,8 @@
       "title": "Simply follow the moves",
       "lead": "Discovering and availing services on Handyman is a breeze! Follow these simple steps to experience seamless solutions tailored to your needs",
       "timing": "Timing",
+      "prev": "Previous step",
+      "next": "Next step",
       "steps": {
         "signUp": {
           "title": "Sign Up",
@@ -575,7 +579,207 @@
     }
   },
   "aboutPage": {},
-  "servicesPage": {},
+  "servicesPage": {
+    "eyebrow": "Everything we do",
+    "title": "Every service, one marketplace",
+    "lead": "Browse the full catalogue by category. Every listing is delivered by an admin-verified vendor, priced up front, and bookable in a few taps.",
+    "cta": "Get a quote",
+    "category": "Category",
+    "allOf": "All",
+    "services": "services",
+    "requestQuote": "Request a quote",
+    "stats": {
+      "services": "Services listed",
+      "categories": "Categories"
+    },
+    "rail": {
+      "label": "Jump to a service category"
+    },
+    "missing": {
+      "eyebrow": "Cannot find it?",
+      "title": "Tell us what you need and we will match a verified pro.",
+      "cta": "Talk to us"
+    },
+    "items": {
+      "furnitureAssembly": {
+        "title": "Flat-pack furniture assembly",
+        "unit": "2 hrs"
+      },
+      "wallMounting": {
+        "title": "TV and shelf wall mounting",
+        "unit": "1 hr"
+      },
+      "interiorPainting": {
+        "title": "Interior wall painting",
+        "unit": "1 day"
+      },
+      "doorLockRepair": {
+        "title": "Door and lock repair",
+        "unit": "1 hr"
+      },
+      "sameDayParcel": {
+        "title": "Same-day parcel delivery",
+        "unit": "3 hrs"
+      },
+      "documentCourier": {
+        "title": "Document courier across the city",
+        "unit": "2 hrs"
+      },
+      "scheduledPickup": {
+        "title": "Scheduled door pickup",
+        "unit": "1 day"
+      },
+      "intercityDrop": {
+        "title": "Intercity drop-off",
+        "unit": "2 day"
+      },
+      "emergencyPlumbing": {
+        "title": "Emergency plumbing call-out",
+        "unit": "1 hr"
+      },
+      "leakRepair": {
+        "title": "Tap and pipe leak repair",
+        "unit": "2 hrs"
+      },
+      "showerFitting": {
+        "title": "Shower and mixer fitting",
+        "unit": "1 day"
+      },
+      "drainCleaning": {
+        "title": "Drain and sewer cleaning",
+        "unit": "3 hrs"
+      },
+      "electricalSafetyCheck": {
+        "title": "Full electrical safety check",
+        "unit": "1 day"
+      },
+      "lightingInstall": {
+        "title": "Lighting and fixture install",
+        "unit": "2 hrs"
+      },
+      "socketRewiring": {
+        "title": "Socket and switch rewiring",
+        "unit": "3 hrs"
+      },
+      "fuseBoxUpgrade": {
+        "title": "Fuse box and breaker upgrade",
+        "unit": "1 day"
+      },
+      "acServiceGasRefill": {
+        "title": "AC servicing and gas refill",
+        "unit": "2 hrs"
+      },
+      "acInstallation": {
+        "title": "Split AC installation",
+        "unit": "1 day"
+      },
+      "acDeepClean": {
+        "title": "AC deep clean and filter change",
+        "unit": "2 hrs"
+      },
+      "thermostatFix": {
+        "title": "Thermostat diagnosis and fix",
+        "unit": "1 hr"
+      },
+      "salonAtHome": {
+        "title": "Salon session at home",
+        "unit": "2 hrs"
+      },
+      "bridalPackage": {
+        "title": "Bridal hair and makeup package",
+        "unit": "1 day"
+      },
+      "maniPedi": {
+        "title": "Manicure and pedicure",
+        "unit": "1 hr"
+      },
+      "makeupSession": {
+        "title": "Event makeup session",
+        "unit": "2 hrs"
+      },
+      "houseShifting": {
+        "title": "Full house shifting",
+        "unit": "1 day"
+      },
+      "officeRelocation": {
+        "title": "Office relocation",
+        "unit": "2 day"
+      },
+      "packingService": {
+        "title": "Professional packing service",
+        "unit": "3 hrs"
+      },
+      "furnitureMoving": {
+        "title": "Single furniture item move",
+        "unit": "2 hrs"
+      }
+    },
+    "lists": {
+      "handyman": {
+        "shelvingBrackets": "Shelving and bracket fitting",
+        "curtainRails": "Curtain rail installation",
+        "tileGrout": "Tile and grout repair",
+        "windowSeals": "Window seal replacement",
+        "flatpackBuilds": "Flat-pack builds of any size"
+      },
+      "cleaning": {
+        "kitchenDeepClean": "Kitchen deep clean",
+        "bathroomSanitising": "Bathroom sanitising",
+        "carpetShampoo": "Carpet and rug shampoo",
+        "windowWashing": "Interior window washing",
+        "postRenovation": "Post-renovation clean-up"
+      },
+      "delivery": {
+        "doorToDoor": "Door-to-door collection",
+        "fragileHandling": "Fragile item handling",
+        "bulkConsignment": "Bulk consignment runs",
+        "liveTracking": "Live tracking on every parcel",
+        "returnPickup": "Return and exchange pickup"
+      },
+      "plumbing": {
+        "tapReplacement": "Tap and mixer replacement",
+        "toiletRepairs": "Toilet and cistern repairs",
+        "pipeInsulation": "Pipe lagging and insulation",
+        "waterHeaterService": "Water heater servicing",
+        "pressureTesting": "Pressure and leak testing"
+      },
+      "electrics": {
+        "ceilingFans": "Ceiling fan installation",
+        "outdoorLighting": "Outdoor and garden lighting",
+        "smartSwitches": "Smart switch setup",
+        "faultFinding": "Fault finding and tracing",
+        "surgeProtection": "Surge protection fitting"
+      },
+      "acRepair": {
+        "splitUnitService": "Split unit servicing",
+        "ductCleaning": "Duct cleaning",
+        "coolantTopUp": "Coolant top-up",
+        "compressorCheck": "Compressor health check",
+        "annualContract": "Annual maintenance contract"
+      },
+      "beauty": {
+        "haircutStyling": "Haircut and styling",
+        "facialTreatment": "Facial treatments",
+        "threadingWaxing": "Threading and waxing",
+        "hairColouring": "Hair colouring",
+        "groomsPackage": "Grooms package"
+      },
+      "shifting": {
+        "loadingUnloading": "Loading and unloading crew",
+        "storageShortTerm": "Short-term storage",
+        "applianceHandling": "Appliance handling",
+        "disassemblyRebuild": "Disassembly and rebuild",
+        "insuranceCover": "Transit insurance cover"
+      },
+      "mechanics": {
+        "engineTuning": "Engine tuning",
+        "brakeService": "Brake pad and disc service",
+        "batteryReplacement": "Battery testing and replacement",
+        "wheelAlignment": "Wheel alignment and balancing",
+        "acRegas": "Vehicle AC re-gas"
+      }
+    }
+  },
   "blogPage": {},
   "blogDetail": {},
   "contactPage": {},
@@ -587,7 +791,495 @@
       "of": "of",
       "previous": "Previous",
       "next": "Next",
-      "empty": "Nothing here yet"
+      "empty": "Nothing here yet",
+      "shown": "shown"
+    },
+    "searchPlaceholder": "Search jobs, parcels, vendors",
+    "notifications": "Notifications",
+    "user": {
+      "name": "Rakib H.",
+      "role": "Customer"
+    },
+    "support": {
+      "label": "Support 24/7",
+      "phone": "+00-11-00-2222",
+      "note": "Job disputes, refunds and parcel claims."
+    },
+    "nav": {
+      "platform": "Platform",
+      "account": "Account",
+      "history": "History",
+      "moneyOut": "Money Out"
+    },
+    "menu": {
+      "profile": "Profile",
+      "settings": "Account settings",
+      "twoFa": "2FA security",
+      "logout": "Logout",
+      "kyc": "Identity verification"
+    },
+    "cta": {
+      "book": "Book a service",
+      "parcel": "Send a parcel"
+    },
+    "tabs": {
+      "all": "All",
+      "active": "Active",
+      "completed": "Completed"
+    },
+    "table": {
+      "job": "Job",
+      "vendor": "Vendor",
+      "schedule": "Schedule",
+      "status": "Status",
+      "amount": "Amount"
+    },
+    "status": {
+      "inProgress": "In progress",
+      "confirmed": "Confirmed",
+      "awaitingVendor": "Awaiting vendor",
+      "completed": "Completed",
+      "inTransit": "In transit",
+      "atHub": "At hub",
+      "delivered": "Delivered",
+      "pending": "Pending",
+      "paid": "Paid",
+      "refunded": "Refunded"
+    },
+    "kpi": {
+      "activeBookings": {
+        "label": "Active bookings",
+        "delta": "this week",
+        "note": "2 today, 2 scheduled"
+      },
+      "parcelsInTransit": {
+        "label": "Parcels in transit",
+        "delta": "On time",
+        "note": "1 out for delivery"
+      },
+      "spend": {
+        "label": "Spend in Sept",
+        "delta": "vs Aug",
+        "note": "৳ 1,850 awaiting payment"
+      },
+      "savedVendors": {
+        "label": "Saved vendors",
+        "delta": "new",
+        "note": "All admin-verified"
+      }
+    },
+    "tracker": {
+      "eyebrow": "Parcel in transit",
+      "rider": "Rider",
+      "arriving": "arriving",
+      "track": "Track live",
+      "steps": {
+        "pickedUp": "Picked up from Mirpur 10",
+        "atHub": "Arrived at Mohakhali hub",
+        "outForDelivery": "Out for delivery",
+        "delivered": "Delivered to Banani 11"
+      }
+    },
+    "spend": {
+      "title": "Spend in September",
+      "repairs": "Repairs",
+      "cleaning": "Cleaning",
+      "delivery": "Delivery"
+    },
+    "actions": {
+      "title": "Quick actions",
+      "rebook": {
+        "label": "Rebook Rahim Plumbing",
+        "note": "Used 3 times · avg ৳ 900"
+      },
+      "sendParcel": {
+        "label": "Send a parcel",
+        "note": "Door pickup in 45 min"
+      },
+      "addAddress": {
+        "label": "Add a work address",
+        "note": "3 saved locations"
+      }
+    },
+    "pages": {
+      "overview": {
+        "nav": "Overview",
+        "heading": "Good morning, Rakib",
+        "sub": "Two jobs are in progress and one parcel is out for delivery. Everything else is settled.",
+        "table": "Active jobs"
+      },
+      "bookings": {
+        "nav": "Bookings",
+        "heading": "Service bookings",
+        "sub": "Every handyman job you have requested, with vendor and schedule.",
+        "table": "All bookings"
+      },
+      "deliveries": {
+        "nav": "Deliveries",
+        "heading": "Parcel deliveries",
+        "sub": "Pickups, hub transfers and drop-offs across the city.",
+        "table": "All parcels"
+      },
+      "payments": {
+        "nav": "Payments",
+        "heading": "Payments",
+        "sub": "Invoices, refunds and payment methods on your account.",
+        "table": "Recent payments"
+      },
+      "vendors": {
+        "nav": "Saved vendors",
+        "heading": "Saved vendors",
+        "sub": "Verified pros you have booked before, ready to rebook in one tap.",
+        "table": "Recent work"
+      },
+      "address": {
+        "nav": "My address",
+        "heading": "My addresses",
+        "sub": "Save the places you book for most. One is the default, and bookings and parcels start there.",
+        "table": "Recent activity"
+      },
+      "twoFa": {
+        "nav": "2FA security",
+        "heading": "Two-factor security",
+        "sub": "SMS codes are on. Add an authenticator app for stronger protection.",
+        "table": "Recent activity"
+      },
+      "settings": {
+        "nav": "Settings",
+        "heading": "Account settings",
+        "sub": "Notifications, language and payout preferences.",
+        "table": "Recent activity"
+      },
+      "profile": {
+        "nav": "Profile",
+        "heading": "Your profile",
+        "sub": "Name, contact details and how vendors see you.",
+        "table": "Recent activity"
+      },
+      "kyc": {
+        "nav": "Verification",
+        "heading": "Identity verification",
+        "sub": "Confirm who you are once, and payouts and higher booking limits unlock.",
+        "table": "Recent activity"
+      },
+      "serviceHistory": {
+        "nav": "Service",
+        "heading": "Service orders",
+        "sub": "Every service you have ordered, with its schedule, status and receipt.",
+        "table": "Recent activity"
+      },
+      "deliveryHistory": {
+        "nav": "Delivery",
+        "heading": "Delivery log",
+        "sub": "Every parcel you have sent, with its schedule, route and charges.",
+        "table": "Recent activity"
+      },
+      "vendorOverview": {
+        "nav": "Dashboard",
+        "heading": "Vendor dashboard",
+        "sub": "Your jobs, your earnings and what is next on the calendar.",
+        "table": "Recent activity"
+      },
+      "vendorOrders": {
+        "nav": "Service Order",
+        "heading": "Service orders",
+        "sub": "Every job customers have booked with you, and what each one pays out.",
+        "table": "Jobs"
+      },
+      "vendorServices": {
+        "nav": "Services",
+        "heading": "Your services",
+        "sub": "The listings customers can book. Pause one and it stays on your account, hidden.",
+        "table": "Listings"
+      },
+      "vendorSchedule": {
+        "nav": "Service Schedule",
+        "heading": "Service schedule",
+        "sub": "Your booked work, day by day.",
+        "table": "Schedule"
+      },
+      "vendorTwoFa": {
+        "nav": "2FA Security",
+        "heading": "Two-factor security",
+        "sub": "Add an authenticator app so a stolen password is not enough.",
+        "table": ""
+      },
+      "moneyOut": {
+        "nav": "Money Out",
+        "heading": "Money out",
+        "sub": "Move your available balance to bKash or your bank.",
+        "table": ""
+      },
+      "moneyOutLogs": {
+        "nav": "Money Out Logs",
+        "heading": "Money out logs",
+        "sub": "Every payout you have requested, with its fee and settlement.",
+        "table": ""
+      }
+    },
+    "profile": {
+      "personalInfo": "Personal information",
+      "changePhoto": "Change your photo",
+      "noName": "Your account",
+      "verified": "Verified",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "country": "Country",
+      "selectCountry": "Select a country",
+      "phone": "Phone",
+      "address": "Address",
+      "city": "City",
+      "state": "State",
+      "zipCode": "ZIP code",
+      "saveChanges": "Save changes",
+      "changePassword": "Change password",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password",
+      "updatePassword": "Update password",
+      "dangerZone": "Danger zone",
+      "dangerDesc": "Deleting your account removes your bookings, saved vendors and payment methods. This cannot be undone.",
+      "deleteMyAccount": "Delete my account"
+    },
+    "security": {
+      "twoFactorTitle": "Two-factor authentication",
+      "enabledBadge": "Enabled",
+      "activeBanner": "Two-factor authentication is protecting this account.",
+      "notProtectedBanner": "This account is not protected by two-factor authentication yet.",
+      "secretKeyLabel": "Secret key",
+      "secretKeyHelp": "Paste this into your authenticator app if you cannot scan the code.",
+      "copySecretKey": "Copy secret key",
+      "copied": "Copied",
+      "qrAlt": "Two-factor authentication QR code",
+      "enable": "Enable 2FA",
+      "disable2fa": "Disable 2FA",
+      "enableTitle": "Enable two-factor authentication",
+      "enableDesc": "Enter the 6-digit code from your authenticator app to switch it on.",
+      "disableTitle": "Disable two-factor authentication",
+      "disableDesc": "Enter a current code to confirm. Your account will lose its second layer of protection.",
+      "authCodeLabel": "Authenticator code",
+      "authCodeHelp": "The 6-digit code shown in your app right now.",
+      "googleAuthTitle": "Google Authenticator",
+      "googleAuthDesc": "Install the app, scan the QR code, and it will generate a fresh 6-digit code every 30 seconds.",
+      "setupSteps": "Setup steps",
+      "step1": "Install Google Authenticator on your phone.",
+      "step2": "Tap the plus button and choose Scan a QR code.",
+      "step3": "Point your camera at the code on this page.",
+      "step4": "Enter the 6-digit code it shows to finish.",
+      "downloadAndroid": "Get it on Android",
+      "downloadIos": "Get it on iOS"
+    },
+    "kyc": {
+      "title": "Identity verification",
+      "formTitle": "Submit your documents",
+      "statusUnverified": "Unverified",
+      "statusVerified": "Verified",
+      "statusPending": "In review",
+      "statusRejected": "Rejected",
+      "noteUnverified": "Submit your documents to verify this account.",
+      "noteVerified": "Your identity has been verified. Nothing further is needed.",
+      "notePending": "Your documents are with our team. This usually takes one working day.",
+      "noteRejected": "We could not verify the documents you sent. Please check them and submit again.",
+      "selectPrefix": "Select",
+      "chooseFile": "Choose a file",
+      "accepts": "Accepts",
+      "fieldRequired": "This field is required",
+      "noFields": "No verification is required for this account right now.",
+      "submit": "Submit for verification"
+    },
+    "address": {
+      "savedTitle": "Saved addresses",
+      "addAddress": "Add address",
+      "addTitle": "Save an address",
+      "editTitle": "Edit address",
+      "saveChanges": "Save changes",
+      "fullAddress": "Full address",
+      "fullAddressPlaceholder": "Street, area, city",
+      "landmark": "Flat / building / landmark",
+      "landmarkPlaceholder": "Flat 3B, Rose Tower",
+      "landmarkHint": "Helps the pro find the door.",
+      "phone": "Phone",
+      "phonePlaceholder": "Number to call on arrival",
+      "saveAs": "Save as",
+      "saveAsPlaceholder": "Choose a label",
+      "mapLink": "Map link",
+      "mapLinkHint": "Optional. Paste a Google Maps link if the address is hard to find.",
+      "makeDefault": "Make this my default address",
+      "makeDefaultHint": "Bookings and parcels will start here.",
+      "labels": {
+        "home": "Home",
+        "work": "Work",
+        "other": "Other"
+      },
+      "defaultBadge": "Default",
+      "inUse": "Default address",
+      "setDefault": "Set as default",
+      "viewMap": "Open in maps",
+      "edit": "Edit address",
+      "delete": "Delete address",
+      "deleteTitle": "Delete this address?",
+      "emptyTitle": "No saved addresses yet",
+      "emptyBody": "Save the places you book for most and they will be one tap away at checkout.",
+      "toastAdded": "Address saved",
+      "toastUpdated": "Address updated",
+      "toastRemoved": "Address removed",
+      "toastDefault": "Default address updated"
+    },
+    "history": {
+      "order": "Order",
+      "placedOn": "Placed on",
+      "manage": "Manage",
+      "qty": "Qty:",
+      "total": "Total",
+      "backToList": "Back to orders",
+      "itemsTitle": "What you ordered",
+      "scheduleTitle": "Schedule and address",
+      "summaryTitle": "Total summary",
+      "name": "Name",
+      "addressType": "Address type",
+      "scheduleDate": "Schedule date",
+      "scheduleTime": "Schedule time",
+      "address": "Address",
+      "phone": "Phone",
+      "subtotal": "Subtotal",
+      "charge": "Charge",
+      "discount": "Discount",
+      "paymentType": "Payment type",
+      "status": {
+        "pending": "Pending",
+        "processing": "Processing",
+        "completed": "Completed"
+      },
+      "payment": {
+        "cod": "Cash on delivery",
+        "card": "Card",
+        "bkash": "bKash"
+      },
+      "emptyTitle": "No orders yet",
+      "emptyBody": "Once you book something it will show up here with its schedule and receipt.",
+      "notFoundTitle": "Order not found",
+      "notFoundBody": "That order number does not match anything on your account."
+    },
+    "delivery": {
+      "logTitle": "Deliveries",
+      "parcels": "parcels",
+      "colParcel": "Parcel",
+      "colSchedule": "Schedule",
+      "colTo": "Deliver to",
+      "colStatus": "Status",
+      "colTotal": "Total",
+      "colActions": "Actions",
+      "viewAll": "View all",
+      "parcelSection": "Parcel",
+      "pickupSection": "Pickup",
+      "dropoffSection": "Delivery",
+      "paymentSection": "Payment",
+      "parcelName": "Name",
+      "brand": "Brand name",
+      "size": "Size",
+      "price": "Price",
+      "quantity": "Quantity",
+      "shop": "Shop",
+      "shopAddress": "Shop address",
+      "details": "Details",
+      "schedule": "Schedule date and time",
+      "name": "Name",
+      "phone": "Phone",
+      "addressType": "Address type",
+      "address": "Address",
+      "landmark": "Landmark",
+      "shortAddress": "Delivery short address",
+      "fullAddress": "Delivery full address",
+      "deliveryPhone": "Delivery phone",
+      "paymentType": "Payment type",
+      "totalPayable": "Total payable",
+      "emptyTitle": "No deliveries yet",
+      "emptyBody": "Send a parcel and it will appear here with its route, schedule and charges."
+    },
+    "vendor": {
+      "kpi": {
+        "openJobs": {
+          "label": "Open jobs",
+          "delta": "this week",
+          "note": "2 today, 1 scheduled"
+        },
+        "completed": {
+          "label": "Completed",
+          "delta": "all time",
+          "note": "98% on-time arrival"
+        },
+        "earnings": {
+          "label": "Earnings",
+          "delta": "this month",
+          "note": "After platform commission"
+        },
+        "rating": {
+          "label": "Rating",
+          "delta": "reviews",
+          "note": "Top 5% of vendors"
+        }
+      },
+      "overview": {
+        "recentJobs": "Recent jobs",
+        "available": "Available to withdraw",
+        "pending": "Pending clearance",
+        "lifetime": "Lifetime earnings",
+        "withdraw": "Withdraw",
+        "nextUp": "Next up"
+      },
+      "orders": {
+        "title": "Service orders",
+        "jobs": "jobs",
+        "colJob": "Job",
+        "colCustomer": "Customer",
+        "colSchedule": "Schedule",
+        "colPayout": "Your payout",
+        "jobSection": "Job",
+        "customerSection": "Customer",
+        "payoutSection": "Payment",
+        "service": "Service",
+        "commission": "Platform commission",
+        "yourPayout": "Your payout"
+      },
+      "services": {
+        "title": "Your services",
+        "add": "Add a service",
+        "live": "Live",
+        "paused": "Paused",
+        "booked": "booked",
+        "pause": "Pause listing",
+        "resume": "Resume listing",
+        "preview": "Preview"
+      },
+      "schedule": {
+        "today": "Today",
+        "tomorrow": "Tomorrow",
+        "later": "Later this week",
+        "emptyDay": "Nothing booked."
+      },
+      "moneyOut": {
+        "title": "Request a payout",
+        "amount": "Amount",
+        "minimum": "Minimum",
+        "method": "Send to",
+        "methodPlaceholder": "Choose a method",
+        "requesting": "Requesting",
+        "fee": "Processing fee",
+        "youReceive": "You receive",
+        "submit": "Request payout",
+        "requested": "Payout requested",
+        "note": "Payouts are reviewed once a day on working days. The fee is 1% of the amount requested.",
+        "seeLogs": "See payout history"
+      },
+      "logs": {
+        "title": "Payouts",
+        "payouts": "payouts",
+        "payout": "Payout",
+        "colRef": "Reference",
+        "colMethod": "Method",
+        "colRequested": "Requested",
+        "colReceived": "Received"
+      }
     }
   },
   "notFound": {
@@ -611,6 +1303,28 @@
       "parcel": {
         "title": "Parcel pickup — 5 kg",
         "meta": "Express · Troy"
+      }
+    }
+  },
+  "vendorsPage": {
+    "eyebrow": "Vendor information",
+    "title": "Expert service providers, at your fingertips",
+    "lead": "Welcome to Handiman, where home maintenance gets done properly. Join as a verified provider and take on the work you want — cleaning, AC servicing, plumbing, electrics and more. Set your own schedule, keep your own rates, and get paid out on a weekly cycle.",
+    "dashboard": "Dashboard",
+    "login": "Vendor sign in",
+    "register": "Become a vendor",
+    "perks": {
+      "payouts": {
+        "title": "Weekly payouts",
+        "body": "Request money out to bKash or your bank. A flat 1% fee, reviewed every working day."
+      },
+      "schedule": {
+        "title": "Your own schedule",
+        "body": "Publish the hours you want to work. Pause a listing any time without losing it."
+      },
+      "verified": {
+        "title": "Verified and protected",
+        "body": "Every provider is ID-checked, and two-factor security is one switch away."
       }
     }
   }

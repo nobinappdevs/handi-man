@@ -4,13 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, ArrowUp, ChevronDown, Mail, MapPin, Phone, Smartphone, Wrench } from "lucide-react";
+import { ArrowRight, ArrowUp, ChevronDown, Mail, MapPin, Phone, Smartphone } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import {
   FOOTER_CONTACT_KEYS,
   FOOTER_LINK_KEYS,
   FOOTER_SOCIAL_ICONS,
 } from "@/components/homepage/homeData";
+import { Logo } from "@/components/share/Logo";
+import { Eyebrow } from "@/components/share/Eyebrow";
 import { newsletterSchema, type NewsletterRequest } from "@/schemas/newsletter.schema";
 import { cn } from "@/components/ui/cn";
 
@@ -37,19 +39,11 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-stretch wide:grid-cols-[0.82fr_1.18fr]">
         {/* ── Brand panel ── */}
         <div className="relative min-w-0 overflow-hidden bg-primary p-[clamp(38px,4.4vw,64px)_clamp(22px,3vw,52px)]">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-[14%] -bottom-[26%] h-[clamp(220px,26vw,380px)] w-[clamp(220px,26vw,380px)] rounded-full border border-white/[0.16]"
-          />
+
 
           <div className="relative flex h-full flex-col gap-[22px]">
-            <Link href="/" className="flex items-center gap-[11px] hover:text-inherit">
-              <span className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-white text-primary">
-                <Wrench size={19} strokeWidth={2.4} aria-hidden />
-              </span>
-              <span className="text-[23px] font-extrabold tracking-[-0.025em] text-white">
-                {t("brand.name")}
-              </span>
+            <Link href="/" className="flex items-center hover:text-inherit">
+              <Logo tone="on-dark" />
             </Link>
 
             <p className="max-w-[330px] text-[clamp(15px,1.4vw,17px)] leading-[1.65] text-white/85">
@@ -85,10 +79,7 @@ export function Footer() {
         {/* ── Newsletter + links ── */}
         <div className="flex min-w-0 flex-col gap-[clamp(28px,3vw,42px)] p-[clamp(38px,4.4vw,64px)_clamp(22px,3vw,52px)]">
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2.5 font-display text-[13px] font-bold tracking-[0.2em] text-white/60 uppercase">
-              <span className="h-0.5 w-[26px] bg-primary" />
-              {t("footer.newsletter.eyebrow")}
-            </div>
+            <Eyebrow className="text-white/60">{t("footer.newsletter.eyebrow")}</Eyebrow>
             <p className="max-w-[520px] text-[clamp(17px,1.7vw,22px)] leading-[1.35] font-bold tracking-[-0.02em] text-white text-pretty">
               {t("footer.newsletter.title")}
             </p>

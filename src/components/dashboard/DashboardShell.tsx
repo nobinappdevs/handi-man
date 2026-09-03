@@ -1,59 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { Navbar } from "@/components/dashboard/Navbar";
 
 /**
- * App chrome for the protected area.
+ * App chrome: rail beside a header + main column.
  *
- * Mobile: off-canvas drawer + backdrop. Tablet: 56px icon rail.
- * Desktop: 260px sidebar, collapsible and remembered in localStorage.
+ * The ONLY viewport state in JS is `drawer`, and it only means anything below
+ * 1024 — every other responsive step in here is CSS. That is deliberate: the
+ * design's own prototype re-rendered the whole tree on `window.resize`, which
+ * is fine for a canvas and wrong for a static export (it would ship a layout
+ * that flashes its mobile form on first paint, before the resize handler has
+ * ever run).
  *
- * `min-w-0` on <main> is required — without it a wide table blows out the grid.
+ * `min-w-0` on the main column is load-bearing — without it the table's widest
+ * row sets the column width and the whole page scrolls sideways.
  */
-export function DashboardShell({ children }) {
-  const [open, setOpen] = useState(false);
-
-  /* restore the user's collapse preference (lazy — runs once on the client) */
-  const [collapsed, setCollapsed] = useState(
-    () => typeof window !== "undefined" && localStorage.getItem("sidebar-collapsed") === "1",
-  );
-
-  function toggleCollapsed() {
-    setCollapsed((c) => {
-      const next = !c;
-      localStorage.setItem("sidebar-collapsed", next ? "1" : "0");
-      return next;
-    });
-  }
+export function DashboardShell({ children }: { children: ReactNode }) {
+  const [drawer, setDrawer] = useState(false);
 
   return (
-    <div
-      className={`min-h-screen bg-bg text-heading md:grid md:grid-cols-[56px_1fr] ${
-        collapsed ? "lg:grid-cols-[56px_1fr]" : "lg:grid-cols-[260px_1fr]"
-      }`}
-    >
-      {/* Mobile drawer backdrop */}
-      {open && (
+    <div className="flex min-h-screen items-stretch bg-page text-body">
+      {drawer && (
         <div
           aria-hidden
-          onClick={() => setOpen(false)}
-          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden"
+          onClick={() => setDrawer(false)}
+          className="fixed inset-0 z-40 bg-[rgba(6,4,4,0.55)] lg:hidden"
         />
       )}
 
-      <Sidebar
-        open={open}
-        collapsed={collapsed}
-        onClose={() => setOpen(false)}
-        onToggleCollapse={toggleCollapsed}
-      />
+      <Sidebar drawer={drawer} onNavigate={() => setDrawer(false)} />
 
-      <main className="flex min-w-0 flex-col">
-        <Navbar onMenu={() => setOpen(true)} />
+      <div className="flex min-w-0 flex-auto flex-col">
+        <Navbar onMenu={() => setDrawer(true)} />
         {children}
-      </main>
+      </div>
     </div>
   );
 }

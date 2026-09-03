@@ -20,7 +20,7 @@ export function HowItWorks() {
   return (
     <section
       ref={scope}
-      className="brand-wash relative border-t border-border [--wash-angle:152deg] [--wash-strength:13%] px-[clamp(18px,3vw,44px)] pt-[clamp(40px,4.6vw,74px)] pb-[clamp(48px,5.6vw,88px)]"
+      className="bg-page relative px-[clamp(18px,3vw,44px)] pt-[clamp(40px,4.6vw,74px)] pb-[clamp(48px,5.6vw,88px)]"
     >
       <div className="mx-auto flex max-w-[1240px] flex-col gap-[clamp(28px,3.2vw,46px)]">
         <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-5">

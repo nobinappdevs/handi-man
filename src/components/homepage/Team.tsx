@@ -14,7 +14,7 @@ export function Team() {
   return (
     <section
       ref={scope}
-      className="brand-wash relative overflow-hidden [--wash-angle:152deg] [--wash-strength:12%] px-[clamp(18px,3vw,44px)] py-[clamp(48px,6vw,90px)]"
+      className="bg-page relative overflow-hidden px-[clamp(18px,3vw,44px)] py-[clamp(48px,6vw,90px)]"
     >
       <div className="relative mx-auto max-w-[1240px]">
         <div className="mb-[clamp(30px,3.6vw,46px)] flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
@@ -82,7 +82,7 @@ export function Team() {
                 </div>
               </div>
 
-              <div className="mt-[30px]">
+              <div className="flex flex-1 flex-col justify-center bg-bg p-3.5 dark:bg-linear-to-br dark:from-primary-dark dark:to-primary">
                 <div className="text-[17px] font-extrabold tracking-[-0.01em] text-heading">
                   {t(`home.team.members.${key}.name`)}
                 </div>

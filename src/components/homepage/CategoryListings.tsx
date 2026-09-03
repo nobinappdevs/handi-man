@@ -16,7 +16,7 @@ export function CategoryListings() {
   return (
     <section
       ref={scope}
-      className="brand-wash relative [--wash-angle:332deg] [--wash-strength:5%] px-[clamp(18px,3vw,44px)] pt-[clamp(14px,2vw,26px)] pb-[clamp(46px,5.4vw,84px)]"
+      className="bg-page relative px-[clamp(18px,3vw,44px)] pt-[clamp(14px,2vw,26px)] pb-[clamp(46px,5.4vw,84px)]"
     >
       <div className="mx-auto flex max-w-[1240px] flex-col gap-[clamp(42px,5vw,74px)]">
         {SERVICE_GROUPS.map((group) => (

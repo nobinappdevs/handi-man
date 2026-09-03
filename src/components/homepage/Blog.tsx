@@ -27,7 +27,7 @@ export function Blog() {
   return (
     <section
       ref={scope}
-      className="brand-wash relative [--wash-angle:332deg] [--wash-strength:5%] px-[clamp(18px,3vw,44px)] py-[clamp(40px,5vw,84px)]"
+      className="bg-page relative px-[clamp(18px,3vw,44px)] py-[clamp(40px,5vw,84px)]"
     >
       <div className="mx-auto flex max-w-[1240px] flex-col gap-[clamp(26px,3vw,42px)]">
         <div

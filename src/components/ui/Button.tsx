@@ -31,7 +31,7 @@ const VARIANTS: Record<Variant, string> = {
   secondary: "bg-heading text-card shadow-sm hover:opacity-90",
   outline:   "border border-border bg-card text-heading hover:border-primary/50 hover:text-primary",
   ghost:     "text-muted hover:bg-black/5 hover:text-heading dark:hover:bg-white/5",
-  danger:    "bg-red-500 text-white shadow-sm hover:bg-red-600",
+  danger:    "bg-danger text-white shadow-sm hover:opacity-90",
 };
 
 const SIZES: Record<Size, string> = {

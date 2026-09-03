@@ -73,7 +73,7 @@ export function Contact() {
   return (
     <section
       ref={scope}
-      className="brand-wash relative [--wash-angle:332deg] [--wash-strength:6%] pb-[clamp(40px,5vw,80px)]"
+      className="bg-page relative pb-[clamp(40px,5vw,80px)]"
     >
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-stretch wide:grid-cols-[0.6fr_0.4fr]">
         {/* ── Photo + verified badge ── */}
