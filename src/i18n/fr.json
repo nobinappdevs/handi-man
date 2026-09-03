@@ -1,1 +1,1331 @@
-{}
+{
+  "brand": {
+    "name": "Handiman",
+    "tagline": "Une aide de confiance pour chaque tâche autour de votre maison"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "services": "Services",
+    "howItWorks": "Comment ça marche",
+    "blog": "Blog",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "login": "Se connecter",
+    "register": "Commencer",
+    "dashboard": "Tableau de bord",
+    "menu": "Menu",
+    "closeMenu": "Fermer le menu",
+    "vendors": "Prestataires",
+    "delivery": "Livraison",
+    "pricing": "Tarifs",
+    "bookService": "Réserver un service",
+    "pickup": "Collecte",
+    "joinVendor": "Devenir prestataire"
+  },
+  "theme": {
+    "toggle": "Thème de couleur",
+    "light": "Mode clair",
+    "dark": "Mode sombre"
+  },
+  "language": {
+    "label": "Langue",
+    "select": "Choisir la langue"
+  },
+  "auth": {
+    "step": "Étape",
+    "or": "ou",
+    "labelEmail": "Adresse e-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "labelPassword": "Mot de passe",
+    "passwordPlaceholder": "Saisissez votre mot de passe",
+    "choosePasswordPlaceholder": "Choisissez un mot de passe",
+    "labelConfirmPassword": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "Répétez votre mot de passe",
+    "labelFirstName": "Prénom",
+    "firstNamePlaceholder": "Jordan",
+    "labelLastName": "Nom",
+    "lastNamePlaceholder": "Rivera",
+    "labelPhone": "Numéro de téléphone",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "strengthWeak": "Faible",
+    "strengthFair": "Moyen",
+    "strengthGood": "Bon",
+    "strengthStrong": "Fort",
+    "loginTitle": "Content de vous revoir",
+    "loginSubtitle": "Connectez-vous pour gérer vos réservations et vos missions.",
+    "loginButton": "Se connecter",
+    "loggingIn": "Connexion en cours…",
+    "noAccount": "Nouveau ici ?",
+    "registerTitle": "Créez votre compte",
+    "registerSubtitle": "Réservez un professionnel de confiance en quelques minutes.",
+    "registerButton": "Créer un compte",
+    "registering": "Création du compte…",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "agreePrefix": "J'accepte les",
+    "terms": "Conditions d'utilisation",
+    "and": "et",
+    "privacy": "Politique de confidentialité",
+    "forgotTitle": "Réinitialisez votre mot de passe",
+    "forgotSubtitle": "Indiquez-nous l'e-mail associé à votre compte et nous vous enverrons un code à 6 chiffres.",
+    "sendCode": "Envoyer le code",
+    "sendingCode": "Envoi en cours…",
+    "backToLogin": "Retour à la connexion",
+    "otpTitle": "Saisissez votre code",
+    "otpSubtitle": "Nous avons envoyé un code à 6 chiffres à votre adresse e-mail.",
+    "otpSentTo": "Nous avons envoyé un code à 6 chiffres à",
+    "otpButton": "Vérifier",
+    "verifying": "Vérification en cours…",
+    "digitLabel": "Chiffre",
+    "resendIn": "Demander un nouveau code dans",
+    "resendCode": "Envoyer un nouveau code",
+    "resending": "Envoi en cours…",
+    "wrongEmail": "Adresse e-mail incorrecte ?",
+    "useDifferentEmail": "Recommencer",
+    "backToForgot": "Retour à la réinitialisation",
+    "resetTitle": "Choisissez un nouveau mot de passe",
+    "resetSubtitle": "Choisissez un mot de passe que vous n'avez pas utilisé sur un autre site.",
+    "resetButton": "Mettre à jour le mot de passe",
+    "resetting": "Mise à jour en cours…",
+    "resetExpiredTitle": "Cette réinitialisation a expiré",
+    "resetExpiredBody": "Recommencez et nous vous enverrons un nouveau code par e-mail.",
+    "startOver": "Recommencer",
+    "twoFaTitle": "Vérification en deux étapes",
+    "twoFaSubtitle": "Saisissez le code de votre application d'authentification.",
+    "twoFaHelp": "Ouvrez votre application d'authentification et saisissez le code actuel à 6 chiffres pour Handiman.",
+    "useDifferentAccount": "Utiliser un autre compte",
+    "social": {
+      "google": "Continuer avec Google",
+      "apple": "Continuer avec Apple",
+      "x": "Continuer avec X",
+      "unavailable": "La connexion via les réseaux sociaux arrive bientôt."
+    },
+    "aside": {
+      "label": "Pourquoi Handiman",
+      "back": "Retour à l'accueil",
+      "badge": "Professionnels locaux vérifiés",
+      "claim": "Une aide de confiance pour chaque tâche autour de votre maison.",
+      "prev": "Témoignage précédent",
+      "next": "Témoignage suivant",
+      "showQuote": "Afficher le témoignage",
+      "stats": {
+        "pros": "Professionnels vérifiés",
+        "rating": "Note moyenne",
+        "support": "Assistance"
+      },
+      "quotes": {
+        "fourJobs": {
+          "quote": "J'ai décroché quatre missions payées en une semaine après mon inscription, soit plus que ce que je n'ai jamais obtenu avec une agence. Je le recommande à tout le monde autour de moi depuis !",
+          "name": "Owen Baxter",
+          "role": "Électricien | Austin, États-Unis"
+        },
+        "vettedPros": {
+          "quote": "Chaque professionnel qui s'est présenté était vérifié, ponctuel et soigné. Réserver un plombier n'est plus la corvée que je redoutais en tant que propriétaire.",
+          "name": "Priya Nandan",
+          "role": "Propriétaire | Portland, États-Unis"
+        },
+        "sameDayFix": {
+          "quote": "La climatisation de notre bureau est tombée en panne un vendredi après-midi et quelqu'un était sur place en moins d'une heure. C'est cette couverture le jour même qui nous a fidélisés.",
+          "name": "Marcus Cole",
+          "role": "Responsable de bureau | Denver, États-Unis"
+        }
+      }
+    }
+  },
+  "common": {
+    "search": "Rechercher",
+    "loading": "Chargement…",
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "submit": "Envoyer",
+    "viewAll": "Tout voir",
+    "readMore": "Lire la suite",
+    "learnMore": "En savoir plus",
+    "getStarted": "Commencer",
+    "noResults": "Aucun résultat",
+    "somethingWentWrong": "Une erreur s'est produite. Veuillez réessayer."
+  },
+  "banner": {},
+  "about": {},
+  "services": {},
+  "howItWorks": {},
+  "testimonials": {},
+  "partners": {},
+  "blog": {},
+  "download": {},
+  "cookie": {},
+  "footer": {
+    "tagline": "La solution ultime de services à la demande et de dépannage pour Android, iOS et le web.",
+    "contacts": {
+      "phone": "(555) 123-4567",
+      "email": "support@handiman.com",
+      "address": "20-22 Wenlock Road, Londres"
+    },
+    "language": "Français",
+    "newsletter": {
+      "eyebrow": "Newsletter",
+      "title": "Restez connecté avec nous pour recevoir des actualités régulières en indiquant votre nom et votre adresse e-mail :",
+      "namePlaceholder": "Nom",
+      "emailPlaceholder": "E-mail",
+      "subscribe": "S'abonner",
+      "subscribed": "Abonné"
+    },
+    "links": {
+      "title": "Liens utiles",
+      "items": {
+        "privacyPolicy": "Politique de confidentialité",
+        "termsConditions": "Conditions générales"
+      }
+    },
+    "download": {
+      "title": "Télécharger l'application",
+      "text": "Nos applications sont disponibles au téléchargement",
+      "appStore": "App Store",
+      "googlePlay": "Google Play"
+    },
+    "copyrightLabel": "Copyright ©",
+    "copyrightNote": "Tous droits réservés par Handiman.",
+    "backToTop": "Retour en haut"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Bienvenue sur Handiman",
+      "titleLine1": "Services à la demande",
+      "titleLine2": "et livraison de colis",
+      "lead": "Réservez des services de dépannage ou envoyez un colis en quelques clics. Les prestataires publient leurs services, les administrateurs vérifient chaque annonce, et vous suivez la mission de la demande jusqu'à sa réalisation.",
+      "discover": "Découvrir plus",
+      "howItWorks": "Comment ça marche",
+      "workerAlt": "Professionnel Handiman tenant une perceuse sans fil et une boîte à outils",
+      "verifiedLabel": "Professionnels vérifiés",
+      "verifiedCount": "2400",
+      "stats": {
+        "categories": "Catégories",
+        "delivery": "Livraison",
+        "rating": "Note"
+      },
+      "supportText": "Assistance 24 h/24 et 7 j/7 pour le dépannage et la livraison — appelez le",
+      "supportPhone": "+00-11-00-2222",
+      "namePlaceholder": "Nom",
+      "emailPlaceholder": "Saisir l'e-mail",
+      "cityLabel": "Ville",
+      "serviceLabel": "Service",
+      "bookNow": "Réservation en cours",
+      "bookSent": "Demande envoyée"
+    },
+    "services": {
+      "handyman": "Dépannage",
+      "cleaning": "Ménage",
+      "acRepair": "Réparation de climatisation",
+      "plumbing": "Plomberie",
+      "parcelPickup": "Collecte de colis",
+      "beauty": "Beauté"
+    },
+    "categories": {
+      "eyebrow": "Parcourir les catégories",
+      "title": "De quoi avez-vous besoin aujourd'hui ?",
+      "pros": "professionnels",
+      "allDay": "24 h/24",
+      "items": {
+        "handyman": "Dépannage",
+        "cleaning": "Ménage",
+        "delivery": "Livraison",
+        "plumbing": "Plomberie",
+        "electrics": "Électricité",
+        "acRepair": "Réparation de climatisation",
+        "beauty": "Beauté",
+        "shifting": "Déménagement"
+      }
+    },
+    "listings": {
+      "tabs": {
+        "recommended": "Recommandé",
+        "trending": "Tendance"
+      },
+      "viewAll": "Tout voir",
+      "items": {
+        "fitnessPotential": {
+          "title": "Libérez tout votre potentiel physique",
+          "unit": "1 article"
+        },
+        "totalBodyFitness": {
+          "title": "Un guide complet pour une remise en forme totale",
+          "unit": "1 jour"
+        },
+        "kitchenBathroomDeepClean": {
+          "title": "Nettoyage en profondeur des cuisines et salles de bains",
+          "unit": "1 visite"
+        },
+        "sameDayParcel": {
+          "title": "Collecte et livraison de colis le jour même",
+          "unit": "par colis"
+        },
+        "acServiceGasRefill": {
+          "title": "Entretien de climatiseur split avec recharge de gaz",
+          "unit": "1 unité"
+        },
+        "emergencyPlumbing": {
+          "title": "Intervention de plomberie d'urgence",
+          "unit": "1 heure"
+        },
+        "electricalSafetyCheck": {
+          "title": "Contrôle électrique complet du logement",
+          "unit": "1 visite"
+        },
+        "salonAtHome": {
+          "title": "Salon à domicile — soin du visage et beauté",
+          "unit": "1 séance"
+        }
+      }
+    },
+    "categoryGroups": {
+      "startsAt": "À partir de",
+      "allOf": "Tout",
+      "groups": {
+        "cleaning": {
+          "name": "Ménage",
+          "eyebrow": "Les mieux notés"
+        },
+        "mechanics": {
+          "name": "Mécanique",
+          "eyebrow": "Les plus réservés"
+        }
+      },
+      "items": {
+        "cleaningSolutions": {
+          "title": "Solutions de nettoyage professionnelles",
+          "unit": "1 jour"
+        },
+        "deepCleaning": {
+          "title": "Services de nettoyage en profondeur",
+          "unit": "1 jour"
+        },
+        "residentialCleaning": {
+          "title": "Nettoyage résidentiel personnalisé",
+          "unit": "2 jours"
+        },
+        "janitorial": {
+          "title": "Services d'entretien commercial",
+          "unit": "1 jour"
+        },
+        "autoDiagnostics": {
+          "title": "Diagnostic et réparation automobile",
+          "unit": "1 jour"
+        },
+        "routineMaintenance": {
+          "title": "Services d'entretien courant",
+          "unit": "1 jour"
+        },
+        "transmission": {
+          "title": "Solutions de transmission",
+          "unit": "1 jour"
+        },
+        "suspension": {
+          "title": "Réparations de suspension et de direction",
+          "unit": "2 jours"
+        }
+      }
+    },
+    "howItWorks": {
+      "eyebrow": "Comment ça marche",
+      "title": "Suivez simplement les étapes",
+      "lead": "Découvrir et profiter des services Handiman, c'est un jeu d'enfant ! Suivez ces étapes simples pour bénéficier de solutions fluides adaptées à vos besoins",
+      "timing": "Durée",
+      "prev": "Étape précédente",
+      "next": "Étape suivante",
+      "steps": {
+        "signUp": {
+          "title": "Inscrivez-vous",
+          "meta": "1 min",
+          "body": "Créez un compte sans effort pour accéder à un monde de services pratiques"
+        },
+        "browseServices": {
+          "title": "Parcourez les services",
+          "meta": "À tout moment",
+          "body": "Explorez un large éventail de services proposés par nos prestataires qualifiés"
+        },
+        "selectService": {
+          "title": "Choisissez votre service",
+          "meta": "Instantané",
+          "body": "Notre interface intuitive facilite la recherche exacte de ce que vous cherchez"
+        },
+        "placeOrder": {
+          "title": "Passez votre commande",
+          "meta": "1 min",
+          "body": "Une fois le bon service trouvé, passez votre commande en un simple clic"
+        },
+        "connectVendor": {
+          "title": "Contactez votre prestataire",
+          "meta": "Instantané",
+          "body": "Entrez en contact avec le prestataire dédié affecté à votre service"
+        },
+        "dedicatedTeams": {
+          "title": "Des équipes dédiées en action",
+          "meta": "24 h/24",
+          "body": "Nos équipes dédiées aux prestataires et aux chefs d'entreprise entrent en action pour garantir un déroulement fluide"
+        },
+        "qualityService": {
+          "title": "Un service de qualité à chaque fois",
+          "meta": "Toujours",
+          "body": "Nous privilégions la qualité pour garantir votre satisfaction à chaque interaction"
+        },
+        "shareFeedback": {
+          "title": "Partagez votre avis",
+          "meta": "À tout moment",
+          "body": "Vos avis nous aident à maintenir des normes élevées et à guider les autres utilisateurs dans leurs choix"
+        }
+      }
+    },
+    "impact": {
+      "eyebrow": "À propos de nous",
+      "title": "Autonomiser les entreprises et connecter les gens",
+      "lead": "Notre mission est de simplifier votre quotidien en proposant une solution complète de services à la demande. De l'entretien de la maison aux projets créatifs, nous nous efforçons de créer une communauté où utilisateurs et prestataires se retrouvent pour des expériences de service exceptionnelles",
+      "photoAlt": "Un prestataire et un client se serrant la main dans une cuisine",
+      "ratingValue": "4,9",
+      "ratingLabel": "Note moyenne des missions",
+      "features": {
+        "onDemand": "Services à la demande",
+        "dedicatedTeams": "Équipes dédiées",
+        "userFriendly": "Interface conviviale",
+        "budgetFriendly": "Économique",
+        "transparentPricing": "Tarifs transparents et compétitifs",
+        "innovation": "Innovation et communauté"
+      },
+      "stats": {
+        "providers": {
+          "num": "20K",
+          "label": "Prestataires de services"
+        },
+        "orders": {
+          "num": "4M",
+          "label": "Commandes traitées"
+        },
+        "clients": {
+          "num": "5M",
+          "label": "Clients satisfaits"
+        }
+      }
+    },
+    "about": {
+      "eyebrow": "Qui sommes-nous",
+      "title": "Notre objectif : une seule plateforme pour tous vos besoins de services.",
+      "lead": "Handiman connecte utilisateurs, prestataires et administrateurs au sein d'un même système — réservations de dépannage, marketplace multi-vendeurs et livraison de colis, avec vérification et analyses intégrées.",
+      "badgeValue": "60+",
+      "badgeLabel": "Catégories de services à la demande",
+      "discover": "Découvrir plus",
+      "callLabel": "Appelez à tout moment",
+      "callNumber": "+00-11-00-2222",
+      "photoOneAlt": "Technicien travaillant sur un tableau électrique",
+      "photoTwoAlt": "Technicien portant un casque et des lunettes de sécurité",
+      "checks": {
+        "marketplace": "Marketplace multi-vendeurs",
+        "tracking": "Suivi en direct des collectes et livraisons",
+        "security": "Sécurité KYC et authentification à deux facteurs",
+        "payments": "Espèces, portefeuille électronique et passerelles de paiement",
+        "scheduling": "Planification flexible des services",
+        "support": "Chat en direct et tickets d'assistance"
+      }
+    },
+    "team": {
+      "eyebrow": "Notre équipe",
+      "title": "Découvrez l'équipe Handiman.",
+      "lead": "De la vérification des prestataires à l'assistance en direct, cette équipe veille à ce que chaque réservation, collecte et livraison se déroule dans les délais.",
+      "members": {
+        "owenBaxter": {
+          "name": "Owen Baxter",
+          "role": "Fondateur"
+        },
+        "priyaNandan": {
+          "name": "Priya Nandan",
+          "role": "Responsable des opérations"
+        },
+        "marcusCole": {
+          "name": "Marcus Cole",
+          "role": "Responsable de la réussite des prestataires"
+        },
+        "saraAhmed": {
+          "name": "Sara Ahmed",
+          "role": "Design produit"
+        }
+      }
+    },
+    "testimonials": {
+      "eyebrow": "Témoignages",
+      "title": "Ce que disent nos clients.",
+      "lead": "Chaque témoignage ici provient d'une mission achevée — une réparation, un ménage ou un colis livré comme promis. Continuez à faire défiler, le mur ne s'arrête pas là.",
+      "ratingValue": "4,9",
+      "ratingLabel": "Note moyenne des missions",
+      "starsLabel": "sur 5 étoiles",
+      "reviewCount": "2,4 k",
+      "reviewLabel": "Avis vérifiés",
+      "items": {
+        "nadiaKarim": {
+          "name": "Nadia Karim",
+          "role": "Propriétaire, Londres",
+          "quote": "J'ai réservé un électricien à neuf heures du matin et la prise a été remplacée avant midi. Le prix affiché au moment de confirmer est exactement celui que j'ai payé — aucun frais de déplacement ajouté à la fin."
+        },
+        "tomasRiley": {
+          "name": "Tomas Riley",
+          "role": "Propriétaire de café",
+          "quote": "Nous tenons un petit café, alors un frigo en panne, c'est une journée perdue. Handiman nous a trouvé un frigoriste en moins d'une heure et j'ai pu suivre son trajet sur la carte."
+        },
+        "graceOkafor": {
+          "name": "Grace Okafor",
+          "role": "Gestionnaire immobilière",
+          "quote": "Je m'occupe de onze appartements et je tenais autrefois un tableau des artisans. Aujourd'hui, chaque mission, facture et photo se trouve au même endroit, et je peux transmettre tout l'historique à un propriétaire en un clic."
+        },
+        "lukeMendes": {
+          "name": "Luke Mendes",
+          "role": "Plombier, prestataire",
+          "quote": "En tant que prestataire, la différence, c'est de ne plus avoir à relancer personne. La mission arrive, je l'accepte, et le paiement est réglé le soir même. Cette prévisibilité, c'est tout ce qui compte."
+        },
+        "hannahBell": {
+          "name": "Hannah Bell",
+          "role": "Acheteuse en distribution",
+          "quote": "J'envoie des colis à trois boutiques chaque semaine. Le suivi en direct m'évite les appels du type « est-ce arrivé ? », et la photo de preuve de livraison a déjà réglé deux litiges."
+        },
+        "devPatel": {
+          "name": "Dev Patel",
+          "role": "Propriétaire, Manchester",
+          "quote": "Ce qui m'a convaincu, c'est la vérification. Chaque profil affiche les contrôles effectués, l'assurance et de vrais avis sur des missions réalisées sur cette plateforme — pas un mur d'étoiles importé d'ailleurs."
+        },
+        "amaraSolis": {
+          "name": "Amara Solis",
+          "role": "Responsable de studio",
+          "quote": "Nous avons eu une fuite un dimanche soir et je m'attendais à devoir attendre lundi. Quelqu'un est arrivé en quarante minutes, et le tarif hors horaires m'a été indiqué clairement dès le départ."
+        },
+        "victorNwosu": {
+          "name": "Victor Nwosu",
+          "role": "Petit entrepreneur",
+          "quote": "L'assistance a répondu en moins de deux minutes lorsqu'un coursier avait du retard, m'a indiqué exactement où se trouvait le colis, et a fait un suivi le lendemain sans que j'aie eu à le demander."
+        }
+      }
+    },
+    "blog": {
+      "eyebrow": "Annonce",
+      "title": "Notre dernière annonce",
+      "lead": "La solution ultime de services à la demande et de dépannage pour Android, iOS et le web.",
+      "author": "Super administrateur",
+      "posts": {
+        "communityConnections": {
+          "cat": "Style de vie Handiman",
+          "title": "Connexions communautaires : le style de vie Handiman",
+          "date": "28 février 2024",
+          "read": "6 min de lecture"
+        },
+        "pricingPhilosophy": {
+          "cat": "Service de qualité",
+          "title": "L'innovation à petit prix : la philosophie tarifaire de Handiman",
+          "date": "26 janvier 2024",
+          "read": "5 min de lecture"
+        },
+        "onDemandAdvantage": {
+          "cat": "Handiman révolutionne",
+          "title": "Révolutionner le service à la demande : l'avantage Handiman",
+          "date": "28 février 2024",
+          "read": "6 min de lecture"
+        }
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Questions fréquentes",
+      "lead": "simplifier l'information pour les utilisateurs et améliorer leur compréhension d'un produit, d'un service ou d'un sujet",
+      "items": {
+        "howItWorks": {
+          "q": "Comment Handiman fonctionne-t-il pour les utilisateurs ?",
+          "a": "Handiman simplifie les démarches pour les utilisateurs. Inscrivez-vous, parcourez les services, choisissez ce dont vous avez besoin, passez commande, contactez votre prestataire et profitez d'un service de premier ordre. Nos équipes dédiées veillent à une expérience fluide, et votre avis compte toujours"
+        },
+        "servicesOffered": {
+          "q": "Quels services sont proposés sur Handiman ?",
+          "a": "Handiman propose un large éventail de services, incluant notamment l'entretien de la maison, l'assistance technique, le ménage, la plomberie, l'aménagement paysager, les soins de beauté, la livraison, l'organisation d'événements, les arts créatifs, le fitness et les consultations professionnelles."
+        },
+        "vendorsJoin": {
+          "q": "Comment les prestataires rejoignent-ils Handiman ?",
+          "a": "Les prestataires peuvent facilement rejoindre Handiman en s'inscrivant, en présentant leurs services et en intégrant notre communauté. Notre plateforme offre un espace permettant aux prestataires de se connecter avec les utilisateurs et de fournir des services exceptionnels."
+        },
+        "whatSetsApart": {
+          "q": "Qu'est-ce qui distingue Handiman des autres plateformes de services à la demande ?",
+          "a": "Handiman se démarque par son interface conviviale, ses équipes dédiées aux prestataires et aux chefs d'entreprise, ses solutions économiques, ses tarifs transparents et son approche axée sur la communauté. Nous privilégions l'innovation et visons à rendre chaque expérience de service exceptionnelle"
+        },
+        "mobileApps": {
+          "q": "Handiman est-il disponible sur mobile ?",
+          "a": "Oui, Handiman est disponible sur Android et iOS. Les utilisateurs et les prestataires peuvent accéder à la plateforme facilement grâce à nos applications mobiles conviviales, pour plus de commodité où que vous soyez"
+        }
+      }
+    },
+    "contact": {
+      "eyebrow": "Contactez-nous",
+      "title": "Parlons de votre prochaine mission.",
+      "photoAlt": "Prestataire Handiman vérifiant le stock par rapport à une fiche de mission",
+      "badge": "Prestataires vérifiés, missions suivies — chaque demande est prise en charge.",
+      "fullName": "Nom complet*",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "serviceLabel": "Service",
+      "message": "Message",
+      "submit": "Envoyer la demande",
+      "sent": "Demande envoyée",
+      "replyNote": "Réponse sous 2 heures, 24 h/24 et 7 j/7."
+    }
+  },
+  "aboutPage": {},
+  "servicesPage": {
+    "eyebrow": "Tout ce que nous faisons",
+    "title": "Tous les services, une seule marketplace",
+    "lead": "Parcourez le catalogue complet par catégorie. Chaque annonce est assurée par un prestataire vérifié par nos administrateurs, au prix affiché à l'avance et réservable en quelques clics.",
+    "cta": "Obtenir un devis",
+    "category": "Catégorie",
+    "allOf": "Tout",
+    "services": "services",
+    "requestQuote": "Demander un devis",
+    "stats": {
+      "services": "Services répertoriés",
+      "categories": "Catégories"
+    },
+    "rail": {
+      "label": "Accéder à une catégorie de service"
+    },
+    "missing": {
+      "eyebrow": "Vous ne trouvez pas ?",
+      "title": "Dites-nous ce dont vous avez besoin et nous vous mettrons en relation avec un professionnel vérifié.",
+      "cta": "Contactez-nous"
+    },
+    "items": {
+      "furnitureAssembly": {
+        "title": "Montage de meubles en kit",
+        "unit": "2 h"
+      },
+      "wallMounting": {
+        "title": "Fixation murale de TV et étagères",
+        "unit": "1 h"
+      },
+      "interiorPainting": {
+        "title": "Peinture murale intérieure",
+        "unit": "1 jour"
+      },
+      "doorLockRepair": {
+        "title": "Réparation de porte et de serrure",
+        "unit": "1 h"
+      },
+      "sameDayParcel": {
+        "title": "Livraison de colis le jour même",
+        "unit": "3 h"
+      },
+      "documentCourier": {
+        "title": "Coursier de documents dans la ville",
+        "unit": "2 h"
+      },
+      "scheduledPickup": {
+        "title": "Collecte programmée à domicile",
+        "unit": "1 jour"
+      },
+      "intercityDrop": {
+        "title": "Dépôt entre villes",
+        "unit": "2 jours"
+      },
+      "emergencyPlumbing": {
+        "title": "Intervention de plomberie d'urgence",
+        "unit": "1 h"
+      },
+      "leakRepair": {
+        "title": "Réparation de fuite de robinet et de tuyau",
+        "unit": "2 h"
+      },
+      "showerFitting": {
+        "title": "Installation de douche et de mitigeur",
+        "unit": "1 jour"
+      },
+      "drainCleaning": {
+        "title": "Nettoyage de canalisations et d'égouts",
+        "unit": "3 h"
+      },
+      "electricalSafetyCheck": {
+        "title": "Contrôle électrique complet",
+        "unit": "1 jour"
+      },
+      "lightingInstall": {
+        "title": "Installation d'éclairage et de luminaires",
+        "unit": "2 h"
+      },
+      "socketRewiring": {
+        "title": "Recâblage de prises et d'interrupteurs",
+        "unit": "3 h"
+      },
+      "fuseBoxUpgrade": {
+        "title": "Mise à niveau du tableau électrique et des disjoncteurs",
+        "unit": "1 jour"
+      },
+      "acServiceGasRefill": {
+        "title": "Entretien de climatisation et recharge de gaz",
+        "unit": "2 h"
+      },
+      "acInstallation": {
+        "title": "Installation de climatiseur split",
+        "unit": "1 jour"
+      },
+      "acDeepClean": {
+        "title": "Nettoyage en profondeur et changement de filtre de climatisation",
+        "unit": "2 h"
+      },
+      "thermostatFix": {
+        "title": "Diagnostic et réparation de thermostat",
+        "unit": "1 h"
+      },
+      "salonAtHome": {
+        "title": "Séance de salon à domicile",
+        "unit": "2 h"
+      },
+      "bridalPackage": {
+        "title": "Forfait coiffure et maquillage de mariée",
+        "unit": "1 jour"
+      },
+      "maniPedi": {
+        "title": "Manucure et pédicure",
+        "unit": "1 h"
+      },
+      "makeupSession": {
+        "title": "Séance de maquillage pour événement",
+        "unit": "2 h"
+      },
+      "houseShifting": {
+        "title": "Déménagement complet de maison",
+        "unit": "1 jour"
+      },
+      "officeRelocation": {
+        "title": "Déménagement de bureaux",
+        "unit": "2 jours"
+      },
+      "packingService": {
+        "title": "Service d'emballage professionnel",
+        "unit": "3 h"
+      },
+      "furnitureMoving": {
+        "title": "Déplacement d'un seul meuble",
+        "unit": "2 h"
+      }
+    },
+    "lists": {
+      "handyman": {
+        "shelvingBrackets": "Pose d'étagères et de supports",
+        "curtainRails": "Installation de tringles à rideaux",
+        "tileGrout": "Réparation de carrelage et de joints",
+        "windowSeals": "Remplacement de joints de fenêtres",
+        "flatpackBuilds": "Montage de meubles en kit de toutes tailles"
+      },
+      "cleaning": {
+        "kitchenDeepClean": "Nettoyage en profondeur de la cuisine",
+        "bathroomSanitising": "Désinfection de la salle de bains",
+        "carpetShampoo": "Shampoing de tapis et moquettes",
+        "windowWashing": "Lavage des vitres intérieures",
+        "postRenovation": "Nettoyage après travaux"
+      },
+      "delivery": {
+        "doorToDoor": "Collecte de porte à porte",
+        "fragileHandling": "Manipulation d'objets fragiles",
+        "bulkConsignment": "Envois en gros volume",
+        "liveTracking": "Suivi en direct de chaque colis",
+        "returnPickup": "Collecte de retour et d'échange"
+      },
+      "plumbing": {
+        "tapReplacement": "Remplacement de robinet et de mitigeur",
+        "toiletRepairs": "Réparation de toilettes et de chasse d'eau",
+        "pipeInsulation": "Gainage et isolation de tuyauterie",
+        "waterHeaterService": "Entretien de chauffe-eau",
+        "pressureTesting": "Test de pression et de fuite"
+      },
+      "electrics": {
+        "ceilingFans": "Installation de ventilateur de plafond",
+        "outdoorLighting": "Éclairage extérieur et de jardin",
+        "smartSwitches": "Configuration d'interrupteurs connectés",
+        "faultFinding": "Recherche et localisation de pannes",
+        "surgeProtection": "Installation de protection contre les surtensions"
+      },
+      "acRepair": {
+        "splitUnitService": "Entretien de climatiseur split",
+        "ductCleaning": "Nettoyage des gaines",
+        "coolantTopUp": "Appoint de fluide frigorigène",
+        "compressorCheck": "Contrôle de l'état du compresseur",
+        "annualContract": "Contrat d'entretien annuel"
+      },
+      "beauty": {
+        "haircutStyling": "Coupe et coiffure",
+        "facialTreatment": "Soins du visage",
+        "threadingWaxing": "Épilation au fil et à la cire",
+        "hairColouring": "Coloration capillaire",
+        "groomsPackage": "Forfait pour marié"
+      },
+      "shifting": {
+        "loadingUnloading": "Équipe de chargement et déchargement",
+        "storageShortTerm": "Stockage à court terme",
+        "applianceHandling": "Manipulation d'électroménager",
+        "disassemblyRebuild": "Démontage et remontage",
+        "insuranceCover": "Assurance transport"
+      },
+      "mechanics": {
+        "engineTuning": "Réglage moteur",
+        "brakeService": "Entretien de plaquettes et disques de frein",
+        "batteryReplacement": "Test et remplacement de batterie",
+        "wheelAlignment": "Parallélisme et équilibrage des roues",
+        "acRegas": "Recharge de climatisation véhicule"
+      }
+    }
+  },
+  "blogPage": {},
+  "blogDetail": {},
+  "contactPage": {},
+  "faqPage": {},
+  "legalPages": {},
+  "dashboard": {
+    "common": {
+      "showing": "Affichage de",
+      "of": "sur",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "empty": "Rien à afficher pour l'instant",
+      "shown": "affiché(s)"
+    },
+    "searchPlaceholder": "Rechercher missions, colis, prestataires",
+    "notifications": "Notifications",
+    "user": {
+      "name": "Rakib H.",
+      "role": "Client"
+    },
+    "support": {
+      "label": "Assistance 24 h/24 et 7 j/7",
+      "phone": "+00-11-00-2222",
+      "note": "Litiges de mission, remboursements et réclamations de colis."
+    },
+    "nav": {
+      "platform": "Plateforme",
+      "account": "Compte",
+      "history": "Historique",
+      "moneyOut": "Retraits"
+    },
+    "menu": {
+      "profile": "Profil",
+      "settings": "Paramètres du compte",
+      "twoFa": "Sécurité 2FA",
+      "logout": "Déconnexion",
+      "kyc": "Vérification d'identité"
+    },
+    "cta": {
+      "book": "Réserver un service",
+      "parcel": "Envoyer un colis"
+    },
+    "tabs": {
+      "all": "Tous",
+      "active": "En cours",
+      "completed": "Terminé"
+    },
+    "table": {
+      "job": "Mission",
+      "vendor": "Prestataire",
+      "schedule": "Planning",
+      "status": "Statut",
+      "amount": "Montant"
+    },
+    "status": {
+      "inProgress": "En cours",
+      "confirmed": "Confirmé",
+      "awaitingVendor": "En attente du prestataire",
+      "completed": "Terminé",
+      "inTransit": "En transit",
+      "atHub": "Au centre de tri",
+      "delivered": "Livré",
+      "pending": "En attente",
+      "paid": "Payé",
+      "refunded": "Remboursé"
+    },
+    "kpi": {
+      "activeBookings": {
+        "label": "Réservations actives",
+        "delta": "cette semaine",
+        "note": "2 aujourd'hui, 2 planifiées"
+      },
+      "parcelsInTransit": {
+        "label": "Colis en transit",
+        "delta": "À l'heure",
+        "note": "1 en cours de livraison"
+      },
+      "spend": {
+        "label": "Dépenses de septembre",
+        "delta": "par rapport à août",
+        "note": "৳ 1,850 en attente de paiement"
+      },
+      "savedVendors": {
+        "label": "Prestataires enregistrés",
+        "delta": "nouveau",
+        "note": "Tous vérifiés par l'administrateur"
+      }
+    },
+    "tracker": {
+      "eyebrow": "Colis en transit",
+      "rider": "Livreur",
+      "arriving": "arrivée",
+      "track": "Suivre en direct",
+      "steps": {
+        "pickedUp": "Collecté à Mirpur 10",
+        "atHub": "Arrivé au centre de tri de Mohakhali",
+        "outForDelivery": "En cours de livraison",
+        "delivered": "Livré à Banani 11"
+      }
+    },
+    "spend": {
+      "title": "Dépenses de septembre",
+      "repairs": "Réparations",
+      "cleaning": "Ménage",
+      "delivery": "Livraison"
+    },
+    "actions": {
+      "title": "Actions rapides",
+      "rebook": {
+        "label": "Réserver à nouveau Rahim Plumbing",
+        "note": "Utilisé 3 fois · moy. ৳ 900"
+      },
+      "sendParcel": {
+        "label": "Envoyer un colis",
+        "note": "Collecte à domicile dans 45 min"
+      },
+      "addAddress": {
+        "label": "Ajouter une adresse de travail",
+        "note": "3 lieux enregistrés"
+      }
+    },
+    "pages": {
+      "overview": {
+        "nav": "Aperçu",
+        "heading": "Bonjour, Rakib",
+        "sub": "Deux missions sont en cours et un colis est en cours de livraison. Tout le reste est réglé.",
+        "table": "Missions en cours"
+      },
+      "bookings": {
+        "nav": "Réservations",
+        "heading": "Réservations de services",
+        "sub": "Toutes les missions de dépannage que vous avez demandées, avec le prestataire et le planning.",
+        "table": "Toutes les réservations"
+      },
+      "deliveries": {
+        "nav": "Livraisons",
+        "heading": "Livraisons de colis",
+        "sub": "Collectes, transferts en centre de tri et livraisons dans toute la ville.",
+        "table": "Tous les colis"
+      },
+      "payments": {
+        "nav": "Paiements",
+        "heading": "Paiements",
+        "sub": "Factures, remboursements et moyens de paiement de votre compte.",
+        "table": "Paiements récents"
+      },
+      "vendors": {
+        "nav": "Prestataires enregistrés",
+        "heading": "Prestataires enregistrés",
+        "sub": "Professionnels vérifiés que vous avez déjà réservés, prêts à être réservés à nouveau en un clic.",
+        "table": "Travaux récents"
+      },
+      "address": {
+        "nav": "Mon adresse",
+        "heading": "Mes adresses",
+        "sub": "Enregistrez les lieux où vous réservez le plus souvent. L'une d'elles est définie par défaut, et les réservations et colis y commencent.",
+        "table": "Activité récente"
+      },
+      "twoFa": {
+        "nav": "Sécurité 2FA",
+        "heading": "Sécurité à deux facteurs",
+        "sub": "Les codes SMS sont activés. Ajoutez une application d'authentification pour une protection renforcée.",
+        "table": "Activité récente"
+      },
+      "settings": {
+        "nav": "Paramètres",
+        "heading": "Paramètres du compte",
+        "sub": "Notifications, langue et préférences de versement.",
+        "table": "Activité récente"
+      },
+      "profile": {
+        "nav": "Profil",
+        "heading": "Votre profil",
+        "sub": "Nom, coordonnées et ce que voient les prestataires à votre sujet.",
+        "table": "Activité récente"
+      },
+      "kyc": {
+        "nav": "Vérification",
+        "heading": "Vérification d'identité",
+        "sub": "Confirmez votre identité une fois, et les versements ainsi que des limites de réservation plus élevées seront débloqués.",
+        "table": "Activité récente"
+      },
+      "serviceHistory": {
+        "nav": "Service",
+        "heading": "Commandes de service",
+        "sub": "Chaque service que vous avez commandé, avec son planning, son statut et son reçu.",
+        "table": "Activité récente"
+      },
+      "deliveryHistory": {
+        "nav": "Livraison",
+        "heading": "Journal des livraisons",
+        "sub": "Chaque colis que vous avez envoyé, avec son planning, son itinéraire et ses frais.",
+        "table": "Activité récente"
+      },
+      "vendorOverview": {
+        "nav": "Tableau de bord",
+        "heading": "Tableau de bord prestataire",
+        "sub": "Vos missions, vos revenus et ce qui arrive dans votre calendrier.",
+        "table": "Activité récente"
+      },
+      "vendorOrders": {
+        "nav": "Commandes de service",
+        "heading": "Commandes de service",
+        "sub": "Chaque mission que des clients ont réservée avec vous, et ce que rapporte chacune.",
+        "table": "Missions"
+      },
+      "vendorServices": {
+        "nav": "Services",
+        "heading": "Vos services",
+        "sub": "Les annonces que les clients peuvent réserver. Mettez-en une en pause et elle reste sur votre compte, masquée.",
+        "table": "Annonces"
+      },
+      "vendorSchedule": {
+        "nav": "Planning de service",
+        "heading": "Planning de service",
+        "sub": "Vos missions réservées, jour par jour.",
+        "table": "Planning"
+      },
+      "vendorTwoFa": {
+        "nav": "Sécurité 2FA",
+        "heading": "Sécurité à deux facteurs",
+        "sub": "Ajoutez une application d'authentification pour qu'un mot de passe volé ne suffise pas.",
+        "table": ""
+      },
+      "moneyOut": {
+        "nav": "Retraits",
+        "heading": "Retraits",
+        "sub": "Transférez votre solde disponible vers bKash ou votre banque.",
+        "table": ""
+      },
+      "moneyOutLogs": {
+        "nav": "Historique des retraits",
+        "heading": "Historique des retraits",
+        "sub": "Chaque versement que vous avez demandé, avec ses frais et son règlement.",
+        "table": ""
+      }
+    },
+    "profile": {
+      "personalInfo": "Informations personnelles",
+      "changePhoto": "Changer votre photo",
+      "noName": "Votre compte",
+      "verified": "Vérifié",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "country": "Pays",
+      "selectCountry": "Sélectionnez un pays",
+      "phone": "Téléphone",
+      "address": "Adresse",
+      "city": "Ville",
+      "state": "État",
+      "zipCode": "Code postal",
+      "saveChanges": "Enregistrer les modifications",
+      "changePassword": "Changer le mot de passe",
+      "currentPassword": "Mot de passe actuel",
+      "newPassword": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le nouveau mot de passe",
+      "updatePassword": "Mettre à jour le mot de passe",
+      "dangerZone": "Zone sensible",
+      "dangerDesc": "La suppression de votre compte efface vos réservations, vos prestataires enregistrés et vos moyens de paiement. Cette action est irréversible.",
+      "deleteMyAccount": "Supprimer mon compte"
+    },
+    "security": {
+      "twoFactorTitle": "Authentification à deux facteurs",
+      "enabledBadge": "Activé",
+      "activeBanner": "L'authentification à deux facteurs protège ce compte.",
+      "notProtectedBanner": "Ce compte n'est pas encore protégé par l'authentification à deux facteurs.",
+      "secretKeyLabel": "Clé secrète",
+      "secretKeyHelp": "Collez cette clé dans votre application d'authentification si vous ne pouvez pas scanner le code.",
+      "copySecretKey": "Copier la clé secrète",
+      "copied": "Copié",
+      "qrAlt": "Code QR d'authentification à deux facteurs",
+      "enable": "Activer la 2FA",
+      "disable2fa": "Désactiver la 2FA",
+      "enableTitle": "Activer l'authentification à deux facteurs",
+      "enableDesc": "Saisissez le code à 6 chiffres de votre application d'authentification pour l'activer.",
+      "disableTitle": "Désactiver l'authentification à deux facteurs",
+      "disableDesc": "Saisissez un code actuel pour confirmer. Votre compte perdra sa seconde couche de protection.",
+      "authCodeLabel": "Code d'authentification",
+      "authCodeHelp": "Le code à 6 chiffres actuellement affiché dans votre application.",
+      "googleAuthTitle": "Google Authenticator",
+      "googleAuthDesc": "Installez l'application, scannez le code QR, et elle générera un nouveau code à 6 chiffres toutes les 30 secondes.",
+      "setupSteps": "Étapes de configuration",
+      "step1": "Installez Google Authenticator sur votre téléphone.",
+      "step2": "Appuyez sur le bouton plus et choisissez Scanner un code QR.",
+      "step3": "Pointez votre appareil photo vers le code sur cette page.",
+      "step4": "Saisissez le code à 6 chiffres affiché pour terminer.",
+      "downloadAndroid": "Disponible sur Android",
+      "downloadIos": "Disponible sur iOS"
+    },
+    "kyc": {
+      "title": "Vérification d'identité",
+      "formTitle": "Envoyez vos documents",
+      "statusUnverified": "Non vérifié",
+      "statusVerified": "Vérifié",
+      "statusPending": "En cours d'examen",
+      "statusRejected": "Rejeté",
+      "noteUnverified": "Envoyez vos documents pour vérifier ce compte.",
+      "noteVerified": "Votre identité a été vérifiée. Aucune autre action n'est nécessaire.",
+      "notePending": "Vos documents sont entre les mains de notre équipe. Cela prend généralement un jour ouvré.",
+      "noteRejected": "Nous n'avons pas pu vérifier les documents envoyés. Veuillez les vérifier et les soumettre à nouveau.",
+      "selectPrefix": "Sélectionner",
+      "chooseFile": "Choisir un fichier",
+      "accepts": "Formats acceptés",
+      "fieldRequired": "Ce champ est obligatoire",
+      "noFields": "Aucune vérification n'est requise pour ce compte pour le moment.",
+      "submit": "Soumettre pour vérification"
+    },
+    "address": {
+      "savedTitle": "Adresses enregistrées",
+      "addAddress": "Ajouter une adresse",
+      "addTitle": "Enregistrer une adresse",
+      "editTitle": "Modifier l'adresse",
+      "saveChanges": "Enregistrer les modifications",
+      "fullAddress": "Adresse complète",
+      "fullAddressPlaceholder": "Rue, quartier, ville",
+      "landmark": "Appartement / bâtiment / point de repère",
+      "landmarkPlaceholder": "Appartement 3B, Rose Tower",
+      "landmarkHint": "Aide le professionnel à trouver la porte.",
+      "phone": "Téléphone",
+      "phonePlaceholder": "Numéro à appeler à l'arrivée",
+      "saveAs": "Enregistrer sous",
+      "saveAsPlaceholder": "Choisissez un libellé",
+      "mapLink": "Lien de carte",
+      "mapLinkHint": "Facultatif. Collez un lien Google Maps si l'adresse est difficile à trouver.",
+      "makeDefault": "Définir comme adresse par défaut",
+      "makeDefaultHint": "Les réservations et les colis commenceront ici.",
+      "labels": {
+        "home": "Domicile",
+        "work": "Travail",
+        "other": "Autre"
+      },
+      "defaultBadge": "Par défaut",
+      "inUse": "Adresse par défaut",
+      "setDefault": "Définir par défaut",
+      "viewMap": "Ouvrir dans les cartes",
+      "edit": "Modifier l'adresse",
+      "delete": "Supprimer l'adresse",
+      "deleteTitle": "Supprimer cette adresse ?",
+      "emptyTitle": "Aucune adresse enregistrée",
+      "emptyBody": "Enregistrez les lieux où vous réservez le plus souvent et ils seront accessibles en un clic au moment du paiement.",
+      "toastAdded": "Adresse enregistrée",
+      "toastUpdated": "Adresse mise à jour",
+      "toastRemoved": "Adresse supprimée",
+      "toastDefault": "Adresse par défaut mise à jour"
+    },
+    "history": {
+      "order": "Commande",
+      "placedOn": "Passée le",
+      "manage": "Gérer",
+      "qty": "Qté :",
+      "total": "Total",
+      "backToList": "Retour aux commandes",
+      "itemsTitle": "Ce que vous avez commandé",
+      "scheduleTitle": "Planning et adresse",
+      "summaryTitle": "Récapitulatif du total",
+      "name": "Nom",
+      "addressType": "Type d'adresse",
+      "scheduleDate": "Date planifiée",
+      "scheduleTime": "Heure planifiée",
+      "address": "Adresse",
+      "phone": "Téléphone",
+      "subtotal": "Sous-total",
+      "charge": "Frais",
+      "discount": "Remise",
+      "paymentType": "Mode de paiement",
+      "status": {
+        "pending": "En attente",
+        "processing": "En cours de traitement",
+        "completed": "Terminé"
+      },
+      "payment": {
+        "cod": "Paiement à la livraison",
+        "card": "Carte",
+        "bkash": "bKash"
+      },
+      "emptyTitle": "Aucune commande pour l'instant",
+      "emptyBody": "Dès que vous réservez quelque chose, cela apparaîtra ici avec son planning et son reçu.",
+      "notFoundTitle": "Commande introuvable",
+      "notFoundBody": "Ce numéro de commande ne correspond à rien sur votre compte."
+    },
+    "delivery": {
+      "logTitle": "Livraisons",
+      "parcels": "colis",
+      "colParcel": "Colis",
+      "colSchedule": "Planning",
+      "colTo": "Livrer à",
+      "colStatus": "Statut",
+      "colTotal": "Total",
+      "colActions": "Actions",
+      "viewAll": "Tout voir",
+      "parcelSection": "Colis",
+      "pickupSection": "Collecte",
+      "dropoffSection": "Livraison",
+      "paymentSection": "Paiement",
+      "parcelName": "Nom",
+      "brand": "Nom de la marque",
+      "size": "Taille",
+      "price": "Prix",
+      "quantity": "Quantité",
+      "shop": "Boutique",
+      "shopAddress": "Adresse de la boutique",
+      "details": "Détails",
+      "schedule": "Date et heure planifiées",
+      "name": "Nom",
+      "phone": "Téléphone",
+      "addressType": "Type d'adresse",
+      "address": "Adresse",
+      "landmark": "Point de repère",
+      "shortAddress": "Adresse courte de livraison",
+      "fullAddress": "Adresse complète de livraison",
+      "deliveryPhone": "Téléphone de livraison",
+      "paymentType": "Mode de paiement",
+      "totalPayable": "Total à payer",
+      "emptyTitle": "Aucune livraison pour l'instant",
+      "emptyBody": "Envoyez un colis et il apparaîtra ici avec son itinéraire, son planning et ses frais."
+    },
+    "vendor": {
+      "kpi": {
+        "openJobs": {
+          "label": "Missions ouvertes",
+          "delta": "cette semaine",
+          "note": "2 aujourd'hui, 1 planifiée"
+        },
+        "completed": {
+          "label": "Terminées",
+          "delta": "total",
+          "note": "98 % d'arrivées à l'heure"
+        },
+        "earnings": {
+          "label": "Revenus",
+          "delta": "ce mois-ci",
+          "note": "Après commission de la plateforme"
+        },
+        "rating": {
+          "label": "Note",
+          "delta": "avis",
+          "note": "Top 5 % des prestataires"
+        }
+      },
+      "overview": {
+        "recentJobs": "Missions récentes",
+        "available": "Disponible pour retrait",
+        "pending": "En attente de règlement",
+        "lifetime": "Revenus cumulés",
+        "withdraw": "Retirer",
+        "nextUp": "À venir"
+      },
+      "orders": {
+        "title": "Commandes de service",
+        "jobs": "missions",
+        "colJob": "Mission",
+        "colCustomer": "Client",
+        "colSchedule": "Planning",
+        "colPayout": "Votre versement",
+        "jobSection": "Mission",
+        "customerSection": "Client",
+        "payoutSection": "Paiement",
+        "service": "Service",
+        "commission": "Commission de la plateforme",
+        "yourPayout": "Votre versement"
+      },
+      "services": {
+        "title": "Vos services",
+        "add": "Ajouter un service",
+        "live": "En ligne",
+        "paused": "En pause",
+        "booked": "réservé",
+        "pause": "Mettre en pause l'annonce",
+        "resume": "Réactiver l'annonce",
+        "preview": "Aperçu"
+      },
+      "schedule": {
+        "today": "Aujourd'hui",
+        "tomorrow": "Demain",
+        "later": "Plus tard cette semaine",
+        "emptyDay": "Rien de prévu."
+      },
+      "moneyOut": {
+        "title": "Demander un versement",
+        "amount": "Montant",
+        "minimum": "Minimum",
+        "method": "Envoyer vers",
+        "methodPlaceholder": "Choisissez une méthode",
+        "requesting": "Demande en cours",
+        "fee": "Frais de traitement",
+        "youReceive": "Vous recevez",
+        "submit": "Demander le versement",
+        "requested": "Versement demandé",
+        "note": "Les versements sont examinés une fois par jour, les jours ouvrés. Les frais s'élèvent à 1 % du montant demandé.",
+        "seeLogs": "Voir l'historique des versements"
+      },
+      "logs": {
+        "title": "Versements",
+        "payouts": "versements",
+        "payout": "Versement",
+        "colRef": "Référence",
+        "colMethod": "Méthode",
+        "colRequested": "Demandé",
+        "colReceived": "Reçu"
+      }
+    }
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "text": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "cta": "Retour à l'accueil"
+  },
+  "cart": {
+    "title": "Votre panier",
+    "empty": "Votre panier est vide.",
+    "subtotal": "Sous-total",
+    "checkout": "Passer la commande",
+    "keepBrowsing": "Continuer mes achats",
+    "increase": "Augmenter la quantité",
+    "decrease": "Diminuer la quantité",
+    "seed": {
+      "ac": {
+        "title": "Entretien de climatisation et recharge de gaz",
+        "meta": "Aujourd'hui · 14 h – 16 h"
+      },
+      "parcel": {
+        "title": "Collecte de colis — 5 kg",
+        "meta": "Express · Troy"
+      }
+    }
+  },
+  "vendorsPage": {
+    "eyebrow": "Informations prestataires",
+    "title": "Des prestataires experts, à portée de main",
+    "lead": "Bienvenue sur Handiman, où l'entretien de la maison est bien fait. Devenez un prestataire vérifié et choisissez les missions qui vous intéressent — ménage, entretien de climatisation, plomberie, électricité et bien plus. Fixez votre propre planning, gardez vos propres tarifs, et soyez payé chaque semaine.",
+    "dashboard": "Tableau de bord",
+    "login": "Connexion prestataire",
+    "register": "Devenir prestataire",
+    "perks": {
+      "payouts": {
+        "title": "Versements hebdomadaires",
+        "body": "Demandez un retrait vers bKash ou votre banque. Des frais fixes de 1 %, examinés chaque jour ouvré."
+      },
+      "schedule": {
+        "title": "Votre propre planning",
+        "body": "Publiez les horaires auxquels vous souhaitez travailler. Mettez une annonce en pause à tout moment sans la perdre."
+      },
+      "verified": {
+        "title": "Vérifié et protégé",
+        "body": "Chaque prestataire est vérifié par pièce d'identité, et l'authentification à deux facteurs est à portée d'un simple interrupteur."
+      }
+    }
+  }
+}
