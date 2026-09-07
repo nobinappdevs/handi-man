@@ -32,11 +32,14 @@ export function ServicesMenu({
   label,
   active,
   className,
+  onHover,
 }: {
   href: string;
   label: string;
   active: boolean;
   className?: string;
+  /** Lets the header's sliding marker track this item like any plain link. */
+  onHover?: () => void;
 }) {
   const { t } = useLang();
   const [open, setOpen] = useState(false);
@@ -66,8 +69,14 @@ export function ServicesMenu({
   return (
     <div
       ref={wrapRef}
+      /* The header measures this attribute to place its sliding marker, so the
+         dropdown trigger is tracked exactly like a plain nav link. */
+      data-nav-item={href}
       className="relative"
-      onMouseEnter={() => setOpen(true)}
+      onMouseEnter={() => {
+        setOpen(true);
+        onHover?.();
+      }}
       onMouseLeave={() => setOpen(false)}
     >
       <button
