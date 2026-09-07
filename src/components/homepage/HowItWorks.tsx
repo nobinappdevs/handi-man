@@ -50,7 +50,7 @@ export function HowItWorks() {
           >
             <span
               aria-hidden
-              className="pointer-events-none absolute -top-[4%] right-[clamp(14px,2vw,30px)] font-display text-[clamp(150px,17vw,250px)] leading-[0.72] font-bold tracking-[-0.05em] text-white/[0.08] select-none"
+              className="pointer-events-none absolute -top-[4%] end-[clamp(14px,2vw,30px)] font-display text-[clamp(150px,17vw,250px)] leading-[0.72] font-bold tracking-[-0.05em] text-white/[0.08] select-none"
             >
               {String(active + 1).padStart(2, "0")}
             </span>
@@ -158,7 +158,7 @@ export function HowItWorks() {
                       on ? "text-brand" : "text-transparent",
                     )}
                   >
-                    <ArrowRight size={15} strokeWidth={2.4} aria-hidden />
+                    <ArrowRight size={15} strokeWidth={2.4} aria-hidden className="rtl:rotate-180" />
                   </span>
                 </button>
               );

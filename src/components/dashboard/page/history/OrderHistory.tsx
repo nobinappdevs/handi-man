@@ -115,7 +115,7 @@ function OrderList({ kind }: { kind: OrderKind }) {
               className="flex flex-none items-center gap-2 text-[12.5px] font-bold tracking-[0.12em] text-brand uppercase"
             >
               {t("dashboard.history.manage")}
-              <ArrowRight size={14} strokeWidth={2.6} aria-hidden />
+              <ArrowRight size={14} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
             </Link>
           </div>
 

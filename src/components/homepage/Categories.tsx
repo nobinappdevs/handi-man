@@ -61,10 +61,10 @@ export function Categories() {
 
         <div className="flex flex-none items-center gap-2.5" data-anim-stagger="zoom" data-anim-gap="0.1">
           <CircleIconButton onClick={() => nudge(-1)} aria-label={t("common.previous")}>
-            <ArrowLeft size={17} strokeWidth={2.4} aria-hidden />
+            <ArrowLeft size={17} strokeWidth={2.4} aria-hidden className="rtl:rotate-180" />
           </CircleIconButton>
           <CircleIconButton onClick={() => nudge(1)} aria-label={t("common.next")}>
-            <ArrowRight size={17} strokeWidth={2.4} aria-hidden />
+            <ArrowRight size={17} strokeWidth={2.4} aria-hidden className="rtl:rotate-180" />
           </CircleIconButton>
         </div>
       </div>

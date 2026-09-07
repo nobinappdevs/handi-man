@@ -161,7 +161,7 @@ export function MoneyOut() {
               className="flex items-center gap-2 text-[12.5px] font-bold tracking-[0.12em] text-brand uppercase"
             >
               {t("dashboard.vendor.moneyOut.seeLogs")}
-              <ArrowRight size={14} strokeWidth={2.6} aria-hidden />
+              <ArrowRight size={14} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
             </Link>
           </div>
         </Panel>

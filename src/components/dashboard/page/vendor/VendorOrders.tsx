@@ -102,7 +102,7 @@ export function VendorOrders() {
                       </span>
                     </td>
                     <td className="whitespace-nowrap">{order.customer}</td>
-                    <td className="whitespace-nowrap">{order.schedule}</td>
+                    <td className="whitespace-nowrap">{order.schedule.time}, {order.schedule.date}</td>
                     <td><StatusPill status={order.status} /></td>
                     <td className="text-end font-bold whitespace-nowrap text-heading">
                       {order.totals.payout}
@@ -146,7 +146,7 @@ export function VendorOrders() {
                 {t("dashboard.vendor.orders.jobSection")}
               </h4>
               <Field icon={<Receipt size={13} strokeWidth={2} aria-hidden />} label={t("dashboard.vendor.orders.service")} value={title(open)} />
-              <Field icon={<CalendarClock size={13} strokeWidth={2} aria-hidden />} label={t("dashboard.history.scheduleTime")} value={open.schedule} />
+              <Field icon={<CalendarClock size={13} strokeWidth={2} aria-hidden />} label={t("dashboard.history.scheduleTime")} value={`${open.schedule.time}, ${open.schedule.date}`} />
               <Field icon={<MapPin size={13} strokeWidth={2} aria-hidden />} label={t("dashboard.history.address")} value={open.address} />
             </section>
 

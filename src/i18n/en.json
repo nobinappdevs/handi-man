@@ -149,6 +149,7 @@
     "previous": "Previous",
     "submit": "Submit",
     "viewAll": "View all",
+    "print": "Print",
     "readMore": "Read more",
     "learnMore": "Learn more",
     "getStarted": "Get started",
@@ -578,7 +579,12 @@
       "replyNote": "Replies within 2 hours, 24/7."
     }
   },
-  "aboutPage": {},
+  "aboutPage": {
+    "eyebrow": "About us",
+    "title": "One platform for every service you need",
+    "lead": "Handiman brings users, vendors and admins into a single system — bookings, a verified marketplace and parcel delivery. Here is who builds it and what the people using it say.",
+    "cta": "Talk to us"
+  },
   "servicesPage": {
     "eyebrow": "Everything we do",
     "title": "Every service, one marketplace",
@@ -780,9 +786,26 @@
       }
     }
   },
-  "blogPage": {},
+  "blogPage": {
+    "eyebrow": "From the team",
+    "title": "News, notes and announcements",
+    "lead": "What we are building, how the platform works and what it costs — written by the people running it.",
+    "cta": "Talk to us",
+    "stats": {
+      "posts": "Articles published"
+    }
+  },
   "blogDetail": {},
-  "contactPage": {},
+  "contactPage": {
+    "eyebrow": "Contact us",
+    "title": "Tell us what you need",
+    "lead": "Send the job over and we will match a verified vendor, priced up front. Prefer to talk? Every detail here reaches a real person.",
+    "channels": {
+      "email": "Email us",
+      "phone": "Call us",
+      "address": "Visit us"
+    }
+  },
   "faqPage": {},
   "legalPages": {},
   "dashboard": {
@@ -825,11 +848,14 @@
     "tabs": {
       "all": "All",
       "active": "Active",
-      "completed": "Completed"
+      "completed": "Completed",
+      "pending": "Pending",
+      "processing": "Processing"
     },
     "table": {
       "job": "Job",
       "vendor": "Vendor",
+      "payment": "Payment",
       "schedule": "Schedule",
       "status": "Status",
       "amount": "Amount"
@@ -847,25 +873,20 @@
       "refunded": "Refunded"
     },
     "kpi": {
-      "activeBookings": {
-        "label": "Active bookings",
-        "delta": "this week",
-        "note": "2 today, 2 scheduled"
+      "balance": {
+        "label": "My balance",
+        "available": "Available"
       },
-      "parcelsInTransit": {
-        "label": "Parcels in transit",
-        "delta": "On time",
-        "note": "1 out for delivery"
+      "completedServices": {
+        "label": "Completed services"
       },
-      "spend": {
-        "label": "Spend in Sept",
-        "delta": "vs Aug",
-        "note": "৳ 1,850 awaiting payment"
+      "activeTickets": {
+        "label": "Active tickets",
+        "note": "No open tickets"
       },
-      "savedVendors": {
-        "label": "Saved vendors",
-        "delta": "new",
-        "note": "All admin-verified"
+      "pendingTickets": {
+        "label": "Pending tickets",
+        "note": "Nothing waiting"
       }
     },
     "tracker": {
@@ -880,11 +901,42 @@
         "delivered": "Delivered to Banani 11"
       }
     },
-    "spend": {
-      "title": "Spend in September",
-      "repairs": "Repairs",
-      "cleaning": "Cleaning",
-      "delivery": "Delivery"
+    "charts": {
+      "period": "Last 30 days",
+      "empty": "No activity in this period",
+      "service": {
+        "title": "Service",
+        "total": "Total requests",
+        "legendAll": "All services",
+        "empty": "No service activity in this period"
+      },
+      "pickup": {
+        "title": "Pickup",
+        "total": "Total pickups",
+        "empty": "No pickups in this period"
+      },
+      "delivery": {
+        "title": "Delivery",
+        "total": "Total deliveries",
+        "empty": "No deliveries in this period"
+      },
+      "vendorJobs": {
+        "title": "Jobs",
+        "total": "Total jobs",
+        "legendAll": "All jobs",
+        "empty": "No job activity in this period"
+      },
+      "status": {
+        "pending": "Pending",
+        "processing": "Processing",
+        "completed": "Completed",
+        "canceled": "Canceled"
+      },
+      "span": {
+        "today": "today",
+        "week": "this week",
+        "month": "this month"
+      }
     },
     "actions": {
       "title": "Quick actions",
@@ -901,12 +953,22 @@
         "note": "3 saved locations"
       }
     },
+    "overview": {
+      "clickRow": "Click a row for full details",
+      "orderDetails": "Order details",
+      "orderInfo": "Order information",
+      "transactionId": "Transaction ID",
+      "paymentMethod": "Payment method",
+      "paymentStatus": "Payment status",
+      "serviceName": "Service name",
+      "activeNote": "open with support",
+      "pendingNote": "awaiting reply"
+    },
     "pages": {
       "overview": {
         "nav": "Overview",
-        "heading": "Good morning, Rakib",
-        "sub": "Two jobs are in progress and one parcel is out for delivery. Everything else is settled.",
-        "table": "Active jobs"
+        "heading": "Overview",
+        "sub": "A summary of your balance, support tickets and the last thirty days of services, pickups and deliveries."
       },
       "bookings": {
         "nav": "Bookings",
@@ -1225,7 +1287,8 @@
         "pending": "Pending clearance",
         "lifetime": "Lifetime earnings",
         "withdraw": "Withdraw",
-        "nextUp": "Next up"
+        "nextUp": "Next up",
+        "openNote": "in the queue"
       },
       "orders": {
         "title": "Service orders",
@@ -1280,6 +1343,50 @@
         "colRequested": "Requested",
         "colReceived": "Received"
       }
+    },
+    "ranges": {
+      "today": "Today",
+      "week": "Week",
+      "month": "Month"
+    },
+    "notify": {
+      "title": "Notifications",
+      "markAll": "Mark all read",
+      "empty": "You are all caught up",
+      "items": {
+        "bookingConfirmed": {
+          "title": "Booking confirmed",
+          "body": "CoolAir Pros accepted your AC servicing for today, 2:00 PM."
+        },
+        "riderOnTheWay": {
+          "title": "Your rider is on the way",
+          "body": "Shakil M. picked up HM-4471 and is heading to Banani 11."
+        },
+        "paymentReceived": {
+          "title": "Payment received",
+          "body": "20.75 USD settled for order #SO34338359."
+        },
+        "kycPending": {
+          "title": "Finish your identity check",
+          "body": "One photo ID lifts the withdrawal limit on your account."
+        },
+        "newJob": {
+          "title": "New job request",
+          "body": "Nusrat Jahan booked AC service — gas refill for 06 May, 2:00 PM."
+        },
+        "payoutSettled": {
+          "title": "Payout settled",
+          "body": "11,880.00 reached your bKash account ending 4412."
+        },
+        "reviewLeft": {
+          "title": "You got a five-star review",
+          "body": "Tanvir Ahmed rated your lighting install."
+        },
+        "listingPaused": {
+          "title": "A listing is paused",
+          "body": "Emergency plumbing stays hidden from search until you re-enable it."
+        }
+      }
     }
   },
   "notFound": {
@@ -1326,6 +1433,88 @@
         "title": "Verified and protected",
         "body": "Every provider is ID-checked, and two-factor security is one switch away."
       }
+    }
+  },
+  "deliveryPage": {
+    "eyebrow": "Shop and deliver",
+    "title": "Tell us what to buy, we bring it over",
+    "lead": "List the items you need. A verified rider shops for them, keeps you posted on the way, and you pay once everything is at your door.",
+    "currency": "USD",
+    "addItem": "Add another item",
+    "note": "Additional note",
+    "notePlaceholder": "Anything the rider should know — a gate code, a preferred brand, a substitute you would accept.",
+    "submit": "Proceed",
+    "sent": "Request sent",
+    "promises": {
+      "verified": "Verified riders only",
+      "tracked": "Tracked from shop to door",
+      "payAfter": "Pay once it arrives"
+    },
+    "item": {
+      "untitled": "New item",
+      "remove": "Remove this item",
+      "name": "Item name",
+      "namePlaceholder": "What should we buy?",
+      "quantity": "Qty",
+      "increase": "Increase quantity",
+      "decrease": "Decrease quantity",
+      "optional": "Optional details",
+      "brand": "Brand",
+      "brandPlaceholder": "Any brand",
+      "size": "Size",
+      "sizePlaceholder": "Any size",
+      "price": "Est. price",
+      "pricePlaceholder": "0.00",
+      "shop": "Preferred shop",
+      "shopPlaceholder": "Leave blank and we will pick",
+      "shopAddress": "Shop address",
+      "shopAddressPlaceholder": "Area or landmark"
+    },
+    "summary": {
+      "title": "Order summary",
+      "items": "Items",
+      "units": "Total units",
+      "estimate": "Your estimate",
+      "estimateNote": "Your own figures, for the priced items only. The rider confirms the real total at the shop.",
+      "noEstimate": "Add an estimated price to any item and it will total up here.",
+      "footnote": "No payment now. We confirm availability and the delivery fee before anyone buys anything."
+    }
+  },
+  "pickupPage": {
+    "eyebrow": "Door pickup",
+    "title": "We collect it from your door",
+    "lead": "List what you are sending and book a slot. A verified rider comes to you, takes it from there, and you can follow it the whole way.",
+    "unit": "KG",
+    "addItem": "Add another product",
+    "note": "Additional note",
+    "notePlaceholder": "Anything the rider should know — where to knock, a fragile box, the best time to come.",
+    "submit": "Proceed",
+    "sent": "Request sent",
+    "promises": {
+      "sameDay": "Same-day slots available",
+      "verified": "Verified riders only",
+      "tracked": "Tracked from your door onward"
+    },
+    "item": {
+      "untitled": "New product",
+      "remove": "Remove this product",
+      "name": "Product name",
+      "namePlaceholder": "What are you sending?",
+      "quantity": "Qty",
+      "increase": "Increase quantity",
+      "decrease": "Decrease quantity",
+      "weight": "Weight each",
+      "weightPlaceholder": "0.0",
+      "weightHint": "Weight of a single unit — we multiply by the quantity for the total."
+    },
+    "summary": {
+      "title": "Pickup summary",
+      "products": "Products",
+      "units": "Total units",
+      "weight": "Total weight",
+      "weightNote": "Weight per unit multiplied by quantity. The rider re-weighs at collection and the fee follows that.",
+      "noWeight": "Add a weight to each product and the total will build up here.",
+      "footnote": "No payment now. We confirm the slot and the pickup fee before a rider sets off."
     }
   }
 }

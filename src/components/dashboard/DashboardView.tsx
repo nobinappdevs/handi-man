@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { PageShell } from "@/components/dashboard/PageShell";
 import { KpiGrid } from "@/components/dashboard/KpiGrid";
 import { KPIS, type PageKey } from "@/components/dashboard/dashboardData";
+import { Overview } from "@/components/dashboard/Overview";
 import { JobsTable } from "@/components/dashboard/JobsTable";
 import { ParcelTracker } from "@/components/dashboard/ParcelTracker";
-import { SpendPanel } from "@/components/dashboard/SpendPanel";
 import { QuickActions } from "@/components/dashboard/QuickActions";
 
 /**
@@ -16,9 +15,15 @@ import { QuickActions } from "@/components/dashboard/QuickActions";
  * four strings and the table's row pool per route, so a second layout would be
  * a second thing to keep in sync for no gain. A page.tsx passes its key and
  * nothing else.
+ *
+ * The overview is the exception, and it owns its whole screen including the
+ * shell: the design heads it with a range switcher that drives every figure
+ * under it, so its head and its body cannot be split across two components.
  */
 export function DashboardView({ page }: { page: PageKey }) {
   const { t } = useLang();
+
+  if (page === "overview") return <Overview />;
 
   return (
     <PageShell
@@ -27,14 +32,13 @@ export function DashboardView({ page }: { page: PageKey }) {
         <div className="flex flex-none flex-wrap gap-2.5">
           <Link
             href="/services"
-            className="flex h-12 flex-none items-center gap-[9px] bg-primary px-6 text-[14.5px] font-medium tracking-[0.13em] whitespace-nowrap text-white uppercase transition-colors hover:bg-primary-dark"
+            className="flex h-11 flex-none items-center px-5 text-[14px] font-medium whitespace-nowrap bg-primary text-white transition-colors hover:bg-primary-dark"
           >
             {t("dashboard.cta.book")}
-            <ArrowRight size={14} strokeWidth={2.6} aria-hidden />
           </Link>
           <Link
             href="/delivery"
-            className="flex h-12 flex-none items-center gap-[9px] border border-border px-[22px] text-[14.5px] font-medium tracking-[0.13em] whitespace-nowrap text-heading uppercase transition-colors hover:border-primary hover:text-brand"
+            className="flex h-11 flex-none items-center border border-border px-5 text-[14px] font-medium whitespace-nowrap text-heading transition-colors hover:border-primary hover:text-brand"
           >
             {t("dashboard.cta.parcel")}
           </Link>
@@ -44,12 +48,11 @@ export function DashboardView({ page }: { page: PageKey }) {
       <KpiGrid items={KPIS} ns="dashboard.kpi" />
 
       {/* ── Table + side column ── single column until 1180px. */}
-      <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-[clamp(16px,1.8vw,24px)] min-[1180px]:grid-cols-[minmax(0,1.65fr)_minmax(300px,1fr)]">
+      <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-[clamp(18px,2vw,28px)] min-[1180px]:grid-cols-[minmax(0,1.65fr)_minmax(300px,1fr)]">
         <JobsTable page={page} />
 
-        <div className="flex min-w-0 flex-col gap-[clamp(16px,1.8vw,24px)]">
+        <div className="flex min-w-0 flex-col gap-[clamp(18px,2vw,28px)]">
           <ParcelTracker />
-          <SpendPanel />
           <QuickActions />
         </div>
       </div>

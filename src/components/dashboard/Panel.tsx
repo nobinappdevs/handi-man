@@ -24,8 +24,8 @@ export function PanelHeader({
   children?: ReactNode;
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-border p-[clamp(16px,1.6vw,22px)_clamp(16px,1.8vw,24px)]">
-      <h2 className="min-w-0 flex-auto truncate text-[clamp(16px,1.6vw,19px)] font-semibold tracking-[-0.02em]">
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-border p-[clamp(16px,1.7vw,22px)_clamp(18px,2vw,26px)]">
+      <h2 className="min-w-0 flex-auto truncate text-[clamp(16px,1.7vw,19px)] font-semibold tracking-[-0.02em]">
         {title}
       </h2>
       {children}
@@ -33,8 +33,31 @@ export function PanelHeader({
   );
 }
 
+/**
+ * The design's section title — a short plum bar, then the name.
+ *
+ * The overview's four panels label themselves this way instead of with
+ * `PanelHeader`: their heading sits INSIDE the panel's padding next to a
+ * legend or a period caption, with no rule under it, so a header row that
+ * draws its own bottom border is the wrong primitive. An `h2` rather than the
+ * design's `span` — it is the section's heading either way.
+ */
+export function PanelTitle({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <h2
+      className={cn(
+        "flex items-center gap-[11px] text-[17px] font-semibold tracking-[-0.02em] text-heading",
+        className,
+      )}
+    >
+      <span aria-hidden className="h-[18px] w-[3px] flex-none bg-primary" />
+      {children}
+    </h2>
+  );
+}
+
 /** Standard padding for a panel's body, matching the header's. */
-export const PANEL_BODY = "p-[clamp(16px,1.8vw,24px)]";
+export const PANEL_BODY = "p-[clamp(18px,2vw,26px)]";
 
 /**
  * The label above a control that is NOT an `Input` — a `Select`, the read-only

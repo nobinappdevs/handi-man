@@ -32,12 +32,12 @@ export function About() {
           {/* Organic plum blobs behind the photos. */}
           <div
             aria-hidden
-            className="absolute top-0 left-0 h-[clamp(190px,24vw,290px)] w-[clamp(190px,24vw,290px)] -rotate-12 bg-primary opacity-[0.92] [border-radius:62%_38%_46%_54%/55%_48%_52%_45%]"
+            className="absolute top-0 start-0 h-[clamp(190px,24vw,290px)] w-[clamp(190px,24vw,290px)] -rotate-12 bg-primary opacity-[0.92] [border-radius:62%_38%_46%_54%/55%_48%_52%_45%]"
             style={{ animation: "about-blob-float 4s ease-in-out infinite" }}
           />
           <div
             aria-hidden
-            className="absolute bottom-0 left-1.5 h-[clamp(90px,11vw,140px)] w-[clamp(90px,11vw,140px)] bg-primary opacity-[0.18] [border-radius:45%_55%_62%_38%/52%_42%_58%_48%]"
+            className="absolute bottom-0 start-1.5 h-[clamp(90px,11vw,140px)] w-[clamp(90px,11vw,140px)] bg-primary opacity-[0.18] [border-radius:45%_55%_62%_38%/52%_42%_58%_48%]"
           />
 
           <div
@@ -52,7 +52,7 @@ export function About() {
                 src={aboutOne}
                 alt={t("home.about.photoOneAlt")}
                 fill
-                sizes="(max-width: 980px) 45vw, 280px"
+                sizes="(max-width: 699px) 45vw, (max-width: 979px) 210px, 240px"
                 className="object-cover"
               />
             </div>
@@ -65,14 +65,14 @@ export function About() {
                 src={aboutTwo}
                 alt={t("home.about.photoTwoAlt")}
                 fill
-                sizes="(max-width: 980px) 45vw, 280px"
+                sizes="(max-width: 699px) 45vw, (max-width: 979px) 210px, 240px"
                 className="object-cover"
               />
             </div>
           </div>
 
           <div
-            className="absolute bottom-[clamp(6px,2vw,18px)] left-0 flex items-center gap-3 bg-primary px-5 py-3.5 text-white shadow-[0_22px_44px_-22px_rgba(0,0,0,0.5)]"
+            className="absolute bottom-[clamp(6px,2vw,18px)] start-0 flex items-center gap-3 bg-primary px-5 py-3.5 text-white shadow-[0_22px_44px_-22px_rgba(0,0,0,0.5)]"
             style={{ animation: "about-badge-float 3.5s ease-in-out infinite" }}
             /* Opacity only. `about-badge-float` is a CSS keyframe animation on
                transform, and a running animation outranks the inline transform
@@ -146,7 +146,7 @@ export function About() {
 
             <div
               data-anim-skip
-              className="absolute -right-60 -bottom-6 hidden h-[clamp(120px,13vw,172px)] w-[clamp(170px,19vw,250px)] opacity-60 mid:block"
+              className="absolute -end-60 -bottom-6 hidden h-[clamp(120px,13vw,172px)] w-[clamp(170px,19vw,250px)] opacity-60 mid:block"
               style={{ animation: "about-tool-float 4s ease-in-out infinite" }}
             >
               <Image

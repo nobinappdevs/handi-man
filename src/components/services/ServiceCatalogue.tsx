@@ -44,7 +44,7 @@ function Card({ card, index }: { card: CatalogueCard; index: number }) {
           {card.tag}
         </span>
         <span className="flex h-[22px] w-[22px] items-center justify-center text-white">
-          <ArrowRight size={15} strokeWidth={2.6} aria-hidden />
+          <ArrowRight size={15} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
         </span>
       </div>
 
@@ -135,7 +135,7 @@ export function ServiceCatalogue() {
                 data-anim-delay="0.12"
               >
                 {t("servicesPage.requestQuote")}
-                <ArrowRight size={14} strokeWidth={2.6} aria-hidden />
+                <ArrowRight size={14} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
               </Link>
             </div>
 

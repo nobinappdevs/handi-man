@@ -64,7 +64,7 @@ export function Impact() {
               {IMPACT_FEATURE_KEYS.map((key, i) => (
                 <div
                   key={key}
-                  className="group flex items-baseline gap-3 border-t border-border py-3.5 pr-1.5 transition-[padding-left] duration-200 hover:pl-2"
+                  className="group flex items-baseline gap-3 border-t border-border py-3.5 pe-1.5 transition-[padding-inline-start] duration-200 hover:ps-2"
                 >
                   <span className="flex-none font-display text-xs font-bold tracking-[0.14em] text-brand">
                     {String(i + 1).padStart(2, "0")}

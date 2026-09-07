@@ -127,7 +127,7 @@ export function Footer() {
                 className="flex h-[52px] flex-none cursor-pointer items-center gap-2.5 border-0 bg-primary px-[26px] font-display text-[14.5px] font-bold tracking-[0.14em] text-white uppercase transition-colors hover:bg-white hover:text-primary"
               >
                 {t(subscribed ? "footer.newsletter.subscribed" : "footer.newsletter.subscribe")}
-                <ArrowRight size={15} strokeWidth={2.6} aria-hidden />
+                <ArrowRight size={15} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
               </button>
             </form>
           </div>

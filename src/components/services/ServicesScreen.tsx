@@ -63,7 +63,7 @@ export function ServicesScreen() {
               className="flex h-12 flex-none items-center gap-2.5 bg-primary px-6 font-display text-[14.5px] font-bold tracking-[0.13em] whitespace-nowrap text-white uppercase transition-colors hover:bg-primary-dark"
             >
               {t("servicesPage.cta")}
-              <ArrowRight size={14} strokeWidth={2.6} aria-hidden />
+              <ArrowRight size={14} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
             </Link>
           </div>
         </div>
@@ -90,7 +90,7 @@ export function ServicesScreen() {
             className="flex h-12 flex-none items-center gap-2.5 bg-white px-6 font-display text-[14px] font-bold tracking-[0.13em] whitespace-nowrap text-ink uppercase transition-colors hover:bg-primary-on-dark"
           >
             {t("servicesPage.missing.cta")}
-            <ArrowRight size={14} strokeWidth={2.6} aria-hidden />
+            <ArrowRight size={14} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
           </Link>
         </div>
       </section>

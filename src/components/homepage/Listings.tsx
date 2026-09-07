@@ -80,7 +80,7 @@ export function Listings() {
             data-anim-delay="0.15"
           >
             {t("home.listings.viewAll")}
-            <ArrowRight size={14} strokeWidth={2.6} aria-hidden />
+            <ArrowRight size={14} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
           </a>
         </div>
 
@@ -105,7 +105,7 @@ export function Listings() {
                   sizes="(max-width: 700px) 100vw, (max-width: 980px) 50vw, 25vw"
                   className="object-cover"
                 />
-                <span className="absolute top-0 left-0 bg-primary px-[11px] py-1.5 font-display text-[11.5px] font-bold uppercase tracking-[0.14em] text-white">
+                <span className="absolute top-0 start-0 bg-primary px-[11px] py-1.5 font-display text-[11.5px] font-bold uppercase tracking-[0.14em] text-white">
                   {card.vendor}
                 </span>
               </div>

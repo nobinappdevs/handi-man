@@ -240,10 +240,10 @@ function BrandPanel() {
 
           <div className="flex flex-none flex-col justify-between">
             <QuoteButton onClick={() => step(1)} label={t("auth.aside.next")}>
-              <ArrowRight size={16} strokeWidth={2.2} aria-hidden />
+              <ArrowRight size={16} strokeWidth={2.2} aria-hidden className="rtl:rotate-180" />
             </QuoteButton>
             <QuoteButton onClick={() => step(-1)} label={t("auth.aside.prev")}>
-              <ArrowLeft size={16} strokeWidth={2.2} aria-hidden />
+              <ArrowLeft size={16} strokeWidth={2.2} aria-hidden className="rtl:rotate-180" />
             </QuoteButton>
           </div>
         </div>

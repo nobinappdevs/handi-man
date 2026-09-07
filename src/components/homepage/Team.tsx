@@ -58,7 +58,7 @@ export function Team() {
                   />
                 </div>
 
-                <div className="absolute right-0 -bottom-4.5 flex w-[46px] flex-col items-stretch">
+                <div className="absolute end-0 -bottom-4.5 flex w-[46px] flex-col items-stretch">
                   <div className="flex translate-y-2 flex-col items-center gap-2.5 bg-white py-3 opacity-0 shadow-[0_18px_36px_-16px_rgba(0,0,0,0.35)] transition-[opacity,transform] duration-200 group-hover:translate-y-0 group-hover:opacity-100">
                     {TEAM_SOCIAL_ICONS.map((icon, i) => (
                       <a
@@ -74,7 +74,7 @@ export function Team() {
                     type="button"
                     className="flex h-[46px] w-[46px] flex-none cursor-pointer items-center justify-center border-0 bg-primary text-white transition-colors hover:bg-primary-dark"
                   >
-                    <svg width={17} height={17} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <svg width={17} height={17} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden className="rtl:-scale-x-100">
                       <path d="M4 17a7 7 0 0 1 7-7h6" />
                       <path d="M14 6l4 4-4 4" />
                     </svg>

@@ -124,7 +124,7 @@ export function Contact() {
           </div>
 
           {/* Frosted card — floats over the photo/panel seam from `wide:` up. */}
-          <div className="relative z-[3] flex flex-col gap-[clamp(16px,2vw,22px)] wide:max-w-[560px] wide:-ml-[46%] wide:bg-[color-mix(in_oklab,rgb(var(--primary__color))_55%,transparent)] wide:p-[clamp(26px,2.6vw,38px)] wide:shadow-[0_40px_90px_-40px_rgba(0,0,0,0.55)] wide:backdrop-blur-[18px]">
+          <div className="relative z-[3] flex flex-col gap-[clamp(16px,2vw,22px)] wide:max-w-[560px] wide:ms-[-46%] wide:bg-[color-mix(in_oklab,rgb(var(--primary__color))_55%,transparent)] wide:p-[clamp(26px,2.6vw,38px)] wide:shadow-[0_40px_90px_-40px_rgba(0,0,0,0.55)] wide:backdrop-blur-[18px]">
             <Eyebrow
               className="text-white/85"
               icon={<MessageSquare size={16} strokeWidth={2.6} aria-hidden />}
@@ -239,7 +239,7 @@ export function Contact() {
                   className="flex h-14 flex-1 min-w-[200px] cursor-pointer items-center justify-center gap-2.5 bg-ink font-display text-[15px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-white hover:text-ink"
                 >
                   {t(sent ? "home.contact.sent" : "home.contact.submit")}
-                  <ArrowRight size={15} strokeWidth={2.6} aria-hidden />
+                  <ArrowRight size={15} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
                 </button>
 
                 <p className="text-[12.5px] font-semibold text-white/80">{t("home.contact.replyNote")}</p>

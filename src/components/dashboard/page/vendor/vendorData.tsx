@@ -8,23 +8,36 @@ import {
   AirVent, Banknote, CalendarCheck, CheckCircle2, Clock, CreditCard,
   Lightbulb, SprayCan, Star, Wallet, Wrench,
 } from "lucide-react";
+import { rangeSeries, type Kpi, type OverviewRange } from "@/components/dashboard/dashboardData";
 import type { OrderStatus } from "@/components/dashboard/page/history/historyData";
 
 /* ─────────────────────────── Overview ─────────────────────────── */
 
-export const VENDOR_KPIS: {
-  key: string;
-  value: string;
-  delta: string;
-  deltaTone: "brand" | "ok";
-  pct: number;
-  icon: LucideIcon;
-}[] = [
-  { key: "openJobs", value: "3", delta: "+1", deltaTone: "brand", pct: 55, icon: CalendarCheck },
-  { key: "completed", value: "128", delta: "", deltaTone: "ok", pct: 82, icon: CheckCircle2 },
-  { key: "earnings", value: "৳92.4k", delta: "+18%", deltaTone: "ok", pct: 74, icon: Wallet },
-  { key: "rating", value: "4.9", delta: "311", deltaTone: "brand", pct: 96, icon: Star },
+export const VENDOR_KPIS: Kpi[] = [
+  { key: "openJobs", value: "3", icon: CalendarCheck, trend: { delta: "+1", tone: "brand" } },
+  { key: "completed", value: "128", icon: CheckCircle2, trend: { delta: "", tone: "ok" } },
+  { key: "earnings", value: "৳92.4k", icon: Wallet, trend: { delta: "+18%", tone: "ok" } },
+  { key: "rating", value: "4.9", icon: Star, trend: { delta: "311", tone: "brand" } },
 ];
+
+/**
+ * Jobs per bucket for the overview chart, one figure per month tick.
+ *
+ * A vendor works several jobs a day where a single customer books a handful a
+ * month, so this is its own month rather than the customer's — but it goes
+ * through the same `rangeSeries` builder, so Today / Week / Month agree
+ * with each other exactly the way the customer's do.
+ */
+const MONTH_JOBS = [
+  2, 3, 1, 4, 2, 3, 5, 2, 4, 3, 2, 4, 6, 3, 2, 5, 3, 2, 4, 5, 3, 6, 4, 3, 2, 4, 3, 5, 2, 4, 3,
+];
+
+const VENDOR_JOB_SERIES = rangeSeries(MONTH_JOBS);
+
+export const vendorJobsFor = (range: OverviewRange) => VENDOR_JOB_SERIES[range];
+
+/** The rating card's three numbers: the score, its ceiling, and the count. */
+export const VENDOR_RATING = { score: "4.9", of: 5, reviews: 311 };
 
 /** Money available to withdraw, and what is still held. */
 export const VENDOR_BALANCE = {
@@ -47,7 +60,8 @@ export type VendorOrder = {
   customer: string;
   phone: string;
   placedOn: string;
-  schedule: string;
+  /** Split in two so the design's table can stack the window under the date. */
+  schedule: { date: string; time: string };
   address: string;
   status: OrderStatus;
   payment: string;
@@ -60,21 +74,21 @@ export const VENDOR_ORDERS: VendorOrder[] = [
   {
     no: "SO34338359", serviceKey: "residentialCleaning", copyNs: HOME_NS, icon: SprayCan,
     customer: "Rakib Hasan", phone: "+880 1712 345678", placedOn: "16 Jun 2026",
-    schedule: "9:00 AM – 10:00 AM, 18 Jun 2026", address: "Level 7, Bay Tower, Gulshan 1",
+    schedule: { date: "18 Jun 2026", time: "9:00 AM – 10:00 AM" }, address: "Level 7, Bay Tower, Gulshan 1",
     status: "pending", payment: "cod",
     totals: { subtotal: "15.00 USD", charge: "2.25 USD", payout: "12.75 USD" },
   },
   {
     no: "SO58969918", serviceKey: "acServiceGasRefill", icon: AirVent,
     customer: "Nusrat Jahan", phone: "+880 1811 220044", placedOn: "04 May 2026",
-    schedule: "2:00 PM – 4:00 PM, 06 May 2026", address: "House 12, Road 5, Mirpur, Dhaka",
+    schedule: { date: "06 May 2026", time: "2:00 PM – 4:00 PM" }, address: "House 12, Road 5, Mirpur, Dhaka",
     status: "processing", payment: "card",
     totals: { subtotal: "49.00 USD", charge: "7.35 USD", payout: "41.65 USD" },
   },
   {
     no: "SO43557361", serviceKey: "lightingInstall", icon: Lightbulb,
     customer: "Tanvir Ahmed", phone: "+880 1912 778899", placedOn: "30 Apr 2026",
-    schedule: "11:00 AM – 12:00 PM, 02 May 2026", address: "Road 11, Banani, Dhaka 1213",
+    schedule: { date: "02 May 2026", time: "11:00 AM – 12:00 PM" }, address: "Road 11, Banani, Dhaka 1213",
     status: "completed", payment: "bkash",
     totals: { subtotal: "28.00 USD", charge: "4.20 USD", payout: "23.80 USD" },
   },

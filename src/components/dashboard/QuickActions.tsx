@@ -11,12 +11,17 @@ const HREFS: Record<string, string> = {
   addAddress: DASH_ROUTES.address,
 };
 
+/**
+ * Three shortcuts under the tracker. The filled plum icon tile on each row is
+ * gone — the same square repeated three times said nothing the label did not,
+ * and the column now has one accent in it rather than four.
+ */
 export function QuickActions() {
   const { t } = useLang();
 
   return (
     <section className="border border-border bg-card">
-      <span className="block px-[clamp(16px,1.8vw,22px)] pt-4 pb-3 text-[12px] font-medium tracking-[0.12em] text-muted uppercase">
+      <span className="block border-b border-border px-[clamp(18px,1.9vw,24px)] py-3.5 text-[13.5px] font-medium text-heading">
         {t("dashboard.actions.title")}
       </span>
 
@@ -24,20 +29,23 @@ export function QuickActions() {
         <Link
           key={key}
           href={HREFS[key]}
-          className="flex items-center gap-[13px] border-t border-border px-[clamp(16px,1.8vw,22px)] py-3.5 transition-colors hover:bg-sunk"
+          className="group flex items-center gap-3 border-b border-border px-[clamp(18px,1.9vw,24px)] py-3.5 transition-colors last:border-b-0 hover:bg-sunk"
         >
-          <span className="flex h-[34px] w-[34px] flex-none items-center justify-center bg-brand/14 text-brand">
-            <Icon size={17} strokeWidth={2} aria-hidden />
-          </span>
+          <Icon size={17} strokeWidth={1.9} aria-hidden className="flex-none text-muted" />
           <span className="flex min-w-0 flex-auto flex-col gap-0.5">
-            <span className="text-[14.5px] font-semibold text-heading">
+            <span className="truncate text-[14px] font-medium text-heading">
               {t(`dashboard.actions.${key}.label`)}
             </span>
-            <span className="text-[12.5px] font-normal text-muted">
+            <span className="truncate text-[12.5px] font-normal text-muted">
               {t(`dashboard.actions.${key}.note`)}
             </span>
           </span>
-          <ChevronRight size={15} strokeWidth={2.4} aria-hidden className="flex-none text-muted" />
+          <ChevronRight
+            size={15}
+            strokeWidth={2}
+            aria-hidden
+            className="flex-none text-muted transition-colors group-hover:text-brand"
+          />
         </Link>
       ))}
     </section>

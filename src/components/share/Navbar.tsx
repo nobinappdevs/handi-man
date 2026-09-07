@@ -80,7 +80,7 @@ export function Navbar() {
             className="hidden items-center gap-[9px] self-stretch bg-primary px-[clamp(18px,2.2vw,34px)] font-nav text-[14.5px] leading-none font-medium  text-white  transition-colors hover:bg-primary-dark hover:text-white min-[1280px]:flex"
           >
             {t("nav.bookService")}
-            <ArrowRight size={14} strokeWidth={2.6} aria-hidden />
+            <ArrowRight size={14} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
           </Link>
         </div>
       </div>

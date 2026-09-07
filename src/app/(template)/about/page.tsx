@@ -1,7 +1,11 @@
-import { PagePlaceholder } from "@/components/share/PagePlaceholder";
+import { AboutScreen } from "@/components/about/AboutScreen";
 
-export const metadata = { title: "About — Handiman" };
+export const metadata = {
+  title: "About — Handiman",
+  description:
+    "Who Handiman is, the team behind the platform, and what customers say about the vendors they book.",
+};
 
 export default function Page() {
-  return <PagePlaceholder title="About" />;
+  return <AboutScreen />;
 }

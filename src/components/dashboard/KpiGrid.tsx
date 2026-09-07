@@ -1,63 +1,71 @@
 "use client";
 
-import type { LucideIcon } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { cn } from "@/components/ui/cn";
-
-export type KpiCell = {
-  key: string;
-  value: string;
-  delta: string;
-  deltaTone: "brand" | "ok";
-  pct: number;
-  icon: LucideIcon;
-};
+import type { Kpi } from "@/components/dashboard/dashboardData";
 
 /**
  * The four-up stat row at the top of a dashboard. Shared by the customer
  * overview and the vendor one — same design, different numbers, so `ns` says
  * which i18n branch holds the labels.
  *
- * The design draws one row with a divider between each and says nothing about
- * the stacked case; `border-b` below 1100px is the responsive half of that,
- * without which the cells run together into one unreadable column on a phone.
+ * One row of four cells divided by hairlines, no cell dressed differently from
+ * its neighbours. The earlier version gave the balance a dark ground and a
+ * skewed plum wedge, put every figure behind a filled icon tile, and hung a
+ * progress bar under each: four competing emphases in a strip whose whole job
+ * is to let four numbers be compared at a glance. The number is the emphasis
+ * now — everything around it is muted, and the only colour left is the delta,
+ * which is the one thing on the card that carries meaning.
+ *
+ * Below 1100px the row stacks into two columns and then one; the dividers are
+ * drawn by the grid gap, so they follow it without a rule per breakpoint.
  */
-export function KpiGrid({ items, ns }: { items: KpiCell[]; ns: string }) {
+export function KpiGrid({ items, ns }: { items: Kpi[]; ns: string }) {
   const { t } = useLang();
 
   return (
-    <div className="grid grid-cols-1 border border-border bg-card min-[620px]:grid-cols-2 min-[1100px]:grid-cols-4">
-      {items.map(({ key, value, delta, deltaTone, pct, icon: Icon }) => (
+    /* `gap-px` over `bg-border` draws the dividers, so a cell never doubles a
+       line against the outer frame and every breakpoint gets the right ones
+       without a rule per column. */
+    <div className="grid grid-cols-1 gap-px border border-border bg-border min-[620px]:grid-cols-2 min-[1100px]:grid-cols-4">
+      {items.map(({ key, value, unit, trend, icon: Icon }) => (
         <div
           key={key}
-          className="relative flex min-w-0 flex-col gap-3 overflow-hidden border-e border-b border-border p-[clamp(18px,1.8vw,24px)] min-[1100px]:border-b-0"
+          className="flex min-w-0 flex-col gap-4 bg-card p-[clamp(18px,1.9vw,26px)]"
         >
-          <span className="flex items-center justify-between gap-2.5 text-[12px] font-medium tracking-[0.12em] text-muted uppercase">
-            {t(`${ns}.${key}.label`)}
-            <Icon size={15} strokeWidth={2} aria-hidden className="flex-none text-brand opacity-85" />
+          <span className="flex items-center gap-2.5 text-muted">
+            <Icon size={16} strokeWidth={1.9} aria-hidden className="flex-none" />
+            <span className="min-w-0 truncate text-[13.5px] font-normal">
+              {t(`${ns}.${key}.label`)}
+            </span>
           </span>
 
-          <span className="flex items-baseline gap-[9px]">
-            <span className="text-[clamp(30px,3.2vw,42px)] leading-[0.9] font-semibold tracking-[-0.04em] text-heading">
+          <span className="flex items-baseline gap-1.5">
+            <span className="text-[clamp(27px,2.7vw,34px)] leading-none font-semibold tracking-[-0.03em] text-heading">
               {value}
             </span>
-            <span
-              className={cn(
-                "text-[12.5px] font-medium tracking-[0.1em] whitespace-nowrap uppercase",
-                deltaTone === "ok" ? "text-ok" : "text-brand",
+            {unit && <span className="text-[14px] font-normal text-muted">{unit}</span>}
+          </span>
+
+          {/* Vendor cards carry a delta and a note; the customer's four do not,
+              and an empty block would leave their cells short. */}
+          {trend && (
+            <span className="flex min-w-0 flex-col gap-1">
+              {trend.delta && (
+                <span
+                  className={cn(
+                    "text-[13px] font-medium",
+                    trend.tone === "ok" ? "text-ok" : "text-brand",
+                  )}
+                >
+                  {trend.delta} {t(`${ns}.${key}.delta`)}
+                </span>
               )}
-            >
-              {delta} {t(`${ns}.${key}.delta`)}
+              <span className="text-[12.5px] leading-[1.45] font-normal text-muted">
+                {t(`${ns}.${key}.note`)}
+              </span>
             </span>
-          </span>
-
-          <span className="block h-1 bg-sunk">
-            <span className="block h-full bg-primary" style={{ width: `${pct}%` }} />
-          </span>
-
-          <span className="text-[12.8px] leading-[1.4] font-normal text-muted">
-            {t(`${ns}.${key}.note`)}
-          </span>
+          )}
         </div>
       ))}
     </div>

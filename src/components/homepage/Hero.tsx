@@ -12,11 +12,24 @@ import heroWorker from "@public/assets/home/hero-worker.webp";
 /** Set to a `next/image` import once a real hero photo exists — see below. */
 const HERO_BG: StaticImageData | null = null;
 
-/* The plum wedge. Below the design's 980px breakpoint it lies flat across the
-   bottom; above it, it cuts diagonally down the right-hand side. */
+/*
+ * The plum wedge. Below the design's 980px breakpoint it lies flat across the
+ * bottom; above it, it cuts diagonally down the side the copy is NOT on.
+ *
+ * `end-0` is logical, so the block moves to the left in Arabic on its own — but
+ * `clip-path` is not. Left unmirrored, the diagonal faced the viewport edge
+ * instead of the copy, which is what made the RTL hero read as broken. Each
+ * polygon has an `rtl:` twin with every x flipped to `100 - x`:
+ *
+ *   19% 0, 100% 0, 100% 100%, 0 100%  ->  0 0, 81% 0, 100% 100%, 0 100%
+ *   0 62%, 100% 47%, …                ->  0 47%, 100% 62%, …
+ */
 const WEDGE =
-  "pointer-events-none absolute inset-y-0 end-0 w-full [clip-path:polygon(0_62%,100%_47%,100%_100%,0_100%)] " +
-  "wide:w-[54%] wide:[clip-path:polygon(19%_0,100%_0,100%_100%,0_100%)]";
+  "pointer-events-none absolute inset-y-0 end-0 w-full " +
+  "[clip-path:polygon(0_62%,100%_47%,100%_100%,0_100%)] " +
+  "rtl:[clip-path:polygon(0_47%,100%_62%,100%_100%,0_100%)] " +
+  "wide:w-[54%] wide:[clip-path:polygon(19%_0,100%_0,100%_100%,0_100%)] " +
+  "wide:rtl:[clip-path:polygon(0_0,81%_0,100%_100%,0_100%)]";
 
 /**
  * Hero motion, in two layers — and the split between them is the whole point.
@@ -74,7 +87,12 @@ export function Hero() {
       </div>
       {/* NOTE: rgba(var(--x), a) — the tokens are comma-separated triplets, so
           the `rgb(var(--x) / a)` form is invalid here and drops the gradient. */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(var(--scrim),0.95)_0%,rgba(var(--scrim),0.88)_38%,rgba(var(--scrim),0.6)_60%,rgba(var(--scrim),0.38)_100%)]" />
+      {/* The angle is mirrored for Arabic. A gradient angle is physical: at
+          90deg the opaque end is always on the left, so in RTL the copy landed
+          on the 0.38 stop — the most transparent — and the body text sat
+          grey-on-grey over the dark backdrop. 270deg puts it back under the
+          copy. */}
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(var(--scrim),0.95)_0%,rgba(var(--scrim),0.88)_38%,rgba(var(--scrim),0.6)_60%,rgba(var(--scrim),0.38)_100%)] rtl:bg-[linear-gradient(270deg,rgba(var(--scrim),0.95)_0%,rgba(var(--scrim),0.88)_38%,rgba(var(--scrim),0.6)_60%,rgba(var(--scrim),0.38)_100%)]" />
 
       <div className={`${WEDGE} bg-primary`} />
       <div className={`${WEDGE} bg-[linear-gradient(200deg,rgba(255,255,255,0.16),rgba(0,0,0,0.18))]`} />
@@ -85,6 +103,11 @@ export function Hero() {
         would slide the `clip-path` with it and break the diagonal.
       */}
       <div className={`${WEDGE} enter-fade overflow-hidden`} aria-hidden>
+        {/* Mirrored wholesale for Arabic: the shapes below are placed with
+            physical right/left and a physical skew. It has to be an INNER
+            wrapper — a transform on the clipped element would drag the
+            `clip-path` with it and break the diagonal. */}
+        <div className="absolute inset-0 rtl:-scale-x-100">
         <div className="absolute -top-[14%] -right-[6%] h-[clamp(300px,34vw,520px)] w-[clamp(300px,34vw,520px)] rounded-full border border-white/[0.18]" />
         <div className="absolute -top-[4%] right-[2%] h-[clamp(210px,24vw,380px)] w-[clamp(210px,24vw,380px)] rounded-full border border-white/[0.12]" />
         <div className="absolute right-[6%] bottom-[12%] h-[clamp(120px,13vw,190px)] w-[clamp(120px,13vw,190px)] rotate-[22deg] rounded-3xl border border-white/[0.16]" />
@@ -92,6 +115,7 @@ export function Hero() {
         <div className="absolute inset-y-0 right-[22%] w-px skew-x-[-13deg] bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.22)_45%,rgba(255,255,255,0)_100%)]" />
         <div className="absolute inset-y-0 right-[34%] w-px skew-x-[-13deg] bg-[linear-gradient(180deg,rgba(255,255,255,0)_10%,rgba(255,255,255,0.12)_60%,rgba(255,255,255,0)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_78%_8%,rgba(255,255,255,0.16),rgba(255,255,255,0)_62%)]" />
+        </div>
       </div>
 
       <div className="relative mx-auto grid max-w-[1440px] grid-cols-1 items-end gap-[clamp(16px,2vw,24px)] px-[clamp(18px,3vw,44px)] mid:min-h-[520px] mid:pt-10 wide:min-h-[600px] wide:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">

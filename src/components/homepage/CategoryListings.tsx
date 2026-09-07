@@ -37,7 +37,7 @@ export function CategoryListings() {
                 data-anim-delay="0.12"
               >
                 {t("home.categoryGroups.allOf")} {t(`home.categoryGroups.groups.${group.key}.name`)}
-                <ArrowRight size={14} strokeWidth={2.6} aria-hidden />
+                <ArrowRight size={14} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
               </a>
             </div>
 
@@ -60,7 +60,7 @@ export function CategoryListings() {
                       {card.tag}
                     </span>
                     <span className="flex h-[22px] w-[22px] items-center justify-center text-white">
-                      <ArrowRight size={15} strokeWidth={2.6} aria-hidden />
+                      <ArrowRight size={15} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
                     </span>
                   </div>
 
@@ -83,7 +83,7 @@ export function CategoryListings() {
                       <h3 className="text-[clamp(15.5px,1.5vw,17.5px)] leading-[1.26] font-extrabold tracking-[-0.02em] text-pretty">
                         {t(`home.categoryGroups.items.${card.key}.title`)}
                       </h3>
-                      <div className="flex items-end justify-between gap-3 pr-[clamp(46px,4.6vw,56px)]">
+                      <div className="flex items-end justify-between gap-3 pe-[clamp(46px,4.6vw,56px)]">
                         <span className="flex flex-col gap-0.5">
                           <span className="font-display text-[11px] font-bold tracking-[0.16em] text-muted uppercase">
                             {t("home.categoryGroups.startsAt")}

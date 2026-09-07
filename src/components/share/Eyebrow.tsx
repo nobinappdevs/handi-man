@@ -32,7 +32,7 @@ export function Eyebrow({
       )}
     >
       <span className="flex shrink-0 items-center [&>svg]:block">
-        {icon ?? <ArrowRight size={16} strokeWidth={2.6} aria-hidden />}
+        {icon ?? <ArrowRight size={16} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />}
       </span>
       {children}
     </span>

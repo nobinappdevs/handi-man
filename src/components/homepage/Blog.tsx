@@ -9,9 +9,10 @@ import { BLOG_POST_KEYS } from "@/components/homepage/homeData";
 import { cn } from "@/components/ui/cn";
 import servicePhoto from "@public/assets/home/oneinall.webp";
 
-/* Left divider only appears between columns, and which index that is shifts
-   with the column count (2-up on tablet, 3-up on desktop) — see each post's
-   comment below for why its breakpoint differs. */
+/* The divider rule (border-s, so it tracks the leading edge in both LTR and
+   RTL) only appears between columns, and which index that is shifts with the
+   column count (2-up on tablet, 3-up on desktop) — see each post's comment
+   below for why its breakpoint differs. */
 const DIVIDER = [
   "border-transparent", // post 1 always starts a row
   "border-transparent mid:border-border", // 2nd of 2 (tablet) and 2nd of 3 (desktop) both need the rule
@@ -54,7 +55,7 @@ export function Blog() {
               key={key}
               href="/blog"
               className={cn(
-                "group flex min-w-0 flex-col gap-[clamp(16px,1.8vw,24px)] border-l px-[clamp(18px,2vw,30px)] pt-[clamp(20px,2.2vw,32px)] pb-[clamp(22px,2.4vw,34px)] transition-colors hover:bg-primary/20",
+                "group flex min-w-0 flex-col gap-[clamp(16px,1.8vw,24px)] border-s px-[clamp(18px,2vw,30px)] pt-[clamp(20px,2.2vw,32px)] pb-[clamp(22px,2.4vw,34px)] transition-colors hover:bg-primary/20",
                 DIVIDER[i],
               )}
             >
@@ -88,8 +89,8 @@ export function Blog() {
                   sizes="(max-width: 700px) 100vw, (max-width: 980px) 50vw, 40vw"
                   className="object-cover"
                 />
-                <span className="absolute right-0 bottom-0 flex h-[clamp(40px,4vw,50px)] w-[clamp(40px,4vw,50px)] items-center justify-center bg-bg text-heading transition-colors group-hover:bg-primary group-hover:text-white">
-                  <ArrowRight size={17} strokeWidth={2.2} aria-hidden />
+                <span className="absolute end-0 bottom-0 flex h-[clamp(40px,4vw,50px)] w-[clamp(40px,4vw,50px)] items-center justify-center bg-bg text-heading transition-colors group-hover:bg-primary group-hover:text-white">
+                  <ArrowRight size={17} strokeWidth={2.2} aria-hidden className="rtl:rotate-180" />
                 </span>
               </div>
             </a>

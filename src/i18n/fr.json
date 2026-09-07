@@ -149,6 +149,7 @@
     "previous": "Précédent",
     "submit": "Envoyer",
     "viewAll": "Tout voir",
+    "print": "Imprimer",
     "readMore": "Lire la suite",
     "learnMore": "En savoir plus",
     "getStarted": "Commencer",
@@ -578,7 +579,12 @@
       "replyNote": "Réponse sous 2 heures, 24 h/24 et 7 j/7."
     }
   },
-  "aboutPage": {},
+  "aboutPage": {
+    "eyebrow": "Qui sommes-nous",
+    "title": "Une seule plateforme pour tous vos besoins de services",
+    "lead": "Handiman réunit utilisateurs, prestataires et administrateurs dans un même système : réservations, marketplace vérifiée et livraison de colis. Voici l'équipe qui la construit et ce qu'en disent ceux qui l'utilisent.",
+    "cta": "Parlons-en"
+  },
   "servicesPage": {
     "eyebrow": "Tout ce que nous faisons",
     "title": "Tous les services, une seule marketplace",
@@ -780,9 +786,26 @@
       }
     }
   },
-  "blogPage": {},
+  "blogPage": {
+    "eyebrow": "De l'équipe",
+    "title": "Actualités, notes et annonces",
+    "lead": "Ce que nous construisons, comment la plateforme fonctionne et ce qu'elle coûte — écrit par ceux qui la font tourner.",
+    "cta": "Parlons-en",
+    "stats": {
+      "posts": "Articles publiés"
+    }
+  },
   "blogDetail": {},
-  "contactPage": {},
+  "contactPage": {
+    "eyebrow": "Contactez-nous",
+    "title": "Dites-nous ce dont vous avez besoin",
+    "lead": "Envoyez-nous la mission et nous vous mettrons en relation avec un prestataire vérifié, au prix annoncé. Vous préférez parler ? Chaque coordonnée ici mène à une vraie personne.",
+    "channels": {
+      "email": "Écrivez-nous",
+      "phone": "Appelez-nous",
+      "address": "Rendez-nous visite"
+    }
+  },
   "faqPage": {},
   "legalPages": {},
   "dashboard": {
@@ -825,11 +848,14 @@
     "tabs": {
       "all": "Tous",
       "active": "En cours",
-      "completed": "Terminé"
+      "completed": "Terminé",
+      "pending": "En attente",
+      "processing": "En cours"
     },
     "table": {
       "job": "Mission",
       "vendor": "Prestataire",
+      "payment": "Paiement",
       "schedule": "Planning",
       "status": "Statut",
       "amount": "Montant"
@@ -847,25 +873,20 @@
       "refunded": "Remboursé"
     },
     "kpi": {
-      "activeBookings": {
-        "label": "Réservations actives",
-        "delta": "cette semaine",
-        "note": "2 aujourd'hui, 2 planifiées"
+      "balance": {
+        "label": "Mon solde",
+        "available": "Disponible"
       },
-      "parcelsInTransit": {
-        "label": "Colis en transit",
-        "delta": "À l'heure",
-        "note": "1 en cours de livraison"
+      "completedServices": {
+        "label": "Services terminés"
       },
-      "spend": {
-        "label": "Dépenses de septembre",
-        "delta": "par rapport à août",
-        "note": "৳ 1,850 en attente de paiement"
+      "activeTickets": {
+        "label": "Tickets actifs",
+        "note": "Aucun ticket ouvert"
       },
-      "savedVendors": {
-        "label": "Prestataires enregistrés",
-        "delta": "nouveau",
-        "note": "Tous vérifiés par l'administrateur"
+      "pendingTickets": {
+        "label": "Tickets en attente",
+        "note": "Rien en attente"
       }
     },
     "tracker": {
@@ -880,11 +901,42 @@
         "delivered": "Livré à Banani 11"
       }
     },
-    "spend": {
-      "title": "Dépenses de septembre",
-      "repairs": "Réparations",
-      "cleaning": "Ménage",
-      "delivery": "Livraison"
+    "charts": {
+      "period": "30 derniers jours",
+      "empty": "Aucune activité sur cette période",
+      "service": {
+        "title": "Service",
+        "total": "Demandes totales",
+        "legendAll": "Tous les services",
+        "empty": "Aucune activité de service sur cette période"
+      },
+      "pickup": {
+        "title": "Enlèvement",
+        "total": "Enlèvements totaux",
+        "empty": "Aucun enlèvement sur cette période"
+      },
+      "delivery": {
+        "title": "Livraison",
+        "total": "Livraisons totales",
+        "empty": "Aucune livraison sur cette période"
+      },
+      "vendorJobs": {
+        "title": "Missions",
+        "total": "Missions totales",
+        "legendAll": "Toutes les missions",
+        "empty": "Aucune activité de mission sur cette période"
+      },
+      "status": {
+        "pending": "En attente",
+        "processing": "En cours",
+        "completed": "Terminé",
+        "canceled": "Annulé"
+      },
+      "span": {
+        "today": "aujourd'hui",
+        "week": "cette semaine",
+        "month": "ce mois"
+      }
     },
     "actions": {
       "title": "Actions rapides",
@@ -901,12 +953,22 @@
         "note": "3 lieux enregistrés"
       }
     },
+    "overview": {
+      "clickRow": "Cliquez sur une ligne pour voir tous les détails",
+      "orderDetails": "Détails de la commande",
+      "orderInfo": "Informations de la commande",
+      "transactionId": "ID de transaction",
+      "paymentMethod": "Moyen de paiement",
+      "paymentStatus": "Statut du paiement",
+      "serviceName": "Nom du service",
+      "activeNote": "ouverts avec le support",
+      "pendingNote": "en attente de réponse"
+    },
     "pages": {
       "overview": {
         "nav": "Aperçu",
-        "heading": "Bonjour, Rakib",
-        "sub": "Deux missions sont en cours et un colis est en cours de livraison. Tout le reste est réglé.",
-        "table": "Missions en cours"
+        "heading": "Aperçu",
+        "sub": "Un récapitulatif de votre solde, de vos tickets d'assistance et des trente derniers jours de services, enlèvements et livraisons."
       },
       "bookings": {
         "nav": "Réservations",
@@ -1225,7 +1287,8 @@
         "pending": "En attente de règlement",
         "lifetime": "Revenus cumulés",
         "withdraw": "Retirer",
-        "nextUp": "À venir"
+        "nextUp": "À venir",
+        "openNote": "dans la file"
       },
       "orders": {
         "title": "Commandes de service",
@@ -1280,6 +1343,50 @@
         "colRequested": "Demandé",
         "colReceived": "Reçu"
       }
+    },
+    "ranges": {
+      "today": "Aujourd'hui",
+      "week": "Semaine",
+      "month": "Mois"
+    },
+    "notify": {
+      "title": "Notifications",
+      "markAll": "Tout marquer comme lu",
+      "empty": "Vous êtes à jour",
+      "items": {
+        "bookingConfirmed": {
+          "title": "Réservation confirmée",
+          "body": "CoolAir Pros a accepté votre entretien de climatisation aujourd'hui à 14h00."
+        },
+        "riderOnTheWay": {
+          "title": "Votre coursier est en route",
+          "body": "Shakil M. a récupéré HM-4471 et se dirige vers Banani 11."
+        },
+        "paymentReceived": {
+          "title": "Paiement reçu",
+          "body": "20,75 USD réglés pour la commande #SO34338359."
+        },
+        "kycPending": {
+          "title": "Terminez votre vérification d'identité",
+          "body": "Une pièce d'identité avec photo lève la limite de retrait sur votre compte."
+        },
+        "newJob": {
+          "title": "Nouvelle demande de mission",
+          "body": "Nusrat Jahan a réservé un entretien de climatisation — recharge de gaz le 6 mai à 14h00."
+        },
+        "payoutSettled": {
+          "title": "Versement effectué",
+          "body": "11 880,00 sont arrivés sur votre compte bKash finissant par 4412."
+        },
+        "reviewLeft": {
+          "title": "Vous avez reçu un avis cinq étoiles",
+          "body": "Tanvir Ahmed a noté votre installation d'éclairage."
+        },
+        "listingPaused": {
+          "title": "Une annonce est en pause",
+          "body": "La plomberie d'urgence reste masquée dans la recherche jusqu'à sa réactivation."
+        }
+      }
     }
   },
   "notFound": {
@@ -1326,6 +1433,88 @@
         "title": "Vérifié et protégé",
         "body": "Chaque prestataire est vérifié par pièce d'identité, et l'authentification à deux facteurs est à portée d'un simple interrupteur."
       }
+    }
+  },
+  "deliveryPage": {
+    "eyebrow": "Achat et livraison",
+    "title": "Dites-nous quoi acheter, on vous l'apporte",
+    "lead": "Listez ce dont vous avez besoin. Un livreur vérifié fait les courses, vous tient informé en chemin, et vous payez une fois tout arrivé chez vous.",
+    "currency": "USD",
+    "addItem": "Ajouter un article",
+    "note": "Note complémentaire",
+    "notePlaceholder": "Ce que le livreur doit savoir : un code de portail, une marque préférée, un produit de remplacement que vous accepteriez.",
+    "submit": "Continuer",
+    "sent": "Demande envoyée",
+    "promises": {
+      "verified": "Uniquement des livreurs vérifiés",
+      "tracked": "Suivi du magasin à votre porte",
+      "payAfter": "Payez à la livraison"
+    },
+    "item": {
+      "untitled": "Nouvel article",
+      "remove": "Supprimer cet article",
+      "name": "Nom de l'article",
+      "namePlaceholder": "Que devons-nous acheter ?",
+      "quantity": "Qté",
+      "increase": "Augmenter la quantité",
+      "decrease": "Diminuer la quantité",
+      "optional": "Détails facultatifs",
+      "brand": "Marque",
+      "brandPlaceholder": "Peu importe",
+      "size": "Taille",
+      "sizePlaceholder": "Peu importe",
+      "price": "Prix est.",
+      "pricePlaceholder": "0.00",
+      "shop": "Magasin préféré",
+      "shopPlaceholder": "Laissez vide, on choisira",
+      "shopAddress": "Adresse du magasin",
+      "shopAddressPlaceholder": "Quartier ou point de repère"
+    },
+    "summary": {
+      "title": "Récapitulatif",
+      "items": "Articles",
+      "units": "Unités au total",
+      "estimate": "Votre estimation",
+      "estimateNote": "Vos propres chiffres, pour les articles chiffrés uniquement. Le livreur confirme le total réel en magasin.",
+      "noEstimate": "Indiquez un prix estimé sur un article et le total apparaîtra ici.",
+      "footnote": "Aucun paiement maintenant. Nous confirmons la disponibilité et les frais de livraison avant tout achat."
+    }
+  },
+  "pickupPage": {
+    "eyebrow": "Enlèvement à domicile",
+    "title": "Nous venons le chercher chez vous",
+    "lead": "Listez ce que vous envoyez et réservez un créneau. Un livreur vérifié passe le prendre, s'en occupe ensuite, et vous suivez le colis tout du long.",
+    "unit": "KG",
+    "addItem": "Ajouter un produit",
+    "note": "Note complémentaire",
+    "notePlaceholder": "Ce que le livreur doit savoir : où sonner, un carton fragile, le meilleur moment pour passer.",
+    "submit": "Continuer",
+    "sent": "Demande envoyée",
+    "promises": {
+      "sameDay": "Créneaux le jour même",
+      "verified": "Uniquement des livreurs vérifiés",
+      "tracked": "Suivi dès votre porte"
+    },
+    "item": {
+      "untitled": "Nouveau produit",
+      "remove": "Supprimer ce produit",
+      "name": "Nom du produit",
+      "namePlaceholder": "Qu'envoyez-vous ?",
+      "quantity": "Qté",
+      "increase": "Augmenter la quantité",
+      "decrease": "Diminuer la quantité",
+      "weight": "Poids unitaire",
+      "weightPlaceholder": "0.0",
+      "weightHint": "Poids d'une seule unité — nous le multiplions par la quantité pour le total."
+    },
+    "summary": {
+      "title": "Récapitulatif d'enlèvement",
+      "products": "Produits",
+      "units": "Unités au total",
+      "weight": "Poids total",
+      "weightNote": "Poids unitaire multiplié par la quantité. Le livreur repèse à l'enlèvement et le tarif suit ce poids.",
+      "noWeight": "Indiquez un poids par produit et le total se construira ici.",
+      "footnote": "Aucun paiement maintenant. Nous confirmons le créneau et les frais d'enlèvement avant qu'un livreur ne parte."
     }
   }
 }

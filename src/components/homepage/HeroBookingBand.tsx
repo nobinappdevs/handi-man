@@ -75,11 +75,11 @@ export function HeroBookingBand() {
           */}
           <span
             aria-hidden
-            className="pointer-events-none absolute inset-y-0 -right-10 hidden w-20 skew-x-[-13deg] bg-form wide:block"
+            className="pointer-events-none absolute inset-y-0 -right-10 hidden w-20 skew-x-[-13deg] bg-form wide:block rtl:right-auto rtl:-left-10 rtl:skew-x-13"
           />
           <span
             aria-hidden
-            className="pointer-events-none absolute inset-y-0 right-6 hidden w-4 skew-x-[-13deg] bg-ink wide:block"
+            className="pointer-events-none absolute inset-y-0 right-6 hidden w-4 skew-x-[-13deg] bg-ink wide:block rtl:right-auto rtl:left-6 rtl:skew-x-13"
           />
         </div>
 

@@ -21,6 +21,18 @@
   --primary-lite: 142, 59, 132;        /* #8e3b84 — link hover           */
   --primary-on-dark: 201, 162, 195;    /* #c9a2c3 — brand ink on #12100f */
 
+  /* The design's four-step plum ramp — chart series ink, darkest to lightest.
+     A chart needs four brand shades that stay apart from each other inside one
+     panel, which `--brand-ink` alone cannot say. Steps 1, 2 and 4 are the ramp
+     above; step 3 is the one shade between them the design adds.
+     The ramp INVERTS in dark for the same reason `--brand-ink` does: #450C3F
+     on the near-black card is a bar nobody can see, so the darkest step
+     becomes the lightest ink and the four stay four. */
+  --ramp-1: var(--primary__color);
+  --ramp-2: var(--primary-lite);
+  --ramp-3: 176, 111, 166;             /* #b06fa6 */
+  --ramp-4: var(--primary-on-dark);
+
   /* The brand colour used as *text*. Plum is unreadable on the dark page, so
      the dark theme swaps in the tint instead. Use `text-brand` for eyebrows,
      highlighted headline words and inline accents — never `text-primary`. */
@@ -142,6 +154,13 @@
   --wash-ink: var(--primary-lite);
   --bar-ink: var(--primary-lite);
 
+  /* Four tints of the same plum, evenly spaced, so all four series still read
+     against a #171514 card — see the light block for why the order flips. */
+  --ramp-1: 240, 226, 237;  /* #f0e2ed */
+  --ramp-2: 214, 179, 208;  /* #d6b3d0 */
+  --ramp-3: 184, 132, 174;  /* #b884ae */
+  --ramp-4: 154, 90, 144;   /* #9a5a90 */
+
   --bg: 18, 16, 15;         /* #12100f */
   --page: 20, 18, 17;       /* #141211 - same composite, dark scrim */
   --surface: 23, 21, 20;    /* #171514 */
@@ -194,6 +213,10 @@
   --color-primary-dark: rgb(var(--primary-dark));
   --color-primary-lite: rgb(var(--primary-lite));
   --color-primary-on-dark: rgb(var(--primary-on-dark));
+  --color-ramp-1: rgb(var(--ramp-1));
+  --color-ramp-2: rgb(var(--ramp-2));
+  --color-ramp-3: rgb(var(--ramp-3));
+  --color-ramp-4: rgb(var(--ramp-4));
   --color-brand: rgb(var(--brand-ink));
 
   /* Constant, deliberately NOT theme-aware: the support band stays near-black
@@ -480,6 +503,26 @@ body {
 img {
   max-width: 100%;
   height: auto;
+}
+
+/*--------------------------------------------------------------
+    # Arabic — no letter-spacing
+    Arabic is cursive: the letters of a word JOIN. Tracking is a typographic
+    nicety on Latin and a defect on Arabic — it severs those joins and the word
+    stops reading as one word.
+
+    This design tracks almost everything: every heading carries negative
+    tracking from the base layer, every uppercase label carries positive
+    tracking from a utility. So the whole document drops it while `dir` is rtl
+    rather than un-tracking a hundred elements one at a time.
+
+    `!important` because those values come from Tailwind utilities of equal
+    specificity; without it the winner would depend on stylesheet order.
+    `text-transform: uppercase` is left alone — Arabic has no case, so it is
+    already a no-op.
+--------------------------------------------------------------*/
+[dir="rtl"] * {
+  letter-spacing: normal !important;
 }
 
 /*--------------------------------------------------------------

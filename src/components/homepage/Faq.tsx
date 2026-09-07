@@ -77,7 +77,7 @@ export function Faq() {
                   )}
                 >
                   <p
-                    className="mt-3.5 mb-0.5 max-w-[660px] pl-[calc(22px+clamp(12px,1.4vw,18px))] text-[clamp(14px,1.3vw,15.5px)] leading-[1.75] text-body text-pretty"
+                    className="mt-3.5 mb-0.5 max-w-[660px] ps-[calc(22px+clamp(12px,1.4vw,18px))] text-[clamp(14px,1.3vw,15.5px)] leading-[1.75] text-body text-pretty"
                   >
                     {t(`home.faq.items.${key}.a`)}
                   </p>
