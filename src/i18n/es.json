@@ -21,7 +21,9 @@
     "pricing": "Precios",
     "bookService": "Reservar un servicio",
     "pickup": "Recogida",
-    "joinVendor": "Únete como proveedor"
+    "joinVendor": "Únete como proveedor",
+    "support": "Soporte 24/7",
+    "viewAllServices": "Ver todos los servicios"
   },
   "theme": {
     "toggle": "Tema de color",

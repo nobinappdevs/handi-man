@@ -6,7 +6,7 @@
   "nav": {
     "home": "होम",
     "about": "हमारे बारे में",
-    "services": "सेवाएं",
+    "services": "सेवाएँ",
     "howItWorks": "यह कैसे काम करता है",
     "blog": "ब्लॉग",
     "contact": "संपर्क करें",
@@ -21,7 +21,9 @@
     "pricing": "मूल्य निर्धारण",
     "bookService": "सेवा बुक करें",
     "pickup": "पिकअप",
-    "joinVendor": "वेंडर के रूप में जुड़ें"
+    "joinVendor": "वेंडर के रूप में जुड़ें",
+    "support": "24/7 सहायता",
+    "viewAllServices": "सभी सेवाएँ देखें"
   },
   "theme": {
     "toggle": "रंग थीम",

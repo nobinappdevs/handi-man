@@ -6,7 +6,7 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "services": "Service",
+    "services": "Services",
     "howItWorks": "How it works",
     "blog": "Blog",
     "contact": "Contact",
@@ -21,7 +21,9 @@
     "pricing": "Pricing",
     "bookService": "Book a service",
     "pickup": "Pickup",
-    "joinVendor": "Join as Vendor"
+    "joinVendor": "Join as Vendor",
+    "support": "24/7 support",
+    "viewAllServices": "View all services"
   },
   "theme": {
     "toggle": "Colour theme",

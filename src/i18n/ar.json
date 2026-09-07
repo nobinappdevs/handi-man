@@ -6,7 +6,7 @@
   "nav": {
     "home": "الرئيسية",
     "about": "من نحن",
-    "services": "الخدمة",
+    "services": "الخدمات",
     "howItWorks": "كيف يعمل",
     "blog": "المدونة",
     "contact": "تواصل معنا",
@@ -21,7 +21,9 @@
     "pricing": "الأسعار",
     "bookService": "احجز خدمة",
     "pickup": "الاستلام",
-    "joinVendor": "انضم كمقدم خدمة"
+    "joinVendor": "انضم كمقدم خدمة",
+    "support": "دعم على مدار الساعة",
+    "viewAllServices": "عرض كل الخدمات"
   },
   "theme": {
     "toggle": "مظهر الألوان",

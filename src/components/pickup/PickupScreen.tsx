@@ -189,9 +189,9 @@ export function PickupScreen() {
               `sticky` only from `wide:`, where the column exists at all. Below
               that it is simply the last block in the flow.
 
-              `top-6`, not a header-height offset: the site header scrolls away
-              rather than sticking, so there is nothing overhead to clear. */}
-          <aside className="flex min-w-0 flex-col gap-4 border border-border bg-card p-[clamp(20px,2.2vw,26px)] wide:sticky wide:top-6">
+              The offset clears the sticky site header — `--header-h`, which
+              `globals.css` keeps in step with the header itself. */}
+          <aside className="flex min-w-0 flex-col gap-4 border border-border bg-card p-[clamp(20px,2.2vw,26px)] wide:sticky wide:top-[calc(var(--header-h)+16px)]">
             <span className="font-display text-[12px] font-bold tracking-[0.14em] text-muted uppercase">
               {t("pickupPage.summary.title")}
             </span>

@@ -21,7 +21,9 @@
     "pricing": "Tarifs",
     "bookService": "Réserver un service",
     "pickup": "Collecte",
-    "joinVendor": "Devenir prestataire"
+    "joinVendor": "Devenir prestataire",
+    "support": "Assistance 24/7",
+    "viewAllServices": "Voir tous les services"
   },
   "theme": {
     "toggle": "Thème de couleur",

@@ -6,9 +6,16 @@ import { useLang } from "@/hooks/useLang";
 import { useShell } from "@/components/context/ShellContext";
 import { CircleIconButton } from "@/components/share/CircleIconButton";
 import { Logo } from "@/components/share/Logo";
-import { SITE_LINKS } from "@/components/share/navLinks";
+import { ACCOUNT_LINKS, SITE_LINKS, VENDOR_LINK } from "@/components/share/navLinks";
 
-/** Left slide-over navigation, shown below the design's 980px nav breakpoint. */
+/**
+ * Left slide-over navigation, shown below the header's nav breakpoint — the
+ * one `NAV_SHOW`/`NAV_HIDE` in `navLinks.ts` define, which is what opens this.
+ *
+ * It stacks both link groups in the order the header lays them out: the site's
+ * content first, then account, separated by the same rule the header draws
+ * between them.
+ */
 export function MobileMenu() {
   const { t, dir } = useLang();
   const { drawer, closeDrawer } = useShell();
@@ -34,7 +41,10 @@ export function MobileMenu() {
         </CircleIconButton>
       </div>
 
-      <nav className="flex flex-1 flex-col overflow-y-auto py-2.5 font-nav text-[14px] font-medium ">
+      <nav
+        aria-label={t("nav.menu")}
+        className="flex flex-1 flex-col overflow-y-auto py-2.5 font-nav text-[14px] font-medium"
+      >
         {SITE_LINKS.map(({ href, key }) => (
           <Link
             key={href}
@@ -45,6 +55,31 @@ export function MobileMenu() {
             {t(key)}
           </Link>
         ))}
+
+        {/* The vendor path has a button of its own in the header, so it needs
+            a home here too — otherwise it is reachable on desktop only. */}
+        <Link
+          href={VENDOR_LINK.href}
+          onClick={closeDrawer}
+          className="border-b border-drawer-line px-[22px] py-3.5 text-base leading-none font-semibold text-brand"
+        >
+          {t(VENDOR_LINK.key)}
+        </Link>
+
+        {/* Account, set apart the way the header sets it apart — a gap and a
+            lighter weight, so the two groups read as two. */}
+        <span className="mt-3 flex flex-col gap-0 pt-3">
+          {ACCOUNT_LINKS.map(({ href, key }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={closeDrawer}
+              className="px-[22px] py-3 text-[15px] leading-none font-medium text-drawer-ink/75 hover:text-brand"
+            >
+              {t(key)}
+            </Link>
+          ))}
+        </span>
       </nav>
 
       <div className="px-[22px] py-[18px]">
