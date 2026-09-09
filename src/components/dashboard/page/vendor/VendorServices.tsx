@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CircleCheck, CirclePause, Plus } from "lucide-react";
@@ -9,6 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/components/ui/cn";
 import { CARD_PHOTOS } from "@/components/services/servicesData";
 import { VENDOR_SERVICES } from "@/components/dashboard/page/vendor/vendorData";
+import { ServiceDialog } from "@/components/dashboard/page/vendor/ServiceDialog";
 
 /**
  * The listings this vendor offers.
@@ -21,6 +23,7 @@ import { VENDOR_SERVICES } from "@/components/dashboard/page/vendor/vendorData";
  */
 export function VendorServices() {
   const { t } = useLang();
+  const [adding, setAdding] = useState(false);
 
   return (
     <div className="flex flex-col gap-[clamp(16px,1.8vw,24px)]">
@@ -29,7 +32,10 @@ export function VendorServices() {
           {t("dashboard.vendor.services.title")}
           <span className="ms-2 inline text-muted">({VENDOR_SERVICES.length})</span>
         </span>
-        <Button leftIcon={<Plus size={16} strokeWidth={2.4} aria-hidden />}>
+        <Button
+          onClick={() => setAdding(true)}
+          leftIcon={<Plus size={16} strokeWidth={2.4} aria-hidden />}
+        >
           {t("dashboard.vendor.services.add")}
         </Button>
       </div>
@@ -102,6 +108,11 @@ export function VendorServices() {
           );
         })}
       </div>
+
+      {/* Closes on submit for now. When the endpoint lands, the close, the
+          toast and `invalidateQueries` all move into the mutation's hook —
+          this screen should not be deciding when a request succeeded. */}
+      <ServiceDialog open={adding} onClose={() => setAdding(false)} onSubmit={() => setAdding(false)} />
     </div>
   );
 }

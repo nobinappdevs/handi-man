@@ -99,7 +99,6 @@ export function ServicesMenu({
           aria-hidden
           className={cn("transition-transform duration-200", open && "rotate-180")}
         />
-        {active && <span aria-hidden className="absolute inset-x-0 bottom-0 h-0.5 bg-brand" />}
       </button>
 
       {/* `top-full` with no offset: any gap here is dead space the pointer

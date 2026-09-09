@@ -83,17 +83,31 @@ export function CategoryListings() {
                       <h3 className="text-[clamp(15.5px,1.5vw,17.5px)] leading-[1.26] font-extrabold tracking-[-0.02em] text-pretty">
                         {t(`home.categoryGroups.items.${card.key}.title`)}
                       </h3>
-                      <div className="flex items-end justify-between gap-3 pe-[clamp(46px,4.6vw,56px)]">
-                        <span className="flex flex-col gap-0.5">
+                      {/* No trailing padding. It used to reserve ~50px here for
+                          something that does not exist — the arrow lives in the
+                          plum spine — and that dead gutter was what squeezed
+                          "10 USD" and "1 day" into breaking across two lines
+                          each. Keep this row identical to the one in
+                          `services/ServiceCatalogue`. */}
+                      <div className="flex items-end justify-between gap-3">
+                        {/* `min-w-0` so this column is allowed to shrink at all;
+                            without it a flex item refuses to go below its
+                            content width and pushes the unit off instead. */}
+                        <span className="flex min-w-0 flex-col gap-0.5">
                           <span className="font-display text-[11px] font-bold tracking-[0.16em] text-muted uppercase">
                             {t("home.categoryGroups.startsAt")}
                           </span>
-                          <span className="text-[clamp(19px,2vw,24px)] leading-none font-black tracking-[-0.03em] text-brand">
+                          {/* One text node at one size, so the amount and the
+                              currency are necessarily identical — and `nowrap`
+                              keeps them on one line. */}
+                          <span className="text-[clamp(19px,2vw,24px)] leading-none font-black tracking-[-0.03em] whitespace-nowrap text-brand">
                             {card.price}
                           </span>
                         </span>
-                        <span className="flex items-center gap-1.5 pb-0.5 font-display text-xs font-bold tracking-[0.12em] text-muted uppercase">
-                          <Clock size={13} strokeWidth={2.2} aria-hidden />
+                        {/* `flex-none`: the duration is short and fixed, so it
+                            holds its width and lets the price absorb a squeeze. */}
+                        <span className="flex flex-none items-center gap-1.5 pb-0.5 font-display text-xs font-bold tracking-[0.12em] whitespace-nowrap text-muted uppercase">
+                          <Clock size={13} strokeWidth={2.2} aria-hidden className="shrink-0" />
                           {t(`home.categoryGroups.items.${card.key}.unit`)}
                         </span>
                       </div>

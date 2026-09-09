@@ -175,3 +175,38 @@ export const PAYOUT_LOGS: PayoutLog[] = [
 ];
 
 export const PAYOUT_ICON: Record<string, LucideIcon> = { bkash: Banknote, bank: CreditCard, pending: Clock };
+
+/* ─────────────────────────── Service listing options ───────────────────────────
+ * The option lists behind "add a service".
+ *
+ * States and cities are proper nouns, so they are not translated — same call
+ * as `CITIES` in `homepage/homeData`, and the API will own them. Cities are
+ * nested under their state because the form's City select is driven by the
+ * State above it: a flat list would happily let someone list a service in
+ * Denver, Alaska.
+ *
+ * Categories are keys, not names — they resolve through
+ * `home.categories.items.<key>`, the same strings the public rail and the
+ * catalogue use, so a renamed category renames itself everywhere.
+ */
+export const SERVICE_REGIONS: { state: string; cities: string[] }[] = [
+  { state: "Alaska", cities: ["Nome", "Anchorage", "Juneau"] },
+  { state: "Colorado", cities: ["Denver", "Boulder", "Colorado Springs"] },
+  { state: "Michigan", cities: ["Troy", "Detroit", "Ann Arbor"] },
+  { state: "Oregon", cities: ["Portland", "Salem", "Eugene"] },
+  { state: "Texas", cities: ["Austin", "Dallas", "Houston"] },
+];
+
+export const citiesIn = (state: string) =>
+  SERVICE_REGIONS.find((r) => r.state === state)?.cities ?? [];
+
+export const SERVICE_CATEGORY_KEYS = [
+  "handyman",
+  "cleaning",
+  "delivery",
+  "plumbing",
+  "electrics",
+  "acRepair",
+  "beauty",
+  "shifting",
+] as const;

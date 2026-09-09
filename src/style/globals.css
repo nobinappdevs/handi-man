@@ -458,6 +458,11 @@
    Keep in step with the `h-16 wide:h-[72px]` on `share/Navbar.tsx`. */
 :root {
   --header-h: 64px;
+  /* What anything pinned BELOW the header should offset by. Normally the
+     header's height; zero while the header is hidden, so a sticky rail or
+     summary rides up with it instead of hanging in mid-air under nothing.
+     `share/Navbar.tsx` sets the attribute. */
+  --header-offset: var(--header-h);
 }
 
 @media (min-width: 980px) {
@@ -466,9 +471,16 @@
   }
 }
 
+html[data-nav-hidden="true"] {
+  --header-offset: 0px;
+}
+
 html {
   font-size: 100%;
   scroll-behavior: smooth;
+  /* Not `--header-offset`: an `#anchor` jump scrolls UP as often as down, and
+     scrolling up is exactly what brings the header back — so the target has to
+     clear the header's full height regardless of where it happens to be. */
   scroll-padding-top: calc(var(--header-h) + 12px);
 }
 

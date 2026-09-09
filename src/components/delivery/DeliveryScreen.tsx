@@ -188,9 +188,10 @@ export function DeliveryScreen() {
               `sticky` only from `wide:`, where the column exists at all. Below
               that it is simply the last block in the flow.
 
-              The offset clears the sticky site header — `--header-h`, which
-              `globals.css` keeps in step with the header itself. */}
-          <aside className="flex min-w-0 flex-col gap-4 border border-border bg-card p-[clamp(20px,2.2vw,26px)] wide:sticky wide:top-[calc(var(--header-h)+16px)]">
+              The offset clears the sticky site header via `--header-offset`,
+              which drops to 0 while that header is hidden — so this rides up
+              with it instead of hanging under nothing. */}
+          <aside className="flex min-w-0 flex-col gap-4 border border-border bg-card p-[clamp(20px,2.2vw,26px)] wide:sticky wide:top-[calc(var(--header-offset)+16px)] wide:transition-[top] wide:duration-500 wide:ease-out">
             <span className="font-display text-[12px] font-bold tracking-[0.14em] text-muted uppercase">
               {t("deliveryPage.summary.title")}
             </span>

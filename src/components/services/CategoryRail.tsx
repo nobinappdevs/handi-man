@@ -14,10 +14,11 @@ import { CATALOGUE, sectionId } from "@/components/services/servicesData";
  * Anchors keep every section in the document, work with no JS at all, and give
  * each category a shareable URL.
  *
- * The bar is sticky UNDER the site header, which is itself sticky — the offset
- * is the header's own `h-16 wide:h-[72px]`, via the `--header-h` custom
- * property `globals.css` keeps in step with it. At `top-0` the rail would ride
- * up over the header and the two would overlap.
+ * The bar is sticky UNDER the site header, which is itself sticky. The offset
+ * is `--header-offset` from `globals.css`: the header's height while it is on
+ * screen, and 0 while it is hidden — so the rail rides up with the header on a
+ * scroll down rather than hanging in mid-air under nothing, and comes back
+ * down with it. At a flat `top-0` the rail and header would simply overlap.
  */
 export function CategoryRail() {
   const { t } = useLang();
@@ -49,7 +50,7 @@ export function CategoryRail() {
   return (
     <nav
       aria-label={t("servicesPage.rail.label")}
-      className="sticky top-[var(--header-h)] z-30 border-y border-border bg-bg/95 backdrop-blur"
+      className="sticky top-[var(--header-offset)] z-30 border-y border-border bg-bg/95 backdrop-blur transition-[top] duration-500 ease-out motion-reduce:transition-none"
     >
       {/* `no-scrollbar` because this track scrolls sideways on a phone and a
           visible bar under nine chips is louder than the chips. */}
