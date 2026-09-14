@@ -3,9 +3,9 @@
 import { useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
-import { TOKEN_KEY } from "@/lib/axios";
-import { readEmailVerified, startEmailOtpFlow, readTwoFaState } from "@/lib/authState";
+import { readToken, type AuthRole } from "@/lib/authState";
 import { useIsClient } from "@/hooks/useIsClient";
+import { authRoutes } from "@/hooks/useAuth";
 
 function Spinner() {
   return (
@@ -15,29 +15,44 @@ function Spinner() {
   );
 }
 
-/** Guest-only pages (login/register/forgot): logged-in users go to /dashboard. */
-export function GuestGuard({ children }: { children: ReactNode }) {
+/**
+ * Guest-only pages (login/register/forgot): a signed-in session is sent to its
+ * own dashboard.
+ *
+ * It asks one question — is there a token — and nothing else. It used to read
+ * cached `email_verified` / 2FA flags to decide whether to route to the OTP or
+ * authenticator screen instead; those are gone, and it does NOT fetch the
+ * profile to replace them.
+ *
+ * That is deliberate. Everyone arriving here is about to be redirected to the
+ * dashboard anyway, and `AuthGuard` asks the server the moment they land —
+ * sending them on to `/verify-otp` if the account still owes a code. Fetching
+ * the profile here as well would put a request in front of every visit to a
+ * sign-in page to save one instant redirect that the user cannot perceive.
+ *
+ * So a half-verified session takes one extra hop (login → dashboard →
+ * verify-otp), and every step of that decision is made from live API data.
+ *
+ * `role` matters as much as in `AuthGuard`: the vendor sign-in page must look
+ * at the *vendor* session. Reading the customer one would lock every signed-in
+ * customer out of registering as a vendor.
+ */
+export function GuestGuard({
+  children,
+  role = "user",
+}: {
+  children: ReactNode;
+  role?: AuthRole;
+}) {
   const router = useRouter();
   const isClient = useIsClient();
-  const authed = isClient ? Boolean(window.localStorage.getItem(TOKEN_KEY)) : false;
+  const routes = authRoutes(role);
+  const authed = isClient ? Boolean(readToken(role)) : false;
 
   useEffect(() => {
     if (!isClient || !authed) return;
-    // Don't shove a half-registered user into the dashboard — they hold a token
-    // but still owe us the email OTP. AuthGuard makes the authoritative call.
-    if (readEmailVerified() === false) {
-      startEmailOtpFlow();
-      router.replace("/verify-otp");
-      return;
-    }
-    // Same idea one step later: a session still owing its authenticator code
-    // belongs on /verify-2fa, not on a dashboard that would bounce it back.
-    if (readTwoFaState() === "pending") {
-      router.replace("/verify-2fa");
-      return;
-    }
-    router.replace("/dashboard");
-  }, [isClient, authed, router]);
+    router.replace(routes.dashboard);
+  }, [isClient, authed, router, routes]);
 
   // Server + first client paint render the same spinner (no hydration mismatch);
   // once mounted, show the page only for guests.

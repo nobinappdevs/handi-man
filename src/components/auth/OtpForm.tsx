@@ -8,9 +8,10 @@ import { useLang } from "@/hooks/useLang";
 import { useIsClient } from "@/hooks/useIsClient";
 import {
   useEmailVerify,
-  useForgotSendOtp,
+  useForgotResendOtp,
   useForgotVerifyOtp,
   useResendEmail,
+  authRoutes,
 } from "@/hooks/useAuth";
 import {
   clearAuthState,
@@ -19,6 +20,7 @@ import {
   readOtpOrigin,
   readResetEmail,
   readResetToken,
+  type AuthRole,
 } from "@/lib/authState";
 import { Button } from "@/components/ui/Button";
 import { AuthShell } from "@/components/auth/AuthShell";
@@ -29,10 +31,15 @@ import { OTP_LENGTH, RESEND_SECONDS } from "@/components/auth/authData";
  * One screen, two flows. `handiman_otp_flow` says which:
  *
  *   "email" — a fresh signup, or a login against an unverified account. The
- *             code goes to `/user/email/otp/verify` and the token the user
+ *             code goes to `{base}/email/otp/verify` and the token the user
  *             already holds authenticates the call.
  *   "reset"  — the middle of a password reset. The code goes to
- *             `/user/forgot/password/verify` together with the reset token.
+ *             `{base}/forgot/password/verify` together with the reset token.
+ *
+ * The two flows resend through DIFFERENT endpoints, which is why there are two
+ * resend hooks below: `email/resend/code` re-mails the signup code, while
+ * `forgot/password/resend/code` rotates the reset token and must store what it
+ * gets back.
  *
  * Flow, origin and address are read once, in lazy initialisers: they come from
  * sessionStorage, which does not exist on the server, so anything RENDERED from
@@ -42,21 +49,22 @@ import { OTP_LENGTH, RESEND_SECONDS } from "@/components/auth/authData";
  * No auto-submit on the last digit: a mistyped or half-pasted code would spend
  * an attempt the user never chose to make.
  */
-export function OtpForm() {
+export function OtpForm({ role = "user" }: { role?: AuthRole }) {
   const { t } = useLang();
   const router = useRouter();
   const isClient = useIsClient();
+  const routes = authRoutes(role);
 
-  const [flow] = useState(() => readOtpFlow());
-  const [origin] = useState(() => readOtpOrigin());
-  const [sentTo] = useState(() => readOtpEmail());
+  const [flow] = useState(() => readOtpFlow(role));
+  const [origin] = useState(() => readOtpOrigin(role));
+  const [sentTo] = useState(() => readOtpEmail(role));
   const [code, setCode] = useState("");
   const [seconds, setSeconds] = useState(RESEND_SECONDS);
 
-  const emailVerify = useEmailVerify();
-  const forgotVerify = useForgotVerifyOtp();
-  const resendEmail = useResendEmail();
-  const forgotResend = useForgotSendOtp();
+  const emailVerify = useEmailVerify(role);
+  const forgotVerify = useForgotVerifyOtp(role);
+  const resendEmail = useResendEmail(role);
+  const forgotResend = useForgotResendOtp(role);
 
   const isVerifying = emailVerify.isPending || forgotVerify.isPending;
   const isResending = resendEmail.isPending || forgotResend.isPending;
@@ -71,21 +79,33 @@ export function OtpForm() {
     e.preventDefault();
     if (code.length < OTP_LENGTH) return;
     if (flow === "reset") {
-      forgotVerify.mutate({ otp: code, token: readResetToken() });
+      forgotVerify.mutate({ otp: code, token: readResetToken(role) });
       return;
     }
     emailVerify.mutate(code);
   };
 
+  /*
+   * The countdown restarts only once the backend confirms a code went out.
+   * Resetting it up front would punish the user for the API's own rate limit —
+   * "You can resend verification code after 38 seconds" comes back as a
+   * failure, and they'd be made to sit through a fresh 60 on top of it.
+   */
+  const restartCountdown = {
+    onSuccess: () => {
+      setCode("");
+      setSeconds(RESEND_SECONDS);
+    },
+  };
+
   const handleResend = () => {
-    setCode("");
-    setSeconds(RESEND_SECONDS);
+    if (isResending) return;
     if (flow === "reset") {
-      const email = readResetEmail();
-      if (email) forgotResend.mutate(email);
+      const email = readResetEmail(role);
+      if (email) forgotResend.mutate(email, restartCountdown);
       return;
     }
-    resendEmail.mutate();
+    resendEmail.mutate(undefined, restartCountdown);
   };
 
   /**
@@ -94,8 +114,8 @@ export function OtpForm() {
    * in" and throws the user straight back here.
    */
   const handleStartOver = () => {
-    clearAuthState();
-    router.replace(origin === "register" ? "/register" : "/login");
+    clearAuthState(role);
+    router.replace(origin === "register" ? routes.register : routes.login);
   };
 
   const linkClass =
@@ -113,7 +133,7 @@ export function OtpForm() {
 
   let footer = (
     <p className="text-center text-[13.5px] text-muted">
-      <Link href="/forgot-password" className={linkClass}>
+      <Link href={routes.forgotPassword} className={linkClass}>
         <ArrowLeft size={14} strokeWidth={2.4} aria-hidden />
         {t("auth.backToForgot")}
       </Link>

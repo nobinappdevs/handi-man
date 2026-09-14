@@ -60,12 +60,18 @@
     "loginSubtitle": "Inicia sesión para gestionar tus reservas y trabajos.",
     "loginButton": "Iniciar sesión",
     "loggingIn": "Iniciando sesión…",
+    "recaptchaError": "Confirma que no eres un robot.",
     "noAccount": "¿Eres nuevo aquí?",
+    "vendorLoginSubtitle": "Inicia sesión para gestionar tus servicios, trabajos y pagos.",
+    "vendorNoAccount": "¿Aún no eres proveedor?",
     "registerTitle": "Crea tu cuenta",
     "registerSubtitle": "Reserva un profesional de confianza en minutos.",
     "registerButton": "Crear cuenta",
     "registering": "Creando cuenta…",
+    "registrationDisabled": "Los nuevos registros están cerrados en este momento.",
     "haveAccount": "¿Ya tienes una cuenta?",
+    "vendorRegisterTitle": "Conviértete en proveedor",
+    "vendorRegisterSubtitle": "Publica tus servicios y empieza a recibir reservas.",
     "agreePrefix": "Acepto los",
     "terms": "Términos del Servicio",
     "and": "y",
@@ -1422,6 +1428,11 @@
           "body": "Fontanería de urgencia seguirá oculta en las búsquedas hasta que la reactives."
         }
       }
+    },
+    "logout": {
+      "confirmTitle": "¿Cerrar sesión?",
+      "confirmBody": "Tendrás que iniciar sesión de nuevo para volver a tu panel.",
+      "pending": "Cerrando sesión…"
     }
   },
   "notFound": {

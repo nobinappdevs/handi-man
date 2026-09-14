@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { profileService } from "@/services/profile.service";
 import { getApiErrorMessage, getApiSuccessMessage } from "@/hooks/useAuth";
-import { TOKEN_KEY } from "@/lib/axios";
+import { clearAuthState } from "@/lib/authState";
 import type { UpdateProfileRequest, UpdatePasswordRequest } from "@/schemas/profile.schema";
 
 /**
@@ -45,11 +45,9 @@ export function useDeleteAccount() {
     mutationFn: () => profileService.deleteAccount(),
     onSuccess: (res) => {
       toast.success(getApiSuccessMessage(res, "Account deleted"));
-      try {
-        window.localStorage.removeItem(TOKEN_KEY);
-      } catch {
-        // Storage can throw in private mode; the redirect below still stands.
-      }
+      // The whole session, not just the token — a leftover `email_verified`
+      // mirror would outlive the account it describes.
+      clearAuthState();
       qc.clear();
       router.replace("/login");
     },

@@ -17,16 +17,23 @@ import {
   type ReactNode,
 } from "react";
 
+import { LANG_STORAGE_KEY, DEFAULT_LANG, type LangCode } from "@/lib/langState";
+
 import en from "@/i18n/en.json";
 import es from "@/i18n/es.json";
 import ar from "@/i18n/ar.json";
 import fr from "@/i18n/fr.json";
 import hi from "@/i18n/hi.json";
 
-export const LANG_STORAGE_KEY = "handiman_lang";
-export const DEFAULT_LANG = "en";
+/*
+ * The code itself, the storage key and the reader live in `lib/langState.ts` —
+ * `lib/axios.ts` needs them to stamp `?lang=` onto every customer API call, and
+ * cannot import this file to get them (React + five dictionaries, and a cycle).
+ * Re-exported here so components keep importing them from the language hook.
+ */
+export { LANG_STORAGE_KEY, DEFAULT_LANG, readLang } from "@/lib/langState";
+export type { LangCode } from "@/lib/langState";
 
-export type LangCode = "en" | "es" | "ar" | "fr" | "hi";
 export type Dir = "rtl" | "ltr";
 
 type Language = { code: LangCode; name: string; flag: string };

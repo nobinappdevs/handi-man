@@ -11,8 +11,18 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "";
 /** Laravel's broadcast-auth route lives at the app root, not under /api/v1. */
 const appRoot = apiUrl.replace(/\/api\/v\d+\/?$/, "");
 
+/*
+ * The vendor API is a SEPARATE root, not a path under the customer one:
+ * customer calls go to `…/api/v1/user/*`, vendor calls to
+ * `…/api/vendor/v1/vendors/*`. Derived from `apiUrl` so a single `.env` entry
+ * still covers both hosts, and overridable for the case where it doesn't.
+ */
+const vendorApiUrl =
+  process.env.NEXT_PUBLIC_VENDOR_API_URL || apiUrl.replace(/\/api\/v(\d+)\/?$/, "/api/vendor/v$1");
+
 export const env = {
   apiUrl,
+  vendorApiUrl,
 
   /*
    * Pusher Channels (realtime pub/sub) — optional, per feature.

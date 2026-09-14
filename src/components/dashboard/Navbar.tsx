@@ -3,9 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Search, ChevronDown } from "lucide-react";
+import { Menu, Search, ChevronDown, LogOut } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { useDismiss } from "@/hooks/useDismiss";
+import { useLogout } from "@/hooks/useAuth";
+import { ConfirmDialog } from "@/components/dashboard/ConfirmDialog";
 import { cn } from "@/components/ui/cn";
 import { SquareIconButton } from "@/components/ui/SquareIconButton";
 import { ThemeToggle } from "@/components/share/ThemeToggle";
@@ -40,6 +42,12 @@ export function Navbar({ onMenu }: { onMenu: () => void }) {
   const menuItems = profileMenuFor(area);
   const [menu, setMenu] = useState(false);
   const wrap = useDismiss(menu, () => setMenu(false));
+
+  /* Sign out talks to whichever API this area belongs to — `/vendors/logout`
+     under /vendors/dashboard, `/user/logout` everywhere else. Getting this
+     wrong would 401 against the other guard and end the wrong session. */
+  const [confirmLogout, setConfirmLogout] = useState(false);
+  const logout = useLogout(area === "vendor" ? "vendor" : "user");
 
   return (
     <header className="sticky top-0 z-30 flex h-[68px] flex-none items-center gap-[clamp(10px,1.4vw,18px)] border-b border-border bg-bg px-[clamp(16px,2.4vw,34px)]">
@@ -110,13 +118,18 @@ export function Navbar({ onMenu }: { onMenu: () => void }) {
                 const label = t(`dashboard.menu.${key}`);
                 const cls =
                   "flex w-full items-center gap-3 px-3 py-2.5 text-[14px] font-normal transition-colors hover:bg-sunk";
-                /* Sign out is the one entry that is not a route. */
+                /* Sign out is the one entry that is not a route — it opens a
+                   confirmation instead. Closing the menu first keeps the
+                   dropdown from sitting over the dialog. */
                 return danger ? (
                   <button
                     key={key}
                     type="button"
                     role="menuitem"
-                    onClick={() => setMenu(false)}
+                    onClick={() => {
+                      setMenu(false);
+                      setConfirmLogout(true);
+                    }}
                     className={cn(cls, "cursor-pointer text-danger")}
                   >
                     <Icon size={17} strokeWidth={2} aria-hidden className="flex-none" />
@@ -139,6 +152,21 @@ export function Navbar({ onMenu }: { onMenu: () => void }) {
           )}
         </div>
       </div>
+
+      {/* `busy` keeps Escape, the backdrop and both buttons inert while the
+          request is in flight — the mutation redirects to /login when it
+          settles, so there is nothing useful to dismiss back to. */}
+      <ConfirmDialog
+        open={confirmLogout}
+        onClose={() => setConfirmLogout(false)}
+        onConfirm={() => logout.mutate()}
+        busy={logout.isPending}
+        tone="danger"
+        icon={<LogOut size={20} strokeWidth={2.2} aria-hidden />}
+        title={t("dashboard.logout.confirmTitle")}
+        description={t("dashboard.logout.confirmBody")}
+        confirmLabel={t(logout.isPending ? "dashboard.logout.pending" : "dashboard.menu.logout")}
+      />
     </header>
   );
 }

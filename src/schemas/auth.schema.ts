@@ -34,19 +34,36 @@ export const loginResponseSchema = z.object({
 });
 
 /* ─────────────────────────── Register ─────────────────────────── */
-export const registerRequestSchema = z
+/*
+ * Two schemas, one field set. `/basic/settings` carries an `agree_policy`
+ * switch: when it is off the register form does not render a consent checkbox
+ * at all, and a schema that still demanded `policy === true` would fail a form
+ * the user has no way to satisfy. So the consent rule is the only difference
+ * between these two, and the form picks by the flag.
+ *
+ * `password_confirmation` is checked in BOTH: the repeat is a client-side
+ * courtesy (the endpoint has no `confirmed` rule and is never sent it), but it
+ * catches a typo before the account is created either way.
+ */
+export const registerRequestSchemaWithoutPolicy = z
   .object({
     first_name: z.string().min(1, "First name is required"),
     last_name: z.string().min(1, "Last name is required"),
     email: z.string().min(1, "Email is required").email("Enter a valid email"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     password_confirmation: z.string().min(1, "Please confirm your password"),
-    policy: z.boolean().refine((v) => v === true, "You must accept the terms"),
+    policy: z.boolean(),
   })
   .refine((d) => d.password === d.password_confirmation, {
     path: ["password_confirmation"],
     message: "Passwords do not match",
   });
+
+/** The default — consent required, which is what `agree_policy: 1` means. */
+export const registerRequestSchema = registerRequestSchemaWithoutPolicy.refine(
+  (d) => d.policy === true,
+  { path: ["policy"], message: "You must accept the terms" },
+);
 
 /* ─────────────────────────── Forgot password ─────────────────────────── */
 export const forgotRequestSchema = z.object({

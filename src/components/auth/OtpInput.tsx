@@ -57,6 +57,32 @@ export function OtpInput({
   };
 
   const handleKeyDown = (i: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    /*
+     * Enter submits the code.
+     *
+     * The browser's own implicit submission cannot be relied on here: it is
+     * specified for a form with a single text field, and this is six
+     * one-character inputs sitting beside a submit button that is `disabled`
+     * until the last digit lands. Between that and numeric keyboards/IMEs that
+     * swallow the key, typing the code and pressing Enter did nothing on the
+     * 2FA and OTP screens — the user had to reach for the mouse.
+     *
+     * So ask the owning form directly. `requestSubmit()` fires the real submit
+     * event (unlike `form.submit()`, which skips the React handler), and both
+     * screens' handlers already return early on an incomplete code, so this
+     * cannot post a half-typed one.
+     */
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (disabled) return;
+      const form = e.currentTarget.form;
+      if (!form) return;
+      if (typeof form.requestSubmit === "function") form.requestSubmit();
+      // Safari < 16 has no requestSubmit; clicking the submit button is the
+      // one fallback that still runs the React onSubmit handler.
+      else form.querySelector<HTMLButtonElement>('button[type="submit"]')?.click();
+      return;
+    }
     if (e.key === "Backspace") {
       e.preventDefault();
       const chars = value.split("");

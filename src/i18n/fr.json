@@ -60,12 +60,18 @@
     "loginSubtitle": "Connectez-vous pour gérer vos réservations et vos missions.",
     "loginButton": "Se connecter",
     "loggingIn": "Connexion en cours…",
+    "recaptchaError": "Veuillez confirmer que vous n'êtes pas un robot.",
     "noAccount": "Nouveau ici ?",
+    "vendorLoginSubtitle": "Connectez-vous pour gérer vos services, missions et paiements.",
+    "vendorNoAccount": "Pas encore prestataire ?",
     "registerTitle": "Créez votre compte",
     "registerSubtitle": "Réservez un professionnel de confiance en quelques minutes.",
     "registerButton": "Créer un compte",
     "registering": "Création du compte…",
+    "registrationDisabled": "Les nouvelles inscriptions sont fermées pour le moment.",
     "haveAccount": "Vous avez déjà un compte ?",
+    "vendorRegisterTitle": "Devenir prestataire",
+    "vendorRegisterSubtitle": "Publiez vos services et commencez à recevoir des réservations.",
     "agreePrefix": "J'accepte les",
     "terms": "Conditions d'utilisation",
     "and": "et",
@@ -1422,6 +1428,11 @@
           "body": "La plomberie d'urgence reste masquée dans la recherche jusqu'à sa réactivation."
         }
       }
+    },
+    "logout": {
+      "confirmTitle": "Se déconnecter ?",
+      "confirmBody": "Vous devrez vous reconnecter pour accéder à votre tableau de bord.",
+      "pending": "Déconnexion…"
     }
   },
   "notFound": {

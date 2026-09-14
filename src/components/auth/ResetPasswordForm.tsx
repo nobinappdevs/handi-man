@@ -7,8 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, LockKeyhole, TriangleAlert } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { useIsClient } from "@/hooks/useIsClient";
-import { useResetPassword } from "@/hooks/useAuth";
-import { readOtpFlow, readResetToken } from "@/lib/authState";
+import { useResetPassword, authRoutes } from "@/hooks/useAuth";
+import { readOtpFlow, readResetToken, type AuthRole } from "@/lib/authState";
 import { Button } from "@/components/ui/Button";
 import { AuthShell } from "@/components/auth/AuthShell";
 import { PasswordField } from "@/components/auth/PasswordField";
@@ -25,16 +25,17 @@ import { resetPasswordSchema, type ResetPasswordRequest } from "@/schemas/auth.s
  * itself: `useForgotSendOtp` always sets the marker, but only stores a token if
  * the API returned one, so gating on the token would strand people mid-flow.
  */
-export function ResetPasswordForm() {
+export function ResetPasswordForm({ role = "user" }: { role?: AuthRole }) {
   const { t } = useLang();
   const router = useRouter();
-  const reset = useResetPassword();
+  const reset = useResetPassword(role);
+  const routes = authRoutes(role);
   // sessionStorage is client-only, so the server and the hydration paint have
   // to agree on something first. They agree on the form: it is what all but a
   // stray deep link wants, and swapping it out one frame later beats flashing
   // "expired" at everyone who arrived here legitimately.
   const isClient = useIsClient();
-  const expired = isClient && readOtpFlow() !== "reset";
+  const expired = isClient && readOtpFlow(role) !== "reset";
 
   const {
     control,
@@ -51,13 +52,13 @@ export function ResetPasswordForm() {
     reset.mutate({
       password: data.password,
       password_confirmation: data.password_confirmation,
-      token: readResetToken(),
+      token: readResetToken(role),
     });
 
   const backToLogin = (
     <p className="text-center text-[13.5px] text-muted">
       <Link
-        href="/login"
+        href={routes.login}
         className="inline-flex items-center gap-1.5 font-bold text-heading underline underline-offset-2"
       >
         <ArrowLeft size={14} strokeWidth={2.4} aria-hidden />
@@ -74,7 +75,7 @@ export function ResetPasswordForm() {
         subtitle={t("auth.resetExpiredBody")}
         footer={backToLogin}
       >
-        <Button type="button" size="lg" fullWidth onClick={() => router.replace("/forgot-password")}>
+        <Button type="button" size="lg" fullWidth onClick={() => router.replace(routes.forgotPassword)}>
           {t("auth.startOver")}
         </Button>
       </AuthShell>

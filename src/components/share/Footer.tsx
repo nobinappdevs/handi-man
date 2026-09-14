@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRecaptcha } from "@/hooks/useBasicSettings";
+import { Recaptcha } from "@/components/share/Recaptcha";
 import { ArrowRight, ArrowUp, ChevronDown, Mail, MapPin, Phone, Smartphone } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import {
@@ -28,6 +30,9 @@ const LINK_HREFS: Record<string, string> = {
 export function Footer() {
   const { t } = useLang();
   const [subscribed, setSubscribed] = useState(false);
+  const { enabled: recaptchaEnabled, siteKey } = useRecaptcha();
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [captchaError, setCaptchaError] = useState("");
 
   const { control, handleSubmit } = useForm<NewsletterRequest>({
     resolver: zodResolver(newsletterSchema),
@@ -85,7 +90,17 @@ export function Footer() {
             </p>
 
             <form
-              onSubmit={handleSubmit(() => setSubscribed(true))}
+              onSubmit={handleSubmit(() => {
+                // As with the contact form: no newsletter endpoint exists in
+                // the API collection yet, so this still ends locally — but the
+                // challenge is enforced, ready for a service behind it.
+                if (recaptchaEnabled && !captchaToken) {
+                  setCaptchaError(t("auth.recaptchaError"));
+                  return;
+                }
+                setCaptchaError("");
+                setSubscribed(true);
+              })}
               className="flex flex-wrap gap-2.5"
             >
               <Controller
@@ -129,6 +144,23 @@ export function Footer() {
                 {t(subscribed ? "footer.newsletter.subscribed" : "footer.newsletter.subscribe")}
                 <ArrowRight size={15} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
               </button>
+
+              {recaptchaEnabled && (
+                <div className="basis-full">
+                  <Recaptcha
+                    siteKey={siteKey}
+                    onVerify={(token) => {
+                      setCaptchaToken(token);
+                      if (token) setCaptchaError("");
+                    }}
+                  />
+                  {captchaError && (
+                    <span className="mt-1.5 block text-[12.5px] font-semibold text-red-300">
+                      {captchaError}
+                    </span>
+                  )}
+                </div>
+              )}
             </form>
           </div>
 

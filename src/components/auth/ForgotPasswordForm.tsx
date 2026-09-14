@@ -5,7 +5,8 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, KeyRound, Mail } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
-import { useForgotSendOtp } from "@/hooks/useAuth";
+import { useForgotSendOtp, authRoutes } from "@/hooks/useAuth";
+import type { AuthRole } from "@/lib/authState";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { AuthShell } from "@/components/auth/AuthShell";
@@ -19,9 +20,10 @@ import { forgotRequestSchema, type ForgotRequest } from "@/schemas/auth.schema";
  * The endpoint rejects an unknown address under `credentials`, not `email` —
  * that mapping is the whole reason `applyServerErrors` takes one.
  */
-export function ForgotPasswordForm() {
+export function ForgotPasswordForm({ role = "user" }: { role?: AuthRole }) {
   const { t } = useLang();
-  const forgot = useForgotSendOtp();
+  const forgot = useForgotSendOtp(role);
+  const routes = authRoutes(role);
 
   const {
     control,
@@ -48,7 +50,7 @@ export function ForgotPasswordForm() {
       footer={
         <p className="text-center text-[13.5px] text-muted">
           <Link
-            href="/login"
+            href={routes.login}
             className="inline-flex items-center gap-1.5 font-bold text-heading underline underline-offset-2"
           >
             <ArrowLeft size={14} strokeWidth={2.4} aria-hidden />

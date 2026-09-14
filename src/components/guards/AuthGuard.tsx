@@ -3,18 +3,16 @@
 import { useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
-import { TOKEN_KEY } from "@/lib/axios";
 import {
-  readEmailVerified,
-  setEmailVerified,
+  readToken,
   startEmailOtpFlow,
   emailVerifiedFromResponse,
-  readTwoFaState,
-  setTwoFaState,
   twoFaStateFromResponse,
+  type AuthRole,
 } from "@/lib/authState";
 import { useIsClient } from "@/hooks/useIsClient";
-import { useProfile } from "@/hooks/useAuth";
+import { useProfile, authRoutes } from "@/hooks/useAuth";
+import { useEmailVerificationRequired } from "@/hooks/useBasicSettings";
 
 function Spinner() {
   return (
@@ -25,68 +23,94 @@ function Spinner() {
 }
 
 /**
- * Protects authenticated areas: no token → /login, unverified email →
- * /verify-otp, unanswered Google-2FA code → /verify-2fa.
+ * Protects authenticated areas: no token → login, unverified email → the OTP
+ * screen, unanswered Google-2FA code → the authenticator screen.
  *
- * A token isn't proof of access here — signup and an unverified login both hand
- * one out so the OTP call can authenticate. So we check the stored
- * `email_verified` flag first (instant, no request) and confirm it against
- * `/user/profile`, which is the copy the user can't edit. The profile query
- * shares its cache key with the dashboard's own `useProfile` calls, so this
- * costs no extra request.
+ * ── The only local input is the token ──
+ * Everything else is read from `{base}/profile` on every check. There is no
+ * cached `email_verified` or 2FA flag to go stale: flip a switch in the admin
+ * panel and the next profile read — a reload, a navigation into this area, or
+ * the tab regaining focus — acts on the new value. `useProfile` is configured
+ * for exactly that (`staleTime: 0`, `refetchOnMount: "always"`,
+ * `refetchOnWindowFocus: true`).
+ *
+ * The cost is a spinner while the first profile call is in flight, and that is
+ * the honest trade: the alternative was trusting a localStorage value the user
+ * could edit and the server could contradict.
+ *
+ * A token isn't proof of access, which is why the profile is consulted at all —
+ * signup and an unverified login both hand one out so the OTP call can
+ * authenticate.
+ *
+ * `role` picks which session is being asked about, and with it every
+ * destination — a vendor with no token belongs at `/vendors/login`, not at the
+ * customer one.
+ *
+ * This is routing, not security: a static export cannot check a session before
+ * it renders. The real boundary is the API, which validates the bearer token on
+ * every private call, and `lib/axios.ts`, which wipes the session on a 401.
  */
-export function AuthGuard({ children }: { children: ReactNode }) {
+export function AuthGuard({
+  children,
+  role = "user",
+}: {
+  children: ReactNode;
+  role?: AuthRole;
+}) {
   const router = useRouter();
   const isClient = useIsClient();
-  const authed = isClient ? Boolean(window.localStorage.getItem(TOKEN_KEY)) : false;
+  const routes = authRoutes(role);
+  const authed = isClient ? Boolean(readToken(role)) : false;
+  // Site-wide switch: with email verification off the profile still reports
+  // `email_verified: 0`, and without this every account would be sent to the
+  // OTP screen forever.
+  const { required: emailVerificationRequired } = useEmailVerificationRequired();
 
-  const stored = isClient ? readEmailVerified() : null;
-  // Already known-unverified → we're redirecting anyway, don't spend a request.
-  const { data: profileRes, isError: profileFailed } = useProfile(authed && stored !== false);
-  const fromServer = profileRes ? emailVerifiedFromResponse(profileRes) : null;
+  const {
+    data: profileRes,
+    isError: profileFailed,
+    isLoading: profileLoading,
+  } = useProfile(authed, role);
 
-  // The server wins when it has answered; otherwise the local flag stands in.
-  // Both null means "unknown" — a pre-existing session or a profile response
-  // without the field — and we hold the spinner rather than guess. If the
-  // profile call itself failed we can't verify anything, so treat it as denied.
-  const verified = fromServer ?? stored ?? (profileFailed ? false : null);
+  /*
+   * `null` = the server has not answered yet. Only two things resolve it: the
+   * profile payload, or the request failing — in which case we cannot verify
+   * anything and deny. A missing flag in an otherwise fine response also stays
+   * `null`, and holds the spinner rather than guessing.
+   */
+  const verified = !emailVerificationRequired
+    ? true
+    : profileRes
+      ? emailVerifiedFromResponse(profileRes)
+      : profileFailed
+        ? false
+        : null;
 
-  // Same shape for the authenticator step: the profile's copy of
-  // `two_factor_status` / `two_factor_verified` is authoritative, the stored
-  // value covers the gap before it answers. Only "pending" blocks — an account
-  // without 2FA switched on ("off") walks straight through, and an unknown
-  // state waits for the profile rather than locking anyone out of their own
-  // dashboard.
-  const twoFaFromServer = profileRes ? twoFaStateFromResponse(profileRes) : null;
-  const twoFa = twoFaFromServer ?? (isClient ? readTwoFaState() : null);
+  /*
+   * Same rule for the authenticator step. Only "pending" blocks — an account
+   * with no authenticator attached ("off") walks straight through.
+   */
+  const twoFa = profileRes ? twoFaStateFromResponse(profileRes) : null;
 
   useEffect(() => {
     if (!isClient) return;
     if (!authed) {
-      router.replace("/login");
+      router.replace(routes.login);
       return;
     }
     if (verified === false) {
-      startEmailOtpFlow();
-      router.replace("/verify-otp");
+      startEmailOtpFlow("login", undefined, role);
+      router.replace(routes.verifyOtp);
       return;
     }
-    if (verified === true && twoFa === "pending") router.replace("/verify-2fa");
-  }, [isClient, authed, verified, twoFa, router]);
+    if (verified === true && twoFa === "pending") router.replace(routes.verify2fa);
+  }, [isClient, authed, verified, twoFa, router, role, routes]);
 
-  // Keep the local flags honest — a hand-edited "1" gets overwritten the moment
-  // the profile disagrees, and a legacy session gets its flags backfilled.
-  useEffect(() => {
-    if (fromServer !== null) setEmailVerified(fromServer);
-  }, [fromServer]);
-
-  useEffect(() => {
-    if (twoFaFromServer) setTwoFaState(twoFaFromServer);
-  }, [twoFaFromServer]);
-
-  // Server + first client paint render the same spinner (no hydration mismatch);
-  // once mounted, show the app only to a verified, authenticated user who owes
-  // no authenticator code.
-  if (!isClient || !authed || verified !== true || twoFa === "pending") return <Spinner />;
+  // Server + first client paint render the same spinner (no hydration
+  // mismatch). Past that, the app shows only once the profile has come back and
+  // says this session is verified and owes no authenticator code.
+  if (!isClient || !authed || profileLoading || verified !== true || twoFa === "pending") {
+    return <Spinner />;
+  }
   return <>{children}</>;
 }

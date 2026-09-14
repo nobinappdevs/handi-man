@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ShieldCheck } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
-import { useVerifyGoogle2fa } from "@/hooks/useAuth";
-import { clearAuthState } from "@/lib/authState";
+import { useVerifyGoogle2fa, authRoutes } from "@/hooks/useAuth";
+import { clearAuthState, type AuthRole } from "@/lib/authState";
 import { Button } from "@/components/ui/Button";
 import { AuthShell } from "@/components/auth/AuthShell";
 import { OtpInput } from "@/components/auth/OtpInput";
@@ -24,10 +24,11 @@ import { OTP_LENGTH } from "@/components/auth/authData";
  * merely navigating to /login would have `GuestGuard` read "logged in" and
  * bounce the user straight back here.
  */
-export function TwoFactorForm() {
+export function TwoFactorForm({ role = "user" }: { role?: AuthRole }) {
   const { t } = useLang();
   const router = useRouter();
-  const verify = useVerifyGoogle2fa();
+  const verify = useVerifyGoogle2fa(role);
+  const routes = authRoutes(role);
   const [code, setCode] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -37,8 +38,8 @@ export function TwoFactorForm() {
   };
 
   const handleSignOut = () => {
-    clearAuthState();
-    router.replace("/login");
+    clearAuthState(role);
+    router.replace(routes.login);
   };
 
   return (

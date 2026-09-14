@@ -60,12 +60,18 @@
     "loginSubtitle": "Sign in to manage your bookings and jobs.",
     "loginButton": "Sign in",
     "loggingIn": "Signing in…",
+    "recaptchaError": "Please confirm you are not a robot.",
     "noAccount": "New here?",
+    "vendorLoginSubtitle": "Sign in to manage your services, jobs and payouts.",
+    "vendorNoAccount": "Not a vendor yet?",
     "registerTitle": "Create your account",
     "registerSubtitle": "Book a trusted pro in minutes.",
     "registerButton": "Create account",
     "registering": "Creating account…",
+    "registrationDisabled": "New registrations are closed at the moment.",
     "haveAccount": "Already have an account?",
+    "vendorRegisterTitle": "Become a vendor",
+    "vendorRegisterSubtitle": "List your services and start taking bookings.",
     "agreePrefix": "I agree to the",
     "terms": "Terms of Service",
     "and": "and",
@@ -1422,6 +1428,11 @@
           "body": "Emergency plumbing stays hidden from search until you re-enable it."
         }
       }
+    },
+    "logout": {
+      "confirmTitle": "Sign out?",
+      "confirmBody": "You will need to sign in again to reach your dashboard.",
+      "pending": "Signing out…"
     }
   },
   "notFound": {

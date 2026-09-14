@@ -141,18 +141,22 @@ export function ServiceDialog({
 
   /* An object URL, not a data URL: it is a pointer, so a 2MB image costs
      nothing to preview. It must be revoked or the blob leaks for the life of
-     the document. */
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+     the document.
+
+     Derived, not state. Holding it in `useState` meant writing that state from
+     inside an effect, which the React Compiler lint rightly rejects — it costs
+     a second render on every file pick. The URL is a pure function of the file,
+     so it is computed here and the effect does the one thing an effect is for:
+     cleaning up when the file changes or the dialog closes. */
+  const previewUrl = useMemo(
+    () => (thumbnail instanceof File ? URL.createObjectURL(thumbnail) : null),
+    [thumbnail],
+  );
 
   useEffect(() => {
-    if (!(thumbnail instanceof File)) {
-      setPreviewUrl(null);
-      return;
-    }
-    const url = URL.createObjectURL(thumbnail);
-    setPreviewUrl(url);
-    return () => URL.revokeObjectURL(url);
-  }, [thumbnail]);
+    if (!previewUrl) return;
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [previewUrl]);
 
   const detailsLength = (details ?? "").length;
 

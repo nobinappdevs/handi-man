@@ -60,12 +60,18 @@
     "loginSubtitle": "سجّل الدخول لإدارة حجوزاتك ومهامك.",
     "loginButton": "تسجيل الدخول",
     "loggingIn": "جارٍ تسجيل الدخول…",
+    "recaptchaError": "يرجى تأكيد أنك لست روبوتًا.",
     "noAccount": "جديد هنا؟",
+    "vendorLoginSubtitle": "سجّل الدخول لإدارة خدماتك وأعمالك ومدفوعاتك.",
+    "vendorNoAccount": "لست مزوّد خدمة بعد؟",
     "registerTitle": "أنشئ حسابك",
     "registerSubtitle": "احجز مع محترف موثوق خلال دقائق.",
     "registerButton": "إنشاء حساب",
     "registering": "جارٍ إنشاء الحساب…",
+    "registrationDisabled": "التسجيلات الجديدة مغلقة في الوقت الحالي.",
     "haveAccount": "لديك حساب بالفعل؟",
+    "vendorRegisterTitle": "كن مزوّد خدمة",
+    "vendorRegisterSubtitle": "اعرض خدماتك وابدأ في استقبال الحجوزات.",
     "agreePrefix": "أوافق على",
     "terms": "شروط الخدمة",
     "and": "و",
@@ -1422,6 +1428,11 @@
           "body": "ستبقى خدمة السباكة الطارئة مخفية من البحث حتى تعيد تشغيلها."
         }
       }
+    },
+    "logout": {
+      "confirmTitle": "تسجيل الخروج؟",
+      "confirmBody": "ستحتاج إلى تسجيل الدخول مرة أخرى للوصول إلى لوحة التحكم.",
+      "pending": "جارٍ تسجيل الخروج…"
     }
   },
   "notFound": {
