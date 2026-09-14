@@ -31,7 +31,7 @@ export function SocialSignIn() {
             type="button"
             onClick={() => toast(t("auth.social.unavailable"))}
             aria-label={t("auth.social." + provider.key)}
-            className="flex h-11 cursor-pointer items-center justify-center rounded-xl border border-border bg-card text-heading transition-colors hover:border-primary/50 hover:bg-surface"
+            className="flex h-11 cursor-pointer items-center justify-center border border-border bg-card text-heading transition-colors hover:border-primary/50 hover:bg-surface"
           >
             {provider.mark}
           </button>

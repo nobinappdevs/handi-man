@@ -32,7 +32,7 @@ const WEDGE =
   "wide:rtl:[clip-path:polygon(0_0,81%_0,100%_100%,0_100%)]";
 
 /**
- * Hero motion, in two layers — and the split between them is the whole point.
+ * Hero motion, in three layers — and the split between them is the whole point.
  *
  * **The entrance is CSS** (`enter-*` / `enter-group`, defined at the foot of
  * `globals.css`). It is the one section above the fold, so it must not wait for
@@ -49,6 +49,14 @@ const WEDGE =
  * the page is already at scroll 0 and the hero must start exactly as designed.
  * `heroParallax` anchors both drifts at `top top` so progress is genuinely 0 on
  * the first frame.
+ *
+ * **The ambient loops are CSS keyframes** — the `hero-*` classes in
+ * `globals.css`. They are decorative only (the wedge's bloom and sweep, the
+ * line-work drifting, a halo and dashed rings behind the figure), they never
+ * touch the opacity of an LCP candidate, and one `prefers-reduced-motion`
+ * block there switches all of them off. Where a shape's resting transform
+ * comes from a class, the keyframe restates it — a running animation replaces
+ * the class's transform outright.
  */
 function heroParallax(root: HTMLElement) {
   const drift = (selector: string, y: number, opacity = 1) => {
@@ -108,13 +116,28 @@ export function Hero() {
             wrapper — a transform on the clipped element would drag the
             `clip-path` with it and break the diagonal. */}
         <div className="absolute inset-0 rtl:-scale-x-100">
-        <div className="absolute -top-[14%] -right-[6%] h-[clamp(300px,34vw,520px)] w-[clamp(300px,34vw,520px)] rounded-full border border-white/[0.18]" />
-        <div className="absolute -top-[4%] right-[2%] h-[clamp(210px,24vw,380px)] w-[clamp(210px,24vw,380px)] rounded-full border border-white/[0.12]" />
-        <div className="absolute right-[6%] bottom-[12%] h-[clamp(120px,13vw,190px)] w-[clamp(120px,13vw,190px)] rotate-[22deg] rounded-3xl border border-white/[0.16]" />
-        <div className="absolute bottom-[16%] left-[14%] h-[clamp(140px,16vw,230px)] w-[clamp(140px,16vw,230px)] opacity-50 bg-[radial-gradient(rgba(255,255,255,0.55)_1.4px,transparent_1.4px)] bg-[length:16px_16px]" />
-        <div className="absolute inset-y-0 right-[22%] w-px skew-x-[-13deg] bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.22)_45%,rgba(255,255,255,0)_100%)]" />
-        <div className="absolute inset-y-0 right-[34%] w-px skew-x-[-13deg] bg-[linear-gradient(180deg,rgba(255,255,255,0)_10%,rgba(255,255,255,0.12)_60%,rgba(255,255,255,0)_100%)]" />
+        {/* Bloom drifting under the line-work. One big blurred layer moved by
+            transform: composited, so it costs nothing per frame. */}
+        <div className="hero-aurora absolute -inset-x-[25%] -inset-y-[50%] bg-[radial-gradient(42%_42%_at_32%_34%,rgba(255,255,255,0.20),transparent_68%),radial-gradient(38%_38%_at_72%_66%,rgba(var(--primary-on-dark),0.26),transparent_70%)]" />
+
+        <div className="hero-ring absolute -top-[14%] -right-[6%] h-[clamp(300px,34vw,520px)] w-[clamp(300px,34vw,520px)] rounded-full border border-white/[0.18]" />
+        <div className="hero-ring-alt absolute -top-[4%] right-[2%] h-[clamp(210px,24vw,380px)] w-[clamp(210px,24vw,380px)] rounded-full border border-white/[0.12]" />
+        <div className="hero-tilt absolute right-[6%] bottom-[12%] h-[clamp(120px,13vw,190px)] w-[clamp(120px,13vw,190px)] rotate-[22deg] rounded-3xl border border-white/[0.16]" />
+        <div className="hero-dots absolute bottom-[16%] left-[14%] h-[clamp(140px,16vw,230px)] w-[clamp(140px,16vw,230px)] opacity-50 bg-[radial-gradient(rgba(255,255,255,0.55)_1.4px,transparent_1.4px)] bg-[length:16px_16px]" />
+        {/* The rails stay put; a short bright segment runs down each of them.
+            The spark is a child, so the rail keeps its own skew — the child's
+            transform is its own and the two never collide. */}
+        <div className="absolute inset-y-0 right-[22%] w-px skew-x-[-13deg] bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.22)_45%,rgba(255,255,255,0)_100%)]">
+          <span className="hero-spark absolute inset-x-0 top-0 h-[22%] bg-[linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,0.85),rgba(255,255,255,0))]" />
+        </div>
+        <div className="absolute inset-y-0 right-[34%] w-px skew-x-[-13deg] bg-[linear-gradient(180deg,rgba(255,255,255,0)_10%,rgba(255,255,255,0.12)_60%,rgba(255,255,255,0)_100%)]">
+          <span className="hero-spark hero-spark-late absolute inset-x-0 top-0 h-[22%] bg-[linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,0.6),rgba(255,255,255,0))]" />
+        </div>
         <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_78%_8%,rgba(255,255,255,0.16),rgba(255,255,255,0)_62%)]" />
+
+        {/* Specular sweep, last so it passes OVER the line-work. Its skew
+            lives in the keyframe, not in a class — see globals.css. */}
+        <div className="hero-sweep absolute -inset-y-[25%] -left-[42%] w-[34%] bg-[linear-gradient(90deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.17)_50%,rgba(255,255,255,0)_100%)] blur-[3px]" />
         </div>
       </div>
 
@@ -132,7 +155,12 @@ export function Hero() {
           <h1 className="enter-rise text-[clamp(34px,5.4vw,78px)] leading-[0.98] text-balance [--enter-delay:0.1s]">
             {t("home.hero.titleLine1")}
             <br />
-            <span className="text-brand">{t("home.hero.titleLine2")}</span>
+            {/* The shine fills these glyphs from a gradient instead of from
+                `color`, but `text-brand` stays on for the theme fallback and
+                for anything that cannot paint `background-clip: text`. Read
+                the LCP note on `.hero-shine` in globals.css before touching
+                the gradient's stops. */}
+            <span className="hero-shine text-brand">{t("home.hero.titleLine2")}</span>
           </h1>
 
           <p className="enter-up max-w-[440px] text-[clamp(14.5px,1.2vw,15.5px)] leading-[1.6] text-body [--enter-delay:0.24s]">
@@ -140,7 +168,15 @@ export function Hero() {
           </p>
 
           <div className="enter-group mt-2.5 flex flex-wrap items-center gap-[clamp(14px,1.8vw,22px)] [--enter-delay:0.32s]">
-            <CtaLink href="/services">{t("home.hero.discover")}</CtaLink>
+            <CtaLink href="/services" className="relative overflow-hidden">
+              {t("home.hero.discover")}
+              {/* Absolute, so it is out of the link's flex flow and cannot
+                  shift the label. */}
+              <span
+                aria-hidden
+                className="hero-cta-sheen pointer-events-none absolute inset-y-0 -left-[35%] w-[35%] bg-[linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.38),rgba(255,255,255,0))]"
+              />
+            </CtaLink>
           </div>
 
           <div className="enter-group mt-4 flex flex-wrap items-center gap-x-[clamp(14px,1.6vw,26px)] gap-y-3 [--enter-delay:0.42s]">
@@ -181,6 +217,32 @@ export function Hero() {
           data-hero="worker"
           className="relative flex h-full min-w-0 items-end justify-center"
         >
+          {/*
+            Ambient backdrop for the figure, both layers BEFORE it in the DOM —
+            positioned siblings with `z-index: auto` paint in document order, so
+            the figure stays on top without a z-index anywhere.
+
+            Placed with insets, never a centring `-translate-x-1/2`: that class
+            transform would be replaced by the keyframe's own.
+          */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-[6%] top-[14%] -bottom-[2%]"
+          >
+            <div className="hero-halo h-full w-full bg-[radial-gradient(58%_52%_at_50%_62%,rgba(255,255,255,0.32)_0%,rgba(255,255,255,0.10)_45%,rgba(255,255,255,0)_72%)]" />
+          </div>
+
+          {/* `aspect-square` on a percentage width, so the rings are only shown
+              from the design's 700px switch point up — below it the column is
+              short and a circle this wide would ride up over the copy. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-[19%] bottom-[8%] hidden aspect-square mid:block"
+          >
+            <div className="hero-orbit h-full w-full rounded-full border border-dashed border-white/[0.18]" />
+            <div className="hero-orbit-alt absolute inset-[13%] rounded-full border border-white/[0.10]" />
+          </div>
+
           {/* `enter-rise`, not `enter-up`: on a narrow viewport the figure is
               the largest paint instead of the headline, so it carries the same
               no-fade rule. */}

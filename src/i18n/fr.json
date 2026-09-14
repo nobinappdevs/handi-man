@@ -107,31 +107,23 @@
     "aside": {
       "label": "Pourquoi Handiman",
       "back": "Retour à l'accueil",
-      "badge": "Professionnels locaux vérifiés",
-      "claim": "Une aide de confiance pour chaque tâche autour de votre maison.",
-      "prev": "Témoignage précédent",
-      "next": "Témoignage suivant",
-      "showQuote": "Afficher le témoignage",
-      "stats": {
-        "pros": "Professionnels vérifiés",
-        "rating": "Note moyenne",
-        "support": "Assistance"
+      "week": {
+        "sun": "Dim",
+        "mon": "Lun",
+        "tue": "Mar",
+        "wed": "Mer",
+        "thu": "Jeu",
+        "fri": "Ven",
+        "sat": "Sam"
       },
-      "quotes": {
-        "fourJobs": {
-          "quote": "J'ai décroché quatre missions payées en une semaine après mon inscription, soit plus que ce que je n'ai jamais obtenu avec une agence. Je le recommande à tout le monde autour de moi depuis !",
-          "name": "Owen Baxter",
-          "role": "Électricien | Austin, États-Unis"
+      "cards": {
+        "upcoming": {
+          "title": "Réparation de robinet",
+          "time": "09:30 – 10:00"
         },
-        "vettedPros": {
-          "quote": "Chaque professionnel qui s'est présenté était vérifié, ponctuel et soigné. Réserver un plombier n'est plus la corvée que je redoutais en tant que propriétaire.",
-          "name": "Priya Nandan",
-          "role": "Propriétaire | Portland, États-Unis"
-        },
-        "sameDayFix": {
-          "quote": "La climatisation de notre bureau est tombée en panne un vendredi après-midi et quelqu'un était sur place en moins d'une heure. C'est cette couverture le jour même qui nous a fidélisés.",
-          "name": "Marcus Cole",
-          "role": "Responsable de bureau | Denver, États-Unis"
+        "today": {
+          "title": "Entretien climatisation",
+          "time": "12:00 – 13:00"
         }
       }
     }

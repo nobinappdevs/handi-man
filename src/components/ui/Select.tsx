@@ -213,7 +213,7 @@ export function Select({
 
   const triggerCls = chip
     ? "flex h-full shrink-0 cursor-pointer items-center gap-2 border-l border-border px-3.5 text-sm font-bold text-primary transition  disabled:cursor-not-allowed disabled:opacity-50"
-    : "flex h-11 w-full cursor-pointer items-center gap-2.5 rounded-xl border border-border bg-surface px-3.5 text-left text-sm font-medium text-heading transition hover:border-primary/50 focus:border-primary focus:outline-none focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50";
+    : "flex h-11 w-full cursor-pointer items-center gap-2.5 border border-border bg-surface px-3.5 text-left text-sm font-medium text-heading transition hover:border-primary/50 focus:border-primary focus:outline-none focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50";
 
   const activeId = open && filtered[activeIndex] ? `${baseId}-opt-${activeIndex}` : undefined;
 
@@ -248,7 +248,7 @@ export function Select({
             ...(chip ? { right: rect.right, width: menuWidth } : { left: rect.left, width: rect.width }),
             ...(rect.dropUp ? { bottom: window.innerHeight - rect.top + menuGap } : { top: rect.bottom + menuGap }),
           }}
-          className="z-100 flex max-h-80 max-w-[calc(100vw-1.5rem)] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xl shadow-black/10 dark:shadow-black/40"
+          className="z-100 flex max-h-80 max-w-[calc(100vw-1.5rem)] flex-col overflow-hidden border border-border bg-card shadow-xl shadow-black/10 dark:shadow-black/40"
         >
           {showSearch && (
             <div className="border-b border-border p-2">
@@ -260,7 +260,7 @@ export function Select({
                   onChange={(e) => { setQuery(e.target.value); setActiveIndex(0); }}
                   onKeyDown={onKeyDown}
                   placeholder={searchPh}
-                  className="h-9 w-full rounded-lg border border-border bg-surface pl-8 pr-3 text-sm text-heading outline-none transition placeholder:text-muted focus:border-primary"
+                  className="h-9 w-full border border-border bg-surface pl-8 pr-3 text-sm text-heading outline-none transition placeholder:text-muted focus:border-primary"
                   aria-controls={`${baseId}-listbox`}
                   aria-activedescendant={activeId}
                 />
@@ -284,7 +284,7 @@ export function Select({
                       onClick={() => choose(o.value)}
                       onMouseEnter={() => setActiveIndex(i)}
                       tabIndex={-1}
-                      className={`flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-left transition disabled:cursor-not-allowed disabled:opacity-50 ${
+                      className={`flex w-full cursor-pointer items-center gap-3 px-3 py-2.5 text-left transition disabled:cursor-not-allowed disabled:opacity-50 ${
                         active ? "bg-primary/10" : highlighted ? "bg-black/5 dark:bg-white/5" : ""
                       }`}
                     >
@@ -297,7 +297,7 @@ export function Select({
                       <span className="min-w-0 flex-1">
                         <span className="flex items-center gap-1.5">
                           <span className={`truncate text-sm font-semibold ${active ? "text-primary" : "text-heading"}`}>{o.label}</span>
-                          {o.badge && <span className="rounded bg-black/5 px-1.5 text-[10px] font-semibold uppercase text-muted dark:bg-white/10">{o.badge}</span>}
+                          {o.badge && <span className="bg-black/5 px-1.5 text-[10px] font-semibold uppercase text-muted dark:bg-white/10">{o.badge}</span>}
                         </span>
                         {o.sub && <span className="block truncate text-xs text-muted">{o.sub}</span>}
                       </span>

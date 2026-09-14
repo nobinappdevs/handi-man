@@ -62,7 +62,7 @@ export function TwoFactorForm() {
       <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-5">
         <OtpInput value={code} onChange={setCode} disabled={verify.isPending} autoFocus />
 
-        <p className="rounded-xl border border-border bg-surface px-4 py-3 text-center text-[13px] leading-[1.5] text-muted">
+        <p className="border border-border bg-surface px-4 py-3 text-center text-[13px] leading-[1.5] text-muted">
           {t("auth.twoFaHelp")}
         </p>
 

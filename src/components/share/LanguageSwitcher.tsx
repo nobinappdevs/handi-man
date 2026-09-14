@@ -82,7 +82,7 @@ export function LanguageSwitcher({ className = "", variant = "pill" }) {
       {open && (
         <ul
           role="listbox"
-          className="absolute end-0 z-50 mt-2 w-48 overflow-hidden rounded-xl border border-border bg-bg py-1 shadow-card"
+          className="absolute end-0 z-50 mt-2 w-48 overflow-hidden border border-border bg-bg py-1 shadow-card"
         >
           {languages.map((l) => {
             const active = l.code === current.code;

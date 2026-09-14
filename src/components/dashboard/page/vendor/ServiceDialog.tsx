@@ -379,7 +379,7 @@ export function ServiceDialog({
                     </span>
 
                     <span className="flex flex-wrap items-center gap-2">
-                      <label className="flex h-9 cursor-pointer items-center gap-2 rounded-xl border border-border bg-card px-3.5 text-[13px] font-semibold text-heading transition-colors hover:border-primary hover:text-brand">
+                      <label className="flex h-9 cursor-pointer items-center gap-2 border border-border bg-card px-3.5 text-[13px] font-semibold text-heading transition-colors hover:border-primary hover:text-brand">
                         <ImagePlus size={14} strokeWidth={2.2} aria-hidden />
                         {t(
                           field.value instanceof File

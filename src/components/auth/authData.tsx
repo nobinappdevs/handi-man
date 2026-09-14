@@ -1,11 +1,15 @@
-// Content for the auth screens: the provider marks, the brand panel's rotating
-// quotes, and its proof row.
+// Content for the auth screens: the provider marks, and the faces and dates
+// on the brand panel's floating cards.
 //
 // The provider marks are drawn verbatim: lucide has no brand glyphs, and the
 // Google G is only recognisable in its four official colours, so it is the one
 // mark here that does not take `currentColor`.
 
 import type { ReactNode } from "react";
+import avatar1 from "@public/assets/testimonials/avatar-1.webp";
+import avatar2 from "@public/assets/testimonials/avatar-2.webp";
+import avatar3 from "@public/assets/testimonials/avatar-3.webp";
+import avatar4 from "@public/assets/testimonials/avatar-4.webp";
 
 export type SocialProvider = { key: string; mark: ReactNode };
 
@@ -51,26 +55,34 @@ export const SOCIAL_PROVIDERS: SocialProvider[] = [
   },
 ];
 
-/** Quotes the brand panel rotates through. Copy lives in `auth.aside.quotes.*`. */
-export const AUTH_QUOTE_KEYS = ["fourJobs", "vettedPros", "sameDayFix"];
-
-/** How long a quote holds before the panel advances itself, in ms. */
-export const AUTH_QUOTE_INTERVAL = 7000;
-
-/**
- * The panel's proof row. The three numbers are the homepage hero's own
- * (`HERO_STATS` + `home.hero.verifiedCount`) on purpose — someone arriving at
- * the sign-in screen from the marketing page must not be told a different story
- * about the same product.
- */
-export const AUTH_PANEL_STATS = [
-  { value: "2,400+", labelKey: "auth.aside.stats.pros" },
-  { value: "4.9", labelKey: "auth.aside.stats.rating" },
-  { value: "24/7", labelKey: "auth.aside.stats.support" },
-];
-
 /** How many digits every code screen asks for (email OTP and authenticator). */
 export const OTP_LENGTH = 6;
 
 /** Seconds the OTP screen makes the user wait before offering a fresh code. */
 export const RESEND_SECONDS = 60;
+
+/**
+ * The faces on the panel's floating cards — the testimonial avatars, reused.
+ * 96px square originals, drawn at 44px and 26px, so even the large ones are
+ * above 2x; `images.unoptimized` ships them byte for byte, and at 1-2KB each
+ * the whole set costs less than one hero crop.
+ */
+export const AUTH_CARD_FACES = [avatar1, avatar2, avatar3, avatar4];
+
+/**
+ * The week strip across the middle of the panel.
+ *
+ * Fixed dates, never computed from the clock: this site is a static export,
+ * so a generated week would be burned into the HTML at build time and then
+ * disagree with the client on the first render after midnight — a hydration
+ * mismatch, for decoration.
+ */
+export const AUTH_WEEK = [
+  { key: "auth.aside.week.sun", date: 22 },
+  { key: "auth.aside.week.mon", date: 23 },
+  { key: "auth.aside.week.tue", date: 24 },
+  { key: "auth.aside.week.wed", date: 25 },
+  { key: "auth.aside.week.thu", date: 26 },
+  { key: "auth.aside.week.fri", date: 27 },
+  { key: "auth.aside.week.sat", date: 28 },
+];

@@ -11,7 +11,7 @@ import { Container } from "@/components/share/Container";
 export function PagePlaceholder({ title, note }: { title: string; note?: string }) {
   return (
     <Container className="py-24">
-      <div className="mx-auto flex max-w-md flex-col items-center gap-4 rounded-2xl border border-border bg-card p-10 text-center">
+      <div className="mx-auto flex max-w-md flex-col items-center gap-4 border border-border bg-card p-10 text-center">
         <span className="grid h-12 w-12 place-items-center rounded-full bg-primary/10 text-primary">
           <Construction size={22} strokeWidth={2} aria-hidden />
         </span>

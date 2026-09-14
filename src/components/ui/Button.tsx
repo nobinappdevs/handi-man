@@ -21,8 +21,15 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   rightIcon?: ReactNode;
 }
 
+/*
+ * Square, with no radius anywhere in the kit. The design's own primary call to
+ * action (`CtaLink`) is a hard-edged plum block and every full-height surface
+ * on the site is cut by a diagonal rather than a corner radius — a `rounded-xl`
+ * button was the one place the product spoke a different language. The only
+ * survivor is the radio in `Input`, which has to be a circle.
+ */
 const BASE =
-  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl font-semibold whitespace-nowrap " +
+  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 font-semibold whitespace-nowrap " +
   "transition active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 " +
   "disabled:pointer-events-none disabled:opacity-50";
 

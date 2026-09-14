@@ -106,7 +106,7 @@ export function OtpInput({
               onFocus={(e) => e.target.select()}
               aria-label={t("auth.digitLabel") + " " + (i + 1)}
               className={cn(
-                "h-[clamp(48px,5vw,56px)] min-w-0 flex-1 rounded-xl border text-center text-[clamp(18px,2vw,22px)] font-bold outline-none transition focus:ring-2",
+                "h-[clamp(48px,5vw,56px)] min-w-0 flex-1 border text-center text-[clamp(18px,2vw,22px)] font-bold outline-none transition focus:ring-2",
                 digit
                   ? "border-brand bg-brand/8 text-brand"
                   : "border-border bg-surface text-heading",

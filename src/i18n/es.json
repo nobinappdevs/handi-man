@@ -107,31 +107,23 @@
     "aside": {
       "label": "Por qué Handiman",
       "back": "Volver al inicio",
-      "badge": "Profesionales locales verificados",
-      "claim": "Ayuda de confianza para cada tarea en tu hogar.",
-      "prev": "Cita anterior",
-      "next": "Siguiente cita",
-      "showQuote": "Mostrar cita",
-      "stats": {
-        "pros": "Profesionales verificados",
-        "rating": "Valoración media",
-        "support": "Soporte"
+      "week": {
+        "sun": "Dom",
+        "mon": "Lun",
+        "tue": "Mar",
+        "wed": "Mié",
+        "thu": "Jue",
+        "fri": "Vie",
+        "sat": "Sáb"
       },
-      "quotes": {
-        "fourJobs": {
-          "quote": "Conseguí cuatro trabajos pagados en la primera semana de registrarme, más de lo que nunca obtuve de una agencia. ¡Desde entonces se lo recomiendo a todos mis conocidos!",
-          "name": "Owen Baxter",
-          "role": "Electricista | Austin, Estados Unidos"
+      "cards": {
+        "upcoming": {
+          "title": "Reparación de grifo",
+          "time": "09:30 – 10:00"
         },
-        "vettedPros": {
-          "quote": "Todos los profesionales que vinieron estaban verificados, fueron puntuales y dejaron todo limpio. Reservar un fontanero dejó de ser lo que más temía de tener una casa.",
-          "name": "Priya Nandan",
-          "role": "Propietaria | Portland, Estados Unidos"
-        },
-        "sameDayFix": {
-          "quote": "El aire acondicionado de nuestra oficina se estropeó un viernes por la tarde y alguien llegó en menos de una hora. La cobertura el mismo día es la razón por la que seguimos con ellos.",
-          "name": "Marcus Cole",
-          "role": "Gerente de oficina | Denver, Estados Unidos"
+        "today": {
+          "title": "Revisión del aire",
+          "time": "12:00 – 13:00"
         }
       }
     }

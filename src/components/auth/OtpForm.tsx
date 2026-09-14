@@ -153,7 +153,7 @@ export function OtpForm() {
       <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-5">
         <OtpInput value={code} onChange={setCode} disabled={isVerifying} autoFocus />
 
-        <div className="rounded-xl border border-border bg-surface px-4 py-3 text-center">
+        <div className="border border-border bg-surface px-4 py-3 text-center">
           {seconds > 0 ? (
             <span className="inline text-[13.5px] text-muted">
               {t("auth.resendIn")}{" "}

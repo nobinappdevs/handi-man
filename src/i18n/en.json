@@ -107,31 +107,23 @@
     "aside": {
       "label": "Why Handiman",
       "back": "Back to home",
-      "badge": "Vetted local pros",
-      "claim": "Trusted help for every job around your home.",
-      "prev": "Previous quote",
-      "next": "Next quote",
-      "showQuote": "Show quote",
-      "stats": {
-        "pros": "Verified pros",
-        "rating": "Average rating",
-        "support": "Support"
+      "week": {
+        "sun": "Sun",
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat"
       },
-      "quotes": {
-        "fourJobs": {
-          "quote": "I had four paid jobs within a week of signing up, which is more than I ever got from an agency. I've been recommending it to everyone I know since!",
-          "name": "Owen Baxter",
-          "role": "Electrician | Austin, United States"
+      "cards": {
+        "upcoming": {
+          "title": "Kitchen tap repair",
+          "time": "09:30am – 10:00am"
         },
-        "vettedPros": {
-          "quote": "Every pro who turned up was vetted, on time and tidy. Booking a plumber stopped being the thing I dread about owning a house.",
-          "name": "Priya Nandan",
-          "role": "Homeowner | Portland, United States"
-        },
-        "sameDayFix": {
-          "quote": "Our office AC died on a Friday afternoon and someone was on site within the hour. Same-day cover is the reason we stayed.",
-          "name": "Marcus Cole",
-          "role": "Office manager | Denver, United States"
+        "today": {
+          "title": "AC service visit",
+          "time": "12:00pm – 01:00pm"
         }
       }
     }

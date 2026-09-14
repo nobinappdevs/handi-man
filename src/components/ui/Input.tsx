@@ -88,7 +88,9 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
             aria-describedby={describedBy}
             className={cn(
               "mt-0.5 h-4.5 w-4.5 shrink-0 cursor-pointer accent-primary",
-              type === "radio" ? "rounded-full" : "rounded",
+              // A radio is a circle by convention everywhere; a checkbox is
+              // square, like every other control in this kit.
+              type === "radio" && "rounded-full",
               className,
             )}
             {...props}
@@ -121,7 +123,7 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
 
       <div
         className={cn(
-          "flex overflow-hidden rounded-xl border bg-surface transition focus-within:ring-2",
+          "flex overflow-hidden border bg-surface transition focus-within:ring-2",
           isArea ? "items-stretch" : "items-center",
           invalid
             ? "border-danger focus-within:border-danger focus-within:ring-danger/20"
