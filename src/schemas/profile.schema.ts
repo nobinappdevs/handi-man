@@ -5,8 +5,11 @@ import { z } from "zod";
  * which is why they are snake_case here and camelCase nowhere.
  */
 export const updateProfileRequestSchema = z.object({
-  firstname: z.string().min(1, "First name is required"),
-  lastname: z.string().min(1, "Last name is required"),
+  /* `first_name` / `last_name`, exactly as POST {base}/profile/update declares
+     them. They were `firstname` / `lastname` — the reference project's
+     spelling — which this API rejects as a missing required field. */
+  first_name: z.string().min(1, "First name is required"),
+  last_name: z.string().min(1, "Last name is required"),
   country: z.string().optional(),
   phone_code: z.string().optional(),
   phone: z.string().optional(),

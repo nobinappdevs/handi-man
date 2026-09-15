@@ -820,8 +820,9 @@
     "searchPlaceholder": "Search jobs, parcels, vendors",
     "notifications": "Notifications",
     "user": {
-      "name": "Rakib H.",
-      "role": "Customer"
+      "fallbackName": "Your account",
+      "roleCustomer": "Customer",
+      "roleVendor": "Vendor"
     },
     "support": {
       "label": "Support 24/7",
@@ -838,6 +839,9 @@
       "profile": "Profile",
       "settings": "Account settings",
       "twoFa": "2FA security",
+      "vendorProfile": "Profile",
+      "vendorKyc": "KYC Verification",
+      "vendorTwoFa": "2FA security",
       "logout": "Logout",
       "kyc": "Identity verification"
     },
@@ -1066,6 +1070,18 @@
         "sub": "Add an authenticator app so a stolen password is not enough.",
         "table": ""
       },
+      "vendorKyc": {
+        "nav": "Verification",
+        "heading": "Identity verification",
+        "sub": "Submit your ID once and your payouts and listings are unlocked.",
+        "table": ""
+      },
+      "vendorProfile": {
+        "nav": "Profile",
+        "heading": "Vendor profile",
+        "sub": "Your business details, contact and password.",
+        "table": ""
+      },
       "moneyOut": {
         "nav": "Money Out",
         "heading": "Money out",
@@ -1101,7 +1117,9 @@
       "updatePassword": "Update password",
       "dangerZone": "Danger zone",
       "dangerDesc": "Deleting your account removes your bookings, saved vendors and payment methods. This cannot be undone.",
-      "deleteMyAccount": "Delete my account"
+      "deleteMyAccount": "Delete my account",
+      "phoneCode": "Country code",
+      "phonePlaceholder": "Phone number"
     },
     "security": {
       "twoFactorTitle": "Two-factor authentication",
@@ -1147,7 +1165,9 @@
       "accepts": "Accepts",
       "fieldRequired": "This field is required",
       "noFields": "No verification is required for this account right now.",
-      "submit": "Submit for verification"
+      "submit": "Submit for verification",
+      "fileType": "Allowed formats:",
+      "fileTooLarge": "File must be smaller than"
     },
     "address": {
       "savedTitle": "Saved addresses",

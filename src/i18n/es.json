@@ -820,8 +820,9 @@
     "searchPlaceholder": "Buscar trabajos, paquetes, proveedores",
     "notifications": "Notificaciones",
     "user": {
-      "name": "Rakib H.",
-      "role": "Cliente"
+      "fallbackName": "Tu cuenta",
+      "roleCustomer": "Cliente",
+      "roleVendor": "Proveedor"
     },
     "support": {
       "label": "Soporte 24/7",
@@ -838,6 +839,9 @@
       "profile": "Perfil",
       "settings": "Configuración de la cuenta",
       "twoFa": "Seguridad 2FA",
+      "vendorProfile": "Perfil",
+      "vendorKyc": "Verificación KYC",
+      "vendorTwoFa": "Seguridad 2FA",
       "logout": "Cerrar sesión",
       "kyc": "Verificación de identidad"
     },
@@ -1066,6 +1070,18 @@
         "sub": "Añade una app de autenticación para que una contraseña robada no sea suficiente.",
         "table": ""
       },
+      "vendorKyc": {
+        "nav": "Verificación",
+        "heading": "Verificación de identidad",
+        "sub": "Envía tu identificación una vez y se desbloquean tus pagos y anuncios.",
+        "table": ""
+      },
+      "vendorProfile": {
+        "nav": "Perfil",
+        "heading": "Perfil del proveedor",
+        "sub": "Los datos de tu negocio, contacto y contraseña.",
+        "table": ""
+      },
       "moneyOut": {
         "nav": "Retiro de dinero",
         "heading": "Retiro de dinero",
@@ -1101,7 +1117,9 @@
       "updatePassword": "Actualizar contraseña",
       "dangerZone": "Zona de riesgo",
       "dangerDesc": "Eliminar tu cuenta elimina tus reservas, proveedores guardados y métodos de pago. Esto no se puede deshacer.",
-      "deleteMyAccount": "Eliminar mi cuenta"
+      "deleteMyAccount": "Eliminar mi cuenta",
+      "phoneCode": "Código de país",
+      "phonePlaceholder": "Número de teléfono"
     },
     "security": {
       "twoFactorTitle": "Autenticación en dos pasos",
@@ -1147,7 +1165,9 @@
       "accepts": "Acepta",
       "fieldRequired": "Este campo es obligatorio",
       "noFields": "Esta cuenta no necesita verificación por ahora.",
-      "submit": "Enviar para verificación"
+      "submit": "Enviar para verificación",
+      "fileType": "Formatos permitidos:",
+      "fileTooLarge": "El archivo debe pesar menos de"
     },
     "address": {
       "savedTitle": "Direcciones guardadas",

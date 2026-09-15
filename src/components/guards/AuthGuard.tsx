@@ -70,6 +70,7 @@ export function AuthGuard({
     data: profileRes,
     isError: profileFailed,
     isLoading: profileLoading,
+    isFetching: profileFetching,
   } = useProfile(authed, role);
 
   /*
@@ -92,24 +93,44 @@ export function AuthGuard({
    */
   const twoFa = profileRes ? twoFaStateFromResponse(profileRes) : null;
 
+  /*
+   * Is this answer final?
+   *
+   * `isLoading` alone is not enough: React Query reports it `false` the moment
+   * any cached data exists, including a stale copy it is in the middle of
+   * re-reading. Acting on that produced a redirect loop — verify the email,
+   * land on the dashboard, get bounced back to the OTP screen by a cached
+   * `email_verified: 0`, and only reach the dashboard by retyping the URL once
+   * the refetch had quietly landed.
+   *
+   * So a DENIAL is provisional until the request in flight settles. Being let
+   * IN on a stale-but-previously-valid copy is harmless — the refetch will
+   * redirect a moment later if the server disagrees — but being thrown OUT on
+   * one is a loop, so only that direction waits.
+   */
+  const settled = !profileLoading && !profileFetching;
+
   useEffect(() => {
     if (!isClient) return;
     if (!authed) {
       router.replace(routes.login);
       return;
     }
+    if (!settled) return;
     if (verified === false) {
       startEmailOtpFlow("login", undefined, role);
       router.replace(routes.verifyOtp);
       return;
     }
     if (verified === true && twoFa === "pending") router.replace(routes.verify2fa);
-  }, [isClient, authed, verified, twoFa, router, role, routes]);
+  }, [isClient, authed, settled, verified, twoFa, router, role, routes]);
 
   // Server + first client paint render the same spinner (no hydration
   // mismatch). Past that, the app shows only once the profile has come back and
-  // says this session is verified and owes no authenticator code.
-  if (!isClient || !authed || profileLoading || verified !== true || twoFa === "pending") {
+  // says this session is verified and owes no authenticator code — `verified`
+  // is `null` until it answers, so the loading case falls out of this test
+  // without a separate check.
+  if (!isClient || !authed || verified !== true || twoFa === "pending") {
     return <Spinner />;
   }
   return <>{children}</>;

@@ -60,6 +60,8 @@ export type PageKey =
   | "vendorServices"
   | "vendorSchedule"
   | "vendorTwoFa"
+  | "vendorKyc"
+  | "vendorProfile"
   | "moneyOut"
   | "moneyOutLogs";
 
@@ -82,6 +84,8 @@ export const DASH_ROUTES: Record<PageKey, string> = {
   vendorServices: "/vendors/dashboard/services",
   vendorSchedule: "/vendors/dashboard/schedule",
   vendorTwoFa: "/vendors/dashboard/2fa",
+  vendorKyc: "/vendors/dashboard/kyc",
+  vendorProfile: "/vendors/dashboard/profile",
   moneyOut: "/vendors/dashboard/money-out",
   moneyOutLogs: "/vendors/dashboard/money-out/logs",
 };
@@ -146,9 +150,11 @@ const CUSTOMER_MENU: MenuItem[] = [
   { key: "logout" as PageKey, icon: LogOut, danger: true },
 ];
 
-/* A vendor has no customer profile, address or KYC page to reach from here —
-   only its own security screen and the way out. */
+/* The vendor's own account screens — its profile, verification and security —
+   and the way out. Never the customer ones: different accounts, different API. */
 const VENDOR_MENU: MenuItem[] = [
+  { key: "vendorProfile", icon: User },
+  { key: "vendorKyc", icon: IdCard },
   { key: "vendorTwoFa", icon: ShieldCheck },
   { key: "logout" as PageKey, icon: LogOut, danger: true },
 ];
@@ -511,7 +517,9 @@ const VENDOR_NAV: NavGroup[] = [
       { key: "vendorOrders", icon: ClipboardList, count: 3 },
       { key: "vendorServices", icon: Briefcase },
       { key: "vendorSchedule", icon: CalendarClock },
-      { key: "vendorTwoFa", icon: ShieldCheck },
+      /* Verification and 2FA are account settings, not places a vendor works.
+         They live in the profile dropdown beside Profile and Logout; the rail
+         stays the jobs-to-be-done list. */
     ],
   },
   {

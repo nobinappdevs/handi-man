@@ -49,6 +49,13 @@ type SelectProps = {
   leftIcon?: ReactNode;
   /** `field` = full-width bordered box; `chip` = compact borderless selector. */
   variant?: "field" | "chip";
+  /**
+   * Which end of its host box a `chip` sits at - it draws its divider on
+   * the opposite side. "end" (the default) is a trailing selector, e.g. a
+   * currency after an amount; "start" is a leading one, e.g. a dial code
+   * before a phone number.
+   */
+  chipSide?: "start" | "end";
   /** Menu width for the `chip` variant (px). */
   menuWidth?: number;
   /** Gap between the trigger and the menu, in px (default 8). */
@@ -77,6 +84,7 @@ export function Select({
   disabled,
   leftIcon,
   variant = "field",
+  chipSide = "end",
   menuWidth = 288,
   menuGap = 8,
   className = "",
@@ -211,8 +219,13 @@ export function Select({
       sel?.imageFallback ?? sel?.icon ?? null
     ));
 
+  /* Logical border-s/border-e, not border-l: the divider has to fall
+     between the chip and the field beside it, and in Arabic that is the
+     other physical side. */
   const triggerCls = chip
-    ? "flex h-full shrink-0 cursor-pointer items-center gap-2 border-l border-border px-3.5 text-sm font-bold text-primary transition  disabled:cursor-not-allowed disabled:opacity-50"
+    ? `flex h-full shrink-0 cursor-pointer items-center gap-2 ${
+        chipSide === "start" ? "border-e" : "border-s"
+      } border-border px-3 text-sm font-semibold whitespace-nowrap text-heading transition disabled:cursor-not-allowed disabled:opacity-50`
     : "flex h-11 w-full cursor-pointer items-center gap-2.5 border border-border bg-surface px-3.5 text-left text-sm font-medium text-heading transition hover:border-primary/50 focus:border-primary focus:outline-none focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50";
 
   const activeId = open && filtered[activeIndex] ? `${baseId}-opt-${activeIndex}` : undefined;

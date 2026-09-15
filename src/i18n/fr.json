@@ -820,8 +820,9 @@
     "searchPlaceholder": "Rechercher missions, colis, prestataires",
     "notifications": "Notifications",
     "user": {
-      "name": "Rakib H.",
-      "role": "Client"
+      "fallbackName": "Votre compte",
+      "roleCustomer": "Client",
+      "roleVendor": "Prestataire"
     },
     "support": {
       "label": "Assistance 24 h/24 et 7 j/7",
@@ -838,6 +839,9 @@
       "profile": "Profil",
       "settings": "Paramètres du compte",
       "twoFa": "Sécurité 2FA",
+      "vendorProfile": "Profil",
+      "vendorKyc": "Vérification KYC",
+      "vendorTwoFa": "Sécurité 2FA",
       "logout": "Déconnexion",
       "kyc": "Vérification d'identité"
     },
@@ -1066,6 +1070,18 @@
         "sub": "Ajoutez une application d'authentification pour qu'un mot de passe volé ne suffise pas.",
         "table": ""
       },
+      "vendorKyc": {
+        "nav": "Vérification",
+        "heading": "Vérification d'identité",
+        "sub": "Envoyez votre pièce d'identité une fois et vos paiements et annonces sont débloqués.",
+        "table": ""
+      },
+      "vendorProfile": {
+        "nav": "Profil",
+        "heading": "Profil du prestataire",
+        "sub": "Les informations de votre activité, contact et mot de passe.",
+        "table": ""
+      },
       "moneyOut": {
         "nav": "Retraits",
         "heading": "Retraits",
@@ -1101,7 +1117,9 @@
       "updatePassword": "Mettre à jour le mot de passe",
       "dangerZone": "Zone sensible",
       "dangerDesc": "La suppression de votre compte efface vos réservations, vos prestataires enregistrés et vos moyens de paiement. Cette action est irréversible.",
-      "deleteMyAccount": "Supprimer mon compte"
+      "deleteMyAccount": "Supprimer mon compte",
+      "phoneCode": "Indicatif pays",
+      "phonePlaceholder": "Numéro de téléphone"
     },
     "security": {
       "twoFactorTitle": "Authentification à deux facteurs",
@@ -1147,7 +1165,9 @@
       "accepts": "Formats acceptés",
       "fieldRequired": "Ce champ est obligatoire",
       "noFields": "Aucune vérification n'est requise pour ce compte pour le moment.",
-      "submit": "Soumettre pour vérification"
+      "submit": "Soumettre pour vérification",
+      "fileType": "Formats autorisés :",
+      "fileTooLarge": "Le fichier doit faire moins de"
     },
     "address": {
       "savedTitle": "Adresses enregistrées",

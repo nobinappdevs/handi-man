@@ -139,6 +139,18 @@ export function getApiSuccessMessage(res: unknown, fallback: string): string {
 }
 
 /**
+ * `message.warning[0]`, when present.
+ *
+ * Some endpoints refuse with HTTP **200** and a `warning` envelope rather than
+ * an error status — KYC submit answers "You are already KYC Verified User" that
+ * way. That lands in `onSuccess`, where treating it as success would toast a
+ * cheerful "submitted for review" over a refusal. Callers check this first.
+ */
+export function getApiWarningMessage(res: unknown): string | undefined {
+  return firstMessage((res as { message?: { warning?: unknown } })?.message?.warning);
+}
+
+/**
  * Tokens land in different places per endpoint: `data.user.token` (forgot →
  * send-otp), `data.token` (login, register, forgot → resend), or bare `token`.
  */
@@ -168,6 +180,7 @@ function owesTwoFa(res: unknown): boolean {
 /* ─────────────────────────── Login ─────────────────────────── */
 export function useLogin(role: AuthRole = "user") {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const routes = authRoutes(role);
   // Site-wide policy from /basic/settings. It can only REMOVE the OTP step,
   // never add one — see `useRegister` below for why.
@@ -176,6 +189,8 @@ export function useLogin(role: AuthRole = "user") {
     mutationFn: (payload) => authServiceFor(role).login(payload),
     onSuccess: (res, variables) => {
       setToken(res.data.token, role);
+      // Whoever was signed in before, their profile is not this session's.
+      queryClient.removeQueries({ queryKey: profileQueryKey(role) });
       const verified = isEmailVerified(res) || !emailVerificationRequired;
       const owesTwoFaCode = owesTwoFa(res);
       toast.success(getApiSuccessMessage(res, "Login successful"));
@@ -203,6 +218,7 @@ export function useLogin(role: AuthRole = "user") {
 /* ─────────────────────────── Register ─────────────────────────── */
 export function useRegister(role: AuthRole = "user") {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const routes = authRoutes(role);
   /*
    * `email_verification` from /basic/settings.
@@ -220,6 +236,7 @@ export function useRegister(role: AuthRole = "user") {
       // A signup token (if returned) lets the email-verify call authenticate.
       const token = extractToken(res);
       if (token) setToken(token, role);
+      queryClient.removeQueries({ queryKey: profileQueryKey(role) });
       const verified = isEmailVerified(res) || !emailVerificationRequired;
 
       // Nothing to verify — either the account came back already verified, or
@@ -317,9 +334,20 @@ export function useEmailVerify(role: AuthRole = "user") {
     mutationFn: (otp) => authServiceFor(role).verifyEmailOtp(otp),
     onSuccess: (res) => {
       clearOtpFlow(role);
-      // The guard re-reads the profile on arrival — drop the cached copy or it
-      // still says `email_verified: 0` and bounces us straight back here.
-      queryClient.invalidateQueries({ queryKey: profileQueryKey(role) });
+      /*
+       * REMOVE, not invalidate.
+       *
+       * The cached profile says `email_verified: 0` — `AuthGuard` fetched it on
+       * the way in and then sent us here. `invalidateQueries` only marks it
+       * stale, and with no component observing it nothing refetches; the guard
+       * on the next screen then reads that stale 0 and bounces straight back to
+       * this page. (React Query reports `isLoading: false` whenever cached data
+       * exists, so the guard's loading gate does not cover it either.)
+       *
+       * Dropping the entry leaves nothing to act on, so the guard shows its
+       * spinner and decides on the answer that comes back.
+       */
+      queryClient.removeQueries({ queryKey: profileQueryKey(role) });
       toast.success(getApiSuccessMessage(res, "Email verified"));
       // An account with 2FA switched on still owes its authenticator code.
       if (owesTwoFa(res)) {
@@ -348,9 +376,10 @@ export function useVerifyGoogle2fa(role: AuthRole = "user") {
   return useMutation<unknown, unknown, string>({
     mutationFn: (otp) => authServiceFor(role).verifyGoogle2fa(otp),
     onSuccess: (res) => {
-      // AuthGuard reads `two_factor_verified` from the profile; the cached copy
-      // still says 0, so it has to go or the dashboard bounces straight back.
-      queryClient.invalidateQueries({ queryKey: profileQueryKey(role) });
+      // Same trap as the email step: the cached profile still says
+      // `two_factor_verified: 0`, and a stale hit would bounce the dashboard
+      // straight back here. Remove it so the guard waits for a fresh read.
+      queryClient.removeQueries({ queryKey: profileQueryKey(role) });
       toast.success(getApiSuccessMessage(res, "Two-factor verified"));
       router.replace(routes.dashboard);
     },
