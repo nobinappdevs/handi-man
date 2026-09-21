@@ -61,6 +61,15 @@ export function AuthGuard({
   const isClient = useIsClient();
   const routes = authRoutes(role);
   const authed = isClient ? Boolean(readToken(role)) : false;
+
+  /*
+   * Only one panel may be live at a time. Someone signed in as the OTHER
+   * role who lands here - by typing the URL, or an old bookmark - is not a
+   * signed-out visitor: sending them to a login page they would then have to
+   * abandon is worse than simply taking them to the dashboard they do have.
+   */
+  const otherRole: AuthRole = role === "vendor" ? "user" : "vendor";
+  const otherSession = isClient && !authed && Boolean(readToken(otherRole));
   // Site-wide switch: with email verification off the profile still reports
   // `email_verified: 0`, and without this every account would be sent to the
   // OTP screen forever.
@@ -113,7 +122,7 @@ export function AuthGuard({
   useEffect(() => {
     if (!isClient) return;
     if (!authed) {
-      router.replace(routes.login);
+      router.replace(otherSession ? authRoutes(otherRole).dashboard : routes.login);
       return;
     }
     if (!settled) return;
@@ -123,7 +132,7 @@ export function AuthGuard({
       return;
     }
     if (verified === true && twoFa === "pending") router.replace(routes.verify2fa);
-  }, [isClient, authed, settled, verified, twoFa, router, role, routes]);
+  }, [isClient, authed, otherSession, otherRole, settled, verified, twoFa, router, role, routes]);
 
   // Server + first client paint render the same spinner (no hydration
   // mismatch). Past that, the app shows only once the profile has come back and

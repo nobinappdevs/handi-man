@@ -1,81 +1,64 @@
-import type { AddressRequest, SavedAddress } from "@/schemas/address.schema";
-import { addressRequestSchema } from "@/schemas/address.schema";
+import { privateApi } from "@/lib/axios";
+import { addressRequestSchema, type AddressRequest, type SavedAddress } from "@/schemas/address.schema";
 
 /**
- * Saved addresses.
+ * Saved addresses — `…/api/v1/user/address*`.
  *
- * There is no endpoint for these yet, so this stands in with `localStorage`.
- * It is shaped exactly like the axios services beside it — every method is
- * async and returns the same envelope a Laravel route would — so when
- * `/user/address` lands, THIS FILE is the only one that changes: the hooks,
- * the query keys and the screen all stay as they are.
+ * Customer-only: the collection documents no vendor equivalent, and a vendor
+ * has a business address on its profile rather than a delivery book. No role
+ * factory for that reason.
  *
- * Unlike `homeData`, a constant array will not do: these are user-owned records
- * that have to survive a reload.
+ * This file used to be a `localStorage` stand-in, written so that only IT would
+ * change when the endpoint landed. That held — the hooks and the screen kept
+ * their shape; what moved is the field names, which are the API's now.
+ *
+ * ── How the API identifies a row ──
+ * Every write takes the id as `target`, in the BODY, never in the path. The
+ * list is the only GET.
+ *
+ * `target` must be a STRING. The list returns `id` as a number, and JSON
+ * serialises it as one, which the backend rejects with "The target must be a
+ * string." - the collection sends these as form-data, where everything is
+ * text, so the rule is invisible there. `String(id)` at every call site.
  */
-export const ADDRESS_STORAGE_KEY = "handiman_addresses";
-
-function read(): SavedAddress[] {
-  try {
-    const raw = window.localStorage.getItem(ADDRESS_STORAGE_KEY);
-    const parsed: unknown = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? (parsed as SavedAddress[]) : [];
-  } catch {
-    /* Unparseable or unavailable storage reads as empty rather than throwing —
-       a corrupt entry should not take the whole screen down. */
-    return [];
-  }
-}
-
-function write(rows: SavedAddress[]) {
-  try {
-    window.localStorage.setItem(ADDRESS_STORAGE_KEY, JSON.stringify(rows));
-  } catch {
-    // Private mode / quota. The in-memory result still stands for this session.
-  }
-}
-
-/** Exactly one row may be default; setting one clears the rest. */
-function normaliseDefault(rows: SavedAddress[], preferId?: string): SavedAddress[] {
-  const winner = preferId ?? rows.find((r) => r.isDefault)?.id ?? rows[0]?.id;
-  return rows.map((r) => ({ ...r, isDefault: r.id === winner }));
-}
-
-const newId = () =>
-  typeof crypto !== "undefined" && crypto.randomUUID
-    ? crypto.randomUUID()
-    : `addr_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-
 export const addressService = {
+  /** GET /user/address — every saved address, full records. */
   async list(): Promise<{ data: SavedAddress[] }> {
-    return { data: read() };
+    const res = await privateApi.get("/user/address");
+    return res.data;
   },
 
-  async create(payload: AddressRequest): Promise<{ data: SavedAddress }> {
+  /**
+   * GET /user/address/edit?target=<id> — one row.
+   *
+   * Wired for completeness; the screen does not call it. `list` already returns
+   * every field the edit form needs, so opening the dialog costs no request,
+   * and this endpoint has no documented response shape to rely on. Reach for it
+   * only if the backend starts returning something here the list does not.
+   */
+  async edit(id: number | string) {
+    const res = await privateApi.get("/user/address/edit", { params: { target: id } });
+    return res.data;
+  },
+
+  /** POST /user/address/store */
+  async create(payload: AddressRequest) {
     const body = addressRequestSchema.parse(payload);
-    const row: SavedAddress = { ...body, id: newId() };
-    const rows = [...read(), row];
-    /* First address saved is the default whatever the form said — an account
-       with addresses and no default has nothing to pre-fill a booking with. */
-    write(normaliseDefault(rows, body.isDefault || rows.length === 1 ? row.id : undefined));
-    return { data: row };
+    const res = await privateApi.post("/user/address/store", body);
+    return res.data;
   },
 
-  async update(id: string, payload: AddressRequest): Promise<{ data: SavedAddress }> {
+  /** POST /user/address/update — the id rides along as `target`. */
+  async update(id: number | string, payload: AddressRequest) {
     const body = addressRequestSchema.parse(payload);
-    const rows = read().map((r) => (r.id === id ? { ...r, ...body, id } : r));
-    write(normaliseDefault(rows, body.isDefault ? id : undefined));
-    return { data: { ...body, id } };
+    const res = await privateApi.post("/user/address/update", { ...body, target: String(id) });
+    return res.data;
   },
 
-  async remove(id: string): Promise<{ data: { id: string } }> {
-    write(normaliseDefault(read().filter((r) => r.id !== id)));
-    return { data: { id } };
-  },
-
-  async setDefault(id: string): Promise<{ data: { id: string } }> {
-    write(normaliseDefault(read(), id));
-    return { data: { id } };
+  /** POST /user/address/delete */
+  async remove(id: number | string) {
+    const res = await privateApi.post("/user/address/delete", { target: String(id) });
+    return res.data;
   },
 };
 

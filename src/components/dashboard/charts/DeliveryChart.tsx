@@ -1,144 +1,156 @@
 "use client";
 
-import { useLang } from "@/hooks/useLang";
-import { Panel, PanelTitle } from "@/components/dashboard/Panel";
 import {
-  STATUS_KEYS, deliverySeriesFor, type OverviewRange, type StatusKey,
-} from "@/components/dashboard/dashboardData";
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { useLang } from "@/hooks/useLang";
+import { useIsClient } from "@/hooks/useIsClient";
+import { Panel, PanelTitle } from "@/components/dashboard/Panel";
+import { ChartTooltip } from "@/components/dashboard/charts/ChartTooltip";
+import type { OverviewRange } from "@/components/dashboard/dashboardData";
+import { yAxisWidth, yAxisTicks, type SegmentSeries } from "@/lib/dashboardSeries";
 
 /**
- * Grouped bars, one cluster per bucket — the design's own delivery treatment.
- * Unlike the activity and pickup charts this one draws all four states, since
- * a parcel spends real time in each and a reader comparing two buckets wants
- * to see which state grew, not just the total.
+ * Deliveries — a stacked bar chart, one column per bucket.
+ *
+ * Stacked rather than grouped, and that is the whole argument for this panel:
+ * a parcel is in exactly ONE state at a time, so the five values in a bucket
+ * sum to that day's deliveries. A stack says that; five bars side by side make
+ * the reader add them up. The column height is the day's total and each band is
+ * its share, which is the question this chart gets asked.
+ *
+ * All five states are drawn — including `hold`, which the grouped version this
+ * replaced left out entirely.
  */
-const X0 = 38;
-const X1 = 508;
-const Y_TOP = 12;
-const Y_BOT = 164;
-const VIEW_W = 520;
-const VIEW_H = 210;
 
-const round = (v: number) => Math.round(v * 10) / 10;
+const STATES = ["completed", "processing", "pending", "canceled", "hold"] as const;
+type State = (typeof STATES)[number];
 
-/* Same fixed-string requirement as `PickupChart` — Tailwind reads these
-   literally, so no key may be built from a template at runtime. The ramp runs
-   darkest to lightest in the order the states matter, not in the order they
-   happen: completed is the figure the panel is about. */
-const FILL: Record<StatusKey, string> = {
-  completed: "fill-ramp-1",
-  processing: "fill-ramp-2",
-  pending: "fill-ramp-3",
-  canceled: "fill-ramp-4",
-};
-const SWATCH: Record<StatusKey, string> = {
-  completed: "bg-ramp-1",
-  processing: "bg-ramp-2",
-  pending: "bg-ramp-3",
-  canceled: "bg-ramp-4",
+/* The four ramp steps carry the states a delivery moves THROUGH; `hold` takes
+   the muted tone because it sits outside that progression. Same rule as the
+   pickup panel, so a colour means one thing across the dashboard. */
+const FILL: Record<State, string> = {
+  completed: "var(--color-ramp-1)",
+  processing: "var(--color-ramp-2)",
+  pending: "var(--color-ramp-3)",
+  canceled: "var(--color-ramp-4)",
+  hold: "var(--color-muted)",
 };
 
-export function DeliveryChart({ range }: { range: OverviewRange }) {
+const AXIS = "var(--color-muted)";
+const GRID = "var(--color-border)";
+
+const sum = (values: number[] = []) => values.reduce((a, b) => a + b, 0);
+
+export function DeliveryChart({
+  range,
+  series,
+}: {
+  range: OverviewRange;
+  series: SegmentSeries;
+}) {
   const { t } = useLang();
+  const isClient = useIsClient();
 
-  const data = deliverySeriesFor(range);
-  const { labels } = data;
+  const { labels, completed, processing, pending, canceled, hold } = series;
+  const byState = { completed, processing, pending, canceled, hold };
   const n = labels.length;
+  const empty = n === 0 || STATES.every((key) => sum(byState[key]) === 0);
 
-  const totals = Object.fromEntries(
-    STATUS_KEYS.map((key) => [key, data[key].reduce((a, b) => a + b, 0)]),
-  ) as Record<StatusKey, number>;
-  const empty = STATUS_KEYS.every((key) => totals[key] === 0);
-  const max = Math.max(2, ...STATUS_KEYS.flatMap((key) => data[key]));
+  const data = labels.map((label, i) => ({
+    label,
+    completed: completed[i] ?? 0,
+    processing: processing[i] ?? 0,
+    pending: pending[i] ?? 0,
+    canceled: canceled[i] ?? 0,
+    hold: hold[i] ?? 0,
+  }));
 
-  const slot = (X1 - X0) / n;
-  const py = (v: number) => Y_BOT - (v / max) * (Y_BOT - Y_TOP);
-
-  /* Divided by all four states, not by the ones this bucket happens to have,
-     so a bar is the same width in every cluster on the panel. */
-  const barW = Math.max(3, Math.min(9, (slot * 0.62) / STATUS_KEYS.length));
-  const gap = 2;
-
-  const bars = labels.flatMap((label, i) => {
-    const cx = X0 + slot * (i + 0.5);
-    const drawn = STATUS_KEYS.filter((key) => data[key][i] > 0);
-    const groupW = drawn.length * barW + Math.max(0, drawn.length - 1) * gap;
-    return drawn.map((key, k) => ({
-      id: `${i}-${key}`,
-      x: round(cx - groupW / 2 + k * (barW + gap)),
-      y: round(py(data[key][i])),
-      h: round(Y_BOT - py(data[key][i])),
-      fill: FILL[key],
-      title: `${label} · ${t(`dashboard.charts.status.${key}`)} ${data[key][i]}`,
-    }));
-  });
-
-  const tickStep = Math.max(1, Math.ceil(max / 4));
-  const ticks: { v: number; topPct: number }[] = [];
-  for (let v = 0; v <= max; v += tickStep) ticks.push({ v, topPct: round((py(v) / VIEW_H) * 100) });
+  const tickGap = range === "week" ? 0 : Math.max(0, Math.ceil(n / 8) - 1);
+  /* Bars are stacked, so the tallest column is the per-bucket SUM, not the
+     biggest single state. Sizing off one state would clip the stack. */
+  const axis = yAxisTicks(
+    Math.max(0, ...data.map((d) => d.completed + d.processing + d.pending + d.canceled + d.hold)),
+  );
 
   return (
     <Panel className="flex flex-col gap-5 p-[clamp(18px,2vw,24px)]">
       <div className="flex flex-wrap items-baseline justify-between gap-2.5">
         <PanelTitle>{t("dashboard.charts.delivery.title")}</PanelTitle>
-        <span className="text-[13px] text-muted">{t(`dashboard.charts.span.${range}`)}</span>
+        {empty && (
+          <span className="text-[13px] text-muted">{t("dashboard.charts.delivery.empty")}</span>
+        )}
       </div>
 
-      <div className="relative">
-        <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} className="block w-full">
-          {ticks.map((tick) => (
-            <line
-              key={tick.v}
-              x1={34}
-              x2={512}
-              y1={py(tick.v)}
-              y2={py(tick.v)}
-              className="stroke-border/60"
-              strokeWidth={1}
-            />
-          ))}
-          {bars.map((bar) => (
-            <rect key={bar.id} x={bar.x} y={bar.y} width={round(barW)} height={bar.h} className={bar.fill}>
-              <title>{bar.title}</title>
-            </rect>
-          ))}
-        </svg>
+      <div className="h-[clamp(260px,26vw,320px)] w-full">
+        {isClient && (
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: 0 }}>
+              <CartesianGrid stroke={GRID} strokeDasharray="3 5" vertical={false} />
+              <XAxis
+                dataKey="label"
+                stroke={AXIS}
+                tickLine={false}
+                axisLine={false}
+                minTickGap={tickGap}
+                tick={{ fontSize: 11 }}
+              />
+              <YAxis
+                stroke={AXIS}
+                tickLine={false}
+                axisLine={false}
+                tick={{ fontSize: 11 }}
+                /* Explicit whole-number ticks whose STEP scales with the data,
+                   and a width sized to the widest of them. Left to itself
+                   Recharts prints 0.2 of a job on a quiet month, and clips a
+                   three-digit tick on a busy one. */
+                ticks={axis.ticks}
+                domain={[0, axis.top]}
+                width={yAxisWidth(axis.top)}
+                allowDecimals={false}
+              />
+              <Tooltip cursor={{ fill: "var(--color-sunk)" }} content={<ChartTooltip />} />
+              <Legend iconType="square" wrapperStyle={{ fontSize: 12.5, paddingTop: 6 }} />
 
-        <div className="pointer-events-none absolute inset-0">
-          {ticks.map((tick) => (
-            <span
-              key={tick.v}
-              style={{ left: "5%", top: `${tick.topPct}%` }}
-              className="absolute -translate-x-full -translate-y-1/2 text-[10.5px] text-muted"
-            >
-              {tick.v}
-            </span>
-          ))}
-          {labels.map((label, i) => (
-            <span
-              key={i}
-              style={{ left: `${round(((X0 + slot * (i + 0.5)) / VIEW_W) * 100)}%`, top: "93%" }}
-              className="absolute -translate-x-1/2 -translate-y-1/2 text-[10.5px] whitespace-nowrap text-muted"
-            >
-              {label}
-            </span>
-          ))}
-        </div>
-
-        {empty && (
-          <span className="absolute top-[44%] left-1/2 -translate-x-1/2 -translate-y-1/2 border border-border bg-sunk px-3.5 py-1.75 text-[13px] whitespace-nowrap text-muted">
-            {t("dashboard.charts.delivery.empty")}
-          </span>
+              {/* One `stackId` puts every state in the same column. Only the top
+                  band is rounded, so the stack reads as one bar and not five. */}
+              {STATES.map((key, i) => (
+                <Bar
+                  key={key}
+                  dataKey={key}
+                  name={t(`dashboard.charts.status.${key}`)}
+                  stackId="delivery"
+                  fill={FILL[key]}
+                  maxBarSize={22}
+                  radius={i === STATES.length - 1 ? [3, 3, 0, 0] : undefined}
+                />
+              ))}
+            </BarChart>
+          </ResponsiveContainer>
         )}
       </div>
 
       <div className="flex flex-wrap items-center gap-x-3.5 gap-y-2 border-t border-border pt-3.5">
-        {STATUS_KEYS.map((key) => (
-          <span key={key} className="flex items-center gap-1.75 text-[12.5px] whitespace-nowrap text-body">
+        {STATES.map((key) => (
+          <span
+            key={key}
+            className="flex items-center gap-1.75 text-[12.5px] whitespace-nowrap text-body"
+          >
             {/* The lightest ramp step needs an edge to sit on a white card. */}
-            <span aria-hidden className={`h-2.5 w-2.5 flex-none border border-heading/20 ${SWATCH[key]}`} />
+            <span
+              aria-hidden
+              className="h-2.5 w-2.5 flex-none border border-heading/20"
+              style={{ background: FILL[key] }}
+            />
             {t(`dashboard.charts.status.${key}`)}
-            <span className="font-medium text-heading tabular-nums">{totals[key]}</span>
+            <span className="font-medium text-heading tabular-nums">{sum(byState[key])}</span>
           </span>
         ))}
       </div>

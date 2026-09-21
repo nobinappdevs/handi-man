@@ -47,15 +47,25 @@ export function GuestGuard({
   const router = useRouter();
   const isClient = useIsClient();
   const routes = authRoutes(role);
+  /*
+   * Gates on EITHER session, not just this role's.
+   *
+   * One panel at a time: a signed-in vendor opening /login is not a guest,
+   * and letting them sign in as a customer would leave two live sessions.
+   * They are sent to the dashboard they have; signing out is how you switch.
+   */
+  const otherRole: AuthRole = role === "vendor" ? "user" : "vendor";
   const authed = isClient ? Boolean(readToken(role)) : false;
+  const otherSession = isClient ? Boolean(readToken(otherRole)) : false;
+  const signedIn = authed || otherSession;
 
   useEffect(() => {
-    if (!isClient || !authed) return;
-    router.replace(routes.dashboard);
-  }, [isClient, authed, router, routes]);
+    if (!isClient || !signedIn) return;
+    router.replace(authed ? routes.dashboard : authRoutes(otherRole).dashboard);
+  }, [isClient, signedIn, authed, otherRole, router, routes]);
 
   // Server + first client paint render the same spinner (no hydration mismatch);
   // once mounted, show the page only for guests.
-  if (!isClient || authed) return <Spinner />;
+  if (!isClient || signedIn) return <Spinner />;
   return <>{children}</>;
 }

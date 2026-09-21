@@ -7,6 +7,7 @@ import { useShell } from "@/components/context/ShellContext";
 import { CircleIconButton } from "@/components/share/CircleIconButton";
 import { Logo } from "@/components/share/Logo";
 import { ACCOUNT_LINKS, SITE_LINKS, VENDOR_LINK } from "@/components/share/navLinks";
+import { useActiveSession } from "@/hooks/useActiveSession";
 
 /**
  * Left slide-over navigation, shown below the header's nav breakpoint — the
@@ -19,6 +20,11 @@ import { ACCOUNT_LINKS, SITE_LINKS, VENDOR_LINK } from "@/components/share/navLi
 export function MobileMenu() {
   const { t, dir } = useLang();
   const { drawer, closeDrawer } = useShell();
+  const { role: session } = useActiveSession();
+  const dashboard =
+    session === "vendor"
+      ? { href: "/vendors/dashboard", key: "nav.vendorDashboard" }
+      : { href: "/dashboard", key: "nav.dashboard" };
   const open = drawer === "menu";
   /* Docked at `start` — the left edge in ltr, the right edge in rtl. The
      closed state has to slide off THAT same edge, so the sign flips with it;
@@ -56,30 +62,42 @@ export function MobileMenu() {
           </Link>
         ))}
 
-        {/* The vendor path has a button of its own in the header, so it needs
-            a home here too — otherwise it is reachable on desktop only. */}
-        <Link
-          href={VENDOR_LINK.href}
-          onClick={closeDrawer}
-          className="border-b border-drawer-line px-[22px] py-3.5 text-base leading-none font-semibold text-brand"
-        >
-          {t(VENDOR_LINK.key)}
-        </Link>
-
-        {/* Account, set apart the way the header sets it apart — a gap and a
-            lighter weight, so the two groups read as two. */}
-        <span className="mt-3 flex flex-col gap-0 pt-3">
-          {ACCOUNT_LINKS.map(({ href, key }) => (
+        {/* Mirrors the header exactly: signed in, the drawer offers the one
+            dashboard for the panel they are in; signed out, the vendor path
+            and the account links. Getting this wrong on mobile only would be
+            the kind of split nobody notices until a vendor reports it. */}
+        {session ? (
+          <Link
+            href={dashboard.href}
+            onClick={closeDrawer}
+            className="border-b border-drawer-line px-[22px] py-3.5 text-base leading-none font-semibold text-brand"
+          >
+            {t(dashboard.key)}
+          </Link>
+        ) : (
+          <>
             <Link
-              key={href}
-              href={href}
+              href={VENDOR_LINK.href}
               onClick={closeDrawer}
-              className="px-[22px] py-3 text-[15px] leading-none font-medium text-drawer-ink/75 hover:text-brand"
+              className="border-b border-drawer-line px-[22px] py-3.5 text-base leading-none font-semibold text-brand"
             >
-              {t(key)}
+              {t(VENDOR_LINK.key)}
             </Link>
-          ))}
-        </span>
+
+            <span className="mt-3 flex flex-col gap-0 pt-3">
+              {ACCOUNT_LINKS.map(({ href, key }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={closeDrawer}
+                  className="px-[22px] py-3 text-[15px] leading-none font-medium text-drawer-ink/75 hover:text-brand"
+                >
+                  {t(key)}
+                </Link>
+              ))}
+            </span>
+          </>
+        )}
       </nav>
 
       <div className="px-[22px] py-[18px]">

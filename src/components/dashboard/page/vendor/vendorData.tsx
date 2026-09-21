@@ -5,10 +5,10 @@
 
 import type { LucideIcon } from "lucide-react";
 import {
-  AirVent, Banknote, CalendarCheck, CheckCircle2, Clock, CreditCard,
+  AirVent, CalendarCheck, CheckCircle2,
   Lightbulb, SprayCan, Star, Wallet, Wrench,
 } from "lucide-react";
-import { rangeSeries, type Kpi, type OverviewRange } from "@/components/dashboard/dashboardData";
+import { type Kpi } from "@/components/dashboard/dashboardData";
 import type { OrderStatus } from "@/components/dashboard/page/history/historyData";
 
 /* ─────────────────────────── Overview ─────────────────────────── */
@@ -20,33 +20,15 @@ export const VENDOR_KPIS: Kpi[] = [
   { key: "rating", value: "4.9", icon: Star, trend: { delta: "311", tone: "brand" } },
 ];
 
-/**
- * Jobs per bucket for the overview chart, one figure per month tick.
+/*
+ * The job series, the rating and the balance were mocked here
+ * (MONTH_JOBS / vendorJobsFor / VENDOR_RATING / VENDOR_BALANCE).
  *
- * A vendor works several jobs a day where a single customer books a handful a
- * month, so this is its own month rather than the customer's — but it goes
- * through the same `rangeSeries` builder, so Today / Week / Month agree
- * with each other exactly the way the customer's do.
+ * They now come from `GET /vendors/dashboard`: the chart from its `chart`
+ * block, the balance from `vendor_wallet` + `currency`. The rating has no
+ * replacement - that payload carries no score and no review count - so the
+ * card it fed shows `active_ticket` instead.
  */
-const MONTH_JOBS = [
-  2, 3, 1, 4, 2, 3, 5, 2, 4, 3, 2, 4, 6, 3, 2, 5, 3, 2, 4, 5, 3, 6, 4, 3, 2, 4, 3, 5, 2, 4, 3,
-];
-
-const VENDOR_JOB_SERIES = rangeSeries(MONTH_JOBS);
-
-export const vendorJobsFor = (range: OverviewRange) => VENDOR_JOB_SERIES[range];
-
-/** The rating card's three numbers: the score, its ceiling, and the count. */
-export const VENDOR_RATING = { score: "4.9", of: 5, reviews: 311 };
-
-/** Money available to withdraw, and what is still held. */
-export const VENDOR_BALANCE = {
-  available: "৳ 42,180.00",
-  pending: "৳ 8,450.00",
-  lifetime: "৳ 92,400.00",
-  minimum: "৳ 500.00",
-};
-
 /* ─────────────────────────── Service orders ───────────────────────────
  * The vendor's side of the same booking the customer sees in History.
  */
@@ -151,30 +133,13 @@ export const VENDOR_SCHEDULE: { dayKey: string; date: string; slots: ScheduleSlo
 
 /* ─────────────────────────── Money out ─────────────────────────── */
 
-export const PAYOUT_METHODS: { key: string; icon: LucideIcon; detail: string }[] = [
-  { key: "bkash", icon: Banknote, detail: "···· 4412" },
-  { key: "bank", icon: CreditCard, detail: "···· 8871" },
-];
 
-export type PayoutLog = {
-  ref: string;
-  requestedOn: string;
-  method: string;
-  amount: string;
-  fee: string;
-  received: string;
-  status: OrderStatus;
-  note: string;
-};
-
-export const PAYOUT_LOGS: PayoutLog[] = [
-  { ref: "MO-77120", requestedOn: "12 Jun 2026", method: "bkash", amount: "৳ 12,000.00", fee: "৳ 120.00", received: "৳ 11,880.00", status: "completed", note: "Settled to bKash ···· 4412." },
-  { ref: "MO-76884", requestedOn: "02 Jun 2026", method: "bank", amount: "৳ 25,000.00", fee: "৳ 250.00", received: "৳ 24,750.00", status: "completed", note: "Settled to bank ···· 8871." },
-  { ref: "MO-76510", requestedOn: "27 May 2026", method: "bkash", amount: "৳ 6,500.00", fee: "৳ 65.00", received: "৳ 6,435.00", status: "processing", note: "Awaiting the payment partner." },
-  { ref: "MO-76331", requestedOn: "18 May 2026", method: "bkash", amount: "৳ 3,000.00", fee: "৳ 30.00", received: "৳ 2,970.00", status: "pending", note: "Queued for the next payout run." },
-];
-
-export const PAYOUT_ICON: Record<string, LucideIcon> = { bkash: Banknote, bank: CreditCard, pending: Clock };
+/*
+ * The payout history used to be mocked here (PayoutLog / PAYOUT_LOGS /
+ * PAYOUT_ICON). It now comes from `transactions` on
+ * `/vendors/money-out/info`, so the fixtures are gone rather than left
+ * sitting beside a real screen inviting someone to wire them back.
+ */
 
 /* ─────────────────────────── Service listing options ───────────────────────────
  * The option lists behind "add a service".

@@ -3,8 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRight, Headphones, Mail, Menu, Phone, ShoppingCart, Users } from "lucide-react";
+import { ArrowRight, Headphones, LayoutDashboard, Mail, Menu, Phone, ShoppingCart, Users } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
+import { useActiveSession } from "@/hooks/useActiveSession";
 import { useShell } from "@/components/context/ShellContext";
 import { Logo } from "@/components/share/Logo";
 import { ThemeToggle } from "@/components/share/ThemeToggle";
@@ -157,6 +158,16 @@ export function Navbar() {
   const phone = t("footer.contacts.phone");
   const email = t("footer.contacts.email");
   const signIn = ACCOUNT_LINKS[ACCOUNT_LINKS.length - 1];
+
+  /* Signed in? Then the header offers ONE thing: the dashboard for the panel
+     they are in. "Join as vendor" and "Sign in" are both recruitment, and
+     showing either to someone already inside is noise - worse for a vendor,
+     who would be invited to join something they have joined. */
+  const { role: session } = useActiveSession();
+  const dashboard =
+      session === "vendor"
+        ? { href: "/vendors/dashboard", key: "nav.vendorDashboard" }
+        : { href: "/dashboard", key: "nav.dashboard" };
   const activeHref = activeHrefFor(
     pathname,
     SITE_LINKS.map((l) => l.href),
@@ -326,31 +337,49 @@ export function Navbar() {
 
             <Divider className={cn("mx-0.5 hidden h-6", NAV_SHOW)} />
 
-            {/* Square, like every CTA on the site. Outlined, because vendor
-                recruitment is the secondary path — "Book a service" is the one
-                this page is actually for. */}
-            <Link
-              href={VENDOR_LINK.href}
-              className={cn(
-                "hidden h-11 items-center gap-2 border border-brand px-[clamp(12px,1.2vw,18px)] font-nav text-[14px] leading-none font-semibold text-brand transition-colors hover:bg-brand/[0.07] hover:text-brand",
-                NAV_SHOW,
-              )}
-            >
-              <Users size={16} strokeWidth={2.2} aria-hidden />
-              {t(VENDOR_LINK.key)}
-            </Link>
+            {session ? (
+              /* One button, and it is the way back in. The label and the
+                 destination both follow the panel they are signed into. */
+              <Link
+                href={dashboard.href}
+                aria-current={pathname === dashboard.href ? "page" : undefined}
+                className={cn(
+                  "hidden h-11 items-center gap-2 border border-brand px-[clamp(12px,1.2vw,18px)] font-nav text-[14px] leading-none font-semibold text-brand transition-colors hover:bg-brand/[0.07] hover:text-brand",
+                  NAV_SHOW,
+                )}
+              >
+                <LayoutDashboard size={16} strokeWidth={2.2} aria-hidden />
+                {t(dashboard.key)}
+              </Link>
+            ) : (
+              <>
+                {/* Square, like every CTA on the site. Outlined, because vendor
+                    recruitment is the secondary path — "Book a service" is the
+                    one this page is actually for. */}
+                <Link
+                  href={VENDOR_LINK.href}
+                  className={cn(
+                    "hidden h-11 items-center gap-2 border border-brand px-[clamp(12px,1.2vw,18px)] font-nav text-[14px] leading-none font-semibold text-brand transition-colors hover:bg-brand/[0.07] hover:text-brand",
+                    NAV_SHOW,
+                  )}
+                >
+                  <Users size={16} strokeWidth={2.2} aria-hidden />
+                  {t(VENDOR_LINK.key)}
+                </Link>
 
-            <Link
-              href={signIn.href}
-              aria-current={pathname === signIn.href ? "page" : undefined}
-              className={cn(
-                "hidden items-center px-1 font-nav text-[14px] leading-none font-medium transition-colors hover:text-brand",
-                pathname === signIn.href ? "text-brand" : "text-heading",
-                NAV_SHOW,
-              )}
-            >
-              {t(signIn.key)}
-            </Link>
+                <Link
+                  href={signIn.href}
+                  aria-current={pathname === signIn.href ? "page" : undefined}
+                  className={cn(
+                    "hidden items-center px-1 font-nav text-[14px] leading-none font-medium transition-colors hover:text-brand",
+                    pathname === signIn.href ? "text-brand" : "text-heading",
+                    NAV_SHOW,
+                  )}
+                >
+                  {t(signIn.key)}
+                </Link>
+              </>
+            )}
 
             <Link
               href="/services"

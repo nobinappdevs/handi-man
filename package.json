@@ -19,6 +19,7 @@
     "react-dom": "19.2.8",
     "react-hook-form": "^7.86.0",
     "react-hot-toast": "^2.6.0",
+    "recharts": "^3.10.1",
     "swiper": "^14.2.0",
     "zod": "^4.4.3"
   },

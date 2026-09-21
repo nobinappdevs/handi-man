@@ -25,6 +25,7 @@ import {
   IdCard,
   Receipt,
   ArrowDownToLine,
+  ArrowUpFromLine,
   ClipboardList,
   Briefcase,
   CalendarClock,
@@ -48,6 +49,7 @@ export type PageKey =
   | "payments"
   | "vendors"
   | "serviceHistory"
+  | "pickupHistory"
   | "deliveryHistory"
   | "address"
   | "twoFa"
@@ -72,6 +74,7 @@ export const DASH_ROUTES: Record<PageKey, string> = {
   payments: "/dashboard/payments",
   vendors: "/dashboard/vendors",
   serviceHistory: "/dashboard/history/service",
+  pickupHistory: "/dashboard/history/pickup",
   deliveryHistory: "/dashboard/history/delivery",
   address: "/dashboard/address",
   twoFa: "/dashboard/2fa",
@@ -127,6 +130,7 @@ const CUSTOMER_NAV: NavGroup[] = [
     key: "history",
     items: [
       { key: "serviceHistory", icon: Receipt },
+      { key: "pickupHistory", icon: ArrowUpFromLine },
       { key: "deliveryHistory", icon: ArrowDownToLine },
     ],
   },
@@ -328,26 +332,15 @@ export type StatusKey = (typeof STATUS_KEYS)[number];
 export const OVERVIEW_RANGES = ["today", "week", "month"] as const;
 export type OverviewRange = (typeof OVERVIEW_RANGES)[number];
 
-/* One entry per hour boundary — 25, not 24, so the axis closes on midnight at
-   both ends the way the design's day chart does. */
-const HOUR_AXIS = Array.from({ length: 25 }, (_, h) =>
-  h === 0 || h === 24 ? "12 AM" : h === 12 ? "12 PM" : `${h % 12} ${h < 12 ? "AM" : "PM"}`,
-);
-
-const WEEK_AXIS = ["29 Aug", "30 Aug", "31 Aug", "01 Sep", "02 Sep", "03 Sep", "04 Sep"];
-
-/* The month axis names its own edges — the first and last ticks are the month
-   boundaries, the 29 between them are days. */
-const MONTH_AXIS = [
-  "Sep '26",
-  ...Array.from({ length: 29 }, (_, i) => `${String(i + 2).padStart(2, "0")} Sep`),
-  "Oct '26",
-];
-
-/** Service requests per bucket, one figure per month-axis tick. */
-const MONTH_REQUESTS = [
-  1, 2, 2, 3, 1, 0, 2, 4, 3, 2, 1, 3, 5, 4, 2, 3, 2, 1, 4, 3, 2, 5, 4, 3, 2, 1, 3, 4, 2, 3, 4,
-];
+/*
+ * The charts' mock data lived here: HOUR_AXIS / WEEK_AXIS / MONTH_AXIS,
+ * MONTH_REQUESTS, rangeSeries, serviceSeriesFor, pickupSeriesFor,
+ * deliverySeriesFor, TICKETS / ticketsFor, BALANCE and RANGE_SPANS.
+ *
+ * Every one of them is now a real figure: the dashboard endpoints return the
+ * buckets, the counters and the balance, and `lib/dashboardSeries.ts` shapes
+ * them. `RangeSeries` stays because `SegmentSeries` extends it.
+ */
 
 /** What one range's chart reads: everything, the completed part, the rest. */
 export type RangeSeries = {
@@ -357,136 +350,11 @@ export type RangeSeries = {
   pending: number[];
 };
 
-/**
- * Turns one authored month into all three ranges.
- *
- * Exported because the vendor overview draws the same chart from its own job
- * counts, and its ranges have to agree with each other the same way these do:
- * the day is the month's LAST bucket spread over the hours it happened in,
- * and the week is the month's last seven. So switching range can never show a
- * day busier than the month containing it.
- */
-export function rangeSeries(monthTotals: number[]): Record<OverviewRange, RangeSeries> {
-  const busyHours = [8, 11, 14, 17, 20, 9, 15].slice(0, monthTotals[monthTotals.length - 1]);
-  const todayTotals = HOUR_AXIS.map((_, h) => busyHours.filter((hour) => hour === h).length);
-
-  const build = (labels: string[], totals: number[]): RangeSeries => {
-    const completed = totals.map((v) => Math.round(v * 0.6));
-    return { labels, totals, completed, pending: totals.map((v, i) => v - completed[i]) };
-  };
-
-  return {
-    today: build(HOUR_AXIS, todayTotals),
-    week: build(WEEK_AXIS, monthTotals.slice(-7)),
-    month: build(MONTH_AXIS, monthTotals),
-  };
-}
-
-const SERVICE_SERIES = rangeSeries(MONTH_REQUESTS);
-
-export const serviceSeriesFor = (range: OverviewRange) => SERVICE_SERIES[range];
-
-/**
- * Pickups.
- *
- * Two series are plotted and two are counted: a pickup sits in Pending or
- * Canceled for minutes, so plotting them would be two flat lines at zero.
- * They are a caption under the chart instead.
- */
-export type PickupSeries = {
-  labels: string[];
-  completed: number[];
-  processing: number[];
-  pending: number;
-  canceled: number;
-};
-
-const PICKUP_SERIES: Record<OverviewRange, PickupSeries> = {
-  today: {
-    labels: ["12 AM", "4 AM", "8 AM", "12 PM", "4 PM", "8 PM"],
-    completed: [0, 0, 1, 1, 1, 0],
-    processing: [0, 0, 1, 0, 0, 0],
-    pending: 0,
-    canceled: 0,
-  },
-  week: {
-    labels: WEEK_AXIS,
-    completed: [1, 1, 0, 2, 1, 1, 0],
-    processing: [0, 1, 1, 0, 1, 0, 0],
-    pending: 1,
-    canceled: 0,
-  },
-  month: {
-    labels: ["Wk 1", "Wk 2", "Wk 3", "Wk 4", "Wk 5"],
-    completed: [3, 2, 3, 2, 2],
-    processing: [2, 1, 2, 2, 1],
-    pending: 3,
-    canceled: 1,
-  },
-};
-
-export const pickupSeriesFor = (range: OverviewRange) => PICKUP_SERIES[range];
-
-/**
- * Deliveries — all four states plotted, unlike pickups.
- *
- * A parcel spends real time in each one, and someone comparing two buckets
- * wants to see WHICH state grew, not just the total.
- */
-export type DeliverySeries = { labels: string[] } & Record<StatusKey, number[]>;
-
-const DELIVERY_SERIES: Record<OverviewRange, DeliverySeries> = {
-  today: {
-    labels: ["12 AM", "4 AM", "8 AM", "12 PM", "4 PM", "8 PM"],
-    pending: [0, 0, 0, 0, 1, 0],
-    processing: [0, 0, 0, 1, 0, 0],
-    completed: [0, 0, 1, 1, 1, 0],
-    canceled: [0, 0, 0, 0, 0, 0],
-  },
-  week: {
-    labels: WEEK_AXIS,
-    pending: [1, 0, 0, 0, 0, 0, 0],
-    processing: [0, 1, 1, 0, 1, 0, 0],
-    completed: [1, 2, 0, 1, 1, 1, 0],
-    canceled: [0, 0, 0, 1, 0, 0, 0],
-  },
-  month: {
-    labels: ["Wk 1", "Wk 2", "Wk 3", "Wk 4", "Wk 5"],
-    pending: [0, 1, 0, 1, 0],
-    processing: [1, 1, 0, 1, 1],
-    completed: [4, 3, 5, 3, 2],
-    canceled: [0, 0, 1, 0, 0],
-  },
-};
-
-export const deliverySeriesFor = (range: OverviewRange) => DELIVERY_SERIES[range];
-
-/**
- * Support tickets per range.
- *
- * `all` is the denominator the two cards show their share of — the tickets
- * opened in the period, not the two counts added up, so "3 of 12" and "2 of
- * 12" read against the same total.
- */
-const TICKETS: Record<OverviewRange, { active: number; waiting: number; all: number }> = {
-  today: { active: 1, waiting: 1, all: 3 },
-  week: { active: 2, waiting: 1, all: 6 },
-  month: { active: 3, waiting: 2, all: 12 },
-};
-
-export const ticketsFor = (range: OverviewRange) => TICKETS[range];
-
-/** The account balance the overview's one filled card shows. */
-export const BALANCE = { value: "1,000.00", unit: "USD" };
-
 /** The month above the overview's heading, and each range's own date span. */
 export const OVERVIEW_PERIOD = "September 2026";
 
-export const RANGE_SPANS: Record<OverviewRange, string> = {
-  today: "4 September 2026",
-  week: "29 August – 4 September 2026",
-  month: "1 September – 1 October 2026",
-};
+/* `RANGE_SPANS` was here — three hard-coded date strings. Captions now come
+   from `rangeCaption()`, which reads the API's own bucket dates. */
 
 /* ─────────────────────────── Orders table ───────────────────────────
  * Its filter row: "all" plus the four states, in the DESIGN's order rather

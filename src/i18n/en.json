@@ -23,7 +23,8 @@
     "pickup": "Pickup",
     "joinVendor": "Join as Vendor",
     "support": "24/7 support",
-    "viewAllServices": "View all services"
+    "viewAllServices": "View all services",
+    "vendorDashboard": "Vendor dashboard"
   },
   "theme": {
     "toggle": "Colour theme",
@@ -862,7 +863,8 @@
       "payment": "Payment",
       "schedule": "Schedule",
       "status": "Status",
-      "amount": "Amount"
+      "amount": "Amount",
+      "quantity": "Quantity"
     },
     "status": {
       "inProgress": "In progress",
@@ -879,7 +881,8 @@
     "kpi": {
       "balance": {
         "label": "My balance",
-        "available": "Available"
+        "available": "Available",
+        "unit": "USD"
       },
       "completedServices": {
         "label": "Completed services"
@@ -934,7 +937,8 @@
         "pending": "Pending",
         "processing": "Processing",
         "completed": "Completed",
-        "canceled": "Canceled"
+        "canceled": "Canceled",
+        "hold": "Hold"
       },
       "span": {
         "today": "today",
@@ -966,7 +970,8 @@
       "paymentStatus": "Payment status",
       "serviceName": "Service name",
       "activeNote": "open with support",
-      "pendingNote": "awaiting reply"
+      "pendingNote": "awaiting reply",
+      "lifetimeNote": "All time"
     },
     "pages": {
       "overview": {
@@ -1032,6 +1037,12 @@
         "nav": "Service",
         "heading": "Service orders",
         "sub": "Every service you have ordered, with its schedule, status and receipt.",
+        "table": "Recent activity"
+      },
+      "pickupHistory": {
+        "nav": "Pickup",
+        "heading": "Pickup log",
+        "sub": "Every parcel a rider has collected from you, with its schedule, route and charges.",
         "table": "Recent activity"
       },
       "deliveryHistory": {
@@ -1186,16 +1197,11 @@
       "saveAsPlaceholder": "Choose a label",
       "mapLink": "Map link",
       "mapLinkHint": "Optional. Paste a Google Maps link if the address is hard to find.",
-      "makeDefault": "Make this my default address",
-      "makeDefaultHint": "Bookings and parcels will start here.",
       "labels": {
         "home": "Home",
         "work": "Work",
         "other": "Other"
       },
-      "defaultBadge": "Default",
-      "inUse": "Default address",
-      "setDefault": "Set as default",
       "viewMap": "Open in maps",
       "edit": "Edit address",
       "delete": "Delete address",
@@ -1204,8 +1210,7 @@
       "emptyBody": "Save the places you book for most and they will be one tap away at checkout.",
       "toastAdded": "Address saved",
       "toastUpdated": "Address updated",
-      "toastRemoved": "Address removed",
-      "toastDefault": "Default address updated"
+      "toastRemoved": "Address removed"
     },
     "history": {
       "order": "Order",
@@ -1241,6 +1246,39 @@
       "emptyBody": "Once you book something it will show up here with its schedule and receipt.",
       "notFoundTitle": "Order not found",
       "notFoundBody": "That order number does not match anything on your account."
+    },
+    "pickup": {
+      "logTitle": "Pickups",
+      "parcels": "parcels",
+      "colParcel": "Parcel",
+      "colSchedule": "Schedule",
+      "colFrom": "Collect from",
+      "colStatus": "Status",
+      "colTotal": "Total",
+      "colActions": "Actions",
+      "viewAll": "View all",
+      "parcelSection": "Parcel",
+      "collectSection": "Collection",
+      "dropoffSection": "Destination",
+      "paymentSection": "Payment",
+      "parcelName": "Name",
+      "quantity": "Quantity",
+      "weight": "Weight",
+      "price": "Price",
+      "details": "Details",
+      "schedule": "Schedule date and time",
+      "name": "Name",
+      "phone": "Phone",
+      "addressType": "Address type",
+      "address": "Address",
+      "landmark": "Landmark",
+      "shortAddress": "Destination short address",
+      "fullAddress": "Destination full address",
+      "dropoffPhone": "Destination phone",
+      "paymentType": "Payment type",
+      "totalPayable": "Total payable",
+      "emptyTitle": "No pickups yet",
+      "emptyBody": "Book a pickup and it will appear here with its schedule, route and charges."
     },
     "delivery": {
       "logTitle": "Deliveries",
@@ -1393,7 +1431,30 @@
         "submit": "Request payout",
         "requested": "Payout requested",
         "note": "Payouts are reviewed once a day on working days. The fee is 1% of the amount requested.",
-        "seeLogs": "See payout history"
+        "seeLogs": "See payout history",
+        "exchangeRate": "Exchange rate",
+        "preview": "Money out preview",
+        "previewEmpty": "Choose a payment gateway to see the breakdown.",
+        "enteredAmount": "Entered amount",
+        "conversionAmount": "Conversion amount",
+        "totalCharge": "Total fees & charges",
+        "willGet": "Will get",
+        "payable": "Payable amount",
+        "totalPayable": "Total payable",
+        "limit": "Limit",
+        "charge": "Charge",
+        "available": "Available balance:",
+        "amountPlaceholder": "Enter amount",
+        "chooseGateway": "Choose a payment gateway",
+        "enterAmount": "Enter an amount",
+        "overBalance": "That is more than your available balance",
+        "limitIs": "Allowed range:",
+        "withdrawVia": "Withdraw via",
+        "withdrawInfo": "Withdraw information",
+        "confirm": "Confirm",
+        "fieldRequired": "This field is required",
+        "doneTitle": "Withdrawal requested",
+        "doneBody": "Your request has been sent to the admin for review."
       },
       "logs": {
         "title": "Payouts",
@@ -1402,7 +1463,10 @@
         "colRef": "Reference",
         "colMethod": "Method",
         "colRequested": "Requested",
-        "colReceived": "Received"
+        "colReceived": "Received",
+        "empty": "No payouts yet.",
+        "rejectionReason": "Why it was rejected",
+        "balanceAfter": "Balance after"
       }
     },
     "ranges": {

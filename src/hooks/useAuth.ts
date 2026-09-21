@@ -177,6 +177,23 @@ function owesTwoFa(res: unknown): boolean {
   return twoFaStateFromResponse(res) === "pending";
 }
 
+/**
+ * End the OTHER panel's session.
+ *
+ * Only one may be live at a time, and the guards assume it: `AuthGuard`
+ * sends someone holding the wrong role's token to that role's dashboard, so
+ * a token left behind from an earlier sign-in would bounce the person who
+ * just signed in straight back out of the panel they chose.
+ *
+ * Called on the way IN rather than on the way out, because the way out is not
+ * guaranteed to happen - a session can end by expiry or by a cleared tab.
+ */
+function endOtherSession(role: AuthRole, queryClient: ReturnType<typeof useQueryClient>) {
+  const other: AuthRole = role === "vendor" ? "user" : "vendor";
+  clearAuthState(other);
+  queryClient.removeQueries({ queryKey: profileQueryKey(other) });
+}
+
 /* ─────────────────────────── Login ─────────────────────────── */
 export function useLogin(role: AuthRole = "user") {
   const router = useRouter();
@@ -191,6 +208,7 @@ export function useLogin(role: AuthRole = "user") {
       setToken(res.data.token, role);
       // Whoever was signed in before, their profile is not this session's.
       queryClient.removeQueries({ queryKey: profileQueryKey(role) });
+      endOtherSession(role, queryClient);
       const verified = isEmailVerified(res) || !emailVerificationRequired;
       const owesTwoFaCode = owesTwoFa(res);
       toast.success(getApiSuccessMessage(res, "Login successful"));
@@ -237,6 +255,7 @@ export function useRegister(role: AuthRole = "user") {
       const token = extractToken(res);
       if (token) setToken(token, role);
       queryClient.removeQueries({ queryKey: profileQueryKey(role) });
+      endOtherSession(role, queryClient);
       const verified = isEmailVerified(res) || !emailVerificationRequired;
 
       // Nothing to verify — either the account came back already verified, or

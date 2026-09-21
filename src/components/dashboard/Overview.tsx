@@ -9,38 +9,47 @@ import { ActivityChart } from "@/components/dashboard/charts/ActivityChart";
 import { PickupChart } from "@/components/dashboard/charts/PickupChart";
 import { DeliveryChart } from "@/components/dashboard/charts/DeliveryChart";
 import {
-  OVERVIEW_PERIOD, OVERVIEW_RANGES, RANGE_SPANS, serviceSeriesFor, type OverviewRange,
+  OVERVIEW_PERIOD, OVERVIEW_RANGES, type OverviewRange,
 } from "@/components/dashboard/dashboardData";
+import { useUserDashboard } from "@/hooks/useDashboard";
+import { segmentSeries, rangeCaption } from "@/lib/dashboardSeries";
 
 /**
  * The dashboard's home screen, built off `home/Handiman Overview.dc.html`:
  * stats, the service chart, then pickup and delivery split below.
  *
- * The range is the ONE piece of state here. Every figure on the screen — the
- * stat cards, all three charts, every period caption — is derived from it in
- * `dashboardData`, so no panel keeps its own idea of what period it is
- * showing. The design's recent-orders table is not on this screen: the two
- * History pages are where an order list belongs, and it survives here as the
- * vendor's job queue (`VendorRecentJobs`).
+ * The range is the ONE piece of state here, and ONE request feeds everything:
+ * `/user/dashboard/cart_count` returns the wallet, the counters and a month of
+ * daily buckets, and each panel is a window over that. So no panel keeps its
+ * own idea of the period, and changing range costs nothing — it re-slices data
+ * already in hand rather than refetching.
+ *
+ * The design's recent-orders table is not on this screen: the two History pages
+ * are where an order list belongs, and it survives here as the vendor's job
+ * queue (`VendorRecentJobs`).
  */
 export function Overview() {
   const { t } = useLang();
   const [range, setRange] = useState<OverviewRange>("month");
+
+  const { data: res } = useUserDashboard();
+  const chart = res?.data?.chart;
+  const caption = rangeCaption(chart, range);
 
   return (
     <PageShell page="overview" head={<OverviewHead range={range} onRange={setRange} />}>
       <OverviewStats range={range} />
       <ActivityChart
         range={range}
-        series={serviceSeriesFor(range)}
+        series={segmentSeries(chart, "service", range)}
         title={t("dashboard.charts.service.title")}
-        caption={RANGE_SPANS[range]}
+        caption={caption}
         allLabel={t("dashboard.charts.service.legendAll")}
         emptyLabel={t("dashboard.charts.service.empty")}
       />
       <div className="grid grid-cols-1 gap-[clamp(18px,2vw,28px)] wide:grid-cols-2">
-        <PickupChart range={range} />
-        <DeliveryChart range={range} />
+        <PickupChart range={range} series={segmentSeries(chart, "pickup", range)} />
+        <DeliveryChart range={range} series={segmentSeries(chart, "delivery", range)} />
       </div>
     </PageShell>
   );

@@ -1,73 +1,116 @@
 "use client";
 
+import { Wrench } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { OrdersPanel, STATUS_INK, type PanelOrder } from "@/components/dashboard/OrdersPanel";
-import { VENDOR_ORDERS } from "@/components/dashboard/page/vendor/vendorData";
+import { useVendorDashboard } from "@/hooks/useDashboard";
+import { money, formatDate, formatDateTime } from "@/lib/money";
+import type { StatusKey } from "@/components/dashboard/dashboardData";
+import type { VendorOrderRow } from "@/services/dashboard.service";
 
 /**
- * The vendor half of the design's recent-orders table: it maps a job onto
- * `PanelOrder` and `OrdersPanel` draws it, exactly as `RecentOrders` does for
- * the customer. The differences are the ones the record actually has — the
- * customer is the other party here, and the money column is the payout after
- * commission rather than what was charged.
+ * The vendor half of the design's recent-orders table, drawn from `order_log`
+ * on `GET /vendors/dashboard`.
+ *
+ * ── The Customer column is not a customer ──
+ * The order payload carries `user_id` and nothing else about the person — no
+ * name, no phone. The mock this replaced invented both. So that column now
+ * shows what the order itself says: the item and quantity. Wrong data under a
+ * right-looking heading is the worse failure of the two.
+ *
+ * When `order_log` is empty the table is empty. It used to show three fictional
+ * jobs on an account that had none.
  */
+
+/**
+ * The API's status onto the panel's four-word vocabulary.
+ *
+ * Read from `stringStatus.value` ("Rejected") rather than the numeric `status`,
+ * because the numbers are not documented and the string is what the backend
+ * itself renders. Anything unrecognised lands on "pending" — the neutral one,
+ * and never "completed", which would claim a job was finished.
+ */
+function statusOf(row: VendorOrderRow): StatusKey {
+  const label = String(row.stringStatus?.value ?? row.status ?? "").trim().toLowerCase();
+  if (label === "success" || label === "completed" || label === "complete") return "completed";
+  if (label === "processing" || label === "progress") return "processing";
+  if (label === "rejected" || label === "canceled" || label === "cancelled") return "canceled";
+  return "pending";
+}
+
 export function VendorRecentJobs() {
   const { t } = useLang();
+  const { data: res } = useVendorDashboard();
 
-  const title = (order: (typeof VENDOR_ORDERS)[number]) =>
-    t(`${order.copyNs ?? "servicesPage.items"}.${order.serviceKey}.title`);
+  const currency = res?.data?.currency ?? "";
+  const rows = res?.data?.order_log ?? [];
 
-  const orders: PanelOrder[] = VENDOR_ORDERS.map((order) => ({
-    ref: `#${order.no}`,
-    subject: title(order),
-    icon: order.icon,
-    who: order.customer,
-    whoSub: order.phone,
-    when: order.schedule.date,
-    whenSub: order.schedule.time,
-    status: order.status,
-    amount: order.totals.payout,
-    columns: [
-      {
-        title: t("dashboard.overview.orderInfo"),
-        fields: [
-          { label: t("dashboard.overview.transactionId"), value: `#${order.no}`, ink: "text-heading" },
-          { label: t("dashboard.vendor.orders.colCustomer"), value: order.customer },
-          { label: t("dashboard.history.phone"), value: order.phone },
-          { label: t("dashboard.history.address"), value: order.address },
-          { label: t("dashboard.history.scheduleDate"), value: order.schedule.date },
-          { label: t("dashboard.history.scheduleTime"), value: order.schedule.time },
-          { label: t("dashboard.history.placedOn"), value: order.placedOn },
-          {
-            label: t("dashboard.overview.paymentMethod"),
-            value: t(`dashboard.history.payment.${order.payment}`),
-          },
-          {
-            label: t("dashboard.overview.paymentStatus"),
-            value: t(`dashboard.charts.status.${order.status}`),
-            ink: STATUS_INK[order.status],
-          },
-        ],
-      },
-      {
-        title: t("dashboard.vendor.orders.service"),
-        fields: [{ label: t("dashboard.overview.serviceName"), value: title(order) }],
-      },
-    ],
-    totals: [
-      { label: t("dashboard.history.subtotal"), value: order.totals.subtotal },
-      { label: t("dashboard.vendor.orders.commission"), value: order.totals.charge },
-      { label: t("dashboard.vendor.orders.yourPayout"), value: order.totals.payout },
-    ],
-  }));
+  const cash = (value: number | undefined) =>
+    value === undefined || value === null ? "—" : money(Number(value) || 0, currency);
+
+  const orders: PanelOrder[] = rows.map((row) => {
+    const line = row.order_details_info?.[0];
+    const service = line?.service_name ?? row.attribute ?? "—";
+    const status = statusOf(row);
+
+    return {
+      ref: `#${row.trx_id ?? row.id ?? ""}`,
+      subject: service,
+      icon: Wrench,
+      who: line?.item ?? "—",
+      whoSub: line?.quantity ? `× ${line.quantity}` : "",
+      when: formatDate(row.created_at),
+      whenSub: "",
+      status,
+      amount: cash(row.payable),
+      columns: [
+        {
+          title: t("dashboard.overview.orderInfo"),
+          fields: [
+            {
+              label: t("dashboard.overview.transactionId"),
+              value: `#${row.trx_id ?? row.id ?? ""}`,
+              ink: "text-heading",
+            },
+            { label: t("dashboard.history.placedOn"), value: formatDateTime(row.created_at) },
+            {
+              label: t("dashboard.overview.paymentStatus"),
+              value: row.stringStatus?.value ?? t(`dashboard.charts.status.${status}`),
+              ink: STATUS_INK[status],
+            },
+            /* Only when there is one — an empty "Reason" line under every
+               completed job reads as a missing value rather than a non-event. */
+            ...(row.reject_reason
+              ? [{ label: t("dashboard.vendor.logs.rejectionReason"), value: row.reject_reason }]
+              : []),
+          ],
+        },
+        {
+          title: t("dashboard.vendor.orders.service"),
+          fields: [
+            { label: t("dashboard.overview.serviceName"), value: service },
+            ...(line?.item ? [{ label: t("dashboard.vendor.orders.colJob"), value: line.item }] : []),
+            ...(line?.quantity
+              ? [{ label: t("dashboard.table.quantity"), value: String(line.quantity) }]
+              : []),
+          ],
+        },
+      ],
+      totals: [
+        { label: t("dashboard.history.subtotal"), value: cash(row.request_amount) },
+        { label: t("dashboard.vendor.orders.commission"), value: cash(row.total_charge) },
+        { label: t("dashboard.vendor.orders.yourPayout"), value: cash(row.payable) },
+      ],
+    };
+  });
 
   return (
     <OrdersPanel
       title={t("dashboard.vendor.overview.recentJobs")}
       headers={[
         t("dashboard.vendor.orders.colJob"),
-        t("dashboard.vendor.orders.colCustomer"),
-        t("dashboard.vendor.orders.colSchedule"),
+        t("dashboard.vendor.orders.service"),
+        t("dashboard.history.placedOn"),
         t("dashboard.table.status"),
         t("dashboard.vendor.orders.colPayout"),
       ]}

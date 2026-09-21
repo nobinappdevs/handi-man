@@ -23,7 +23,8 @@
     "pickup": "Recogida",
     "joinVendor": "Únete como proveedor",
     "support": "Soporte 24/7",
-    "viewAllServices": "Ver todos los servicios"
+    "viewAllServices": "Ver todos los servicios",
+    "vendorDashboard": "Panel del proveedor"
   },
   "theme": {
     "toggle": "Tema de color",
@@ -862,7 +863,8 @@
       "payment": "Pago",
       "schedule": "Horario",
       "status": "Estado",
-      "amount": "Importe"
+      "amount": "Importe",
+      "quantity": "Cantidad"
     },
     "status": {
       "inProgress": "En curso",
@@ -879,7 +881,8 @@
     "kpi": {
       "balance": {
         "label": "Mi saldo",
-        "available": "Disponible"
+        "available": "Disponible",
+        "unit": "USD"
       },
       "completedServices": {
         "label": "Servicios completados"
@@ -934,7 +937,8 @@
         "pending": "Pendiente",
         "processing": "En proceso",
         "completed": "Completado",
-        "canceled": "Cancelado"
+        "canceled": "Cancelado",
+        "hold": "En espera"
       },
       "span": {
         "today": "hoy",
@@ -966,7 +970,8 @@
       "paymentStatus": "Estado del pago",
       "serviceName": "Nombre del servicio",
       "activeNote": "abiertos con soporte",
-      "pendingNote": "esperando respuesta"
+      "pendingNote": "esperando respuesta",
+      "lifetimeNote": "Histórico"
     },
     "pages": {
       "overview": {
@@ -1032,6 +1037,12 @@
         "nav": "Servicio",
         "heading": "Pedidos de servicio",
         "sub": "Cada servicio que has solicitado, con su horario, estado y recibo.",
+        "table": "Actividad reciente"
+      },
+      "pickupHistory": {
+        "nav": "Recogidas",
+        "heading": "Registro de recogidas",
+        "sub": "Cada paquete que un repartidor ha recogido de ti, con su horario, ruta y cargos.",
         "table": "Actividad reciente"
       },
       "deliveryHistory": {
@@ -1186,16 +1197,11 @@
       "saveAsPlaceholder": "Elige una etiqueta",
       "mapLink": "Enlace del mapa",
       "mapLinkHint": "Opcional. Pega un enlace de Google Maps si la dirección es difícil de encontrar.",
-      "makeDefault": "Convertir en mi dirección predeterminada",
-      "makeDefaultHint": "Las reservas y paquetes comenzarán aquí.",
       "labels": {
         "home": "Casa",
         "work": "Trabajo",
         "other": "Otro"
       },
-      "defaultBadge": "Predeterminada",
-      "inUse": "Dirección predeterminada",
-      "setDefault": "Establecer como predeterminada",
       "viewMap": "Abrir en mapas",
       "edit": "Editar dirección",
       "delete": "Eliminar dirección",
@@ -1204,8 +1210,7 @@
       "emptyBody": "Guarda los lugares donde más reservas y estarán a un toque de distancia al pagar.",
       "toastAdded": "Dirección guardada",
       "toastUpdated": "Dirección actualizada",
-      "toastRemoved": "Dirección eliminada",
-      "toastDefault": "Dirección predeterminada actualizada"
+      "toastRemoved": "Dirección eliminada"
     },
     "history": {
       "order": "Pedido",
@@ -1241,6 +1246,39 @@
       "emptyBody": "En cuanto reserves algo, aparecerá aquí con su horario y recibo.",
       "notFoundTitle": "Pedido no encontrado",
       "notFoundBody": "Ese número de pedido no coincide con nada de tu cuenta."
+    },
+    "pickup": {
+      "logTitle": "Recogidas",
+      "parcels": "paquetes",
+      "colParcel": "Paquete",
+      "colSchedule": "Horario",
+      "colFrom": "Recoger en",
+      "colStatus": "Estado",
+      "colTotal": "Total",
+      "colActions": "Acciones",
+      "viewAll": "Ver todo",
+      "parcelSection": "Paquete",
+      "collectSection": "Recogida",
+      "dropoffSection": "Destino",
+      "paymentSection": "Pago",
+      "parcelName": "Nombre",
+      "quantity": "Cantidad",
+      "weight": "Peso",
+      "price": "Precio",
+      "details": "Detalles",
+      "schedule": "Fecha y hora programada",
+      "name": "Nombre",
+      "phone": "Teléfono",
+      "addressType": "Tipo de dirección",
+      "address": "Dirección",
+      "landmark": "Punto de referencia",
+      "shortAddress": "Dirección corta de destino",
+      "fullAddress": "Dirección completa de destino",
+      "dropoffPhone": "Teléfono de destino",
+      "paymentType": "Tipo de pago",
+      "totalPayable": "Total a pagar",
+      "emptyTitle": "Todavía no hay recogidas",
+      "emptyBody": "Solicita una recogida y aparecerá aquí con su horario, ruta y cargos."
     },
     "delivery": {
       "logTitle": "Entregas",
@@ -1393,7 +1431,30 @@
         "submit": "Solicitar pago",
         "requested": "Pago solicitado",
         "note": "Los pagos se revisan una vez al día en días hábiles. La comisión es del 1% del importe solicitado.",
-        "seeLogs": "Ver historial de pagos"
+        "seeLogs": "Ver historial de pagos",
+        "exchangeRate": "Tipo de cambio",
+        "preview": "Vista previa del retiro",
+        "previewEmpty": "Elige una pasarela de pago para ver el desglose.",
+        "enteredAmount": "Importe introducido",
+        "conversionAmount": "Importe convertido",
+        "totalCharge": "Comisiones totales",
+        "willGet": "Recibirás",
+        "payable": "Importe a pagar",
+        "totalPayable": "Total a pagar",
+        "limit": "Límite",
+        "charge": "Comisión",
+        "available": "Saldo disponible:",
+        "amountPlaceholder": "Introduce el importe",
+        "chooseGateway": "Elige una pasarela de pago",
+        "enterAmount": "Introduce un importe",
+        "overBalance": "Supera tu saldo disponible",
+        "limitIs": "Rango permitido:",
+        "withdrawVia": "Retirar vía",
+        "withdrawInfo": "Información del retiro",
+        "confirm": "Confirmar",
+        "fieldRequired": "Este campo es obligatorio",
+        "doneTitle": "Retiro solicitado",
+        "doneBody": "Tu solicitud se ha enviado al administrador para su revisión."
       },
       "logs": {
         "title": "Pagos",
@@ -1402,7 +1463,10 @@
         "colRef": "Referencia",
         "colMethod": "Método",
         "colRequested": "Solicitado",
-        "colReceived": "Recibido"
+        "colReceived": "Recibido",
+        "empty": "Aún no hay retiros.",
+        "rejectionReason": "Motivo del rechazo",
+        "balanceAfter": "Saldo posterior"
       }
     },
     "ranges": {

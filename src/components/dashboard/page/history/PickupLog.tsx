@@ -1,61 +1,59 @@
 "use client";
 
 import {
-  ArrowDownToLine, CalendarClock, CreditCard, MapPin, Package, Phone,
-  Receipt, Store, User,
+  ArrowUpFromLine, CalendarClock, CreditCard, MapPin, Package, Phone,
+  Receipt, Scale, User,
 } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { Field, ParcelLog, Section } from "@/components/dashboard/page/history/ParcelLog";
-import { deliveryOrders } from "@/components/dashboard/page/history/historyData";
+import { pickupOrders } from "@/components/dashboard/page/history/historyData";
 
 /**
- * The delivery log — parcels you sent out, as a table.
+ * The pickup log — parcels a rider collected from you, as a table.
  *
- * The table, the modal shell and the empty state are `ParcelLog`, shared with
- * the pickup log. What is here is what a DELIVERY record holds: a shop the
- * parcel came from, and a drop-off it is going to.
+ * The same `ParcelLog` the delivery log renders, so the two screens cannot
+ * drift apart. What is here is what a PICKUP record holds: a weight instead of
+ * the shop fields, and the collection address read as the origin rather than
+ * the destination — which is also why the route column is "collect from".
  */
-export function DeliveryLog() {
+export function PickupLog() {
   const { t } = useLang();
-  const k = (s: string) => t(`dashboard.delivery.${s}`);
+  const k = (s: string) => t(`dashboard.pickup.${s}`);
 
   return (
     <ParcelLog
-      ns="dashboard.delivery"
-      icon={ArrowDownToLine}
-      orders={deliveryOrders()}
-      routeHeading={k("colTo")}
-      routeValue={(order) => order.dropoff.shortAddress || order.dropoff.fullAddress || "—"}
+      ns="dashboard.pickup"
+      icon={ArrowUpFromLine}
+      orders={pickupOrders()}
+      routeHeading={k("colFrom")}
+      routeValue={(order) => order.collect.address || "—"}
       details={(order) => (
         <>
           <Section title={k("parcelSection")}>
             <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("parcelName")} value={order.parcel.name} />
-            <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("brand")} value={order.parcel.brand} />
-            <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("size")} value={order.parcel.size} />
-            <Field icon={<Receipt size={13} strokeWidth={2} aria-hidden />} label={k("price")} value={order.parcel.price} />
             <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("quantity")} value={order.parcel.quantity} />
-            <Field icon={<Store size={13} strokeWidth={2} aria-hidden />} label={k("shop")} value={order.parcel.shop} />
-            <Field icon={<Store size={13} strokeWidth={2} aria-hidden />} label={k("shopAddress")} value={order.parcel.shopAddress} />
+            <Field icon={<Scale size={13} strokeWidth={2} aria-hidden />} label={k("weight")} value={order.parcel.weight} />
+            <Field icon={<Receipt size={13} strokeWidth={2} aria-hidden />} label={k("price")} value={order.parcel.price} />
             <Field icon={<Receipt size={13} strokeWidth={2} aria-hidden />} label={k("details")} value={order.parcel.details} />
           </Section>
 
-          <Section title={k("pickupSection")}>
+          <Section title={k("collectSection")}>
             <Field icon={<CalendarClock size={13} strokeWidth={2} aria-hidden />} label={k("schedule")} value={order.schedule} />
-            <Field icon={<User size={13} strokeWidth={2} aria-hidden />} label={k("name")} value={order.pickup.name} />
-            <Field icon={<Phone size={13} strokeWidth={2} aria-hidden />} label={k("phone")} value={order.pickup.phone} />
+            <Field icon={<User size={13} strokeWidth={2} aria-hidden />} label={k("name")} value={order.collect.name} />
+            <Field icon={<Phone size={13} strokeWidth={2} aria-hidden />} label={k("phone")} value={order.collect.phone} />
             <Field
               icon={<MapPin size={13} strokeWidth={2} aria-hidden />}
               label={k("addressType")}
-              value={t(`dashboard.address.labels.${order.pickup.addressLabel}`)}
+              value={t(`dashboard.address.labels.${order.collect.addressLabel}`)}
             />
-            <Field icon={<MapPin size={13} strokeWidth={2} aria-hidden />} label={k("address")} value={order.pickup.address} />
-            <Field icon={<MapPin size={13} strokeWidth={2} aria-hidden />} label={k("landmark")} value={order.pickup.landmark} />
+            <Field icon={<MapPin size={13} strokeWidth={2} aria-hidden />} label={k("address")} value={order.collect.address} />
+            <Field icon={<MapPin size={13} strokeWidth={2} aria-hidden />} label={k("landmark")} value={order.collect.landmark} />
           </Section>
 
           <Section title={k("dropoffSection")}>
             <Field icon={<MapPin size={13} strokeWidth={2} aria-hidden />} label={k("shortAddress")} value={order.dropoff.shortAddress} />
             <Field icon={<MapPin size={13} strokeWidth={2} aria-hidden />} label={k("fullAddress")} value={order.dropoff.fullAddress} />
-            <Field icon={<Phone size={13} strokeWidth={2} aria-hidden />} label={k("deliveryPhone")} value={order.dropoff.phone} />
+            <Field icon={<Phone size={13} strokeWidth={2} aria-hidden />} label={k("dropoffPhone")} value={order.dropoff.phone} />
           </Section>
 
           <Section title={k("paymentSection")}>

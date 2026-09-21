@@ -23,7 +23,8 @@
     "pickup": "الاستلام",
     "joinVendor": "انضم كمقدم خدمة",
     "support": "دعم على مدار الساعة",
-    "viewAllServices": "عرض كل الخدمات"
+    "viewAllServices": "عرض كل الخدمات",
+    "vendorDashboard": "لوحة المزوّد"
   },
   "theme": {
     "toggle": "مظهر الألوان",
@@ -862,7 +863,8 @@
       "payment": "الدفع",
       "schedule": "الموعد",
       "status": "الحالة",
-      "amount": "المبلغ"
+      "amount": "المبلغ",
+      "quantity": "الكمية"
     },
     "status": {
       "inProgress": "قيد التنفيذ",
@@ -879,7 +881,8 @@
     "kpi": {
       "balance": {
         "label": "رصيدي",
-        "available": "متاح"
+        "available": "متاح",
+        "unit": "USD"
       },
       "completedServices": {
         "label": "الخدمات المكتملة"
@@ -934,7 +937,8 @@
         "pending": "قيد الانتظار",
         "processing": "قيد المعالجة",
         "completed": "مكتمل",
-        "canceled": "ملغى"
+        "canceled": "ملغى",
+        "hold": "معلّق"
       },
       "span": {
         "today": "اليوم",
@@ -966,7 +970,8 @@
       "paymentStatus": "حالة الدفع",
       "serviceName": "اسم الخدمة",
       "activeNote": "مفتوحة مع الدعم",
-      "pendingNote": "في انتظار الرد"
+      "pendingNote": "في انتظار الرد",
+      "lifetimeNote": "الإجمالي"
     },
     "pages": {
       "overview": {
@@ -1032,6 +1037,12 @@
         "nav": "الخدمة",
         "heading": "طلبات الخدمة",
         "sub": "كل خدمة طلبتها، بموعدها وحالتها وإيصالها.",
+        "table": "النشاط الأخير"
+      },
+      "pickupHistory": {
+        "nav": "الاستلام",
+        "heading": "سجل الاستلام",
+        "sub": "كل طرد استلمه مندوب منك، بموعده ومساره ورسومه.",
         "table": "النشاط الأخير"
       },
       "deliveryHistory": {
@@ -1186,16 +1197,11 @@
       "saveAsPlaceholder": "اختر تسمية",
       "mapLink": "رابط الخريطة",
       "mapLinkHint": "اختياري. الصق رابط خرائط Google إذا كان العنوان صعب الإيجاد.",
-      "makeDefault": "اجعل هذا عنواني الافتراضي",
-      "makeDefaultHint": "ستبدأ الحجوزات والطرود من هنا.",
       "labels": {
         "home": "المنزل",
         "work": "العمل",
         "other": "أخرى"
       },
-      "defaultBadge": "افتراضي",
-      "inUse": "العنوان الافتراضي",
-      "setDefault": "تعيين كافتراضي",
       "viewMap": "فتح في الخرائط",
       "edit": "تعديل العنوان",
       "delete": "حذف العنوان",
@@ -1204,8 +1210,7 @@
       "emptyBody": "احفظ الأماكن التي تحجز منها غالبًا وستكون على بعد نقرة واحدة عند الدفع.",
       "toastAdded": "تم حفظ العنوان",
       "toastUpdated": "تم تحديث العنوان",
-      "toastRemoved": "تم حذف العنوان",
-      "toastDefault": "تم تحديث العنوان الافتراضي"
+      "toastRemoved": "تم حذف العنوان"
     },
     "history": {
       "order": "الطلب",
@@ -1241,6 +1246,39 @@
       "emptyBody": "بمجرد أن تحجز شيئًا، سيظهر هنا مع موعده وإيصاله.",
       "notFoundTitle": "الطلب غير موجود",
       "notFoundBody": "رقم الطلب هذا لا يطابق أي شيء في حسابك."
+    },
+    "pickup": {
+      "logTitle": "عمليات الاستلام",
+      "parcels": "طرود",
+      "colParcel": "الطرد",
+      "colSchedule": "الموعد",
+      "colFrom": "الاستلام من",
+      "colStatus": "الحالة",
+      "colTotal": "الإجمالي",
+      "colActions": "الإجراءات",
+      "viewAll": "عرض الكل",
+      "parcelSection": "الطرد",
+      "collectSection": "الاستلام",
+      "dropoffSection": "الوجهة",
+      "paymentSection": "الدفع",
+      "parcelName": "الاسم",
+      "quantity": "الكمية",
+      "weight": "الوزن",
+      "price": "السعر",
+      "details": "التفاصيل",
+      "schedule": "تاريخ ووقت الموعد",
+      "name": "الاسم",
+      "phone": "الهاتف",
+      "addressType": "نوع العنوان",
+      "address": "العنوان",
+      "landmark": "علامة مميزة",
+      "shortAddress": "عنوان الوجهة المختصر",
+      "fullAddress": "عنوان الوجهة الكامل",
+      "dropoffPhone": "هاتف الوجهة",
+      "paymentType": "طريقة الدفع",
+      "totalPayable": "الإجمالي المستحق",
+      "emptyTitle": "لا توجد عمليات استلام بعد",
+      "emptyBody": "احجز عملية استلام وستظهر هنا مع موعدها ومسارها ورسومها."
     },
     "delivery": {
       "logTitle": "التوصيلات",
@@ -1393,7 +1431,30 @@
         "submit": "طلب السحب",
         "requested": "تم طلب السحب",
         "note": "تتم مراجعة عمليات السحب مرة واحدة يوميًا في أيام العمل. الرسوم 1% من المبلغ المطلوب.",
-        "seeLogs": "عرض سجل السحب"
+        "seeLogs": "عرض سجل السحب",
+        "exchangeRate": "سعر الصرف",
+        "preview": "معاينة السحب",
+        "previewEmpty": "اختر بوابة دفع لعرض التفاصيل.",
+        "enteredAmount": "المبلغ المُدخل",
+        "conversionAmount": "المبلغ بعد التحويل",
+        "totalCharge": "إجمالي الرسوم",
+        "willGet": "ستستلم",
+        "payable": "المبلغ المستحق",
+        "totalPayable": "الإجمالي المستحق",
+        "limit": "الحد",
+        "charge": "الرسوم",
+        "available": "الرصيد المتاح:",
+        "amountPlaceholder": "أدخل المبلغ",
+        "chooseGateway": "اختر بوابة دفع",
+        "enterAmount": "أدخل مبلغًا",
+        "overBalance": "هذا يتجاوز رصيدك المتاح",
+        "limitIs": "النطاق المسموح:",
+        "withdrawVia": "السحب عبر",
+        "withdrawInfo": "معلومات السحب",
+        "confirm": "تأكيد",
+        "fieldRequired": "هذا الحقل مطلوب",
+        "doneTitle": "تم إرسال طلب السحب",
+        "doneBody": "تم إرسال طلبك إلى الإدارة للمراجعة."
       },
       "logs": {
         "title": "عمليات السحب",
@@ -1402,7 +1463,10 @@
         "colRef": "المرجع",
         "colMethod": "الطريقة",
         "colRequested": "تاريخ الطلب",
-        "colReceived": "تاريخ الاستلام"
+        "colReceived": "تاريخ الاستلام",
+        "empty": "لا توجد عمليات سحب بعد.",
+        "rejectionReason": "سبب الرفض",
+        "balanceAfter": "الرصيد بعد العملية"
       }
     },
     "ranges": {

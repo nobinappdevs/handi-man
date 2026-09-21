@@ -23,7 +23,8 @@
     "pickup": "पिकअप",
     "joinVendor": "वेंडर के रूप में जुड़ें",
     "support": "24/7 सहायता",
-    "viewAllServices": "सभी सेवाएँ देखें"
+    "viewAllServices": "सभी सेवाएँ देखें",
+    "vendorDashboard": "वेंडर डैशबोर्ड"
   },
   "theme": {
     "toggle": "रंग थीम",
@@ -862,7 +863,8 @@
       "payment": "भुगतान",
       "schedule": "शेड्यूल",
       "status": "स्थिति",
-      "amount": "राशि"
+      "amount": "राशि",
+      "quantity": "मात्रा"
     },
     "status": {
       "inProgress": "प्रगति पर",
@@ -879,7 +881,8 @@
     "kpi": {
       "balance": {
         "label": "मेरा बैलेंस",
-        "available": "उपलब्ध"
+        "available": "उपलब्ध",
+        "unit": "USD"
       },
       "completedServices": {
         "label": "पूर्ण सेवाएँ"
@@ -934,7 +937,8 @@
         "pending": "लंबित",
         "processing": "प्रक्रियाधीन",
         "completed": "पूर्ण",
-        "canceled": "रद्द"
+        "canceled": "रद्द",
+        "hold": "होल्ड"
       },
       "span": {
         "today": "आज",
@@ -966,7 +970,8 @@
       "paymentStatus": "भुगतान की स्थिति",
       "serviceName": "सेवा का नाम",
       "activeNote": "सपोर्ट के साथ खुले",
-      "pendingNote": "उत्तर की प्रतीक्षा"
+      "pendingNote": "उत्तर की प्रतीक्षा",
+      "lifetimeNote": "कुल"
     },
     "pages": {
       "overview": {
@@ -1032,6 +1037,12 @@
         "nav": "सेवा",
         "heading": "सेवा ऑर्डर",
         "sub": "आपके द्वारा ऑर्डर की गई हर सेवा, उसके शेड्यूल, स्थिति और रसीद के साथ।",
+        "table": "हाल की गतिविधि"
+      },
+      "pickupHistory": {
+        "nav": "पिकअप",
+        "heading": "पिकअप लॉग",
+        "sub": "हर पार्सल जो राइडर ने आपसे लिया, उसके शेड्यूल, रूट और शुल्क के साथ।",
         "table": "हाल की गतिविधि"
       },
       "deliveryHistory": {
@@ -1186,16 +1197,11 @@
       "saveAsPlaceholder": "एक लेबल चुनें",
       "mapLink": "मैप लिंक",
       "mapLinkHint": "वैकल्पिक। अगर पता ढूंढना मुश्किल है तो Google Maps लिंक पेस्ट करें।",
-      "makeDefault": "इसे मेरा डिफ़ॉल्ट पता बनाएं",
-      "makeDefaultHint": "बुकिंग और पार्सल यहीं से शुरू होंगे।",
       "labels": {
         "home": "घर",
         "work": "कार्यालय",
         "other": "अन्य"
       },
-      "defaultBadge": "डिफ़ॉल्ट",
-      "inUse": "डिफ़ॉल्ट पता",
-      "setDefault": "डिफ़ॉल्ट के रूप में सेट करें",
       "viewMap": "मैप्स में खोलें",
       "edit": "पता संपादित करें",
       "delete": "पता हटाएं",
@@ -1204,8 +1210,7 @@
       "emptyBody": "उन जगहों को सेव करें जहां आप सबसे ज़्यादा बुक करते हैं और वे चेकआउट पर एक टैप दूर होंगी।",
       "toastAdded": "पता सेव हो गया",
       "toastUpdated": "पता अपडेट हो गया",
-      "toastRemoved": "पता हटा दिया गया",
-      "toastDefault": "डिफ़ॉल्ट पता अपडेट हो गया"
+      "toastRemoved": "पता हटा दिया गया"
     },
     "history": {
       "order": "ऑर्डर",
@@ -1241,6 +1246,39 @@
       "emptyBody": "जैसे ही आप कुछ बुक करेंगे, वह यहां अपने शेड्यूल और रसीद के साथ दिखेगा।",
       "notFoundTitle": "ऑर्डर नहीं मिला",
       "notFoundBody": "वह ऑर्डर नंबर आपके अकाउंट में किसी भी चीज़ से मेल नहीं खाता।"
+    },
+    "pickup": {
+      "logTitle": "पिकअप",
+      "parcels": "पार्सल",
+      "colParcel": "पार्सल",
+      "colSchedule": "शेड्यूल",
+      "colFrom": "कहाँ से लेना है",
+      "colStatus": "स्थिति",
+      "colTotal": "कुल",
+      "colActions": "कार्रवाई",
+      "viewAll": "सभी देखें",
+      "parcelSection": "पार्सल",
+      "collectSection": "पिकअप",
+      "dropoffSection": "गंतव्य",
+      "paymentSection": "भुगतान",
+      "parcelName": "नाम",
+      "quantity": "मात्रा",
+      "weight": "वज़न",
+      "price": "कीमत",
+      "details": "विवरण",
+      "schedule": "शेड्यूल तारीख और समय",
+      "name": "नाम",
+      "phone": "फोन",
+      "addressType": "पते का प्रकार",
+      "address": "पता",
+      "landmark": "लैंडमार्क",
+      "shortAddress": "गंतव्य संक्षिप्त पता",
+      "fullAddress": "गंतव्य पूरा पता",
+      "dropoffPhone": "गंतव्य फोन",
+      "paymentType": "भुगतान का प्रकार",
+      "totalPayable": "कुल देय राशि",
+      "emptyTitle": "अभी कोई पिकअप नहीं",
+      "emptyBody": "पिकअप बुक करें और यह अपने शेड्यूल, रूट और शुल्क के साथ यहां दिखेगा।"
     },
     "delivery": {
       "logTitle": "डिलीवरी",
@@ -1393,7 +1431,30 @@
         "submit": "पेआउट का अनुरोध करें",
         "requested": "पेआउट का अनुरोध किया गया",
         "note": "पेआउट की समीक्षा कार्यदिवसों में दिन में एक बार होती है। अनुरोधित राशि पर शुल्क 1% है।",
-        "seeLogs": "पेआउट इतिहास देखें"
+        "seeLogs": "पेआउट इतिहास देखें",
+        "exchangeRate": "विनिमय दर",
+        "preview": "निकासी पूर्वावलोकन",
+        "previewEmpty": "विवरण देखने के लिए भुगतान गेटवे चुनें।",
+        "enteredAmount": "दर्ज राशि",
+        "conversionAmount": "परिवर्तित राशि",
+        "totalCharge": "कुल शुल्क",
+        "willGet": "आपको मिलेगा",
+        "payable": "देय राशि",
+        "totalPayable": "कुल देय",
+        "limit": "सीमा",
+        "charge": "शुल्क",
+        "available": "उपलब्ध शेष:",
+        "amountPlaceholder": "राशि दर्ज करें",
+        "chooseGateway": "भुगतान गेटवे चुनें",
+        "enterAmount": "राशि दर्ज करें",
+        "overBalance": "यह आपके उपलब्ध शेष से अधिक है",
+        "limitIs": "अनुमत सीमा:",
+        "withdrawVia": "इसके माध्यम से निकासी",
+        "withdrawInfo": "निकासी जानकारी",
+        "confirm": "पुष्टि करें",
+        "fieldRequired": "यह फ़ील्ड आवश्यक है",
+        "doneTitle": "निकासी का अनुरोध भेजा गया",
+        "doneBody": "आपका अनुरोध समीक्षा हेतु व्यवस्थापक को भेज दिया गया है।"
       },
       "logs": {
         "title": "पेआउट",
@@ -1402,7 +1463,10 @@
         "colRef": "संदर्भ",
         "colMethod": "तरीका",
         "colRequested": "अनुरोधित",
-        "colReceived": "प्राप्त"
+        "colReceived": "प्राप्त",
+        "empty": "अभी तक कोई निकासी नहीं।",
+        "rejectionReason": "अस्वीकृति का कारण",
+        "balanceAfter": "बाद में शेष"
       }
     },
     "ranges": {

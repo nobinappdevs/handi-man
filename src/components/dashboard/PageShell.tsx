@@ -57,15 +57,15 @@ export function PageShell({
         {head ?? (
           <>
             <div className="flex min-w-0 flex-col gap-2">
-              <span className="min-h-[18px] text-[13px] leading-none font-normal text-muted">
+              {/* <span className="min-h-[18px] text-[13px] leading-none font-normal text-muted">
                 {today}
-              </span>
+              </span> */}
               <h1 className="text-[clamp(24px,2.6vw,34px)] leading-[1.1] font-semibold tracking-[-0.025em]">
                 {t(`dashboard.pages.${page}.heading`)}
               </h1>
-              <p className="max-w-[560px] text-[14.5px] leading-[1.6] font-normal text-muted">
+              {/* <p className="max-w-[560px] text-[14.5px] leading-[1.6] font-normal text-muted">
                 {t(`dashboard.pages.${page}.sub`)}
-              </p>
+              </p> */}
             </div>
             {actions}
           </>

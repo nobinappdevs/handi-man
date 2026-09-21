@@ -187,7 +187,95 @@ export const deliveryOrders = () => DELIVERY_ORDERS;
 export const findDelivery = (no: string | null) =>
   no ? (DELIVERY_ORDERS.find((o) => o.no === no) ?? null) : null;
 
-/** Pickup arrives later; the screen already handles an empty pool. */
+/* ─────────────────────────── Pickup log ───────────────────────────
+ * The mirror image of a delivery: a rider comes to YOUR door, collects what
+ * you already have, and carries it on to a destination. So it is the same
+ * table — see `ParcelLog` — over a record that trades the shop fields for a
+ * weight, which is what a courier quote is priced on.
+ */
+
+export type PickupOrder = {
+  no: string;
+  status: OrderStatus;
+  placedOn: string;
+  /** Pre-formatted window; the API sends it as one string. */
+  schedule: string;
+  /** i18n suffix under `dashboard.history.payment`. */
+  payment: string;
+  parcel: {
+    name: string; quantity: number; weight: string; price: string; details: string;
+  };
+  /** Where the rider collects — the customer's own door, usually. */
+  collect: { name: string; phone: string; addressLabel: string; address: string; landmark: string };
+  /** Where it goes afterwards. */
+  dropoff: { shortAddress: string; fullAddress: string; phone: string };
+  totals: { subtotal: string; charge: string; total: string };
+};
+
+/* Blanks stay "" for the same reason as above: the modal says "not given"
+   rather than hiding the row. */
+const PICKUP_ORDERS: PickupOrder[] = [
+  {
+    no: "PO17820461",
+    status: "pending",
+    placedOn: "24 Mar 2026",
+    schedule: "10:00 AM – 11:00 AM, 26 Mar 2026",
+    payment: "cod",
+    parcel: {
+      name: "Laptop bag", quantity: 1, weight: "2.5 kg", price: "",
+      details: "Contains a charger — keep upright.",
+    },
+    collect: {
+      name: "Rakib Hasan", phone: "+880 1712 345678", addressLabel: "home",
+      address: "House 12, Road 5, Mirpur, Dhaka", landmark: "Flat 3B, Rose Tower",
+    },
+    dropoff: { shortAddress: "Gulshan 2", fullAddress: "Road 41, Gulshan 2, Dhaka 1212", phone: "+880 1611 553311" },
+    totals: { subtotal: "0.00 USD", charge: "4.50 USD", total: "4.50 USD" },
+  },
+  {
+    no: "PO17811908",
+    status: "processing",
+    placedOn: "18 Mar 2026",
+    schedule: "3:00 PM – 4:00 PM, 20 Mar 2026",
+    payment: "bkash",
+    parcel: {
+      name: "Returned shoes", quantity: 2, weight: "1.2 kg", price: "36.00 USD",
+      details: "",
+    },
+    collect: {
+      name: "Rakib Hasan", phone: "+880 1712 345678", addressLabel: "work",
+      address: "Level 7, Bay Tower, Gulshan 1", landmark: "",
+    },
+    dropoff: { shortAddress: "Mohakhali DOHS", fullAddress: "House 9, Road 3, Mohakhali DOHS, Dhaka", phone: "+880 1511 889977" },
+    totals: { subtotal: "0.00 USD", charge: "6.00 USD", total: "6.00 USD" },
+  },
+  {
+    no: "PO17796335",
+    status: "completed",
+    placedOn: "02 Mar 2026",
+    schedule: "9:00 AM – 10:00 AM, 03 Mar 2026",
+    payment: "card",
+    parcel: {
+      name: "Kitchen mixer", quantity: 1, weight: "6.00 kg", price: "",
+      details: "Boxed, with the original packaging.",
+    },
+    collect: {
+      name: "Rakib Hasan", phone: "+880 1712 345678", addressLabel: "home",
+      address: "House 12, Road 5, Mirpur, Dhaka", landmark: "Flat 3B, Rose Tower",
+    },
+    dropoff: { shortAddress: "Bashundhara Block C", fullAddress: "", phone: "" },
+    totals: { subtotal: "0.00 USD", charge: "8.25 USD", total: "8.25 USD" },
+  },
+];
+
+export const pickupOrders = () => PICKUP_ORDERS;
+
+export const findPickup = (no: string | null) =>
+  no ? (PICKUP_ORDERS.find((o) => o.no === no) ?? null) : null;
+
+/* Pickup and Delivery have logs of their own — `pickupOrders` /
+   `deliveryOrders` above — because a parcel is not shaped like a service
+   order. This pool stays for the service-order screen. */
 const ORDERS: Record<OrderKind, ServiceOrder[]> = {
   service: SERVICE_ORDERS,
   pickup: [],

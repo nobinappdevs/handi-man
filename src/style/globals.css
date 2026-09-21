@@ -829,6 +829,29 @@ input[type="number"] {
 }
 
 /*--------------------------------------------------------------
+    # Recharts - focus ring
+
+    Recharts marks its chart root focusable so a keyboard can step through
+    the series. The side effect is that CLICKING a chart draws the browser's
+    focus ring around the whole panel, which reads as an error state on a
+    dashboard - a black box appears and stays until you click elsewhere.
+
+    So: no ring for pointer focus, ring kept for `:focus-visible`, which is
+    what a keyboard user gets. Removing it outright would strip the only
+    indication of where tab focus is.
+--------------------------------------------------------------*/
+.recharts-wrapper:focus,
+.recharts-surface:focus,
+.recharts-wrapper *:focus {
+  outline: none;
+}
+
+.recharts-wrapper:focus-visible {
+  outline: 2px solid rgb(var(--primary__color));
+  outline-offset: 2px;
+}
+
+/*--------------------------------------------------------------
     # Dashboard tables - horizontal scroll + slim themed scrollbar
 --------------------------------------------------------------*/
 .scroll-x {

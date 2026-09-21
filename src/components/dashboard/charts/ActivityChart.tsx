@@ -1,39 +1,63 @@
 "use client";
 
+import {
+  Area,
+  Bar,
+  CartesianGrid,
+  ComposedChart,
+  Legend,
+  Line,
+  ResponsiveContainer,
+  Scatter,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import { useLang } from "@/hooks/useLang";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useIsClient } from "@/hooks/useIsClient";
 import { Panel } from "@/components/dashboard/Panel";
-import type { OverviewRange, RangeSeries } from "@/components/dashboard/dashboardData";
+import { ChartTooltip } from "@/components/dashboard/charts/ChartTooltip";
+import type { OverviewRange } from "@/components/dashboard/dashboardData";
+import { yAxisWidth, yAxisTicks, type SegmentSeries } from "@/lib/dashboardSeries";
 
 /**
- * Both overviews' headline chart: the design's composed area + bar + line
- * combo, not the flat stacked column the rest of the dashboard uses. This is
- * the one chart the design gives its own full-width row, so it keeps its own
- * shape — area = everything in the bucket, bar = the completed ones, line =
- * the rest still open. Processing and canceled are the table's job below; a
- * fourth series overlapping these three reads as noise.
+ * The service chart — Recharts' "Line Bar Area Composed Chart", built to match
+ * that example exactly: four marks over one band-scaled dataset.
  *
- * Generic over the series so the customer's service requests and the vendor's
- * job queue are one chart with two datasets, not two charts to keep in sync.
- * `title` and `allLabel` are the only strings that differ between them.
+ *   Area    — every request in the bucket, whatever state   (the example's `amt`)
+ *   Bar     — the ones that completed                       (`pv`)
+ *   Line    — the ones still waiting                        (`uv`)
+ *   Scatter — the ones in progress                          (`cnt`)
+ *
+ * `scale="band"` is what lets the bar sit centred on the same tick the line and
+ * the dots use, and the grid is dashed on BOTH axes — the example draws a full
+ * lattice rather than the horizontal-only rules the other panels use.
+ *
+ * Generic over the series, so the customer's service requests and the vendor's
+ * job queue are one chart with two datasets. `title` and `allLabel` are the only
+ * strings that differ between them.
+ *
+ * ── The palette is the primary family ──
+ * The shape is the reference's; the colour is this product's. Each mark takes
+ * the token its STATUS already has in the pickup and delivery panels, so a
+ * colour means one thing across the whole dashboard:
+ *
+ *   bar     completed  -> ramp-1  (deepest plum)
+ *   scatter processing -> ramp-2
+ *   line    pending    -> ramp-3
+ *
+ * The area is the bucket total rather than a status, so it takes `primary`
+ * itself at a low opacity — a wash for everything, with the three states
+ * reading on top of it.
  */
-const X0 = 44;
-const X1 = 986;
-const Y_TOP = 16;
-const Y_BOT = 196;
-const VIEW_W = 1000;
-const VIEW_H = 238;
-
-const round = (v: number) => Math.round(v * 10) / 10;
-
-function smoothPath(xs: number[], ys: number[]): string {
-  let d = `M ${round(xs[0])} ${round(ys[0])}`;
-  for (let i = 1; i < xs.length; i += 1) {
-    const cx = round((xs[i - 1] + xs[i]) / 2);
-    d += ` C ${cx} ${round(ys[i - 1])}, ${cx} ${round(ys[i])}, ${round(xs[i])} ${round(ys[i])}`;
-  }
-  return d;
-}
+const INK = {
+  area: "var(--color-primary)",
+  bar: "var(--color-ramp-1)",
+  scatter: "var(--color-ramp-2)",
+  line: "var(--color-ramp-3)",
+  axis: "var(--color-muted)",
+  grid: "var(--color-border)",
+};
 
 export function ActivityChart({
   range,
@@ -43,9 +67,9 @@ export function ActivityChart({
   allLabel,
   emptyLabel,
 }: {
-  /** Only read for the axis label density — the series is already ranged. */
+  /** Read for axis label density — the series is already ranged. */
   range: OverviewRange;
-  series: RangeSeries;
+  series: SegmentSeries;
   title: string;
   /** The period this covers, under the title. */
   caption: string;
@@ -54,42 +78,28 @@ export function ActivityChart({
   emptyLabel: string;
 }) {
   const { t } = useLang();
-  /* The design thins the axis on a narrow screen by DROPPING labels, which no
-     class can do — a hidden label still occupies its slot in the sequence. */
-  const roomy = useMediaQuery("(min-width: 900px)");
+  /* Recharts measures its container, which has no width during the static
+     prerender. Holding the chart back until mount avoids a first paint at zero
+     width that then jumps — the axis and legend would render on top of nothing. */
+  const isClient = useIsClient();
 
-  const { labels, totals, completed, pending } = series;
+  const { labels, totals, completed, pending, processing } = series;
   const n = labels.length;
-  const max = Math.max(5, ...totals);
-  const empty = totals.every((v) => v === 0);
+  const empty = n === 0 || totals.every((v) => v === 0);
 
-  const step = n <= 1 ? 0 : (X1 - X0) / (n - 1);
-  const px = (i: number) => X0 + i * step;
-  const py = (v: number) => Y_BOT - (v / max) * (Y_BOT - Y_TOP);
+  const data = labels.map((label, i) => ({
+    label,
+    total: totals[i] ?? 0,
+    completed: completed[i] ?? 0,
+    pending: pending[i] ?? 0,
+    processing: processing[i] ?? 0,
+  }));
 
-  const xs = labels.map((_, i) => px(i));
-  const areaPath = `${smoothPath(xs, totals.map(py))} L ${round(px(n - 1))} ${Y_BOT} L ${round(px(0))} ${Y_BOT} Z`;
-  const linePath = smoothPath(xs, pending.map(py));
-
-  const barW = Math.max(3, Math.min(18, step * 0.46));
-  const bars = completed.map((v, i) => {
-    const h = v === 0 ? 2 : Y_BOT - py(v);
-    return { i, x: round(px(i) - barW / 2), y: round(Y_BOT - h), h: round(h), zero: v === 0 };
-  });
-
-  const dotEvery = n > 20 ? 3 : 1;
-  const dots = pending
-    .map((v, i) => ({ i, cx: round(px(i)), cy: round(py(v)) }))
-    .filter(({ i }) => i % dotEvery === 0);
-
-  /* One gridline per whole request — the axis counts jobs, and a fractional
-     tick on a chart whose values are all integers is a lie. */
-  const ticks = Array.from({ length: max + 1 }, (_, v) => ({ v, topPct: round((py(v) / VIEW_H) * 100) }));
-
-  const labelStep = range === "week" ? 1 : roomy ? 3 : 6;
-  const xLabels = labels
-    .map((label, i) => ({ i, label, pctIn: round((px(i) / VIEW_W) * 100) }))
-    .filter(({ i }) => i % labelStep === 0 || i === n - 1);
+  /* A month of daily buckets cannot show 30 labels, so drop every Nth. Recharts
+     counts the GAP between shown ticks, not the stride, hence the -1. */
+  const tickGap = range === "week" ? 0 : Math.max(0, Math.ceil(n / 10) - 1);
+  /* The area carries every state, so it is the tallest mark and sets the axis. */
+  const axis = yAxisTicks(Math.max(0, ...totals));
 
   return (
     <Panel className="flex flex-col gap-[18px] p-[clamp(18px,2vw,26px)]">
@@ -101,90 +111,70 @@ export function ActivityChart({
             <span className="text-[13.5px] text-muted">{caption}</span>
           </span>
         </span>
-
-        <div className="flex flex-wrap gap-x-4.5 gap-y-2">
-          <span className="flex items-center gap-1.75 text-[13px] whitespace-nowrap text-body">
-            <span aria-hidden className="h-[9px] w-3.5 flex-none border border-brand/60 bg-brand/10" />
-            {allLabel}
-          </span>
-          <span className="flex items-center gap-1.75 text-[13px] whitespace-nowrap text-body">
-            <span aria-hidden className="h-3 w-[7px] flex-none bg-ramp-1" />
-            {t("dashboard.charts.status.completed")}
-          </span>
-          <span className="flex items-center gap-1.75 text-[13px] whitespace-nowrap text-body">
-            <span aria-hidden className="flex h-[9px] w-4 flex-none items-center justify-center bg-warn">
-              <span className="h-1.5 w-1.5 rounded-full bg-card" />
-            </span>
-            {t("dashboard.charts.status.pending")}
-          </span>
-        </div>
+        {empty && <span className="text-[13px] text-muted">{emptyLabel}</span>}
       </div>
 
-      <div className="relative">
-        <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} className="block w-full" aria-hidden>
-          {ticks.map((tick) => (
-            <line
-              key={tick.v}
-              x1={X0}
-              x2={X1}
-              y1={py(tick.v)}
-              y2={py(tick.v)}
-              className="stroke-border/60"
-              strokeWidth={1}
-              strokeDasharray="3 5"
-            />
-          ))}
-          <line x1={X0} x2={X0} y1={Y_TOP} y2={Y_BOT} className="stroke-border" strokeWidth={1} />
+      <div className="h-[clamp(300px,32vw,400px)] w-full">
+        {isClient && (
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart data={data} margin={{ top: 8, right: 12, bottom: 0, left: 0 }}>
+              {/* The example's full lattice — dashed on both axes, where the
+                  pickup and delivery panels rule horizontally only. */}
+              <CartesianGrid stroke={INK.grid} strokeDasharray="3 3" />
+              <XAxis
+                dataKey="label"
+                scale="band"
+                stroke={INK.axis}
+                tickLine={false}
+                minTickGap={tickGap}
+                tick={{ fontSize: 11 }}
+              />
+              <YAxis
+                stroke={INK.axis}
+                tickLine={false}
+                tick={{ fontSize: 11 }}
+                /* Explicit whole-number ticks whose STEP scales with the data,
+                   and a width sized to the widest of them. Left to itself
+                   Recharts prints 0.2 of a job on a quiet month. */
+                ticks={axis.ticks}
+                domain={[0, axis.top]}
+                width={yAxisWidth(axis.top)}
+                allowDecimals={false}
+              />
+              <Tooltip content={<ChartTooltip />} />
+              <Legend iconType="circle" wrapperStyle={{ fontSize: 12.5, paddingTop: 8 }} />
 
-          <path d={areaPath} className="fill-brand/8" stroke="none" />
-          {bars.map((bar) => (
-            <rect
-              key={bar.i}
-              x={bar.x}
-              y={bar.y}
-              width={round(barW)}
-              height={bar.h}
-              className={bar.zero ? "fill-border" : "fill-ramp-1"}
-            />
-          ))}
-          <path d={linePath} className="fill-none stroke-warn" strokeWidth={2} strokeLinecap="round" />
-          {dots.map((dot) => (
-            <circle
-              key={dot.i}
-              cx={dot.cx}
-              cy={dot.cy}
-              r={3.2}
-              className="fill-card stroke-warn"
-              strokeWidth={2}
-            />
-          ))}
-        </svg>
-
-        <div className="pointer-events-none absolute inset-0">
-          {ticks.map((tick) => (
-            <span
-              key={tick.v}
-              style={{ left: "3.4%", top: `${tick.topPct}%` }}
-              className="absolute -translate-x-full -translate-y-1/2 text-[11px] text-muted"
-            >
-              {tick.v}
-            </span>
-          ))}
-          {xLabels.map(({ i, label, pctIn }) => (
-            <span
-              key={i}
-              style={{ left: `${pctIn}%`, top: "93%" }}
-              className="absolute -translate-x-1/2 -translate-y-1/2 text-[11px] whitespace-nowrap text-muted"
-            >
-              {label}
-            </span>
-          ))}
-        </div>
-
-        {empty && (
-          <span className="absolute top-[44%] left-1/2 -translate-x-1/2 -translate-y-1/2 border border-border bg-sunk px-4 py-2 text-[13.5px] whitespace-nowrap text-muted">
-            {emptyLabel}
-          </span>
+              <Area
+                type="monotone"
+                dataKey="total"
+                name={allLabel}
+                fill={INK.area}
+                /* A wash, not a block: the bars and dots sit ON this, and a
+                   solid plum fill buries every one of them. */
+                fillOpacity={0.14}
+                stroke={INK.area}
+                strokeWidth={2}
+              />
+              <Bar
+                dataKey="completed"
+                name={t("dashboard.charts.status.completed")}
+                barSize={20}
+                fill={INK.bar}
+              />
+              <Line
+                type="monotone"
+                dataKey="pending"
+                name={t("dashboard.charts.status.pending")}
+                stroke={INK.line}
+                strokeWidth={2.2}
+              />
+              <Scatter
+                dataKey="processing"
+                name={t("dashboard.charts.status.processing")}
+                fill={INK.scatter}
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
         )}
       </div>
     </Panel>

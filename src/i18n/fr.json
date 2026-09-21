@@ -23,7 +23,8 @@
     "pickup": "Collecte",
     "joinVendor": "Devenir prestataire",
     "support": "Assistance 24/7",
-    "viewAllServices": "Voir tous les services"
+    "viewAllServices": "Voir tous les services",
+    "vendorDashboard": "Tableau prestataire"
   },
   "theme": {
     "toggle": "Thème de couleur",
@@ -862,7 +863,8 @@
       "payment": "Paiement",
       "schedule": "Planning",
       "status": "Statut",
-      "amount": "Montant"
+      "amount": "Montant",
+      "quantity": "Quantité"
     },
     "status": {
       "inProgress": "En cours",
@@ -879,7 +881,8 @@
     "kpi": {
       "balance": {
         "label": "Mon solde",
-        "available": "Disponible"
+        "available": "Disponible",
+        "unit": "USD"
       },
       "completedServices": {
         "label": "Services terminés"
@@ -934,7 +937,8 @@
         "pending": "En attente",
         "processing": "En cours",
         "completed": "Terminé",
-        "canceled": "Annulé"
+        "canceled": "Annulé",
+        "hold": "En attente"
       },
       "span": {
         "today": "aujourd'hui",
@@ -966,7 +970,8 @@
       "paymentStatus": "Statut du paiement",
       "serviceName": "Nom du service",
       "activeNote": "ouverts avec le support",
-      "pendingNote": "en attente de réponse"
+      "pendingNote": "en attente de réponse",
+      "lifetimeNote": "Depuis toujours"
     },
     "pages": {
       "overview": {
@@ -1032,6 +1037,12 @@
         "nav": "Service",
         "heading": "Commandes de service",
         "sub": "Chaque service que vous avez commandé, avec son planning, son statut et son reçu.",
+        "table": "Activité récente"
+      },
+      "pickupHistory": {
+        "nav": "Collecte",
+        "heading": "Journal des collectes",
+        "sub": "Chaque colis qu'un coursier a récupéré chez vous, avec son planning, son itinéraire et ses frais.",
         "table": "Activité récente"
       },
       "deliveryHistory": {
@@ -1186,16 +1197,11 @@
       "saveAsPlaceholder": "Choisissez un libellé",
       "mapLink": "Lien de carte",
       "mapLinkHint": "Facultatif. Collez un lien Google Maps si l'adresse est difficile à trouver.",
-      "makeDefault": "Définir comme adresse par défaut",
-      "makeDefaultHint": "Les réservations et les colis commenceront ici.",
       "labels": {
         "home": "Domicile",
         "work": "Travail",
         "other": "Autre"
       },
-      "defaultBadge": "Par défaut",
-      "inUse": "Adresse par défaut",
-      "setDefault": "Définir par défaut",
       "viewMap": "Ouvrir dans les cartes",
       "edit": "Modifier l'adresse",
       "delete": "Supprimer l'adresse",
@@ -1204,8 +1210,7 @@
       "emptyBody": "Enregistrez les lieux où vous réservez le plus souvent et ils seront accessibles en un clic au moment du paiement.",
       "toastAdded": "Adresse enregistrée",
       "toastUpdated": "Adresse mise à jour",
-      "toastRemoved": "Adresse supprimée",
-      "toastDefault": "Adresse par défaut mise à jour"
+      "toastRemoved": "Adresse supprimée"
     },
     "history": {
       "order": "Commande",
@@ -1241,6 +1246,39 @@
       "emptyBody": "Dès que vous réservez quelque chose, cela apparaîtra ici avec son planning et son reçu.",
       "notFoundTitle": "Commande introuvable",
       "notFoundBody": "Ce numéro de commande ne correspond à rien sur votre compte."
+    },
+    "pickup": {
+      "logTitle": "Collectes",
+      "parcels": "colis",
+      "colParcel": "Colis",
+      "colSchedule": "Planning",
+      "colFrom": "Collecte à",
+      "colStatus": "Statut",
+      "colTotal": "Total",
+      "colActions": "Actions",
+      "viewAll": "Tout voir",
+      "parcelSection": "Colis",
+      "collectSection": "Collecte",
+      "dropoffSection": "Destination",
+      "paymentSection": "Paiement",
+      "parcelName": "Nom",
+      "quantity": "Quantité",
+      "weight": "Poids",
+      "price": "Prix",
+      "details": "Détails",
+      "schedule": "Date et heure planifiées",
+      "name": "Nom",
+      "phone": "Téléphone",
+      "addressType": "Type d'adresse",
+      "address": "Adresse",
+      "landmark": "Point de repère",
+      "shortAddress": "Adresse courte de destination",
+      "fullAddress": "Adresse complète de destination",
+      "dropoffPhone": "Téléphone de destination",
+      "paymentType": "Mode de paiement",
+      "totalPayable": "Total à payer",
+      "emptyTitle": "Aucune collecte pour l'instant",
+      "emptyBody": "Réservez une collecte et elle apparaîtra ici avec son planning, son itinéraire et ses frais."
     },
     "delivery": {
       "logTitle": "Livraisons",
@@ -1393,7 +1431,30 @@
         "submit": "Demander le versement",
         "requested": "Versement demandé",
         "note": "Les versements sont examinés une fois par jour, les jours ouvrés. Les frais s'élèvent à 1 % du montant demandé.",
-        "seeLogs": "Voir l'historique des versements"
+        "seeLogs": "Voir l'historique des versements",
+        "exchangeRate": "Taux de change",
+        "preview": "Aperçu du retrait",
+        "previewEmpty": "Choisissez une passerelle de paiement pour voir le détail.",
+        "enteredAmount": "Montant saisi",
+        "conversionAmount": "Montant converti",
+        "totalCharge": "Frais totaux",
+        "willGet": "Vous recevrez",
+        "payable": "Montant à payer",
+        "totalPayable": "Total à payer",
+        "limit": "Limite",
+        "charge": "Frais",
+        "available": "Solde disponible :",
+        "amountPlaceholder": "Saisir un montant",
+        "chooseGateway": "Choisissez une passerelle de paiement",
+        "enterAmount": "Saisissez un montant",
+        "overBalance": "Cela dépasse votre solde disponible",
+        "limitIs": "Plage autorisée :",
+        "withdrawVia": "Retirer via",
+        "withdrawInfo": "Informations du retrait",
+        "confirm": "Confirmer",
+        "fieldRequired": "Ce champ est obligatoire",
+        "doneTitle": "Retrait demandé",
+        "doneBody": "Votre demande a été envoyée à l'administrateur pour examen."
       },
       "logs": {
         "title": "Versements",
@@ -1402,7 +1463,10 @@
         "colRef": "Référence",
         "colMethod": "Méthode",
         "colRequested": "Demandé",
-        "colReceived": "Reçu"
+        "colReceived": "Reçu",
+        "empty": "Aucun retrait pour le moment.",
+        "rejectionReason": "Motif du refus",
+        "balanceAfter": "Solde après"
       }
     },
     "ranges": {
