@@ -1355,8 +1355,6 @@
         "colCustomer": "Client",
         "colSchedule": "Planning",
         "colPayout": "Votre versement",
-        "jobSection": "Mission",
-        "customerSection": "Client",
         "payoutSection": "Paiement",
         "service": "Service",
         "commission": "Commission de la plateforme",

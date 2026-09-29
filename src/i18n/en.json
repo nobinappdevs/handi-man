@@ -1355,12 +1355,15 @@
         "colCustomer": "Customer",
         "colSchedule": "Schedule",
         "colPayout": "Your payout",
-        "jobSection": "Job",
-        "customerSection": "Customer",
         "payoutSection": "Payment",
         "service": "Service",
         "commission": "Platform commission",
-        "yourPayout": "Your payout"
+        "yourPayout": "Your payout",
+        "viewDetails": "View details",
+        "accept": "Accept",
+        "reject": "Reject",
+        "rejected": "Rejected",
+        "rejectTitle": "Reject this job?"
       },
       "services": {
         "title": "Your services",
