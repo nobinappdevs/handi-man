@@ -1,32 +1,89 @@
 "use client";
 
-import Image from "next/image";
+import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { ArrowLeft, ArrowRight, CalendarClock, Check, MapPin, Package, Phone, Receipt, User } from "lucide-react";
+import {
+  ArrowLeft, ArrowRight, CalendarClock, Check, MapPin, Package, Phone, Receipt, User, Wrench,
+} from "lucide-react";
 import { useLang } from "@/hooks/useLang";
+import { formatDate, money } from "@/lib/money";
+import { useUserTransactions } from "@/hooks/useTransactions";
 import { Panel, PanelHeader, PANEL_BODY } from "@/components/dashboard/Panel";
-import { CARD_PHOTOS } from "@/components/services/servicesData";
+import { LogSkeleton } from "@/components/dashboard/page/history/ParcelLog";
 import { cn } from "@/components/ui/cn";
 import {
-  findOrder, ordersFor, ORDER_STEPS, STATUS_TONE,
+  addressLabelFor, paymentKeyFor, statusFromApi, ORDER_STEPS, STATUS_TONE,
   type OrderItem, type OrderKind, type ServiceOrder,
 } from "@/components/dashboard/page/history/historyData";
+import type { UserTransactionData } from "@/services/transaction.service";
 
-/** Thumbnail: the catalogue photo when there is one, its icon otherwise —
- *  the same pairing the services catalogue uses, so one service looks like
- *  itself wherever it appears. */
+/**
+ * `/user/transaction`'s `service_orders` mapped into what the list and the
+ * detail screen read.
+ *
+ * A line's price is `single_price × quantity` — the per-item TOTAL, not the
+ * unit price alone, which is what makes the items sum to `request_amount`.
+ * `discount` has no order-level field, so it is the sum of each line's own.
+ */
+function buildServiceOrders(data?: UserTransactionData): ServiceOrder[] {
+  const thumbFor = (thumbnail?: string) =>
+    !data ? "" : thumbnail
+      ? `${data.base_url}${data.service_image_path}/${thumbnail}`
+      : `${data.base_url}${data.default_image}`;
+
+  return (data?.service_orders ?? []).map((row) => {
+    const info = row.service_orders;
+    const currency = row.currency ?? row.payable_currency ?? "";
+    const request = Number(row.request_amount) || 0;
+    const payable = Number(row.payable) || 0;
+    const lines = row.service_info ?? [];
+    const discount = lines.reduce((sum, line) => sum + (Number(line.discount) || 0), 0);
+
+    return {
+      no: row.trx,
+      placedOn: formatDate(row.date_time),
+      payment: paymentKeyFor(row.payment_type ?? info?.payment_type, row.gateway_name),
+      status: statusFromApi(row.status),
+      items: lines.map((line) => ({
+        id: line.id,
+        title: line.service_name,
+        qty: Number(line.quantity) || 0,
+        price: money((Number(line.single_price) || 0) * (Number(line.quantity) || 1), currency),
+        thumbnail: thumbFor(line.service?.thumbnail),
+      })),
+      schedule: {
+        name: info?.name ?? "",
+        addressLabel: addressLabelFor(info?.address_type),
+        date: info?.schedule_date ?? "",
+        time: info?.schedule_time ?? "",
+        address: info?.address ?? "",
+        phone: info?.phone ?? "",
+      },
+      totals: {
+        subtotal: money(request, currency),
+        charge: money(Math.max(payable - request, 0), currency),
+        discount: money(discount, currency),
+        total: money(payable, currency),
+      },
+    };
+  });
+}
+
+/** Thumbnail: the vendor's own service photo when there is one, a generic
+ *  icon otherwise. Unlike the public catalogue, a booked order's service is
+ *  not guaranteed to still be a catalogue entry — `title` below is shown as
+ *  the vendor wrote it, not looked up by key. */
 function Thumb({ item }: { item: OrderItem }) {
-  const photo = CARD_PHOTOS[item.key];
-  const Icon = item.icon;
+  const [broken, setBroken] = useState(false);
+  const showPhoto = item.thumbnail && !broken;
   return (
-    <span className="relative flex h-16 w-16 flex-none overflow-hidden border border-border">
-      {photo ? (
-        <Image src={photo} alt="" aria-hidden fill sizes="64px" className="object-cover" />
+    <span className="relative flex h-16 w-16 flex-none items-center justify-center overflow-hidden border border-border bg-brand/12 text-brand">
+      {showPhoto ? (
+        // eslint-disable-next-line @next/next/no-img-element -- remote service photo, static export
+        <img src={item.thumbnail} alt="" className="h-full w-full object-cover" onError={() => setBroken(true)} />
       ) : (
-        <span className="flex h-full w-full items-center justify-center bg-brand/12 text-brand">
-          <Icon size={22} strokeWidth={1.6} aria-hidden />
-        </span>
+        <Wrench size={22} strokeWidth={1.6} aria-hidden />
       )}
     </span>
   );
@@ -49,12 +106,11 @@ function StatusPill({ status }: { status: ServiceOrder["status"] }) {
 
 function ItemRow({ item }: { item: OrderItem }) {
   const { t } = useLang();
-  const ns = item.copyNs ?? "servicesPage.items";
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-3 px-[clamp(16px,1.8vw,24px)] py-4 not-last:border-b not-last:border-border">
       <Thumb item={item} />
       <span className="min-w-[180px] flex-auto text-[15px] font-bold tracking-[-0.015em] text-heading">
-        {t(`${ns}.${item.key}.title`)}
+        {item.title}
       </span>
       <span className="flex-none text-[13px] font-medium text-muted">
         {t("dashboard.history.qty")} {item.qty}
@@ -66,9 +122,8 @@ function ItemRow({ item }: { item: OrderItem }) {
 
 /* ─────────────────────────── list ─────────────────────────── */
 
-function OrderList({ kind }: { kind: OrderKind }) {
+function OrderList({ kind, orders }: { kind: OrderKind; orders: ServiceOrder[] }) {
   const { t } = useLang();
-  const orders = ordersFor(kind);
 
   if (orders.length === 0) {
     return (
@@ -121,7 +176,7 @@ function OrderList({ kind }: { kind: OrderKind }) {
 
           <div className="flex flex-col">
             {order.items.map((item) => (
-              <ItemRow key={item.key} item={item} />
+              <ItemRow key={item.id} item={item} />
             ))}
           </div>
 
@@ -153,7 +208,7 @@ function Row({ icon, label, value }: { icon: React.ReactNode; label: string; val
   );
 }
 
-function Tracker({ status }: { status: ServiceOrder["status"] }) {
+function Tracker({ status }: { status: (typeof ORDER_STEPS)[number] }) {
   const { t } = useLang();
   const current = ORDER_STEPS.indexOf(status);
 
@@ -207,6 +262,7 @@ function Tracker({ status }: { status: ServiceOrder["status"] }) {
 
 function OrderDetail({ kind, order }: { kind: OrderKind; order: ServiceOrder }) {
   const { t } = useLang();
+  const status = order.status;
 
   return (
     <div className="flex flex-col gap-[clamp(16px,1.8vw,24px)]">
@@ -228,10 +284,17 @@ function OrderDetail({ kind, order }: { kind: OrderKind; order: ServiceOrder }) 
               {t("dashboard.history.placedOn")} {order.placedOn}
             </span>
           </span>
-          <StatusPill status={order.status} />
+          <StatusPill status={status} />
         </div>
         <div className={`${PANEL_BODY} pt-6 pb-7`}>
-          <Tracker status={order.status} />
+          {/* A canceled order left the tracker rather than stopping partway
+              along it — `ORDER_STEPS` has no slot for it, so it gets its own
+              note instead of a bar that reads as "nothing happened yet". */}
+          {status === "canceled" ? (
+            <p className="text-center text-[13.5px] text-muted">{t("dashboard.history.canceledNote")}</p>
+          ) : (
+            <Tracker status={status} />
+          )}
         </div>
       </Panel>
 
@@ -239,7 +302,7 @@ function OrderDetail({ kind, order }: { kind: OrderKind; order: ServiceOrder }) 
         <PanelHeader title={t("dashboard.history.itemsTitle")} />
         <div className="flex flex-col">
           {order.items.map((item) => (
-            <ItemRow key={item.key} item={item} />
+            <ItemRow key={item.id} item={item} />
           ))}
         </div>
       </Panel>
@@ -299,7 +362,11 @@ export function OrderHistory({ kind }: { kind: OrderKind }) {
   const { t } = useLang();
   const params = useSearchParams();
   const requested = params.get("order");
-  const order = findOrder(kind, requested);
+  const { data: res, isLoading } = useUserTransactions();
+  const orders = buildServiceOrders(res?.data);
+  const order = requested ? (orders.find((o) => o.no === requested) ?? null) : null;
+
+  if (isLoading) return <LogSkeleton />;
 
   if (requested && !order) {
     return (
@@ -324,5 +391,5 @@ export function OrderHistory({ kind }: { kind: OrderKind }) {
     );
   }
 
-  return order ? <OrderDetail kind={kind} order={order} /> : <OrderList kind={kind} />;
+  return order ? <OrderDetail kind={kind} order={order} /> : <OrderList kind={kind} orders={orders} />;
 }

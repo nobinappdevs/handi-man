@@ -3,7 +3,7 @@
 import { useState, type ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
-import { Panel, PanelHeader, PANEL_BODY } from "@/components/dashboard/Panel";
+import { Panel, PanelHeader, PANEL_BODY, SkLine } from "@/components/dashboard/Panel";
 import { Modal } from "@/components/dashboard/Modal";
 import { cn } from "@/components/ui/cn";
 import { STATUS_TONE, type OrderStatus } from "@/components/dashboard/page/history/historyData";
@@ -83,6 +83,25 @@ export function Section({ title, children }: { title: string; children: ReactNod
       <h4 className="mb-1 text-[11.5px] font-bold tracking-[0.14em] text-muted uppercase">{title}</h4>
       {children}
     </section>
+  );
+}
+
+/** The loading state for any of the three history screens, while
+ *  `/user/transaction` is in flight — three pulsing rows in the same shape
+ *  the real table rows take, so the layout does not jump once it lands. */
+export function LogSkeleton() {
+  return (
+    <Panel>
+      <div className={`flex flex-col gap-4 ${PANEL_BODY}`}>
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="flex items-center gap-3">
+            <SkLine className="h-9 w-9 flex-none" />
+            <SkLine className="h-4 flex-auto" />
+            <SkLine className="h-4 w-20 flex-none" />
+          </div>
+        ))}
+      </div>
+    </Panel>
   );
 }
 

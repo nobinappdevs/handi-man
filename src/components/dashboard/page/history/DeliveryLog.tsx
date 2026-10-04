@@ -5,8 +5,64 @@ import {
   Receipt, Store, User,
 } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
-import { Field, ParcelLog, Section } from "@/components/dashboard/page/history/ParcelLog";
-import { deliveryOrders } from "@/components/dashboard/page/history/historyData";
+import { formatDate, money } from "@/lib/money";
+import { useUserTransactions } from "@/hooks/useTransactions";
+import { Field, LogSkeleton, ParcelLog, Section } from "@/components/dashboard/page/history/ParcelLog";
+import {
+  addressLabelFor, paymentKeyFor, statusFromApi, type DeliveryOrder,
+} from "@/components/dashboard/page/history/historyData";
+import type { UserTransactionData } from "@/services/transaction.service";
+
+/** `/user/transaction`'s `delivery_orders` mapped into what the table and its
+ *  modal read. The API calls the parcel-and-shop block `pickup_info` even
+ *  here — it is where the courier picks the parcel up FROM — and a delivery
+ *  order has never carried more than one parcel, so only the first is read.
+ *  There is no `address_type` on a delivery row, so the pickup address label
+ *  falls back to "other" rather than guessing. */
+function buildDeliveryOrders(data?: UserTransactionData): DeliveryOrder[] {
+  return (data?.delivery_orders ?? []).map((row) => {
+    const currency = row.currency ?? "";
+    const request = Number(row.request_amount) || 0;
+    const payable = Number(row.payable) || 0;
+    const charge = row.charge !== undefined ? Number(row.charge) || 0 : Math.max(payable - request, 0);
+    const parcel = row.pickup_info?.[0];
+
+    return {
+      no: row.trx,
+      status: statusFromApi(row.status),
+      placedOn: formatDate(row.date_time),
+      schedule: [row.schedule_time, row.schedule_date].filter(Boolean).join(", "),
+      payment: paymentKeyFor(row.payment_type, row.gateway_name),
+      parcel: {
+        name: parcel?.name ?? "",
+        brand: parcel?.brand_name ?? "",
+        size: parcel?.size ?? "",
+        price: parcel?.price ? money(Number(parcel.price) || 0, currency) : "",
+        quantity: Number(parcel?.quantity) || 0,
+        shop: parcel?.shop ?? "",
+        shopAddress: parcel?.shop_address ?? "",
+        details: "",
+      },
+      pickup: {
+        name: row.name ?? "",
+        phone: row.phone ?? "",
+        addressLabel: addressLabelFor(),
+        address: row.address ?? "",
+        landmark: row.landmark ?? "",
+      },
+      dropoff: {
+        shortAddress: row.shortaddress ?? "",
+        fullAddress: row.fulladdress ?? "",
+        phone: row.delivery_phone ?? "",
+      },
+      totals: {
+        subtotal: money(request, currency),
+        charge: money(charge, currency),
+        total: money(payable, currency),
+      },
+    };
+  });
+}
 
 /**
  * The delivery log — parcels you sent out, as a table.
@@ -18,12 +74,15 @@ import { deliveryOrders } from "@/components/dashboard/page/history/historyData"
 export function DeliveryLog() {
   const { t } = useLang();
   const k = (s: string) => t(`dashboard.delivery.${s}`);
+  const { data: res, isLoading } = useUserTransactions();
+
+  if (isLoading) return <LogSkeleton />;
 
   return (
     <ParcelLog
       ns="dashboard.delivery"
       icon={ArrowDownToLine}
-      orders={deliveryOrders()}
+      orders={buildDeliveryOrders(res?.data)}
       routeHeading={k("colTo")}
       routeValue={(order) => order.dropoff.shortAddress || order.dropoff.fullAddress || "—"}
       details={(order) => (

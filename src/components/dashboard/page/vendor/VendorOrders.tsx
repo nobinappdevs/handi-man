@@ -29,9 +29,10 @@ export function StatusPill({ status }: { status: OrderStatus }) {
 
 /** A vendor's decision on a still-`pending` job — local to this screen until
  *  a `PATCH` endpoint lands, same stand-in the pause/resume toggle uses on
- *  `VendorServices`. Not folded into `OrderStatus`: that vocabulary is shared
- *  with the customer-facing History screens and their step tracker, and a
- *  vendor's rejection is not a state a customer's order ever reaches there. */
+ *  `VendorServices`. `VENDOR_ORDERS` is still mock data with no status of its
+ *  own to flip, so the decision lives beside it here rather than as a real
+ *  `OrderStatus` value (its "canceled" is what a rejection would map to once
+ *  this screen reads the live endpoint). */
 type Decision = "accepted" | "rejected";
 
 function RejectedPill() {

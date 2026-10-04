@@ -1235,7 +1235,8 @@
       "status": {
         "pending": "Pending",
         "processing": "Processing",
-        "completed": "Completed"
+        "completed": "Completed",
+        "canceled": "Canceled"
       },
       "payment": {
         "cod": "Cash on delivery",
@@ -1245,7 +1246,8 @@
       "emptyTitle": "No orders yet",
       "emptyBody": "Once you book something it will show up here with its schedule and receipt.",
       "notFoundTitle": "Order not found",
-      "notFoundBody": "That order number does not match anything on your account."
+      "notFoundBody": "That order number does not match anything on your account.",
+      "canceledNote": "This order was canceled and will not proceed further."
     },
     "pickup": {
       "logTitle": "Pickups",

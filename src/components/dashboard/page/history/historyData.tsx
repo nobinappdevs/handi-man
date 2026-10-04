@@ -1,28 +1,38 @@
-// Order history, standing in for the orders API.
+// Order history — types and the small pure helpers every history screen maps
+// the `/user/transaction` payload through.
 //
 // Built around `kind` from the start — the old dashboard has Service, Pickup
-// and Delivery as three entries under History, and they are the same screen
-// with a different pool. Adding the other two is a data change, not a new
-// component.
-
-import type { LucideIcon } from "lucide-react";
-import { AirVent, Lightbulb, Package, SprayCan, Wrench } from "lucide-react";
+// and Delivery as three entries under History. Service stayed one component
+// (`OrderHistory`, item-based); Pickup and Delivery turned out to share a
+// different shape instead (a single parcel, a route) and became `ParcelLog`.
+//
+// The mock arrays that used to live here (`SERVICE_ORDERS`, `PICKUP_ORDERS`,
+// `DELIVERY_ORDERS`) and their accessors are gone now that `/user/transaction`
+// is wired up — same call as `vendorData.tsx` made when its endpoints landed.
+// Each screen maps the raw rows into these same shapes itself (see
+// `OrderHistory`, `PickupLog`, `DeliveryLog`), using the helpers below for the
+// bits every one of the three needs: a status word, a payment method, an
+// address type.
 
 export type OrderKind = "service" | "pickup" | "delivery";
 
-/** The three states the tracker draws, in order. */
+/** The three states the tracker draws, in order. Not the full status
+ *  vocabulary — a canceled order never was a step on this bar, it left it. */
 export const ORDER_STEPS = ["pending", "processing", "completed"] as const;
-export type OrderStatus = (typeof ORDER_STEPS)[number];
 
+export type OrderStatus = "pending" | "processing" | "completed" | "canceled";
+
+/** One line of a service order. `title` is the vendor's own service name —
+ *  raw text from the API, never a catalogue lookup, because a booked order
+ *  is not guaranteed to still match a catalogue entry. `thumbnail` is an
+ *  absolute URL, or "" to fall back to a generic icon. */
 export type OrderItem = {
-  /** Catalogue key — the title comes from the same copy the catalogue uses. */
-  key: string;
-  /** i18n namespace for the title. Defaults to `servicesPage.items`. */
-  copyNs?: string;
+  id: string | number;
+  title: string;
   qty: number;
-  /** Raw money, as the API will send it. */
+  /** Pre-formatted money — line total (unit price × quantity). */
   price: string;
-  icon: LucideIcon;
+  thumbnail: string;
 };
 
 export type ServiceOrder = {
@@ -44,73 +54,17 @@ export type ServiceOrder = {
   totals: { subtotal: string; charge: string; discount: string; total: string };
 };
 
-const HOME_NS = "home.categoryGroups.items";
-
-const SERVICE_ORDERS: ServiceOrder[] = [
-  {
-    no: "SO34338359",
-    placedOn: "16 Jun 2026",
-    payment: "cod",
-    status: "completed",
-    items: [{ key: "residentialCleaning", copyNs: HOME_NS, qty: 1, price: "15.00 USD", icon: SprayCan }],
-    schedule: {
-      name: "Rakib Hasan", addressLabel: "work", date: "18 Jun 2026",
-      time: "9:00 AM – 10:00 AM", address: "Level 7, Bay Tower, Gulshan 1", phone: "+880 1712 345678",
-    },
-    totals: { subtotal: "15.00 USD", charge: "5.75 USD", discount: "0.00 USD", total: "20.75 USD" },
-  },
-  {
-    no: "SO58969918",
-    placedOn: "04 May 2026",
-    payment: "card",
-    status: "completed",
-    items: [{ key: "acServiceGasRefill", qty: 1, price: "49.00 USD", icon: AirVent }],
-    schedule: {
-      name: "Rakib Hasan", addressLabel: "home", date: "06 May 2026",
-      time: "2:00 PM – 4:00 PM", address: "House 12, Road 5, Mirpur, Dhaka", phone: "+880 1712 345678",
-    },
-    totals: { subtotal: "49.00 USD", charge: "5.75 USD", discount: "5.00 USD", total: "49.75 USD" },
-  },
-  {
-    no: "SO43557361",
-    placedOn: "30 Apr 2026",
-    payment: "cod",
-    status: "processing",
-    items: [{ key: "lightingInstall", qty: 1, price: "28.00 USD", icon: Lightbulb }],
-    schedule: {
-      name: "Rakib Hasan", addressLabel: "home", date: "02 May 2026",
-      time: "11:00 AM – 12:00 PM", address: "House 12, Road 5, Mirpur, Dhaka", phone: "+880 1712 345678",
-    },
-    totals: { subtotal: "28.00 USD", charge: "4.00 USD", discount: "0.00 USD", total: "32.00 USD" },
-  },
-  {
-    no: "SO41220874",
-    placedOn: "22 Apr 2026",
-    payment: "bkash",
-    status: "pending",
-    items: [
-      { key: "emergencyPlumbing", qty: 1, price: "32.00 USD", icon: Wrench },
-      { key: "drainCleaning", qty: 2, price: "52.00 USD", icon: Package },
-    ],
-    schedule: {
-      name: "Rakib Hasan", addressLabel: "home", date: "24 Apr 2026",
-      time: "8:00 AM – 9:00 AM", address: "House 12, Road 5, Mirpur, Dhaka", phone: "+880 1712 345678",
-    },
-    totals: { subtotal: "84.00 USD", charge: "6.50 USD", discount: "0.00 USD", total: "90.50 USD" },
-  },
-];
-
 /* ─────────────────────────── Delivery log ───────────────────────────
  * A parcel carries far more fields than a service order, and most of them are
  * blank most of the time. That is why this screen is a TABLE of the handful you
- * scan a log for, with the whole record behind a modal — see `DeliveryLog`.
+ * scan a log for, with the whole record behind a modal — see `ParcelLog`.
  */
 
 export type DeliveryOrder = {
   no: string;
   status: OrderStatus;
   placedOn: string;
-  /** Pre-formatted window; the API sends it as one string. */
+  /** Pre-formatted window; the API sends the date and the time separately. */
   schedule: string;
   /** i18n suffix under `dashboard.history.payment`. */
   payment: string;
@@ -125,68 +79,6 @@ export type DeliveryOrder = {
   totals: { subtotal: string; charge: string; total: string };
 };
 
-/* Blanks are kept as "" rather than dropped: the old screen rendered an empty
-   row for each, and the modal needs to say "not given" instead of hiding the
-   field, so the reader can tell a missing value from a missing row. */
-const DELIVERY_ORDERS: DeliveryOrder[] = [
-  {
-    no: "DO29476842",
-    status: "pending",
-    placedOn: "23 Mar 2026",
-    schedule: "2:00 PM – 3:00 PM, 25 Mar 2026",
-    payment: "cod",
-    parcel: {
-      name: "Documents envelope", brand: "", size: "A4", price: "",
-      quantity: 1, shop: "", shopAddress: "", details: "Hand to reception only.",
-    },
-    pickup: {
-      name: "Rakib Hasan", phone: "+880 1712 345678", addressLabel: "home",
-      address: "House 12, Road 5, Mirpur, Dhaka", landmark: "Flat 3B, Rose Tower",
-    },
-    dropoff: { shortAddress: "Banani 11", fullAddress: "Road 11, Banani, Dhaka 1213", phone: "+880 1811 220044" },
-    totals: { subtotal: "0.00 USD", charge: "5.00 USD", total: "5.00 USD" },
-  },
-  {
-    no: "DO29455190",
-    status: "processing",
-    placedOn: "19 Mar 2026",
-    schedule: "11:00 AM – 12:00 PM, 21 Mar 2026",
-    payment: "bkash",
-    parcel: {
-      name: "Spare parts box", brand: "Bosch", size: "Medium", price: "42.00 USD",
-      quantity: 2, shop: "Auto Mart", shopAddress: "Shop 4, Bijoy Sarani, Dhaka", details: "Fragile — do not stack.",
-    },
-    pickup: {
-      name: "Rakib Hasan", phone: "+880 1712 345678", addressLabel: "work",
-      address: "Level 7, Bay Tower, Gulshan 1", landmark: "",
-    },
-    dropoff: { shortAddress: "Uttara 7", fullAddress: "House 22, Sector 7, Uttara, Dhaka", phone: "+880 1912 778899" },
-    totals: { subtotal: "42.00 USD", charge: "6.50 USD", total: "48.50 USD" },
-  },
-  {
-    no: "DO29401773",
-    status: "completed",
-    placedOn: "28 Feb 2026",
-    schedule: "4:00 PM – 5:00 PM, 01 Mar 2026",
-    payment: "card",
-    parcel: {
-      name: "Gift box", brand: "", size: "Small", price: "18.00 USD",
-      quantity: 1, shop: "Bloom & Co.", shopAddress: "Road 27, Dhanmondi, Dhaka", details: "",
-    },
-    pickup: {
-      name: "Rakib Hasan", phone: "+880 1712 345678", addressLabel: "home",
-      address: "House 12, Road 5, Mirpur, Dhaka", landmark: "Flat 3B, Rose Tower",
-    },
-    dropoff: { shortAddress: "Dhanmondi 27", fullAddress: "", phone: "" },
-    totals: { subtotal: "18.00 USD", charge: "4.00 USD", total: "22.00 USD" },
-  },
-];
-
-export const deliveryOrders = () => DELIVERY_ORDERS;
-
-export const findDelivery = (no: string | null) =>
-  no ? (DELIVERY_ORDERS.find((o) => o.no === no) ?? null) : null;
-
 /* ─────────────────────────── Pickup log ───────────────────────────
  * The mirror image of a delivery: a rider comes to YOUR door, collects what
  * you already have, and carries it on to a destination. So it is the same
@@ -198,7 +90,7 @@ export type PickupOrder = {
   no: string;
   status: OrderStatus;
   placedOn: string;
-  /** Pre-formatted window; the API sends it as one string. */
+  /** Pre-formatted window; the API sends the date and the time separately. */
   schedule: string;
   /** i18n suffix under `dashboard.history.payment`. */
   payment: string;
@@ -212,84 +104,50 @@ export type PickupOrder = {
   totals: { subtotal: string; charge: string; total: string };
 };
 
-/* Blanks stay "" for the same reason as above: the modal says "not given"
-   rather than hiding the row. */
-const PICKUP_ORDERS: PickupOrder[] = [
-  {
-    no: "PO17820461",
-    status: "pending",
-    placedOn: "24 Mar 2026",
-    schedule: "10:00 AM – 11:00 AM, 26 Mar 2026",
-    payment: "cod",
-    parcel: {
-      name: "Laptop bag", quantity: 1, weight: "2.5 kg", price: "",
-      details: "Contains a charger — keep upright.",
-    },
-    collect: {
-      name: "Rakib Hasan", phone: "+880 1712 345678", addressLabel: "home",
-      address: "House 12, Road 5, Mirpur, Dhaka", landmark: "Flat 3B, Rose Tower",
-    },
-    dropoff: { shortAddress: "Gulshan 2", fullAddress: "Road 41, Gulshan 2, Dhaka 1212", phone: "+880 1611 553311" },
-    totals: { subtotal: "0.00 USD", charge: "4.50 USD", total: "4.50 USD" },
-  },
-  {
-    no: "PO17811908",
-    status: "processing",
-    placedOn: "18 Mar 2026",
-    schedule: "3:00 PM – 4:00 PM, 20 Mar 2026",
-    payment: "bkash",
-    parcel: {
-      name: "Returned shoes", quantity: 2, weight: "1.2 kg", price: "36.00 USD",
-      details: "",
-    },
-    collect: {
-      name: "Rakib Hasan", phone: "+880 1712 345678", addressLabel: "work",
-      address: "Level 7, Bay Tower, Gulshan 1", landmark: "",
-    },
-    dropoff: { shortAddress: "Mohakhali DOHS", fullAddress: "House 9, Road 3, Mohakhali DOHS, Dhaka", phone: "+880 1511 889977" },
-    totals: { subtotal: "0.00 USD", charge: "6.00 USD", total: "6.00 USD" },
-  },
-  {
-    no: "PO17796335",
-    status: "completed",
-    placedOn: "02 Mar 2026",
-    schedule: "9:00 AM – 10:00 AM, 03 Mar 2026",
-    payment: "card",
-    parcel: {
-      name: "Kitchen mixer", quantity: 1, weight: "6.00 kg", price: "",
-      details: "Boxed, with the original packaging.",
-    },
-    collect: {
-      name: "Rakib Hasan", phone: "+880 1712 345678", addressLabel: "home",
-      address: "House 12, Road 5, Mirpur, Dhaka", landmark: "Flat 3B, Rose Tower",
-    },
-    dropoff: { shortAddress: "Bashundhara Block C", fullAddress: "", phone: "" },
-    totals: { subtotal: "0.00 USD", charge: "8.25 USD", total: "8.25 USD" },
-  },
-];
-
-export const pickupOrders = () => PICKUP_ORDERS;
-
-export const findPickup = (no: string | null) =>
-  no ? (PICKUP_ORDERS.find((o) => o.no === no) ?? null) : null;
-
-/* Pickup and Delivery have logs of their own — `pickupOrders` /
-   `deliveryOrders` above — because a parcel is not shaped like a service
-   order. This pool stays for the service-order screen. */
-const ORDERS: Record<OrderKind, ServiceOrder[]> = {
-  service: SERVICE_ORDERS,
-  pickup: [],
-  delivery: [],
-};
-
-export const ordersFor = (kind: OrderKind) => ORDERS[kind] ?? [];
-
-export const findOrder = (kind: OrderKind, no: string | null) =>
-  no ? (ordersFor(kind).find((o) => o.no === no) ?? null) : null;
-
 /** Tone classes per status — same four-tone vocabulary as the jobs table. */
 export const STATUS_TONE: Record<OrderStatus, string> = {
   pending: "bg-muted/16 text-muted",
   processing: "bg-warn/14 text-warn",
   completed: "bg-ok/14 text-ok",
+  canceled: "bg-danger/14 text-danger",
 };
+
+/**
+ * The API's own status word onto the four the pill and the tracker draw.
+ *
+ * Case-insensitive and reads the string ("Rejected", "Success") rather than
+ * a numeric code, because the numbers are not documented anywhere in the
+ * collection and the string is what the backend itself renders — same call
+ * `VendorRecentJobs` makes for the vendor side. Anything unrecognised lands on
+ * "pending", never "completed": a status this screen cannot place should
+ * undersell the order, not oversell it.
+ */
+export function statusFromApi(raw?: string | number | null): OrderStatus {
+  const s = String(raw ?? "").trim().toLowerCase();
+  if (s === "processing" || s === "progress") return "processing";
+  if (s === "completed" || s === "complete" || s === "success") return "completed";
+  if (s === "rejected" || s === "canceled" || s === "cancelled" || s === "declined") return "canceled";
+  return "pending";
+}
+
+/**
+ * `payment_type` + `gateway_name` onto the three words `dashboard.history.payment`
+ * defines. The API's own values are `cash_on_delivery` / `online_payment` plus a
+ * free-text gateway ("Stripe USD"), not the three-way split the design shows —
+ * so this narrows it down rather than showing a raw gateway string as if it
+ * were a translated label. Any online gateway this cannot place still reads as
+ * "Card": it is the least wrong of the three for money that moved online.
+ */
+export function paymentKeyFor(paymentType?: string | null, gatewayName?: string | null): string {
+  const type = String(paymentType ?? "").trim().toLowerCase();
+  const gateway = String(gatewayName ?? "").trim().toLowerCase();
+  if (type === "cash_on_delivery") return "cod";
+  if (gateway.includes("bkash")) return "bkash";
+  return "card";
+}
+
+/** `address_type` ("Work") onto `dashboard.address.labels`' three keys. */
+export function addressLabelFor(raw?: string | null): "home" | "work" | "other" {
+  const s = String(raw ?? "").trim().toLowerCase();
+  return s === "home" || s === "work" ? s : "other";
+}
