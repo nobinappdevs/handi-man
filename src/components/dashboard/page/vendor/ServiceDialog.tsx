@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -141,18 +141,17 @@ export function ServiceDialog({
 
   /* An object URL, not a data URL: it is a pointer, so a 2MB image costs
      nothing to preview. It must be revoked or the blob leaks for the life of
-     the document. */
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!(thumbnail instanceof File)) {
-      setPreviewUrl(null);
-      return;
-    }
-    const url = URL.createObjectURL(thumbnail);
-    setPreviewUrl(url);
-    return () => URL.revokeObjectURL(url);
-  }, [thumbnail]);
+     the document. A ref callback, not state set from an effect: the URL lives
+     exactly as long as the <img> showing it, and the cleanup revokes it. */
+  const previewRef = useCallback(
+    (img: HTMLImageElement | null) => {
+      if (!img || !(thumbnail instanceof File)) return;
+      const url = URL.createObjectURL(thumbnail);
+      img.src = url;
+      return () => URL.revokeObjectURL(url);
+    },
+    [thumbnail],
+  );
 
   const detailsLength = (details ?? "").length;
 
@@ -355,10 +354,10 @@ export function ServiceDialog({
                   {/* The card's own 1.6 aspect, so what you see here is what
                       the listing will crop to. */}
                   <span className="relative flex aspect-[1.6] w-full flex-none items-center justify-center overflow-hidden bg-sunk min-[560px]:w-[176px]">
-                    {previewUrl ? (
+                    {thumbnail instanceof File ? (
                       // eslint-disable-next-line @next/next/no-img-element -- a blob: object URL; next/image cannot take one
                       <img
-                        src={previewUrl}
+                        ref={previewRef}
                         alt=""
                         aria-hidden
                         className="h-full w-full object-cover"
