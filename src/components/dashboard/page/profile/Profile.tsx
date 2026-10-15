@@ -246,11 +246,6 @@ export function Profile({ role = "user" }: { role?: AuthRole }) {
                   {t("dashboard.profile.verified")}
                 </span>
               )}
-              {user?.type && (
-                <span className="inline-flex bg-brand/14 px-2 py-0.5 text-[11.5px] font-bold tracking-[0.1em] text-brand uppercase">
-                  {user.type}
-                </span>
-              )}
             </span>
             <span className="flex min-w-0 items-center gap-1.5 text-[13.5px] text-muted">
               <Mail size={12} strokeWidth={2} aria-hidden className="flex-none" />
