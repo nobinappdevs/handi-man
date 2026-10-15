@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { applyServerErrors } from "@/components/auth/serverErrors";
 import type { KycData, KycField } from "@/services/kyc.service";
+import type { AuthRole } from "@/lib/authState";
 
 type StatusMeta = { labelKey: string; noteKey: string; tone: string; Icon: typeof ShieldCheck };
 
@@ -41,7 +42,26 @@ function schemaFor(fields: KycField[], t: (k: string) => string) {
 
   for (const f of fields) {
     if (f.type === "file") {
-      const file = z.instanceof(File, { message: required });
+      /* The server sends the rules with the field: `mimes` as bare extensions
+         ("jpg","png") and `max` as a size in MB. Enforcing them here turns a
+         round trip and a 422 into an instant message under the input — and it
+         stays correct if an admin changes the allowed types, because nothing
+         about them is written down on this side. */
+      const mimes = (f.validation?.mimes ?? []).map((m) => m.toLowerCase());
+      const maxMb = Number(f.validation?.max) || 0;
+
+      let file = z.instanceof(File, { message: required });
+      if (mimes.length) {
+        file = file.refine(
+          (v) => mimes.includes((v.name.split(".").pop() ?? "").toLowerCase()),
+          { message: `${t("dashboard.kyc.fileType")} ${mimes.join(", ")}` },
+        );
+      }
+      if (maxMb > 0) {
+        file = file.refine((v) => v.size <= maxMb * 1024 * 1024, {
+          message: `${t("dashboard.kyc.fileTooLarge")} ${maxMb}MB`,
+        });
+      }
       shape[f.name] = f.required ? file : file.optional();
       continue;
     }
@@ -153,10 +173,10 @@ function KycControl({
   );
 }
 
-export function Kyc() {
+export function Kyc({ role = "user" }: { role?: AuthRole }) {
   const { t } = useLang();
-  const { data: res, isLoading } = useKycFields();
-  const submit = useSubmitKyc();
+  const { data: res, isLoading } = useKycFields(role);
+  const submit = useSubmitKyc(role);
 
   const kyc = (res as { data?: KycData } | undefined)?.data;
   const status = kyc?.kyc_status ?? KYC_UNVERIFIED;
@@ -236,7 +256,7 @@ export function Kyc() {
               </span>
             </span>
             <p className="text-[13.5px] leading-[1.5]">
-              {kyc?.status_info || t(`dashboard.kyc.${meta.noteKey}`)}
+              {t(`dashboard.kyc.${meta.noteKey}`)}
             </p>
           </div>
         </div>

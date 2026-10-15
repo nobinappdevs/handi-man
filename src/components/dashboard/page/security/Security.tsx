@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Apple, Check, Copy, Shield, ShieldCheck, TriangleAlert } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { useGoogle2fa, useUpdate2faStatus } from "@/hooks/useSecurity";
+import type { AuthRole } from "@/lib/authState";
 import { Panel, PanelHeader, PANEL_BODY, FieldLabel, SkLine } from "@/components/dashboard/Panel";
 import { ConfirmDialog } from "@/components/dashboard/ConfirmDialog";
 import { Input } from "@/components/ui/Input";
@@ -57,18 +58,18 @@ function SecuritySkeleton() {
   );
 }
 
-export function Security() {
+export function Security({ role = "user" }: { role?: AuthRole }) {
   const { t } = useLang();
   const [copied, setCopied] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const { data: res, isLoading } = useGoogle2fa();
+  const { data: res, isLoading } = useGoogle2fa(role);
   const twoFa = (res as { data?: Google2faData } | undefined)?.data;
   const secret = twoFa?.qr_secrete ?? "";
   const qrSrc = twoFa?.qr_code ? qrSrcFrom(twoFa.qr_code) : "";
   const enabled = twoFa?.qr_status === 1;
 
-  const update2fa = useUpdate2faStatus();
+  const update2fa = useUpdate2faStatus(role);
   const {
     control,
     handleSubmit,

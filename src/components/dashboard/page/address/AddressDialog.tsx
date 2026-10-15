@@ -12,13 +12,13 @@ import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import {
   addressRequestSchema,
-  ADDRESS_LABELS,
+  ADDRESS_TYPES,
   type AddressRequest,
   type SavedAddress,
 } from "@/schemas/address.schema";
 
 const BLANK: AddressRequest = {
-  address: "", landmark: "", phone: "", label: "home", mapLink: "", isDefault: false,
+  address: "", landmark: "", mobile: "", address_type: "home", google_map: "",
 };
 
 /**
@@ -97,7 +97,7 @@ export function AddressDialog({
           />
         )} />
 
-        <Controller name="phone" control={control} render={({ field }) => (
+        <Controller name="mobile" control={control} render={({ field }) => (
           <Input
             {...field}
             required
@@ -105,28 +105,28 @@ export function AddressDialog({
             label={t("dashboard.address.phone")}
             placeholder={t("dashboard.address.phonePlaceholder")}
             leftIcon={<Phone size={14} strokeWidth={2} aria-hidden />}
-            error={errors.phone?.message}
+            error={errors.mobile?.message}
           />
         )} />
 
         <div>
           <FieldLabel required>{t("dashboard.address.saveAs")}</FieldLabel>
-          <Controller name="label" control={control} render={({ field }) => (
+          <Controller name="address_type" control={control} render={({ field }) => (
             <Select
               value={field.value}
               onChange={(v) => field.onChange(v)}
-              options={ADDRESS_LABELS.map((k) => ({ value: k, label: t(`dashboard.address.labels.${k}`) }))}
+              options={ADDRESS_TYPES.map((k) => ({ value: k, label: t(`dashboard.address.labels.${k}`) }))}
               placeholder={t("dashboard.address.saveAsPlaceholder")}
               leftIcon={<Star size={14} strokeWidth={2} aria-hidden />}
               required
             />
           )} />
-          {errors.label?.message && (
-            <p className="mt-1.5 text-xs text-danger">{errors.label.message}</p>
+          {errors.address_type?.message && (
+            <p className="mt-1.5 text-xs text-danger">{errors.address_type.message}</p>
           )}
         </div>
 
-        <Controller name="mapLink" control={control} render={({ field }) => (
+        <Controller name="google_map" control={control} render={({ field }) => (
           <Input
             {...field}
             value={field.value ?? ""}
@@ -135,22 +135,13 @@ export function AddressDialog({
             placeholder="https://maps.google.com/…"
             /* Optional on purpose — see the note in `address.schema.ts`. */
             hint={t("dashboard.address.mapLinkHint")}
-            error={errors.mapLink?.message}
+            error={errors.google_map?.message}
           />
         )} />
 
-        <Controller name="isDefault" control={control} render={({ field }) => (
-          <Input
-            type="checkbox"
-            name={field.name}
-            ref={field.ref}
-            checked={Boolean(field.value)}
-            onChange={(e) => field.onChange(e.target.checked)}
-            onBlur={field.onBlur}
-            label={t("dashboard.address.makeDefault")}
-            hint={t("dashboard.address.makeDefaultHint")}
-          />
-        )} />
+        {/* The "make this my default" checkbox was here. `/user/address` has
+            no default field, so the box would have promised something the
+            backend never stored. */}
 
         <div className="flex gap-3 border-t border-border pt-5">
           <Button type="button" variant="outline" fullWidth disabled={busy} onClick={onClose} className="flex-1">

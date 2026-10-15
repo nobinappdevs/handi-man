@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { LayoutDashboard, LogIn, ShieldCheck, Wallet, CalendarClock } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { useIsAuthed } from "@/hooks/useIsAuthed";
@@ -87,17 +86,13 @@ export function VendorLanding() {
                     <LogIn size={17} strokeWidth={2.2} aria-hidden />
                     {t("vendorsPage.login")}
                   </CtaLink>
-                  {/* Not a `CtaLink`. That component IS the primary CTA and
-                      hardcodes `bg-primary text-white`; `cn` does not merge, so
-                      an override here loses to it on CSS order and the label
-                      goes white-on-white. Secondary CTAs use the outline
-                      treatment from the dashboard instead. */}
-                  <Link
-                    href="/vendors/register"
-                    className="inline-flex items-center gap-[9px] border border-border px-[30px] py-4 font-display text-[15px] leading-none font-bold tracking-[0.13em] text-heading uppercase transition-colors hover:border-primary hover:text-brand"
-                  >
+                  {/* The outline twin of the block beside it — same metrics,
+                      same label treatment, an edge instead of a fill. It used
+                      to be hand-rolled here on `border-border`, which is a 12%
+                      divider hairline and disappeared against the watermark. */}
+                  <CtaLink href="/vendors/register" variant="outline">
                     {t("vendorsPage.register")}
-                  </Link>
+                  </CtaLink>
                 </>
               )}
             </div>

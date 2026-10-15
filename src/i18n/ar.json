@@ -23,7 +23,8 @@
     "pickup": "الاستلام",
     "joinVendor": "انضم كمقدم خدمة",
     "support": "دعم على مدار الساعة",
-    "viewAllServices": "عرض كل الخدمات"
+    "viewAllServices": "عرض كل الخدمات",
+    "vendorDashboard": "لوحة المزوّد"
   },
   "theme": {
     "toggle": "مظهر الألوان",
@@ -60,12 +61,18 @@
     "loginSubtitle": "سجّل الدخول لإدارة حجوزاتك ومهامك.",
     "loginButton": "تسجيل الدخول",
     "loggingIn": "جارٍ تسجيل الدخول…",
+    "recaptchaError": "يرجى تأكيد أنك لست روبوتًا.",
     "noAccount": "جديد هنا؟",
+    "vendorLoginSubtitle": "سجّل الدخول لإدارة خدماتك وأعمالك ومدفوعاتك.",
+    "vendorNoAccount": "لست مزوّد خدمة بعد؟",
     "registerTitle": "أنشئ حسابك",
     "registerSubtitle": "احجز مع محترف موثوق خلال دقائق.",
     "registerButton": "إنشاء حساب",
     "registering": "جارٍ إنشاء الحساب…",
+    "registrationDisabled": "التسجيلات الجديدة مغلقة في الوقت الحالي.",
     "haveAccount": "لديك حساب بالفعل؟",
+    "vendorRegisterTitle": "كن مزوّد خدمة",
+    "vendorRegisterSubtitle": "اعرض خدماتك وابدأ في استقبال الحجوزات.",
     "agreePrefix": "أوافق على",
     "terms": "شروط الخدمة",
     "and": "و",
@@ -814,8 +821,9 @@
     "searchPlaceholder": "ابحث عن مهام، طرود، مقدمي خدمة",
     "notifications": "الإشعارات",
     "user": {
-      "name": "Rakib H.",
-      "role": "عميل"
+      "fallbackName": "حسابك",
+      "roleCustomer": "عميل",
+      "roleVendor": "مزوّد خدمة"
     },
     "support": {
       "label": "دعم على مدار الساعة",
@@ -832,6 +840,9 @@
       "profile": "الملف الشخصي",
       "settings": "إعدادات الحساب",
       "twoFa": "أمان المصادقة الثنائية",
+      "vendorProfile": "الملف الشخصي",
+      "vendorKyc": "التحقق من الهوية (KYC)",
+      "vendorTwoFa": "أمان المصادقة الثنائية",
       "logout": "تسجيل الخروج",
       "kyc": "التحقق من الهوية"
     },
@@ -852,7 +863,8 @@
       "payment": "الدفع",
       "schedule": "الموعد",
       "status": "الحالة",
-      "amount": "المبلغ"
+      "amount": "المبلغ",
+      "quantity": "الكمية"
     },
     "status": {
       "inProgress": "قيد التنفيذ",
@@ -869,7 +881,8 @@
     "kpi": {
       "balance": {
         "label": "رصيدي",
-        "available": "متاح"
+        "available": "متاح",
+        "unit": "USD"
       },
       "completedServices": {
         "label": "الخدمات المكتملة"
@@ -924,7 +937,8 @@
         "pending": "قيد الانتظار",
         "processing": "قيد المعالجة",
         "completed": "مكتمل",
-        "canceled": "ملغى"
+        "canceled": "ملغى",
+        "hold": "معلّق"
       },
       "span": {
         "today": "اليوم",
@@ -956,7 +970,8 @@
       "paymentStatus": "حالة الدفع",
       "serviceName": "اسم الخدمة",
       "activeNote": "مفتوحة مع الدعم",
-      "pendingNote": "في انتظار الرد"
+      "pendingNote": "في انتظار الرد",
+      "lifetimeNote": "الإجمالي"
     },
     "pages": {
       "overview": {
@@ -1024,6 +1039,12 @@
         "sub": "كل خدمة طلبتها، بموعدها وحالتها وإيصالها.",
         "table": "النشاط الأخير"
       },
+      "pickupHistory": {
+        "nav": "الاستلام",
+        "heading": "سجل الاستلام",
+        "sub": "كل طرد استلمه مندوب منك، بموعده ومساره ورسومه.",
+        "table": "النشاط الأخير"
+      },
       "deliveryHistory": {
         "nav": "التوصيل",
         "heading": "سجل التوصيل",
@@ -1058,6 +1079,18 @@
         "nav": "أمان المصادقة الثنائية",
         "heading": "أمان المصادقة الثنائية",
         "sub": "أضف تطبيق مصادقة حتى لا تكفي كلمة المرور المسروقة وحدها.",
+        "table": ""
+      },
+      "vendorKyc": {
+        "nav": "التحقق",
+        "heading": "التحقق من الهوية",
+        "sub": "أرسل هويتك مرة واحدة ليتم تفعيل مدفوعاتك وخدماتك.",
+        "table": ""
+      },
+      "vendorProfile": {
+        "nav": "الملف الشخصي",
+        "heading": "ملف المزوّد",
+        "sub": "بيانات نشاطك وجهة الاتصال وكلمة المرور.",
         "table": ""
       },
       "moneyOut": {
@@ -1095,7 +1128,9 @@
       "updatePassword": "تحديث كلمة المرور",
       "dangerZone": "منطقة الخطر",
       "dangerDesc": "حذف حسابك يزيل حجوزاتك ومقدمي الخدمة المحفوظين وطرق الدفع. لا يمكن التراجع عن هذا الإجراء.",
-      "deleteMyAccount": "حذف حسابي"
+      "deleteMyAccount": "حذف حسابي",
+      "phoneCode": "رمز الدولة",
+      "phonePlaceholder": "رقم الهاتف"
     },
     "security": {
       "twoFactorTitle": "المصادقة الثنائية",
@@ -1141,7 +1176,9 @@
       "accepts": "يقبل",
       "fieldRequired": "هذا الحقل مطلوب",
       "noFields": "لا يلزم أي تحقق لهذا الحساب حاليًا.",
-      "submit": "إرسال للتحقق"
+      "submit": "إرسال للتحقق",
+      "fileType": "الصيغ المسموح بها:",
+      "fileTooLarge": "يجب أن يكون حجم الملف أقل من"
     },
     "address": {
       "savedTitle": "العناوين المحفوظة",
@@ -1160,16 +1197,11 @@
       "saveAsPlaceholder": "اختر تسمية",
       "mapLink": "رابط الخريطة",
       "mapLinkHint": "اختياري. الصق رابط خرائط Google إذا كان العنوان صعب الإيجاد.",
-      "makeDefault": "اجعل هذا عنواني الافتراضي",
-      "makeDefaultHint": "ستبدأ الحجوزات والطرود من هنا.",
       "labels": {
         "home": "المنزل",
         "work": "العمل",
         "other": "أخرى"
       },
-      "defaultBadge": "افتراضي",
-      "inUse": "العنوان الافتراضي",
-      "setDefault": "تعيين كافتراضي",
       "viewMap": "فتح في الخرائط",
       "edit": "تعديل العنوان",
       "delete": "حذف العنوان",
@@ -1178,8 +1210,7 @@
       "emptyBody": "احفظ الأماكن التي تحجز منها غالبًا وستكون على بعد نقرة واحدة عند الدفع.",
       "toastAdded": "تم حفظ العنوان",
       "toastUpdated": "تم تحديث العنوان",
-      "toastRemoved": "تم حذف العنوان",
-      "toastDefault": "تم تحديث العنوان الافتراضي"
+      "toastRemoved": "تم حذف العنوان"
     },
     "history": {
       "order": "الطلب",
@@ -1215,6 +1246,39 @@
       "emptyBody": "بمجرد أن تحجز شيئًا، سيظهر هنا مع موعده وإيصاله.",
       "notFoundTitle": "الطلب غير موجود",
       "notFoundBody": "رقم الطلب هذا لا يطابق أي شيء في حسابك."
+    },
+    "pickup": {
+      "logTitle": "عمليات الاستلام",
+      "parcels": "طرود",
+      "colParcel": "الطرد",
+      "colSchedule": "الموعد",
+      "colFrom": "الاستلام من",
+      "colStatus": "الحالة",
+      "colTotal": "الإجمالي",
+      "colActions": "الإجراءات",
+      "viewAll": "عرض الكل",
+      "parcelSection": "الطرد",
+      "collectSection": "الاستلام",
+      "dropoffSection": "الوجهة",
+      "paymentSection": "الدفع",
+      "parcelName": "الاسم",
+      "quantity": "الكمية",
+      "weight": "الوزن",
+      "price": "السعر",
+      "details": "التفاصيل",
+      "schedule": "تاريخ ووقت الموعد",
+      "name": "الاسم",
+      "phone": "الهاتف",
+      "addressType": "نوع العنوان",
+      "address": "العنوان",
+      "landmark": "علامة مميزة",
+      "shortAddress": "عنوان الوجهة المختصر",
+      "fullAddress": "عنوان الوجهة الكامل",
+      "dropoffPhone": "هاتف الوجهة",
+      "paymentType": "طريقة الدفع",
+      "totalPayable": "الإجمالي المستحق",
+      "emptyTitle": "لا توجد عمليات استلام بعد",
+      "emptyBody": "احجز عملية استلام وستظهر هنا مع موعدها ومسارها ورسومها."
     },
     "delivery": {
       "logTitle": "التوصيلات",
@@ -1291,8 +1355,6 @@
         "colCustomer": "العميل",
         "colSchedule": "الموعد",
         "colPayout": "أرباحك",
-        "jobSection": "المهمة",
-        "customerSection": "العميل",
         "payoutSection": "الدفع",
         "service": "الخدمة",
         "commission": "عمولة المنصة",
@@ -1367,7 +1429,30 @@
         "submit": "طلب السحب",
         "requested": "تم طلب السحب",
         "note": "تتم مراجعة عمليات السحب مرة واحدة يوميًا في أيام العمل. الرسوم 1% من المبلغ المطلوب.",
-        "seeLogs": "عرض سجل السحب"
+        "seeLogs": "عرض سجل السحب",
+        "exchangeRate": "سعر الصرف",
+        "preview": "معاينة السحب",
+        "previewEmpty": "اختر بوابة دفع لعرض التفاصيل.",
+        "enteredAmount": "المبلغ المُدخل",
+        "conversionAmount": "المبلغ بعد التحويل",
+        "totalCharge": "إجمالي الرسوم",
+        "willGet": "ستستلم",
+        "payable": "المبلغ المستحق",
+        "totalPayable": "الإجمالي المستحق",
+        "limit": "الحد",
+        "charge": "الرسوم",
+        "available": "الرصيد المتاح:",
+        "amountPlaceholder": "أدخل المبلغ",
+        "chooseGateway": "اختر بوابة دفع",
+        "enterAmount": "أدخل مبلغًا",
+        "overBalance": "هذا يتجاوز رصيدك المتاح",
+        "limitIs": "النطاق المسموح:",
+        "withdrawVia": "السحب عبر",
+        "withdrawInfo": "معلومات السحب",
+        "confirm": "تأكيد",
+        "fieldRequired": "هذا الحقل مطلوب",
+        "doneTitle": "تم إرسال طلب السحب",
+        "doneBody": "تم إرسال طلبك إلى الإدارة للمراجعة."
       },
       "logs": {
         "title": "عمليات السحب",
@@ -1376,7 +1461,10 @@
         "colRef": "المرجع",
         "colMethod": "الطريقة",
         "colRequested": "تاريخ الطلب",
-        "colReceived": "تاريخ الاستلام"
+        "colReceived": "تاريخ الاستلام",
+        "empty": "لا توجد عمليات سحب بعد.",
+        "rejectionReason": "سبب الرفض",
+        "balanceAfter": "الرصيد بعد العملية"
       }
     },
     "ranges": {
@@ -1422,6 +1510,11 @@
           "body": "ستبقى خدمة السباكة الطارئة مخفية من البحث حتى تعيد تشغيلها."
         }
       }
+    },
+    "logout": {
+      "confirmTitle": "تسجيل الخروج؟",
+      "confirmBody": "ستحتاج إلى تسجيل الدخول مرة أخرى للوصول إلى لوحة التحكم.",
+      "pending": "جارٍ تسجيل الخروج…"
     }
   },
   "notFound": {

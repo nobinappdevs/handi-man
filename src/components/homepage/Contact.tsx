@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { useGsapScope } from "@/hooks/useGsap";
+import { useRecaptcha } from "@/hooks/useBasicSettings";
+import { Recaptcha } from "@/components/share/Recaptcha";
 import { Eyebrow } from "@/components/share/Eyebrow";
 import { SERVICE_KEYS } from "@/components/homepage/homeData";
 import {
@@ -49,6 +51,9 @@ export function Contact() {
   const { t } = useLang();
   const scope = useGsapScope();
   const [sent, setSent] = useState(false);
+  const { enabled: recaptchaEnabled, siteKey } = useRecaptcha();
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [captchaError, setCaptchaError] = useState("");
 
   const serviceOptions = SERVICE_KEYS.map((key) => ({
     value: key,
@@ -142,7 +147,17 @@ export function Contact() {
 
             <form
               noValidate
-              onSubmit={handleSubmit(() => setSent(true))}
+              onSubmit={handleSubmit(() => {
+                // No contact endpoint exists in the API collection yet, so this
+                // still ends at the local "sent" state — but the challenge is
+                // enforced now, so wiring a service in later changes one line.
+                if (recaptchaEnabled && !captchaToken) {
+                  setCaptchaError(t("auth.recaptchaError"));
+                  return;
+                }
+                setCaptchaError("");
+                setSent(true);
+              })}
               className="flex flex-col gap-3"
             >
               <div
@@ -232,6 +247,19 @@ export function Contact() {
                 />
                 {errors.message && <span className={ERROR_TEXT}>{errors.message.message}</span>}
               </div>
+
+              {recaptchaEnabled && (
+                <div data-anim="up" data-anim-delay="0.14">
+                  <Recaptcha
+                    siteKey={siteKey}
+                    onVerify={(token) => {
+                      setCaptchaToken(token);
+                      if (token) setCaptchaError("");
+                    }}
+                  />
+                  {captchaError && <span className={ERROR_TEXT}>{captchaError}</span>}
+                </div>
+              )}
 
               <div className="flex flex-wrap items-center gap-3.5" data-anim="up" data-anim-delay="0.16">
                 <button

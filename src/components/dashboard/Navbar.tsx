@@ -3,9 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Search, ChevronDown } from "lucide-react";
+import { Menu, Search, ChevronDown, LogOut } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { useDismiss } from "@/hooks/useDismiss";
+import { useLogout } from "@/hooks/useAuth";
+import { useAccountIdentity } from "@/hooks/useAccountIdentity";
+import { ConfirmDialog } from "@/components/dashboard/ConfirmDialog";
 import { cn } from "@/components/ui/cn";
 import { SquareIconButton } from "@/components/ui/SquareIconButton";
 import { ThemeToggle } from "@/components/share/ThemeToggle";
@@ -40,6 +43,20 @@ export function Navbar({ onMenu }: { onMenu: () => void }) {
   const menuItems = profileMenuFor(area);
   const [menu, setMenu] = useState(false);
   const wrap = useDismiss(menu, () => setMenu(false));
+
+  /* Sign out talks to whichever API this area belongs to — `/vendors/logout`
+     under /vendors/dashboard, `/user/logout` everywhere else. Getting this
+     wrong would 401 against the other guard and end the wrong session. */
+  const [confirmLogout, setConfirmLogout] = useState(false);
+  const authRole = area === "vendor" ? "vendor" : "user";
+  const logout = useLogout(authRole);
+
+  /* Who this actually is. Reads the profile query `AuthGuard` already fetched
+     for this area, so it costs no extra request — and it is per role, so the
+     vendor header shows the vendor account, not whoever is signed in as a
+     customer in the same browser. */
+  const { name, initial, avatarUrl } = useAccountIdentity(authRole);
+  const displayName = name || t("dashboard.user.fallbackName");
 
   return (
     <header className="sticky top-0 z-30 flex h-[68px] flex-none items-center gap-[clamp(10px,1.4vw,18px)] border-b border-border bg-bg px-[clamp(16px,2.4vw,34px)]">
@@ -86,12 +103,32 @@ export function Navbar({ onMenu }: { onMenu: () => void }) {
               menu ? "border-primary" : "border-border",
             )}
           >
-            <span className="flex h-8 w-8 flex-none items-center justify-center bg-primary text-[14px] font-medium text-white">
-              {t("dashboard.user.name").charAt(0)}
+            <span className="flex h-8 w-8 flex-none items-center justify-center overflow-hidden bg-primary text-[14px] font-medium text-white">
+              {avatarUrl ? (
+                /* A remote image, so a plain <img>: this is a static export and
+                   next/image cannot optimise a host it does not know at build
+                   time (blueprint §14.2). The initial stays underneath as the
+                   fallback for a 404 or a blocked image. */
+                /* eslint-disable-next-line @next/next/no-img-element -- remote avatar in a static-export app */
+                <img
+                  src={avatarUrl}
+                  alt=""
+                  className="h-full w-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
+              ) : (
+                initial
+              )}
             </span>
             <span className="hidden flex-col items-start leading-[1.15] min-[700px]:flex">
-              <span className="text-[13.5px] font-medium text-heading">{t("dashboard.user.name")}</span>
-              <span className="text-[12px] font-normal text-muted">{t("dashboard.user.role")}</span>
+              <span className="max-w-[140px] truncate text-[13.5px] font-medium text-heading">
+                {displayName}
+              </span>
+              <span className="text-[12px] font-normal text-muted">
+                {t(area === "vendor" ? "dashboard.user.roleVendor" : "dashboard.user.roleCustomer")}
+              </span>
             </span>
             <ChevronDown
               size={13}
@@ -110,13 +147,18 @@ export function Navbar({ onMenu }: { onMenu: () => void }) {
                 const label = t(`dashboard.menu.${key}`);
                 const cls =
                   "flex w-full items-center gap-3 px-3 py-2.5 text-[14px] font-normal transition-colors hover:bg-sunk";
-                /* Sign out is the one entry that is not a route. */
+                /* Sign out is the one entry that is not a route — it opens a
+                   confirmation instead. Closing the menu first keeps the
+                   dropdown from sitting over the dialog. */
                 return danger ? (
                   <button
                     key={key}
                     type="button"
                     role="menuitem"
-                    onClick={() => setMenu(false)}
+                    onClick={() => {
+                      setMenu(false);
+                      setConfirmLogout(true);
+                    }}
                     className={cn(cls, "cursor-pointer text-danger")}
                   >
                     <Icon size={17} strokeWidth={2} aria-hidden className="flex-none" />
@@ -139,6 +181,21 @@ export function Navbar({ onMenu }: { onMenu: () => void }) {
           )}
         </div>
       </div>
+
+      {/* `busy` keeps Escape, the backdrop and both buttons inert while the
+          request is in flight — the mutation redirects to /login when it
+          settles, so there is nothing useful to dismiss back to. */}
+      <ConfirmDialog
+        open={confirmLogout}
+        onClose={() => setConfirmLogout(false)}
+        onConfirm={() => logout.mutate()}
+        busy={logout.isPending}
+        tone="danger"
+        icon={<LogOut size={20} strokeWidth={2.2} aria-hidden />}
+        title={t("dashboard.logout.confirmTitle")}
+        description={t("dashboard.logout.confirmBody")}
+        confirmLabel={t(logout.isPending ? "dashboard.logout.pending" : "dashboard.menu.logout")}
+      />
     </header>
   );
 }

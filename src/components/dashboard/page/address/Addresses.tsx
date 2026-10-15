@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import {
-  Building2, ExternalLink, Home, MapPin, MapPinPlus, Pencil, Phone, Star, Trash2,
+  Building2, ExternalLink, Home, MapPin, MapPinPlus, Pencil, Phone, Trash2,
 } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import {
-  useAddresses, useCreateAddress, useDeleteAddress, useSetDefaultAddress, useUpdateAddress,
+  useAddresses, useCreateAddress, useDeleteAddress, useUpdateAddress,
 } from "@/hooks/useAddresses";
 import { Panel, PANEL_BODY, SkLine } from "@/components/dashboard/Panel";
 import { ConfirmDialog } from "@/components/dashboard/ConfirmDialog";
@@ -14,9 +14,9 @@ import { AddressDialog } from "@/components/dashboard/page/address/AddressDialog
 import { Button } from "@/components/ui/Button";
 import { SquareIconButton } from "@/components/ui/SquareIconButton";
 import { cn } from "@/components/ui/cn";
-import type { AddressLabel, AddressRequest, SavedAddress } from "@/schemas/address.schema";
+import type { AddressType, AddressRequest, SavedAddress } from "@/schemas/address.schema";
 
-const LABEL_ICON: Record<AddressLabel, typeof Home> = {
+const TYPE_ICON: Record<AddressType, typeof Home> = {
   home: Home,
   work: Building2,
   other: MapPin,
@@ -25,15 +25,14 @@ const LABEL_ICON: Record<AddressLabel, typeof Home> = {
 /**
  * Saved addresses.
  *
- * Two things the old screen did not do, and both are why it needed opening an
- * edit dialog to answer basic questions:
+ * The card shows the WHOLE record — landmark and phone included. Those are what
+ * a courier actually needs, and hiding them behind an edit button made the list
+ * a set of unlabelled boxes.
  *
- *   1. The card shows the WHOLE record — landmark and phone included. Those are
- *      what a courier actually needs, and hiding them behind an edit button
- *      made the list a set of unlabelled boxes.
- *   2. One address is the default. A saved-address list with no default has
- *      nothing for a booking or a parcel to pre-fill from, which is most of the
- *      reason to save one.
+ * ⚠️ No default address. The local stand-in this screen used to run on had one,
+ * and it was genuinely useful — a booking could pre-fill from it. `/user/address`
+ * has no such field and no endpoint to set it, so the feature went rather than
+ * be faked against a flag the backend would never persist.
  */
 export function Addresses() {
   const { t } = useLang();
@@ -44,7 +43,6 @@ export function Addresses() {
   const create = useCreateAddress(t("dashboard.address.toastAdded"));
   const update = useUpdateAddress(t("dashboard.address.toastUpdated"));
   const remove = useDeleteAddress(t("dashboard.address.toastRemoved"));
-  const setDefault = useSetDefaultAddress(t("dashboard.address.toastDefault"));
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<SavedAddress | null>(null);
@@ -114,16 +112,19 @@ export function Addresses() {
       ) : (
         <div className="grid grid-cols-1 items-start gap-[clamp(16px,1.8vw,24px)] min-[700px]:grid-cols-2 min-[1180px]:grid-cols-3">
           {rows.map((row) => {
-            const Icon = LABEL_ICON[row.label] ?? MapPin;
+            const Icon = TYPE_ICON[row.address_type] ?? MapPin;
+            /* The API stores this free-form — its own sample has junk text in
+               it — so only render a link when there is actually one to follow. */
+            const mapHref = (() => {
+              const link = (row.google_map ?? "").trim().toLowerCase();
+              return link.startsWith("http://") || link.startsWith("https://")
+                ? row.google_map!
+                : "";
+            })();
             return (
               <section
                 key={row.id}
-                className={cn(
-                  "flex min-w-0 flex-col border bg-card transition-colors",
-                  /* The default is marked by its border, not just a badge — it
-                     has to be findable at a glance across a wrapped grid. */
-                  row.isDefault ? "border-primary" : "border-border",
-                )}
+                className="flex min-w-0 flex-col border border-border bg-card transition-colors"
               >
                 <div className={`flex min-w-0 flex-auto flex-col gap-3 ${PANEL_BODY}`}>
                   <div className="flex items-start gap-3">
@@ -131,16 +132,8 @@ export function Addresses() {
                       <Icon size={19} strokeWidth={2} aria-hidden />
                     </span>
                     <span className="flex min-w-0 flex-auto flex-col gap-1">
-                      <span className="flex flex-wrap items-center gap-2">
-                        <span className="text-[15.5px] font-bold tracking-[-0.015em] text-heading">
-                          {t(`dashboard.address.labels.${row.label}`)}
-                        </span>
-                        {row.isDefault && (
-                          <span className="inline-flex items-center gap-1 bg-primary px-2 py-0.5 text-[10.5px] font-bold tracking-[0.12em] text-white uppercase">
-                            <Star size={9} strokeWidth={3} aria-hidden />
-                            {t("dashboard.address.defaultBadge")}
-                          </span>
-                        )}
+                      <span className="text-[15.5px] font-bold tracking-[-0.015em] text-heading">
+                        {t(`dashboard.address.labels.${row.address_type}`)}
                       </span>
                       <span className="text-[13.5px] leading-[1.5] font-normal text-body">
                         {row.address}
@@ -157,28 +150,16 @@ export function Addresses() {
 
                   <span className="flex items-center gap-2 text-[12.5px] text-muted">
                     <Phone size={13} strokeWidth={2} aria-hidden className="flex-none" />
-                    {row.phone}
+                    {row.mobile}
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2 border-t border-border bg-sunk px-[clamp(14px,1.6vw,18px)] py-2.5">
-                  {row.isDefault ? (
-                    <span className="flex-auto text-[12px] font-bold tracking-[0.1em] text-muted uppercase">
-                      {t("dashboard.address.inUse")}
-                    </span>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => setDefault.mutate(row.id)}
-                      className="flex-auto cursor-pointer text-start text-[12px] font-bold tracking-[0.1em] text-brand uppercase transition-opacity hover:opacity-70"
-                    >
-                      {t("dashboard.address.setDefault")}
-                    </button>
-                  )}
+                  <span className="flex-auto" />
 
-                  {row.mapLink && (
+                  {mapHref && (
                     <a
-                      href={row.mapLink}
+                      href={mapHref}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={t("dashboard.address.viewMap")}
