@@ -2,7 +2,6 @@
 
 import { useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
 import {
   readToken,
   startEmailOtpFlow,
@@ -13,14 +12,7 @@ import {
 import { useIsClient } from "@/hooks/useIsClient";
 import { useProfile, authRoutes } from "@/hooks/useAuth";
 import { useEmailVerificationRequired } from "@/hooks/useBasicSettings";
-
-function Spinner() {
-  return (
-    <div className="grid min-h-screen place-items-center bg-bg">
-      <Loader2 size={28} strokeWidth={2} className="animate-spin text-primary" aria-label="Loading" />
-    </div>
-  );
-}
+import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 
 /**
  * Protects authenticated areas: no token → login, unverified email → the OTP
@@ -34,8 +26,9 @@ function Spinner() {
  * for exactly that (`staleTime: 0`, `refetchOnMount: "always"`,
  * `refetchOnWindowFocus: true`).
  *
- * The cost is a spinner while the first profile call is in flight, and that is
- * the honest trade: the alternative was trusting a localStorage value the user
+ * The cost is a wait while the first profile call is in flight - shown as the
+ * dashboard's own skeleton, not a spinner on a blank page - and that is the
+ * honest trade: the alternative was trusting a localStorage value the user
  * could edit and the server could contradict.
  *
  * A token isn't proof of access, which is why the profile is consulted at all —
@@ -134,13 +127,13 @@ export function AuthGuard({
     if (verified === true && twoFa === "pending") router.replace(routes.verify2fa);
   }, [isClient, authed, otherSession, otherRole, settled, verified, twoFa, router, role, routes]);
 
-  // Server + first client paint render the same spinner (no hydration
+  // Server + first client paint render the same skeleton (no hydration
   // mismatch). Past that, the app shows only once the profile has come back and
   // says this session is verified and owes no authenticator code — `verified`
   // is `null` until it answers, so the loading case falls out of this test
   // without a separate check.
   if (!isClient || !authed || verified !== true || twoFa === "pending") {
-    return <Spinner />;
+    return <DashboardSkeleton />;
   }
   return <>{children}</>;
 }

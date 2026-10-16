@@ -60,6 +60,17 @@ type SelectProps = {
   menuWidth?: number;
   /** Gap between the trigger and the menu, in px (default 8). */
   menuGap?: number;
+  /**
+   * Replaces the `field` trigger's box - height, border, fill, type - for a
+   * select that sits on a surface with its own field design (the hero band's
+   * square light fields, the contact form's glass ones on plum). It is a
+   * replacement, not an addition: `cn` does not merge, so `h-11` and `h-[46px]`
+   * side by side would leave the winner to stylesheet order. The menu, the
+   * search and the keyboard behaviour are untouched.
+   */
+  skin?: string;
+  /** Chevron colour; defaults to `text-muted`, which disappears on a dark skin. */
+  chevronClassName?: string;
   className?: string;
   searchPlaceholder?: string;
   noResultsText?: string;
@@ -87,6 +98,8 @@ export function Select({
   chipSide = "end",
   menuWidth = 288,
   menuGap = 8,
+  skin,
+  chevronClassName = "text-muted",
   className = "",
   searchPlaceholder,
   noResultsText,
@@ -226,7 +239,10 @@ export function Select({
     ? `flex h-full shrink-0 cursor-pointer items-center gap-2 ${
         chipSide === "start" ? "border-e" : "border-s"
       } border-border px-3 text-sm font-semibold whitespace-nowrap text-heading transition disabled:cursor-not-allowed disabled:opacity-50`
-    : "flex h-11 w-full cursor-pointer items-center gap-2.5 border border-border bg-surface px-3.5 text-left text-sm font-medium text-heading transition hover:border-primary/50 focus:border-primary focus:outline-none focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50";
+    : `flex w-full cursor-pointer items-center gap-2.5 text-start transition focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 ${
+        skin ??
+        "h-11 border border-border bg-surface px-3.5 text-sm font-medium text-heading hover:border-primary/50 focus:border-primary focus-visible:border-primary"
+      }`;
 
   const activeId = open && filtered[activeIndex] ? `${baseId}-opt-${activeIndex}` : undefined;
 
@@ -249,7 +265,7 @@ export function Select({
       >
         {trigIcon}
         <span className={`min-w-0 flex-1 truncate ${chip ? "" : sel ? "" : "text-muted"}`}>{sel?.label ?? placeholder}</span>
-        <ChevronDown size={chip ? 14 : 16} strokeWidth={chip ? 2.5 : 2} className={`shrink-0 text-muted transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
+        <ChevronDown size={chip ? 14 : 16} strokeWidth={chip ? 2.5 : 2} className={`shrink-0 ${chevronClassName} transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
       </button>
 
       {open && rect && createPortal(

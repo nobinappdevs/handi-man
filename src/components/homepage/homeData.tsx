@@ -11,10 +11,6 @@
 import type { ReactNode } from "react";
 import type { StaticImageData } from "next/image";
 
-import teamOne from "@public/assets/team/team1.webp";
-import teamTwo from "@public/assets/team/team2.webp";
-import teamThree from "@public/assets/team/team3.webp";
-import teamFour from "@public/assets/team/team4.webp";
 
 import avatarOne from "@public/assets/testimonials/avatar-1.webp";
 import avatarTwo from "@public/assets/testimonials/avatar-2.webp";
@@ -153,32 +149,9 @@ export const ABOUT_CHECK_KEYS = [
 ];
 
 /* ─────────────────────────── Listings (Popular services) ───────────────────
- * Tabbed card grid. `key` resolves i18n title/unit; price and vendor are raw
- * catalogue data (not translated), same convention as `Category.pros`.
+ * The recommended / trending cards (LISTING_TABS) used to be mocked here; they
+ * now come from `GET /global/index` - see `useHomeContent`.
  */
-
-export type ListingCard = { key: string; price: string; vendor: string };
-
-export const LISTING_TABS: { key: string; cards: ListingCard[] }[] = [
-  {
-    key: "recommended",
-    cards: [
-      { key: "fitnessPotential", price: "10 USD", vendor: "Vendor 1" },
-      { key: "totalBodyFitness", price: "15 USD", vendor: "Vendor 1" },
-      { key: "kitchenBathroomDeepClean", price: "38 USD", vendor: "Vendor 2" },
-      { key: "sameDayParcel", price: "12 USD", vendor: "Vendor 4" },
-    ],
-  },
-  {
-    key: "trending",
-    cards: [
-      { key: "acServiceGasRefill", price: "49 USD", vendor: "Vendor 3" },
-      { key: "emergencyPlumbing", price: "32 USD", vendor: "Vendor 5" },
-      { key: "electricalSafetyCheck", price: "55 USD", vendor: "Vendor 2" },
-      { key: "salonAtHome", price: "28 USD", vendor: "Vendor 6" },
-    ],
-  },
-];
 
 /* ─────────────────────────── Category listing groups ───────────────────── */
 
@@ -306,31 +279,50 @@ const socialIconProps = {
   "aria-hidden": true,
 };
 
-export const TEAM_SOCIAL_ICONS: ReactNode[] = [
-  <svg key="x" {...socialIconProps} fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round">
+/**
+ * A team member's social links arrive as Font Awesome classes ("fab
+ * fa-instagram"); `useHomeContent` reduces those to the network name, and
+ * this maps the name to a glyph. An unknown network falls back to a globe in
+ * the section rather than an empty square.
+ */
+export const SOCIAL_ICONS: Record<string, ReactNode> = {
+  x: <svg {...socialIconProps} fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round">
     <path d="M4 4l16 16M20 4L4 20" />
   </svg>,
-  <svg key="facebook" {...socialIconProps} fill="currentColor">
+  facebook: <svg {...socialIconProps} fill="currentColor">
     <path d="M14 8h-2c-.6 0-1 .4-1 1v2h3l-.4 3H11v7H8v-7H6v-3h2V9c0-2.2 1.8-4 4-4h2v3z" />
   </svg>,
-  <svg key="pinterest" {...socialIconProps} fill="currentColor">
+  pinterest: <svg {...socialIconProps} fill="currentColor">
     <path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.1-2 0-2.9l1.2-5s-.3-.6-.3-1.4c0-1.4.8-2.4 1.8-2.4.8 0 1.3.6 1.3 1.4 0 .8-.6 2-.8 3.2-.2 1 .5 1.8 1.5 1.8 1.8 0 3.1-2.3 3.1-5 0-2.1-1.5-3.6-3.8-3.6-2.6 0-4.2 1.9-4.2 4 0 .7.2 1.2.5 1.6.1.1.1.2.1.4l-.3.9c0 .2-.2.3-.4.2-1.1-.4-1.6-1.7-1.6-3.1 0-2.3 2-5 5.9-5 3.2 0 5.3 2.3 5.3 4.7 0 3.2-1.8 5.6-4.4 5.6-.9 0-1.7-.5-2-1l-.5 2c-.2.8-.6 1.7-1 2.3.8.2 1.6.4 2.5.4a10 10 0 0 0 0-20z" />
   </svg>,
-  <svg key="instagram" {...socialIconProps} fill="none" stroke="currentColor" strokeWidth={2}>
+  instagram: <svg {...socialIconProps} fill="none" stroke="currentColor" strokeWidth={2}>
     <rect x="3" y="3" width="18" height="18" rx="5" />
     <circle cx="12" cy="12" r="4" />
     <circle cx="17.5" cy="6.5" r="1" />
   </svg>,
-];
+  whatsapp: (
+    <svg {...socialIconProps} fill="currentColor">
+      <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.1z" />
+    </svg>
+  ),
+  linkedin: (
+    <svg {...socialIconProps} fill="currentColor">
+      <path d="M6.9 8.5H3.6V20h3.3V8.5zM5.2 3.5a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8zM20.4 13.4c0-3.1-1.7-5.1-4.3-5.1-1.5 0-2.5.8-2.9 1.6V8.5H10V20h3.3v-5.9c0-1.6.6-2.8 2-2.8s1.8 1.2 1.8 2.8V20h3.3v-6.6z" />
+    </svg>
+  ),
+  youtube: (
+    <svg {...socialIconProps} fill="currentColor">
+      <path d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.6 2.6 0 0 0 2.4 7.2 27 27 0 0 0 2 12a27 27 0 0 0 .4 4.8 2.6 2.6 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8A27 27 0 0 0 22 12a27 27 0 0 0-.4-4.8zM10 15V9l5.2 3L10 15z" />
+    </svg>
+  ),
+};
+/* Font Awesome's older name for X. */
+SOCIAL_ICONS.twitter = SOCIAL_ICONS.x;
 
-export type TeamMember = { key: string; photo: StaticImageData };
-
-export const TEAM_MEMBERS: TeamMember[] = [
-  { key: "owenBaxter", photo: teamOne },
-  { key: "priyaNandan", photo: teamTwo },
-  { key: "marcusCole", photo: teamThree },
-  { key: "saraAhmed", photo: teamFour },
-];
+/*
+ * The team itself (TEAM_MEMBERS) used to be mocked here; it now comes from
+ * `teams.value.items` on `GET /global/index` - see `useHomeContent`.
+ */
 
 /* ─────────────────────────── Testimonials ─────────────────────────── */
 
@@ -376,9 +368,10 @@ export const TESTIMONIAL_PHOTOS: Record<string, StaticImageData> = {
   victorNwosu: avatarTwo,
 };
 
-/* ─────────────────────────── Blog / Announcement ───────────────────── */
-
-export const BLOG_POST_KEYS = ["communityConnections", "pricingPhilosophy", "onDemandAdvantage"];
+/* ─────────────────────────── Blog / Announcement ─────────────────────
+ * The posts (BLOG_POST_KEYS) are the API's now - `announcements` on
+ * `GET /global/index`, see `useHomeContent`.
+ */
 
 /* ─────────────────────────── FAQ ─────────────────────────── */
 

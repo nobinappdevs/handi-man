@@ -217,12 +217,14 @@
       },
       "supportText": "24/7 support for handyman & delivery jobs — call",
       "supportPhone": "+00-11-00-2222",
-      "namePlaceholder": "Name",
-      "emailPlaceholder": "Enter Email",
+      "stateLabel": "State",
+      "statePlaceholder": "Select state",
       "cityLabel": "City",
-      "serviceLabel": "Service",
-      "bookNow": "Booking now",
-      "bookSent": "Request sent"
+      "cityPlaceholder": "Select city",
+      "cityNeedsState": "Please select a state first",
+      "searchLabel": "Search services",
+      "searchPlaceholder": "Find your service here e.g. AC, Car, Facial…",
+      "searchSubmit": "Search"
     },
     "services": {
       "handyman": "Handyman",
@@ -235,8 +237,6 @@
     "categories": {
       "eyebrow": "Browse categories",
       "title": "What do you need today?",
-      "pros": "pros",
-      "allDay": "24/7",
       "items": {
         "handyman": "Handyman",
         "cleaning": "Cleaning",
@@ -246,7 +246,8 @@
         "acRepair": "AC repair",
         "beauty": "Beauty",
         "shifting": "Shifting"
-      }
+      },
+      "explore": "Explore"
     },
     "listings": {
       "tabs": {
@@ -254,40 +255,7 @@
         "trending": "Trending"
       },
       "viewAll": "View all",
-      "items": {
-        "fitnessPotential": {
-          "title": "Unleashing Your Full Fitness Potential",
-          "unit": "1 item"
-        },
-        "totalBodyFitness": {
-          "title": "A Comprehensive Guide to Total Body Fitness",
-          "unit": "1 day"
-        },
-        "kitchenBathroomDeepClean": {
-          "title": "Deep Clean for Kitchens and Bathrooms",
-          "unit": "1 visit"
-        },
-        "sameDayParcel": {
-          "title": "Same-Day Parcel Pickup and Delivery",
-          "unit": "per parcel"
-        },
-        "acServiceGasRefill": {
-          "title": "Split AC Service with Gas Refill",
-          "unit": "1 unit"
-        },
-        "emergencyPlumbing": {
-          "title": "Emergency Plumbing Callout",
-          "unit": "1 hour"
-        },
-        "electricalSafetyCheck": {
-          "title": "Full Home Electrical Safety Check",
-          "unit": "1 visit"
-        },
-        "salonAtHome": {
-          "title": "Salon at Home — Facial and Care",
-          "unit": "1 session"
-        }
-      }
+      "empty": "No services to show yet."
     },
     "categoryGroups": {
       "startsAt": "Starts at",
@@ -440,25 +408,7 @@
     "team": {
       "eyebrow": "Our team",
       "title": "Meet the Handiman team.",
-      "lead": "From vendor verification to live support, this team keeps every booking, pickup and delivery running on schedule.",
-      "members": {
-        "owenBaxter": {
-          "name": "Owen Baxter",
-          "role": "Founder"
-        },
-        "priyaNandan": {
-          "name": "Priya Nandan",
-          "role": "Operations Lead"
-        },
-        "marcusCole": {
-          "name": "Marcus Cole",
-          "role": "Vendor Success"
-        },
-        "saraAhmed": {
-          "name": "Sara Ahmed",
-          "role": "Product Design"
-        }
-      }
+      "lead": "From vendor verification to live support, this team keeps every booking, pickup and delivery running on schedule."
     },
     "testimonials": {
       "eyebrow": "Testimonials",
@@ -517,26 +467,10 @@
       "title": "Our Recent Announcement",
       "lead": "Ultimate on-demand service and handyman solution for Android, iOS, and the web.",
       "author": "Super Admin",
-      "posts": {
-        "communityConnections": {
-          "cat": "Handiman Lifestyle",
-          "title": "Community Connections: The Handiman Lifestyle",
-          "date": "28 February, 2024",
-          "read": "6 mins read"
-        },
-        "pricingPhilosophy": {
-          "cat": "Quality service",
-          "title": "Innovation on a Budget: Handiman's Pricing Philosophy",
-          "date": "26 January, 2024",
-          "read": "5 mins read"
-        },
-        "onDemandAdvantage": {
-          "cat": "Revolutionizing is Handiman",
-          "title": "Revolutionizing On-Demand: The Handiman Advantage",
-          "date": "28 February, 2024",
-          "read": "6 mins read"
-        }
-      }
+      "minRead": "min read",
+      "loadMore": "Load more",
+      "readMore": "Read more",
+      "empty": "No announcements yet."
     },
     "faq": {
       "eyebrow": "FAQ",
@@ -796,7 +730,13 @@
       "posts": "Articles published"
     }
   },
-  "blogDetail": {},
+  "blogDetail": {
+    "back": "All announcements",
+    "notFound": "Announcement not found",
+    "notFoundHint": "It may have been removed, or the link is wrong.",
+    "more": "More announcements",
+    "tags": "Tags"
+  },
   "contactPage": {
     "eyebrow": "Contact us",
     "title": "Tell us what you need",
@@ -816,7 +756,8 @@
       "previous": "Previous",
       "next": "Next",
       "empty": "Nothing here yet",
-      "shown": "shown"
+      "shown": "shown",
+      "pagination": "Pagination"
     },
     "searchPlaceholder": "Search jobs, parcels, vendors",
     "notifications": "Notifications",
@@ -1072,7 +1013,7 @@
       "vendorSchedule": {
         "nav": "Service Schedule",
         "heading": "Service schedule",
-        "sub": "Your booked work, day by day.",
+        "sub": "When customers can book you: how far ahead, and at what times.",
         "table": "Schedule"
       },
       "vendorTwoFa": {
@@ -1104,6 +1045,16 @@
         "heading": "Money out logs",
         "sub": "Every payout you have requested, with its fee and settlement.",
         "table": ""
+      },
+      "vendorServiceCreate": {
+        "nav": "Add service",
+        "heading": "Add a service",
+        "sub": "List a new service for customers to book."
+      },
+      "vendorServiceEdit": {
+        "nav": "Edit service",
+        "heading": "Edit service",
+        "sub": "Change a listing's details, price or photo."
       }
     },
     "profile": {
@@ -1365,17 +1316,23 @@
         "accept": "Accept",
         "reject": "Reject",
         "rejected": "Rejected",
-        "rejectTitle": "Reject this job?"
+        "rejectTitle": "Reject this job?",
+        "complete": "Complete",
+        "viewAll": "View all",
+        "colAmount": "Amount",
+        "item": "Item",
+        "customerSection": "Customer",
+        "reasonLabel": "Reason",
+        "reasonPlaceholder": "e.g. Not available on this date",
+        "reasonHint": "The customer sees this reason with the order.",
+        "orderBy": "Order by",
+        "landmark": "Flat / Building / Landmark",
+        "map": "Map",
+        "price": "Price"
       },
       "services": {
         "title": "Your services",
         "add": "Add a service",
-        "live": "Live",
-        "paused": "Paused",
-        "booked": "booked",
-        "pause": "Pause listing",
-        "resume": "Resume listing",
-        "preview": "Preview",
         "form": {
           "title": "Add a service",
           "whereTitle": "Where you work",
@@ -1392,15 +1349,6 @@
           "name": "Service name",
           "namePlaceholder": "e.g. Deep kitchen clean",
           "unit": "Charged per",
-          "unitPlaceholder": "Choose a unit",
-          "units": {
-            "hour": "Hour",
-            "day": "Day",
-            "week": "Week",
-            "piece": "Piece",
-            "room": "Room",
-            "visit": "Visit"
-          },
           "price": "Starting price",
           "currency": "USD",
           "priceHint": "The lowest you would take this job for.",
@@ -1415,14 +1363,46 @@
           "details": "What is included",
           "detailsPlaceholder": "What you do, what you bring, what is not covered, and how long it usually takes.",
           "reviewNote": "Listings go live once an admin has checked them — usually within a few hours.",
-          "submit": "Submit listing"
-        }
+          "submit": "Submit listing",
+          "editTitle": "Edit service",
+          "save": "Save changes",
+          "itemPlaceholder": "e.g. 1 hour, 1 day, 1 room",
+          "itemHint": "What the price covers.",
+          "thumbnailCurrent": "Current image — choose a new one to replace it",
+          "detailsHint": "Use headings, lists and links to make it easy to scan."
+        },
+        "edit": "Edit",
+        "delete": "Delete",
+        "deleteTitle": "Delete this service?",
+        "searchPlaceholder": "Search your services",
+        "emptyTitle": "No services yet",
+        "emptyBody": "Add your first service so customers in your area can book you.",
+        "noMatch": "No matching services",
+        "noMatchHint": "Try a different name or category.",
+        "backToList": "Back to services",
+        "notFound": "Service not found",
+        "notFoundHint": "It may have been deleted, or the link is wrong."
       },
       "schedule": {
-        "today": "Today",
-        "tomorrow": "Tomorrow",
-        "later": "Later this week",
-        "emptyDay": "Nothing booked."
+        "windowTitle": "Booking window",
+        "windowHint": "How many days ahead, starting today, customers can book you.",
+        "fewerDays": "Fewer days",
+        "moreDays": "More days",
+        "daysUnit": "days ahead",
+        "previewTitle": "Bookable dates",
+        "previewEmpty": "Set a number of days to open dates for booking.",
+        "slotsTitle": "Time slots",
+        "slotsHint": "The hours customers can choose on each bookable day.",
+        "addSlot": "Add time slot",
+        "editSlot": "Edit time slot",
+        "deleteSlot": "Delete",
+        "deleteTitle": "Delete this time slot?",
+        "emptyTitle": "No time slots yet",
+        "emptyBody": "Add the hours you work so customers can pick a time.",
+        "start": "Start time",
+        "end": "End time",
+        "hourShort": "h",
+        "minuteShort": "m"
       },
       "moneyOut": {
         "title": "Request a payout",
@@ -1651,5 +1631,63 @@
       "noWeight": "Add a weight to each product and the total will build up here.",
       "footnote": "No payment now. We confirm the slot and the pickup fee before a rider sets off."
     }
+  },
+  "editor": {
+    "toolbar": "Formatting",
+    "undo": "Undo",
+    "redo": "Redo",
+    "blockType": "Text style",
+    "paragraph": "Paragraph",
+    "heading2": "Heading 2",
+    "heading3": "Heading 3",
+    "heading4": "Heading 4",
+    "fontSize": "Font size",
+    "fontSizeDefault": "Default",
+    "bold": "Bold",
+    "italic": "Italic",
+    "underline": "Underline",
+    "strike": "Strikethrough",
+    "code": "Inline code",
+    "subscript": "Subscript",
+    "superscript": "Superscript",
+    "clearFormatting": "Clear formatting",
+    "textColor": "Text colour",
+    "colorDefault": "Default colour",
+    "highlight": "Highlight",
+    "highlightNone": "No highlight",
+    "alignLeft": "Align left",
+    "alignCenter": "Align centre",
+    "alignRight": "Align right",
+    "alignJustify": "Justify",
+    "bulletList": "Bulleted list",
+    "orderedList": "Numbered list",
+    "taskList": "Checklist",
+    "outdent": "Decrease indent",
+    "indent": "Increase indent",
+    "link": "Link",
+    "linkPlaceholder": "Paste or type a link",
+    "apply": "Apply",
+    "removeLink": "Remove link",
+    "image": "Image",
+    "imagePlaceholder": "Image URL (https://…)",
+    "insert": "Insert",
+    "blockquote": "Quote",
+    "codeBlock": "Code block",
+    "table": "Insert table",
+    "horizontalRule": "Divider",
+    "source": "Source",
+    "visual": "Editor",
+    "addRow": "Add row below",
+    "addColumn": "Add column right",
+    "deleteRow": "Delete row",
+    "deleteColumn": "Delete column",
+    "toggleHeader": "Toggle header row",
+    "deleteTable": "Delete table"
+  },
+  "timePicker": {
+    "placeholder": "Select time",
+    "hour": "Hour",
+    "minute": "Min",
+    "period": "AM/PM"
   }
 }

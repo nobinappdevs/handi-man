@@ -5,11 +5,12 @@ import { ArrowRight } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { Eyebrow } from "@/components/share/Eyebrow";
 import { Blog } from "@/components/homepage/Blog";
-import { BLOG_POST_KEYS } from "@/components/homepage/homeData";
+import { useHomeContent } from "@/hooks/useHomeContent";
 
 /**
  * The `/blog` screen: a short page head, then the post grid the design shares
- * with the home page.
+ * with the home page - here with EVERY announcement (`all`), where the home
+ * page shows the newest three and a "Load more" that leads here.
  *
  * `Blog` is imported as-is rather than copied — it takes no props and owns its
  * own GSAP scope. The head exists because that reveal waits for hydration, so
@@ -19,6 +20,7 @@ import { BLOG_POST_KEYS } from "@/components/homepage/homeData";
  */
 export function BlogScreen() {
   const { t } = useLang();
+  const { data, isLoading } = useHomeContent();
 
   return (
     <>
@@ -38,7 +40,7 @@ export function BlogScreen() {
           <div className="enter-fade flex min-w-0 flex-wrap items-center gap-x-8 gap-y-4 [--enter-delay:0.24s]">
             <span className="flex flex-col gap-1">
               <span className="text-[clamp(26px,2.6vw,34px)] leading-none font-black tracking-[-0.03em] text-brand">
-                {BLOG_POST_KEYS.length}
+                {isLoading ? "··" : (data?.announcements.length ?? 0)}
               </span>
               <span className="font-display text-[12px] font-bold tracking-[0.14em] text-muted uppercase">
                 {t("blogPage.stats.posts")}
@@ -55,7 +57,7 @@ export function BlogScreen() {
         </div>
       </section>
 
-      <Blog />
+      <Blog all />
     </>
   );
 }

@@ -55,42 +55,27 @@ export interface UserDashboardData {
   chart?: DashboardChart;
 }
 
-/** A line of a vendor order — one service within it. */
-export interface VendorOrderDetail {
-  service_name?: string;
-  quantity?: string | number;
-  item?: string;
-  single_price?: number;
-}
-
 /**
- * A row of `order_log`.
+ * A row of `order_log` - the latest five service orders, newest first, as
+ * the endpoint's own description documents them.
  *
- * Typed from `/vendors/order/list`, which returns the same records — the
- * dashboard's own samples are all empty, so there was nothing to read there.
- * Everything is optional: this is the shape of another endpoint's rows, and
- * the screen degrades to a dash rather than assuming a field is present.
- *
- * Note what is NOT here: the customer's name and phone. The payload carries
- * only `user_id`, which is why the table shows the order's own details in
- * that column instead of a person.
+ * Nothing on screen reads these: the overview's recent jobs come from
+ * `/vendors/order/list`, whose rows also carry the service name, charge and
+ * payable that these do not. Typed anyway so the shape is on record.
  */
-export interface VendorOrderRow {
-  id?: number;
-  trx_id?: string;
-  /** 0-3; `stringStatus.value` is the readable form. */
-  status?: number | string;
-  stringStatus?: { class?: string; value?: string };
-  attribute?: string;
-  request_amount?: number;
-  total_charge?: number;
-  discount?: number;
-  /** What the vendor is paid for this order. */
-  payable?: number;
-  reject_reason?: string | null;
+export interface VendorOrderLogRow {
+  id: number;
+  trx_id: string;
+  request_amount?: string | number;
+  /** 1 completed, 2 pending, 3 rejected, 4 hold, 5 processing. */
+  status: number;
+  status_label?: string;
+  /** True while pending. */
+  can_accept?: boolean;
+  can_reject?: boolean;
+  /** True while processing. */
+  can_complete?: boolean;
   created_at?: string;
-  order_details_info?: VendorOrderDetail[];
-  [key: string]: unknown;
 }
 
 export interface VendorDashboardData {
@@ -102,8 +87,8 @@ export interface VendorDashboardData {
   pending_order: number;
   active_ticket: number;
   chart?: DashboardChart;
-  /** Recent orders, newest first. `VendorRecentJobs` draws these. */
-  order_log?: VendorOrderRow[];
+  /** The latest five orders. See `VendorOrderLogRow`. */
+  order_log?: VendorOrderLogRow[];
 }
 
 export const dashboardService = {

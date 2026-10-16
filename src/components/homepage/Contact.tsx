@@ -11,7 +11,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ArrowRight,
-  ChevronDown,
   MessageSquare,
   ShieldCheck,
 } from "lucide-react";
@@ -26,6 +25,7 @@ import {
   type ContactRequest,
 } from "@/schemas/contact.schema";
 import { cn } from "@/components/ui/cn";
+import { Select } from "@/components/ui/Select";
 import contactPhoto from "@public/assets/home/contact-photo.webp";
 
 /* Fields sit on the plum panel, so they are translucent white rather than the
@@ -33,7 +33,12 @@ import contactPhoto from "@public/assets/home/contact-photo.webp";
 const FIELD =
   "h-[54px] w-full border bg-white/[0.12] px-4 text-[14.5px] font-medium text-white outline-none transition-colors placeholder:text-white/55 focus:border-white/60";
 
-const ERROR_TEXT = "mt-1.5 block text-[12.5px] font-medium text-red-300";
+/* The same glass box for the service picker. Only the trigger sits on plum -
+   its menu portals to <body> and draws on the themed card surface. */
+const SELECT_SKIN =
+  "h-[54px] border border-white/[0.28] bg-white/[0.12] px-4 text-[14.5px] font-semibold text-white hover:border-white/60 focus-visible:border-white/60";
+
+const ERROR_TEXT ="mt-1.5 block text-[12.5px] font-medium text-red-300";
 
 /**
  * Contact section: a worksite photo with a "verified" badge on the left, and
@@ -190,35 +195,23 @@ export function Contact() {
                 />
 
                 <div>
-                  <label className="relative flex h-[54px] items-center border border-white/[0.28] bg-white/[0.12] px-4">
-                    <Controller
-                      name="service"
-                      control={control}
-                      render={({ field }) => (
-                        <select
-                          {...field}
-                          aria-label={t("home.contact.serviceLabel")}
-                          onChange={(e) => {
-                            field.onChange(e);
-                            setSent(false);
-                          }}
-                          className="w-full cursor-pointer appearance-none border-0 bg-transparent pe-[18px] text-[14.5px] font-semibold text-white outline-none"
-                        >
-                          {serviceOptions.map((option) => (
-                            <option key={option.value} value={option.value} style={{ color: "#12100f" }}>
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
-                      )}
-                    />
-                    <ChevronDown
-                      size={12}
-                      strokeWidth={2.6}
-                      aria-hidden
-                      className="pointer-events-none absolute end-[14px] text-white/70"
-                    />
-                  </label>
+                  <Controller
+                    name="service"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        value={field.value}
+                        onChange={(value) => {
+                          field.onChange(value);
+                          setSent(false);
+                        }}
+                        options={serviceOptions}
+                        aria-label={t("home.contact.serviceLabel")}
+                        skin={SELECT_SKIN}
+                        chevronClassName="text-white/70"
+                      />
+                    )}
+                  />
                 </div>
               </div>
 

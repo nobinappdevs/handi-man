@@ -217,12 +217,14 @@
       },
       "supportText": "دعم على مدار الساعة طوال أيام الأسبوع لمهام الصيانة والتوصيل — اتصل على",
       "supportPhone": "+00-11-00-2222",
-      "namePlaceholder": "الاسم",
-      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "stateLabel": "الولاية",
+      "statePlaceholder": "اختر الولاية",
       "cityLabel": "المدينة",
-      "serviceLabel": "الخدمة",
-      "bookNow": "جارٍ الحجز",
-      "bookSent": "تم إرسال الطلب"
+      "cityPlaceholder": "اختر المدينة",
+      "cityNeedsState": "يرجى اختيار الولاية أولاً",
+      "searchLabel": "ابحث عن الخدمات",
+      "searchPlaceholder": "ابحث عن خدمتك هنا مثل: مكيف، سيارة، عناية بالوجه…",
+      "searchSubmit": "بحث"
     },
     "services": {
       "handyman": "الصيانة المنزلية",
@@ -235,8 +237,6 @@
     "categories": {
       "eyebrow": "تصفح الفئات",
       "title": "ما الذي تحتاجه اليوم؟",
-      "pros": "محترفون",
-      "allDay": "على مدار الساعة",
       "items": {
         "handyman": "الصيانة المنزلية",
         "cleaning": "التنظيف",
@@ -246,7 +246,8 @@
         "acRepair": "صيانة المكيفات",
         "beauty": "التجميل",
         "shifting": "النقل"
-      }
+      },
+      "explore": "استكشف"
     },
     "listings": {
       "tabs": {
@@ -254,40 +255,7 @@
         "trending": "الأكثر رواجًا"
       },
       "viewAll": "عرض الكل",
-      "items": {
-        "fitnessPotential": {
-          "title": "أطلق كامل طاقتك البدنية",
-          "unit": "عنصر واحد"
-        },
-        "totalBodyFitness": {
-          "title": "دليل شامل للياقة بدنية متكاملة",
-          "unit": "يوم واحد"
-        },
-        "kitchenBathroomDeepClean": {
-          "title": "تنظيف عميق للمطابخ والحمامات",
-          "unit": "زيارة واحدة"
-        },
-        "sameDayParcel": {
-          "title": "استلام وتوصيل الطرود في نفس اليوم",
-          "unit": "لكل طرد"
-        },
-        "acServiceGasRefill": {
-          "title": "صيانة مكيف سبليت مع إعادة تعبئة الغاز",
-          "unit": "وحدة واحدة"
-        },
-        "emergencyPlumbing": {
-          "title": "زيارة سباكة طارئة",
-          "unit": "ساعة واحدة"
-        },
-        "electricalSafetyCheck": {
-          "title": "فحص شامل للسلامة الكهربائية للمنزل",
-          "unit": "زيارة واحدة"
-        },
-        "salonAtHome": {
-          "title": "صالون في المنزل — عناية بالبشرة وتجميل",
-          "unit": "جلسة واحدة"
-        }
-      }
+      "empty": "لا توجد خدمات لعرضها بعد."
     },
     "categoryGroups": {
       "startsAt": "يبدأ من",
@@ -440,25 +408,7 @@
     "team": {
       "eyebrow": "فريقنا",
       "title": "تعرّف على فريق Handiman.",
-      "lead": "من التحقق من مقدمي الخدمة إلى الدعم المباشر، يحرص هذا الفريق على أن يسير كل حجز واستلام وتوصيل في موعده.",
-      "members": {
-        "owenBaxter": {
-          "name": "Owen Baxter",
-          "role": "المؤسس"
-        },
-        "priyaNandan": {
-          "name": "Priya Nandan",
-          "role": "مسؤولة العمليات"
-        },
-        "marcusCole": {
-          "name": "Marcus Cole",
-          "role": "مسؤول نجاح مقدمي الخدمة"
-        },
-        "saraAhmed": {
-          "name": "Sara Ahmed",
-          "role": "تصميم المنتج"
-        }
-      }
+      "lead": "من التحقق من مقدمي الخدمة إلى الدعم المباشر، يحرص هذا الفريق على أن يسير كل حجز واستلام وتوصيل في موعده."
     },
     "testimonials": {
       "eyebrow": "آراء العملاء",
@@ -517,26 +467,10 @@
       "title": "أحدث إعلاناتنا",
       "lead": "الحل الأمثل للخدمات الفورية وأعمال الصيانة المنزلية على أندرويد وiOS والويب.",
       "author": "المشرف العام",
-      "posts": {
-        "communityConnections": {
-          "cat": "أسلوب حياة Handiman",
-          "title": "روابط مجتمعية: أسلوب حياة Handiman",
-          "date": "28 فبراير، 2024",
-          "read": "6 دقائق قراءة"
-        },
-        "pricingPhilosophy": {
-          "cat": "خدمة عالية الجودة",
-          "title": "الابتكار باقتصاد: فلسفة التسعير في Handiman",
-          "date": "26 يناير، 2024",
-          "read": "5 دقائق قراءة"
-        },
-        "onDemandAdvantage": {
-          "cat": "Handiman تُحدث الثورة",
-          "title": "ثورة في الخدمات عند الطلب: ميزة Handiman",
-          "date": "28 فبراير، 2024",
-          "read": "6 دقائق قراءة"
-        }
-      }
+      "minRead": "دقائق للقراءة",
+      "loadMore": "عرض المزيد",
+      "readMore": "اقرأ المزيد",
+      "empty": "لا توجد إعلانات بعد."
     },
     "faq": {
       "eyebrow": "الأسئلة الشائعة",
@@ -796,7 +730,13 @@
       "posts": "مقالات منشورة"
     }
   },
-  "blogDetail": {},
+  "blogDetail": {
+    "back": "كل الإعلانات",
+    "notFound": "الإعلان غير موجود",
+    "notFoundHint": "ربما أُزيل، أو أن الرابط غير صحيح.",
+    "more": "المزيد من الإعلانات",
+    "tags": "الوسوم"
+  },
   "contactPage": {
     "eyebrow": "اتصل بنا",
     "title": "أخبرنا بما تحتاجه",
@@ -816,7 +756,8 @@
       "previous": "السابق",
       "next": "التالي",
       "empty": "لا يوجد شيء هنا بعد",
-      "shown": "معروض"
+      "shown": "معروض",
+      "pagination": "ترقيم الصفحات"
     },
     "searchPlaceholder": "ابحث عن مهام، طرود، مقدمي خدمة",
     "notifications": "الإشعارات",
@@ -1072,7 +1013,7 @@
       "vendorSchedule": {
         "nav": "جدول الخدمة",
         "heading": "جدول الخدمة",
-        "sub": "أعمالك المحجوزة، يومًا بيوم.",
+        "sub": "متى يمكن للعملاء حجزك: إلى أي مدى مسبقًا وفي أي أوقات.",
         "table": "الجدول"
       },
       "vendorTwoFa": {
@@ -1104,6 +1045,16 @@
         "heading": "سجلات سحب الأموال",
         "sub": "كل عملية سحب طلبتها، برسومها وتسويتها.",
         "table": ""
+      },
+      "vendorServiceCreate": {
+        "nav": "إضافة خدمة",
+        "heading": "إضافة خدمة",
+        "sub": "اعرض خدمة جديدة ليحجزها العملاء."
+      },
+      "vendorServiceEdit": {
+        "nav": "تعديل الخدمة",
+        "heading": "تعديل الخدمة",
+        "sub": "غيّر تفاصيل الخدمة أو سعرها أو صورتها."
       }
     },
     "profile": {
@@ -1358,17 +1309,27 @@
         "payoutSection": "الدفع",
         "service": "الخدمة",
         "commission": "عمولة المنصة",
-        "yourPayout": "أرباحك"
+        "yourPayout": "أرباحك",
+        "complete": "إكمال",
+        "viewAll": "عرض الكل",
+        "colAmount": "المبلغ",
+        "item": "البند",
+        "customerSection": "العميل",
+        "reasonLabel": "السبب",
+        "reasonPlaceholder": "مثال: غير متاح في هذا التاريخ",
+        "reasonHint": "سيرى العميل هذا السبب مع الطلب.",
+        "orderBy": "الطلب بواسطة",
+        "landmark": "الشقة / المبنى / المعلم",
+        "map": "الخريطة",
+        "price": "السعر",
+        "accept": "قبول",
+        "reject": "رفض",
+        "viewDetails": "عرض التفاصيل",
+        "rejectTitle": "رفض هذه المهمة؟"
       },
       "services": {
         "title": "خدماتك",
         "add": "إضافة خدمة",
-        "live": "نشطة",
-        "paused": "متوقفة مؤقتًا",
-        "booked": "محجوزة",
-        "pause": "إيقاف الإعلان مؤقتًا",
-        "resume": "استئناف الإعلان",
-        "preview": "معاينة",
         "form": {
           "title": "إضافة خدمة",
           "whereTitle": "مكان عملك",
@@ -1385,15 +1346,6 @@
           "name": "اسم الخدمة",
           "namePlaceholder": "مثال: تنظيف عميق للمطبخ",
           "unit": "التسعير حسب",
-          "unitPlaceholder": "اختر الوحدة",
-          "units": {
-            "hour": "ساعة",
-            "day": "يوم",
-            "week": "أسبوع",
-            "piece": "قطعة",
-            "room": "غرفة",
-            "visit": "زيارة"
-          },
           "price": "السعر الابتدائي",
           "currency": "USD",
           "priceHint": "أقل مبلغ تقبل به هذا العمل.",
@@ -1408,14 +1360,46 @@
           "details": "ما يشمله",
           "detailsPlaceholder": "ما تقوم به، وما تجلبه معك، وما هو غير مشمول، والمدة التي يستغرقها عادةً.",
           "reviewNote": "تُنشر الإعلانات بعد مراجعة المشرف لها — عادةً في غضون ساعات.",
-          "submit": "إرسال الإعلان"
-        }
+          "submit": "إرسال الإعلان",
+          "editTitle": "تعديل الخدمة",
+          "save": "حفظ التغييرات",
+          "itemPlaceholder": "مثال: ساعة، يوم، غرفة",
+          "itemHint": "ما يغطيه السعر.",
+          "thumbnailCurrent": "الصورة الحالية — اختر صورة جديدة لاستبدالها",
+          "detailsHint": "استخدم العناوين والقوائم والروابط لتسهيل القراءة."
+        },
+        "edit": "تعديل",
+        "delete": "حذف",
+        "deleteTitle": "حذف هذه الخدمة؟",
+        "searchPlaceholder": "ابحث في خدماتك",
+        "emptyTitle": "لا توجد خدمات بعد",
+        "emptyBody": "أضف خدمتك الأولى ليتمكن العملاء في منطقتك من حجزك.",
+        "noMatch": "لا توجد خدمات مطابقة",
+        "noMatchHint": "جرّب اسمًا أو فئة أخرى.",
+        "backToList": "العودة إلى الخدمات",
+        "notFound": "الخدمة غير موجودة",
+        "notFoundHint": "ربما حُذفت، أو أن الرابط غير صحيح."
       },
       "schedule": {
-        "today": "اليوم",
-        "tomorrow": "غدًا",
-        "later": "لاحقًا هذا الأسبوع",
-        "emptyDay": "لا يوجد شيء محجوز."
+        "windowTitle": "فترة الحجز",
+        "windowHint": "كم يومًا مقدمًا، بدءًا من اليوم، يمكن للعملاء حجزك.",
+        "fewerDays": "أيام أقل",
+        "moreDays": "أيام أكثر",
+        "daysUnit": "يومًا مقدمًا",
+        "previewTitle": "التواريخ المتاحة للحجز",
+        "previewEmpty": "حدد عدد الأيام لفتح التواريخ للحجز.",
+        "slotsTitle": "الفترات الزمنية",
+        "slotsHint": "الساعات التي يمكن للعملاء اختيارها في كل يوم متاح.",
+        "addSlot": "إضافة فترة زمنية",
+        "editSlot": "تعديل الفترة الزمنية",
+        "deleteSlot": "حذف",
+        "deleteTitle": "حذف هذه الفترة الزمنية؟",
+        "emptyTitle": "لا توجد فترات زمنية بعد",
+        "emptyBody": "أضف ساعات عملك ليتمكن العملاء من اختيار وقت.",
+        "start": "وقت البدء",
+        "end": "وقت الانتهاء",
+        "hourShort": "س",
+        "minuteShort": "د"
       },
       "moneyOut": {
         "title": "طلب سحب",
@@ -1644,5 +1628,63 @@
       "noWeight": "أضف وزنًا لكل منتج وسيتراكم الإجمالي هنا.",
       "footnote": "لا دفع الآن. نؤكّد الموعد ورسوم الاستلام قبل أن ينطلق أي مندوب."
     }
+  },
+  "editor": {
+    "toolbar": "التنسيق",
+    "undo": "تراجع",
+    "redo": "إعادة",
+    "blockType": "نمط النص",
+    "paragraph": "فقرة",
+    "heading2": "عنوان 2",
+    "heading3": "عنوان 3",
+    "heading4": "عنوان 4",
+    "fontSize": "حجم الخط",
+    "fontSizeDefault": "افتراضي",
+    "bold": "عريض",
+    "italic": "مائل",
+    "underline": "تسطير",
+    "strike": "يتوسطه خط",
+    "code": "رمز برمجي",
+    "subscript": "منخفض",
+    "superscript": "مرتفع",
+    "clearFormatting": "مسح التنسيق",
+    "textColor": "لون النص",
+    "colorDefault": "اللون الافتراضي",
+    "highlight": "تظليل",
+    "highlightNone": "بدون تظليل",
+    "alignLeft": "محاذاة لليسار",
+    "alignCenter": "توسيط",
+    "alignRight": "محاذاة لليمين",
+    "alignJustify": "ضبط",
+    "bulletList": "قائمة نقطية",
+    "orderedList": "قائمة مرقمة",
+    "taskList": "قائمة مهام",
+    "outdent": "إنقاص المسافة",
+    "indent": "زيادة المسافة",
+    "link": "رابط",
+    "linkPlaceholder": "الصق رابطًا أو اكتبه",
+    "apply": "تطبيق",
+    "removeLink": "إزالة الرابط",
+    "image": "صورة",
+    "imagePlaceholder": "رابط الصورة (https://…)",
+    "insert": "إدراج",
+    "blockquote": "اقتباس",
+    "codeBlock": "كتلة برمجية",
+    "table": "إدراج جدول",
+    "horizontalRule": "فاصل",
+    "source": "المصدر",
+    "visual": "المحرر",
+    "addRow": "إضافة صف أسفل",
+    "addColumn": "إضافة عمود",
+    "deleteRow": "حذف الصف",
+    "deleteColumn": "حذف العمود",
+    "toggleHeader": "تبديل صف العناوين",
+    "deleteTable": "حذف الجدول"
+  },
+  "timePicker": {
+    "placeholder": "اختر الوقت",
+    "hour": "الساعة",
+    "minute": "الدقيقة",
+    "period": "ص/م"
   }
 }

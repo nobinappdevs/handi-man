@@ -100,7 +100,17 @@ export function profileQueryKey(role: AuthRole) {
 /** The first human-readable string in any of the shapes above. */
 function firstMessage(message: unknown): string | undefined {
   if (typeof message === "string") return message;
-  if (Array.isArray(message)) return message.find((m): m is string => typeof m === "string");
+  // Recursive, not a flat `find`: a Laravel 422 here arrives as
+  // `{"error": [["The reject reason field is required."]]}` - an array inside
+  // the array - and a flat search found nothing and fell back to "Something
+  // went wrong".
+  if (Array.isArray(message)) {
+    for (const item of message) {
+      const found = firstMessage(item);
+      if (found) return found;
+    }
+    return undefined;
+  }
   if (message && typeof message === "object") {
     for (const value of Object.values(message as Record<string, unknown>)) {
       const found = firstMessage(value);

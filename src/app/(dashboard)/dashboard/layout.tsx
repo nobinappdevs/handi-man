@@ -12,7 +12,8 @@ export const metadata = {
  *
  * It gates three things in order: no token → /login, unverified email →
  * /verify-otp, unanswered Google-2FA code → /verify-2fa. Until all three pass
- * it renders a spinner, so no dashboard markup reaches a signed-out visitor.
+ * it renders the dashboard skeleton, so no dashboard markup or data reaches a
+ * signed-out visitor.
  *
  * This is routing, not security. A static export has no server to check a
  * session, so the real boundary is the API: every private endpoint validates

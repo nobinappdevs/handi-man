@@ -60,6 +60,8 @@ export type PageKey =
   | "vendorOverview"
   | "vendorOrders"
   | "vendorServices"
+  | "vendorServiceCreate"
+  | "vendorServiceEdit"
   | "vendorSchedule"
   | "vendorTwoFa"
   | "vendorKyc"
@@ -85,12 +87,23 @@ export const DASH_ROUTES: Record<PageKey, string> = {
   vendorOverview: "/vendors/dashboard",
   vendorOrders: "/vendors/dashboard/orders",
   vendorServices: "/vendors/dashboard/services",
+  vendorServiceCreate: "/vendors/dashboard/services/create",
+  vendorServiceEdit: "/vendors/dashboard/services/edit",
   vendorSchedule: "/vendors/dashboard/schedule",
   vendorTwoFa: "/vendors/dashboard/2fa",
   vendorKyc: "/vendors/dashboard/kyc",
   vendorProfile: "/vendors/dashboard/profile",
   moneyOut: "/vendors/dashboard/money-out",
   moneyOutLogs: "/vendors/dashboard/money-out/logs",
+};
+
+/**
+ * Pages that are not in the rail themselves but belong to one that is - the
+ * rail keeps that item lit while you are on them.
+ */
+export const NAV_PARENT: Partial<Record<PageKey, PageKey>> = {
+  vendorServiceCreate: "vendorServices",
+  vendorServiceEdit: "vendorServices",
 };
 
 /**

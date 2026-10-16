@@ -1,48 +1,49 @@
 "use client";
 
-import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, useWatch, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChevronDown } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
-import { quickBookingSchema, type QuickBookingRequest } from "@/schemas/booking.schema";
-import { CITIES, SERVICE_KEYS } from "@/components/homepage/homeData";
-import { cn } from "@/components/ui/cn";
-
-type Option = { value: string; label: string };
+import { useSearchLocations, useServiceSearchSubmit } from "@/hooks/useServiceSearch";
+import { serviceSearchSchema, type ServiceSearchRequest } from "@/schemas/search.schema";
+import { Select, type SelectOption } from "@/components/ui/Select";
 
 /* The band's fields are square and light in both themes by design, so they use
-   the `field-*` tokens rather than the page surfaces. */
+   the `field-*` tokens rather than the page surfaces. The selects share the
+   input's 46px box so both rows line up. */
 const FIELD =
-  "h-[46px] min-w-0 flex-[1_1_150px] border bg-field px-3.5 text-[14.5px] font-medium text-field-ink outline-none transition-colors placeholder:text-muted focus:border-primary";
+  "h-[46px] w-full border border-field-line bg-field px-3.5 text-[14.5px] font-medium text-field-ink outline-none transition-colors placeholder:text-muted focus:border-primary";
+
+const SELECT_SKIN =
+  "h-[46px] border border-field-line bg-field px-3.5 text-[14.5px] font-semibold text-field-ink hover:border-primary/50 focus-visible:border-primary";
 
 /**
- * The support + quick-request band that straddles the hero and the section
- * below it. Validation is local (Zod + RHF); on submit the button switches to
- * its "sent" label, exactly as the design specifies. Wire the mutation in when
- * the booking endpoint exists — the toast and navigation belong in that hook,
- * not here.
+ * The support + service-search band that straddles the hero and the section
+ * below it: state → city → keyword, the same three filters `GET /service/search`
+ * takes.
+ *
+ * States and cities come from `GET /service/search-get`. The city list belongs
+ * to the chosen state, so changing the state clears the city - a city from the
+ * previous state would otherwise ride along into a search it cannot match.
+ * Submitting navigates to `/services` with the filters in the URL; the hook
+ * owns that navigation.
  */
 export function HeroBookingBand() {
   const { t } = useLang();
-  const [sent, setSent] = useState(false);
+  const { data: locations = [], isLoading } = useSearchLocations();
+  const submitSearch = useServiceSearchSubmit();
 
-  const cityOptions: Option[] = CITIES.map((c) => ({ value: c, label: c }));
-  const serviceOptions: Option[] = SERVICE_KEYS.map((key) => ({
-    value: key,
-    label: t(`home.services.${key}`),
-  }));
-
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<QuickBookingRequest>({
-    resolver: zodResolver(quickBookingSchema),
-    defaultValues: { name: "", email: "", city: CITIES[0], service: SERVICE_KEYS[0] },
+  const { control, handleSubmit, setValue } = useForm<ServiceSearchRequest>({
+    resolver: zodResolver(serviceSearchSchema),
+    defaultValues: { state: "", city: "", search: "" },
   });
 
-  const onSubmit = () => setSent(true);
+  const stateId = useWatch({ control, name: "state" });
+  const cities = locations.find((s) => s.id === stateId)?.cities ?? [];
+
+  const stateOptions: SelectOption[] = locations.map((s) => ({ value: s.id, label: s.name }));
+  const cityOptions: SelectOption[] = cities.map((c) => ({ value: c.id, label: c.name }));
+
+  const loadingText = t("common.loading");
 
   return (
     <div className="relative z-[6] mx-auto max-w-[1440px] translate-y-0 px-[clamp(18px,3vw,44px)] mid:translate-y-[42%]">
@@ -85,120 +86,88 @@ export function HeroBookingBand() {
 
         <form
           noValidate
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(submitSearch)}
           className="flex flex-col gap-3 bg-form px-[clamp(16px,2.2vw,28px)] py-[clamp(18px,2.2vw,22px)]"
         >
-          <div className="flex flex-wrap gap-2.5">
-            <Controller
-              name="name"
-              control={control}
-              render={({ field }) => (
-                <input
-                  {...field}
-                  type="text"
-                  aria-label={t("home.hero.namePlaceholder")}
-                  aria-invalid={errors.name ? true : undefined}
-                  placeholder={t("home.hero.namePlaceholder")}
-                  onChange={(e) => {
-                    field.onChange(e);
-                    setSent(false);
-                  }}
-                  className={cn(FIELD, errors.name ? "border-red-500" : "border-field-line")}
-                />
-              )}
-            />
-            <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <input
-                  {...field}
-                  type="email"
-                  aria-label={t("home.hero.emailPlaceholder")}
-                  aria-invalid={errors.email ? true : undefined}
-                  placeholder={t("home.hero.emailPlaceholder")}
-                  onChange={(e) => {
-                    field.onChange(e);
-                    setSent(false);
-                  }}
-                  className={cn(FIELD, errors.email ? "border-red-500" : "border-field-line")}
-                />
-              )}
-            />
-          </div>
+          <Controller
+            name="search"
+            control={control}
+            render={({ field }) => (
+              <input
+                {...field}
+                type="search"
+                aria-label={t("home.hero.searchLabel")}
+                placeholder={t("home.hero.searchPlaceholder")}
+                className={FIELD}
+              />
+            )}
+          />
 
           <div className="flex flex-wrap gap-2.5">
-            <BandSelect
-              name="city"
-              control={control}
-              label={t("home.hero.cityLabel")}
-              options={cityOptions}
-              onPick={() => setSent(false)}
-            />
-            <BandSelect
-              name="service"
-              control={control}
-              label={t("home.hero.serviceLabel")}
-              options={serviceOptions}
-              onPick={() => setSent(false)}
-            />
+            <div className="min-w-37.5 flex-[1_1_150px]">
+              <Controller
+                name="state"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    value={field.value}
+                    onChange={(value) => {
+                      field.onChange(value);
+                      setValue("city", "");
+                    }}
+                    options={stateOptions}
+                    placeholder={isLoading ? loadingText : t("home.hero.statePlaceholder")}
+                    aria-label={t("home.hero.stateLabel")}
+                    searchable
+                    skin={SELECT_SKIN}
+                  />
+                )}
+              />
+            </div>
+
+            {/* `group` on the wrapper, not the trigger: a disabled button is not
+                a reliable mouse target across browsers, but CSS `:hover` on its
+                parent still is. The hint only exists while no state is chosen. */}
+            <div className="group relative min-w-37.5 flex-[1_1_150px]">
+              {!stateId && (
+                <span
+                  role="tooltip"
+                  className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 whitespace-nowrap bg-ink px-3 py-1.5 text-[13px] font-semibold text-white opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100"
+                >
+                  {t("home.hero.cityNeedsState")}
+                  <span
+                    aria-hidden
+                    className="absolute top-full left-1/2 -translate-x-1/2 border-x-[6px] border-t-[6px] border-x-transparent border-t-ink"
+                  />
+                </span>
+              )}
+              <Controller
+                name="city"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    value={field.value}
+                    onChange={field.onChange}
+                    options={cityOptions}
+                    placeholder={isLoading ? loadingText : t("home.hero.cityPlaceholder")}
+                    aria-label={t("home.hero.cityLabel")}
+                    disabled={!stateId || cityOptions.length === 0}
+                    searchable
+                    skin={SELECT_SKIN}
+                  />
+                )}
+              />
+            </div>
+
             <button
               type="submit"
-              className="h-[46px] min-w-[150px] flex-[1_1_165px] cursor-pointer bg-primary font-display text-[14.5px] font-bold uppercase tracking-[0.13em] text-white transition-colors hover:bg-ink"
+              className="h-[46px] min-w-37.5 flex-[1_1_165px] cursor-pointer bg-primary font-display text-[14.5px] font-bold uppercase tracking-[0.13em] text-white transition-colors hover:bg-primary-dark"
             >
-              {t(sent ? "home.hero.bookSent" : "home.hero.bookNow")}
+              {t("home.hero.searchSubmit")}
             </button>
           </div>
         </form>
       </div>
     </div>
-  );
-}
-
-/* Native select, kept deliberately: the band's square 46px field is a distinct
-   design element, and the app's portal `Select` carries a different shape. */
-function BandSelect({
-  name,
-  control,
-  label,
-  options,
-  onPick,
-}: {
-  name: "city" | "service";
-  control: ReturnType<typeof useForm<QuickBookingRequest>>["control"];
-  label: string;
-  options: Option[];
-  onPick: () => void;
-}) {
-  return (
-    <label className="relative flex h-[46px] min-w-[150px] flex-[1_1_150px] items-center border border-field-line bg-field px-3.5">
-      <Controller
-        name={name}
-        control={control}
-        render={({ field }) => (
-          <select
-            {...field}
-            aria-label={label}
-            onChange={(e) => {
-              field.onChange(e);
-              onPick();
-            }}
-            className="w-full cursor-pointer appearance-none border-0 bg-transparent pe-4 text-[14.5px] font-semibold text-field-ink outline-none"
-          >
-            {options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        )}
-      />
-      <ChevronDown
-        size={12}
-        strokeWidth={2.6}
-        aria-hidden
-        className="pointer-events-none absolute end-3 text-muted"
-      />
-    </label>
   );
 }

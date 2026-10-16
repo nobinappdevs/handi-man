@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useLang } from "@/hooks/useLang";
 import { cn } from "@/components/ui/cn";
 import { Logo, LogoMark } from "@/components/share/Logo";
-import { navGroupsFor, areaFromPath, DASH_ROUTES } from "@/components/dashboard/dashboardData";
+import { navGroupsFor, areaFromPath, DASH_ROUTES, NAV_PARENT, pageFromPath } from "@/components/dashboard/dashboardData";
 
 /**
  * The rail has THREE states, not two, and they are pure CSS — no JS reads the
@@ -76,7 +76,7 @@ export function Sidebar({ drawer, onNavigate }: { drawer: boolean; onNavigate: (
 
             {group.items.map(({ key, icon: Icon, count }) => {
               const href = DASH_ROUTES[key];
-              const active = pathname === href;
+              const active = pathname === href || NAV_PARENT[pageFromPath(pathname)] === key;
               return (
                 <Link
                   key={key}

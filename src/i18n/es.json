@@ -217,12 +217,14 @@
       },
       "supportText": "Soporte 24/7 para trabajos de mantenimiento y entregas — llama al",
       "supportPhone": "+00-11-00-2222",
-      "namePlaceholder": "Nombre",
-      "emailPlaceholder": "Introduce tu correo",
+      "stateLabel": "Estado",
+      "statePlaceholder": "Selecciona un estado",
       "cityLabel": "Ciudad",
-      "serviceLabel": "Servicio",
-      "bookNow": "Reservando",
-      "bookSent": "Solicitud enviada"
+      "cityPlaceholder": "Selecciona una ciudad",
+      "cityNeedsState": "Primero selecciona un estado",
+      "searchLabel": "Buscar servicios",
+      "searchPlaceholder": "Encuentra tu servicio, p. ej. AC, coche, facial…",
+      "searchSubmit": "Buscar"
     },
     "services": {
       "handyman": "Mantenimiento del hogar",
@@ -235,8 +237,6 @@
     "categories": {
       "eyebrow": "Explorar categorías",
       "title": "¿Qué necesitas hoy?",
-      "pros": "profesionales",
-      "allDay": "24/7",
       "items": {
         "handyman": "Mantenimiento del hogar",
         "cleaning": "Limpieza",
@@ -246,7 +246,8 @@
         "acRepair": "Reparación de A/C",
         "beauty": "Belleza",
         "shifting": "Mudanzas"
-      }
+      },
+      "explore": "Explorar"
     },
     "listings": {
       "tabs": {
@@ -254,40 +255,7 @@
         "trending": "Tendencia"
       },
       "viewAll": "Ver todo",
-      "items": {
-        "fitnessPotential": {
-          "title": "Libera todo tu potencial físico",
-          "unit": "1 artículo"
-        },
-        "totalBodyFitness": {
-          "title": "Una guía completa para el fitness de cuerpo entero",
-          "unit": "1 día"
-        },
-        "kitchenBathroomDeepClean": {
-          "title": "Limpieza profunda de cocinas y baños",
-          "unit": "1 visita"
-        },
-        "sameDayParcel": {
-          "title": "Recogida y entrega de paquetes el mismo día",
-          "unit": "por paquete"
-        },
-        "acServiceGasRefill": {
-          "title": "Servicio de A/C split con recarga de gas",
-          "unit": "1 unidad"
-        },
-        "emergencyPlumbing": {
-          "title": "Servicio de fontanería de emergencia",
-          "unit": "1 hora"
-        },
-        "electricalSafetyCheck": {
-          "title": "Revisión completa de seguridad eléctrica del hogar",
-          "unit": "1 visita"
-        },
-        "salonAtHome": {
-          "title": "Salón de belleza a domicilio — Facial y cuidado",
-          "unit": "1 sesión"
-        }
-      }
+      "empty": "Aún no hay servicios para mostrar."
     },
     "categoryGroups": {
       "startsAt": "Desde",
@@ -440,25 +408,7 @@
     "team": {
       "eyebrow": "Nuestro equipo",
       "title": "Conoce al equipo de Handiman.",
-      "lead": "Desde la verificación de proveedores hasta el soporte en vivo, este equipo mantiene cada reserva, recogida y entrega funcionando a tiempo.",
-      "members": {
-        "owenBaxter": {
-          "name": "Owen Baxter",
-          "role": "Fundador"
-        },
-        "priyaNandan": {
-          "name": "Priya Nandan",
-          "role": "Directora de Operaciones"
-        },
-        "marcusCole": {
-          "name": "Marcus Cole",
-          "role": "Éxito de Proveedores"
-        },
-        "saraAhmed": {
-          "name": "Sara Ahmed",
-          "role": "Diseño de Producto"
-        }
-      }
+      "lead": "Desde la verificación de proveedores hasta el soporte en vivo, este equipo mantiene cada reserva, recogida y entrega funcionando a tiempo."
     },
     "testimonials": {
       "eyebrow": "Testimonios",
@@ -517,26 +467,10 @@
       "title": "Nuestro anuncio reciente",
       "lead": "La solución definitiva de servicios y mantenimiento del hogar bajo demanda para Android, iOS y la web.",
       "author": "Super Administrador",
-      "posts": {
-        "communityConnections": {
-          "cat": "Estilo de vida Handiman",
-          "title": "Conexiones comunitarias: el estilo de vida Handiman",
-          "date": "28 de febrero de 2024",
-          "read": "6 min de lectura"
-        },
-        "pricingPhilosophy": {
-          "cat": "Servicio de calidad",
-          "title": "Innovación con presupuesto: la filosofía de precios de Handiman",
-          "date": "26 de enero de 2024",
-          "read": "5 min de lectura"
-        },
-        "onDemandAdvantage": {
-          "cat": "Handiman está revolucionando el sector",
-          "title": "Revolucionando lo bajo demanda: la ventaja Handiman",
-          "date": "28 de febrero de 2024",
-          "read": "6 min de lectura"
-        }
-      }
+      "minRead": "min de lectura",
+      "loadMore": "Ver más",
+      "readMore": "Leer más",
+      "empty": "Aún no hay anuncios."
     },
     "faq": {
       "eyebrow": "Preguntas frecuentes",
@@ -796,7 +730,13 @@
       "posts": "Artículos publicados"
     }
   },
-  "blogDetail": {},
+  "blogDetail": {
+    "back": "Todos los anuncios",
+    "notFound": "Anuncio no encontrado",
+    "notFoundHint": "Puede que se haya eliminado o que el enlace sea incorrecto.",
+    "more": "Más anuncios",
+    "tags": "Etiquetas"
+  },
   "contactPage": {
     "eyebrow": "Contáctanos",
     "title": "Cuéntanos qué necesitas",
@@ -816,7 +756,8 @@
       "previous": "Anterior",
       "next": "Siguiente",
       "empty": "Todavía no hay nada aquí",
-      "shown": "mostrados"
+      "shown": "mostrados",
+      "pagination": "Paginación"
     },
     "searchPlaceholder": "Buscar trabajos, paquetes, proveedores",
     "notifications": "Notificaciones",
@@ -1072,7 +1013,7 @@
       "vendorSchedule": {
         "nav": "Horario de servicio",
         "heading": "Horario de servicio",
-        "sub": "Tus trabajos reservados, día a día.",
+        "sub": "Cuándo pueden reservarte los clientes: con cuánta antelación y a qué horas.",
         "table": "Horario"
       },
       "vendorTwoFa": {
@@ -1104,6 +1045,16 @@
         "heading": "Historial de retiros",
         "sub": "Cada retiro que has solicitado, con su comisión y liquidación.",
         "table": ""
+      },
+      "vendorServiceCreate": {
+        "nav": "Añadir servicio",
+        "heading": "Añadir un servicio",
+        "sub": "Publica un servicio nuevo para que los clientes lo reserven."
+      },
+      "vendorServiceEdit": {
+        "nav": "Editar servicio",
+        "heading": "Editar servicio",
+        "sub": "Cambia los detalles, el precio o la foto de un anuncio."
       }
     },
     "profile": {
@@ -1358,17 +1309,27 @@
         "payoutSection": "Pago",
         "service": "Servicio",
         "commission": "Comisión de la plataforma",
-        "yourPayout": "Tu pago"
+        "yourPayout": "Tu pago",
+        "complete": "Completar",
+        "viewAll": "Ver todo",
+        "colAmount": "Importe",
+        "item": "Artículo",
+        "customerSection": "Cliente",
+        "reasonLabel": "Motivo",
+        "reasonPlaceholder": "p. ej. No disponible en esta fecha",
+        "reasonHint": "El cliente verá este motivo junto al pedido.",
+        "orderBy": "Pedido por",
+        "landmark": "Piso / Edificio / Referencia",
+        "map": "Mapa",
+        "price": "Precio",
+        "accept": "Aceptar",
+        "reject": "Rechazar",
+        "viewDetails": "Ver detalles",
+        "rejectTitle": "¿Rechazar este trabajo?"
       },
       "services": {
         "title": "Tus servicios",
         "add": "Añadir un servicio",
-        "live": "Activo",
-        "paused": "Pausado",
-        "booked": "reservados",
-        "pause": "Pausar anuncio",
-        "resume": "Reanudar anuncio",
-        "preview": "Vista previa",
         "form": {
           "title": "Añadir un servicio",
           "whereTitle": "Dónde trabajas",
@@ -1385,15 +1346,6 @@
           "name": "Nombre del servicio",
           "namePlaceholder": "p. ej. Limpieza profunda de cocina",
           "unit": "Se cobra por",
-          "unitPlaceholder": "Elige una unidad",
-          "units": {
-            "hour": "Hora",
-            "day": "Día",
-            "week": "Semana",
-            "piece": "Pieza",
-            "room": "Habitación",
-            "visit": "Visita"
-          },
           "price": "Precio inicial",
           "currency": "USD",
           "priceHint": "Lo mínimo por lo que aceptarías el trabajo.",
@@ -1408,14 +1360,46 @@
           "details": "Qué incluye",
           "detailsPlaceholder": "Qué haces, qué llevas, qué no está incluido y cuánto suele tardar.",
           "reviewNote": "Los anuncios se publican cuando un administrador los revisa, normalmente en unas horas.",
-          "submit": "Enviar anuncio"
-        }
+          "submit": "Enviar anuncio",
+          "editTitle": "Editar servicio",
+          "save": "Guardar cambios",
+          "itemPlaceholder": "p. ej. 1 hora, 1 día, 1 habitación",
+          "itemHint": "Lo que cubre el precio.",
+          "thumbnailCurrent": "Imagen actual — elige otra para reemplazarla",
+          "detailsHint": "Usa títulos, listas y enlaces para que se lea fácilmente."
+        },
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "deleteTitle": "¿Eliminar este servicio?",
+        "searchPlaceholder": "Busca en tus servicios",
+        "emptyTitle": "Aún no hay servicios",
+        "emptyBody": "Añade tu primer servicio para que los clientes de tu zona puedan reservarte.",
+        "noMatch": "Ningún servicio coincide",
+        "noMatchHint": "Prueba con otro nombre o categoría.",
+        "backToList": "Volver a servicios",
+        "notFound": "Servicio no encontrado",
+        "notFoundHint": "Puede que se haya eliminado o que el enlace sea incorrecto."
       },
       "schedule": {
-        "today": "Hoy",
-        "tomorrow": "Mañana",
-        "later": "Más adelante esta semana",
-        "emptyDay": "Nada reservado."
+        "windowTitle": "Periodo de reserva",
+        "windowHint": "Con cuántos días de antelación, desde hoy, pueden reservarte los clientes.",
+        "fewerDays": "Menos días",
+        "moreDays": "Más días",
+        "daysUnit": "días de antelación",
+        "previewTitle": "Fechas reservables",
+        "previewEmpty": "Indica un número de días para abrir fechas de reserva.",
+        "slotsTitle": "Franjas horarias",
+        "slotsHint": "Las horas que los clientes pueden elegir cada día reservable.",
+        "addSlot": "Añadir franja horaria",
+        "editSlot": "Editar franja horaria",
+        "deleteSlot": "Eliminar",
+        "deleteTitle": "¿Eliminar esta franja horaria?",
+        "emptyTitle": "Aún no hay franjas horarias",
+        "emptyBody": "Añade tus horas de trabajo para que los clientes elijan una hora.",
+        "start": "Hora de inicio",
+        "end": "Hora de fin",
+        "hourShort": "h",
+        "minuteShort": "min"
       },
       "moneyOut": {
         "title": "Solicitar un pago",
@@ -1644,5 +1628,63 @@
       "noWeight": "Añade un peso a cada producto y el total se irá sumando aquí.",
       "footnote": "Sin pago ahora. Confirmamos la franja y la tarifa de recogida antes de que salga un repartidor."
     }
+  },
+  "editor": {
+    "toolbar": "Formato",
+    "undo": "Deshacer",
+    "redo": "Rehacer",
+    "blockType": "Estilo de texto",
+    "paragraph": "Párrafo",
+    "heading2": "Título 2",
+    "heading3": "Título 3",
+    "heading4": "Título 4",
+    "fontSize": "Tamaño de fuente",
+    "fontSizeDefault": "Predeterminado",
+    "bold": "Negrita",
+    "italic": "Cursiva",
+    "underline": "Subrayado",
+    "strike": "Tachado",
+    "code": "Código en línea",
+    "subscript": "Subíndice",
+    "superscript": "Superíndice",
+    "clearFormatting": "Borrar formato",
+    "textColor": "Color del texto",
+    "colorDefault": "Color predeterminado",
+    "highlight": "Resaltar",
+    "highlightNone": "Sin resaltado",
+    "alignLeft": "Alinear a la izquierda",
+    "alignCenter": "Centrar",
+    "alignRight": "Alinear a la derecha",
+    "alignJustify": "Justificar",
+    "bulletList": "Lista con viñetas",
+    "orderedList": "Lista numerada",
+    "taskList": "Lista de tareas",
+    "outdent": "Reducir sangría",
+    "indent": "Aumentar sangría",
+    "link": "Enlace",
+    "linkPlaceholder": "Pega o escribe un enlace",
+    "apply": "Aplicar",
+    "removeLink": "Quitar enlace",
+    "image": "Imagen",
+    "imagePlaceholder": "URL de la imagen (https://…)",
+    "insert": "Insertar",
+    "blockquote": "Cita",
+    "codeBlock": "Bloque de código",
+    "table": "Insertar tabla",
+    "horizontalRule": "Separador",
+    "source": "Código fuente",
+    "visual": "Editor",
+    "addRow": "Añadir fila debajo",
+    "addColumn": "Añadir columna",
+    "deleteRow": "Eliminar fila",
+    "deleteColumn": "Eliminar columna",
+    "toggleHeader": "Alternar fila de encabezado",
+    "deleteTable": "Eliminar tabla"
+  },
+  "timePicker": {
+    "placeholder": "Elegir hora",
+    "hour": "Hora",
+    "minute": "Min",
+    "period": "AM/PM"
   }
 }
