@@ -58,6 +58,26 @@ export function useRecaptcha() {
   };
 }
 
+/**
+ * tawk.to live chat. `enabled` only when the backend has it switched on AND
+ * sent both ids — the embed URL is `/{property_id}/{widget_id}`, so a missing
+ * half loads a 404 script.
+ *
+ * Default OFF, for the same reason as reCAPTCHA: guessing "on" would inject a
+ * third-party script the admin may have deliberately turned off.
+ */
+export function useTawkTo() {
+  const { data } = useBasicSettings();
+  const config = data?.data?.tawk_to;
+  const propertyId = config?.property_id ?? "";
+  const widgetId = config?.widget_id ?? "";
+  return {
+    enabled: String(config?.status ?? 0) === "1" && Boolean(propertyId) && Boolean(widgetId),
+    propertyId,
+    widgetId,
+  };
+}
+
 /** `user_registration` — whether the admin is accepting signups at all. */
 export function useRegistrationEnabled() {
   const { flags, isLoading } = useFlags();

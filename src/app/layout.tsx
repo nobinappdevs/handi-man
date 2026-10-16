@@ -3,6 +3,7 @@ import "../style/globals.css";
 import { ThemeProvider } from "@/hooks/useTheme";
 import { LangProvider } from "@/hooks/useLang";
 import { QueryProvider } from "@/providers/QueryProvider";
+import { TawkTo } from "@/components/share/TawkTo";
 
 /*
  * Two families, the pairing the reference design uses.
@@ -79,7 +80,10 @@ export default function RootLayout({ children }) {
         {/* Provider order matters: Theme → Lang → Query. */}
         <ThemeProvider>
           <LangProvider>
-            <QueryProvider>{children}</QueryProvider>
+            <QueryProvider>
+              {children}
+              <TawkTo />
+            </QueryProvider>
           </LangProvider>
         </ThemeProvider>
       </body>
