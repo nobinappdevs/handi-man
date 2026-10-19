@@ -7,16 +7,17 @@ import {
 import { useLang } from "@/hooks/useLang";
 import { formatDate, money } from "@/lib/money";
 import { useUserTransactions } from "@/hooks/useTransactions";
-import { Field, LogSkeleton, ParcelLog, Section } from "@/components/dashboard/page/history/ParcelLog";
+import { Field, LogSkeleton, ParcelList, ParcelLog, Section } from "@/components/dashboard/page/history/ParcelLog";
 import {
   addressLabelFor, paymentKeyFor, statusFromApi, type DeliveryOrder,
 } from "@/components/dashboard/page/history/historyData";
 import type { UserTransactionData } from "@/services/transaction.service";
 
 /** `/user/transaction`'s `delivery_orders` mapped into what the table and its
- *  modal read. The API calls the parcel-and-shop block `pickup_info` even
- *  here — it is where the courier picks the parcel up FROM — and a delivery
- *  order has never carried more than one parcel, so only the first is read.
+ *  modal read. The API calls the item list `pickup_info` even here — it is
+ *  where the courier picks the parcels up FROM — and it is an array: every
+ *  item the customer listed is kept, not just the first. Each `price` is the
+ *  estimate for the whole line, so it is shown as given, never × quantity.
  *  There is no `address_type` on a delivery row, so the pickup address label
  *  falls back to "other" rather than guessing. */
 function buildDeliveryOrders(data?: UserTransactionData): DeliveryOrder[] {
@@ -25,7 +26,6 @@ function buildDeliveryOrders(data?: UserTransactionData): DeliveryOrder[] {
     const request = Number(row.request_amount) || 0;
     const payable = Number(row.payable) || 0;
     const charge = row.charge !== undefined ? Number(row.charge) || 0 : Math.max(payable - request, 0);
-    const parcel = row.pickup_info?.[0];
 
     return {
       no: row.trx,
@@ -33,16 +33,15 @@ function buildDeliveryOrders(data?: UserTransactionData): DeliveryOrder[] {
       placedOn: formatDate(row.date_time),
       schedule: [row.schedule_time, row.schedule_date].filter(Boolean).join(", "),
       payment: paymentKeyFor(row.payment_type, row.gateway_name),
-      parcel: {
-        name: parcel?.name ?? "",
-        brand: parcel?.brand_name ?? "",
-        size: parcel?.size ?? "",
-        price: parcel?.price ? money(Number(parcel.price) || 0, currency) : "",
-        quantity: Number(parcel?.quantity) || 0,
-        shop: parcel?.shop ?? "",
-        shopAddress: parcel?.shop_address ?? "",
-        details: "",
-      },
+      parcels: (row.pickup_info ?? []).map((parcel) => ({
+        name: parcel.name ?? "",
+        brand: parcel.brand_name ?? "",
+        size: parcel.size ?? "",
+        price: parcel.price ? money(Number(parcel.price) || 0, currency) : "",
+        quantity: Number(parcel.quantity) || 0,
+        shop: parcel.shop ?? "",
+        shopAddress: parcel.shop_address ?? "",
+      })),
       pickup: {
         name: row.name ?? "",
         phone: row.phone ?? "",
@@ -87,16 +86,21 @@ export function DeliveryLog() {
       routeValue={(order) => order.dropoff.shortAddress || order.dropoff.fullAddress || "—"}
       details={(order) => (
         <>
-          <Section title={k("parcelSection")}>
-            <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("parcelName")} value={order.parcel.name} />
-            <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("brand")} value={order.parcel.brand} />
-            <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("size")} value={order.parcel.size} />
-            <Field icon={<Receipt size={13} strokeWidth={2} aria-hidden />} label={k("price")} value={order.parcel.price} />
-            <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("quantity")} value={order.parcel.quantity} />
-            <Field icon={<Store size={13} strokeWidth={2} aria-hidden />} label={k("shop")} value={order.parcel.shop} />
-            <Field icon={<Store size={13} strokeWidth={2} aria-hidden />} label={k("shopAddress")} value={order.parcel.shopAddress} />
-            <Field icon={<Receipt size={13} strokeWidth={2} aria-hidden />} label={k("details")} value={order.parcel.details} />
-          </Section>
+          <ParcelList
+            title={k("parcelSection")}
+            parcels={order.parcels}
+            name={(parcel) => parcel.name}
+            fields={(parcel) => (
+              <>
+                <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("brand")} value={parcel.brand} />
+                <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("size")} value={parcel.size} />
+                <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("quantity")} value={parcel.quantity} />
+                <Field icon={<Receipt size={13} strokeWidth={2} aria-hidden />} label={k("price")} value={parcel.price} />
+                <Field icon={<Store size={13} strokeWidth={2} aria-hidden />} label={k("shop")} value={parcel.shop} />
+                <Field icon={<Store size={13} strokeWidth={2} aria-hidden />} label={k("shopAddress")} value={parcel.shopAddress} />
+              </>
+            )}
+          />
 
           <Section title={k("pickupSection")}>
             <Field icon={<CalendarClock size={13} strokeWidth={2} aria-hidden />} label={k("schedule")} value={order.schedule} />

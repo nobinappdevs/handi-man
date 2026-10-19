@@ -86,6 +86,67 @@ export function Section({ title, children }: { title: string; children: ReactNod
   );
 }
 
+/**
+ * One parcel inside the modal's parcel section — a numbered, bordered block so
+ * two items with the same field labels read as two things, not one long list.
+ * The name is the block's heading; `children` are its `Field` rows.
+ */
+export function ParcelItem({
+  index,
+  name,
+  children,
+}: {
+  index: number;
+  name: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="border border-border">
+      <div className="flex items-center gap-2.5 border-b border-border bg-sunk px-3.5 py-2.5">
+        <span className="flex h-6 w-6 flex-none items-center justify-center bg-brand/14 text-[12px] font-bold text-brand">
+          {index + 1}
+        </span>
+        <span className="min-w-0 text-[14px] font-bold tracking-[-0.015em] break-words text-heading">
+          {name || "—"}
+        </span>
+      </div>
+      <div className="px-3.5">{children}</div>
+    </div>
+  );
+}
+
+/** The parcel section: every item on the order, each in its own block. */
+export function ParcelList<P>({
+  title,
+  parcels,
+  name,
+  fields,
+}: {
+  title: string;
+  parcels: P[];
+  name: (parcel: P) => string;
+  fields: (parcel: P) => ReactNode;
+}) {
+  return (
+    <section>
+      <h4 className="mb-2 text-[11.5px] font-bold tracking-[0.14em] text-muted uppercase">
+        {title} · {parcels.length}
+      </h4>
+      {parcels.length === 0 ? (
+        <p className="text-[13.5px] text-muted">—</p>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {parcels.map((parcel, i) => (
+            <ParcelItem key={i} index={i} name={name(parcel)}>
+              {fields(parcel)}
+            </ParcelItem>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
 /** The loading state for any of the three history screens, while
  *  `/user/transaction` is in flight — three pulsing rows in the same shape
  *  the real table rows take, so the layout does not jump once it lands. */
@@ -112,7 +173,9 @@ export type ParcelRow = {
   placedOn: string;
   /** Pre-formatted window; the API sends it as one string. */
   schedule: string;
-  parcel: { name: string; quantity: number };
+  /** Every item on the order. The row shows the first name, how many more
+   *  there are, and the quantity summed across all of them. */
+  parcels: { name: string; quantity: number }[];
   totals: { total: string };
 };
 
@@ -178,46 +241,56 @@ export function ParcelLog<T extends ParcelRow>({
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <tr
-                  key={order.no}
-                  onClick={() => setOpen(order)}
-                  className="cursor-pointer transition-colors hover:bg-sunk"
-                >
-                  <td>
-                    <span className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 flex-none items-center justify-center bg-brand/14 text-brand">
-                        <Icon size={16} strokeWidth={2} aria-hidden />
-                      </span>
-                      <span className="flex flex-col gap-0.5">
-                        <span className="text-[14.5px] font-bold tracking-[-0.015em] text-heading">
-                          {order.parcel.name}
+              {orders.map((order) => {
+                const first = order.parcels[0]?.name || "—";
+                const more = order.parcels.length - 1;
+                const qty = order.parcels.reduce((sum, p) => sum + p.quantity, 0);
+                return (
+                  <tr
+                    key={order.no}
+                    onClick={() => setOpen(order)}
+                    className="cursor-pointer transition-colors hover:bg-sunk"
+                  >
+                    <td>
+                      <span className="flex items-center gap-3">
+                        <span className="flex h-9 w-9 flex-none items-center justify-center bg-brand/14 text-brand">
+                          <Icon size={16} strokeWidth={2} aria-hidden />
                         </span>
-                        <span className="text-[11.5px] font-medium tracking-[0.1em] text-muted uppercase">
-                          #{order.no} · {t("dashboard.history.qty")} {order.parcel.quantity}
+                        <span className="flex flex-col gap-0.5">
+                          <span className="text-[14.5px] font-bold tracking-[-0.015em] text-heading">
+                            {first}
+                            {more > 0 && (
+                              <span className="ms-1.5 text-[12px] font-semibold text-brand">
+                                +{more} {t("dashboard.history.more")}
+                              </span>
+                            )}
+                          </span>
+                          <span className="text-[11.5px] font-medium tracking-[0.1em] text-muted uppercase">
+                            #{order.no} · {t("dashboard.history.qty")} {qty}
+                          </span>
                         </span>
                       </span>
-                    </span>
-                  </td>
-                  <td className="whitespace-nowrap">{order.schedule}</td>
-                  <td>{routeValue(order)}</td>
-                  <td>
-                    <StatusPill status={order.status} />
-                  </td>
-                  <td className="text-end font-bold whitespace-nowrap text-heading">
-                    {order.totals.total}
-                  </td>
-                  <td className="text-end">
-                    <button
-                      type="button"
-                      onClick={(e) => { e.stopPropagation(); setOpen(order); }}
-                      className="cursor-pointer text-[12px] font-bold tracking-[0.12em] whitespace-nowrap text-brand uppercase transition-opacity hover:opacity-70"
-                    >
-                      {k("viewAll")}
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td className="whitespace-nowrap">{order.schedule}</td>
+                    <td>{routeValue(order)}</td>
+                    <td>
+                      <StatusPill status={order.status} />
+                    </td>
+                    <td className="text-end font-bold whitespace-nowrap text-heading">
+                      {order.totals.total}
+                    </td>
+                    <td className="text-end">
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setOpen(order); }}
+                        className="cursor-pointer text-[12px] font-bold tracking-[0.12em] whitespace-nowrap text-brand uppercase transition-opacity hover:opacity-70"
+                      >
+                        {k("viewAll")}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

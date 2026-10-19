@@ -4,7 +4,7 @@
 // Built around `kind` from the start — the old dashboard has Service, Pickup
 // and Delivery as three entries under History. Service stayed one component
 // (`OrderHistory`, item-based); Pickup and Delivery turned out to share a
-// different shape instead (a single parcel, a route) and became `ParcelLog`.
+// different shape instead (a list of parcels, a route) and became `ParcelLog`.
 //
 // The mock arrays that used to live here (`SERVICE_ORDERS`, `PICKUP_ORDERS`,
 // `DELIVERY_ORDERS`) and their accessors are gone now that `/user/transaction`
@@ -60,6 +60,13 @@ export type ServiceOrder = {
  * scan a log for, with the whole record behind a modal — see `ParcelLog`.
  */
 
+/** One item the rider buys and brings — `pickup_info[n]` on a delivery row.
+ *  `price` is the customer's estimate for the whole line, pre-formatted. */
+export type DeliveryParcel = {
+  name: string; brand: string; size: string; price: string;
+  quantity: number; shop: string; shopAddress: string;
+};
+
 export type DeliveryOrder = {
   no: string;
   status: OrderStatus;
@@ -68,10 +75,8 @@ export type DeliveryOrder = {
   schedule: string;
   /** i18n suffix under `dashboard.history.payment`. */
   payment: string;
-  parcel: {
-    name: string; brand: string; size: string; price: string;
-    quantity: number; shop: string; shopAddress: string; details: string;
-  };
+  /** Every item on the order, in the order the customer listed them. */
+  parcels: DeliveryParcel[];
   /** Where the rider collects. */
   pickup: { name: string; phone: string; addressLabel: string; address: string; landmark: string };
   /** Where it goes. */
@@ -86,6 +91,9 @@ export type DeliveryOrder = {
  * weight, which is what a courier quote is priced on.
  */
 
+/** One parcel the rider collects — `pickup_info[n]` on a pickup row. */
+export type PickupParcel = { name: string; quantity: number; weight: string };
+
 export type PickupOrder = {
   no: string;
   status: OrderStatus;
@@ -94,9 +102,8 @@ export type PickupOrder = {
   schedule: string;
   /** i18n suffix under `dashboard.history.payment`. */
   payment: string;
-  parcel: {
-    name: string; quantity: number; weight: string; price: string; details: string;
-  };
+  /** Every parcel on the order, in the order the customer listed them. */
+  parcels: PickupParcel[];
   /** Where the rider collects — the customer's own door, usually. */
   collect: { name: string; phone: string; addressLabel: string; address: string; landmark: string };
   /** Where it goes afterwards. */

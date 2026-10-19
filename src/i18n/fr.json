@@ -180,7 +180,9 @@
       "namePlaceholder": "Nom",
       "emailPlaceholder": "E-mail",
       "subscribe": "S'abonner",
-      "subscribed": "Abonné"
+      "subscribing": "Abonnement…",
+      "subscribed": "Abonné",
+      "success": "Vous êtes abonné. Merci de nous rejoindre !"
     },
     "links": {
       "title": "Liens utiles",
@@ -237,16 +239,6 @@
     "categories": {
       "eyebrow": "Parcourir les catégories",
       "title": "De quoi avez-vous besoin aujourd'hui ?",
-      "items": {
-        "handyman": "Dépannage",
-        "cleaning": "Ménage",
-        "delivery": "Livraison",
-        "plumbing": "Plomberie",
-        "electrics": "Électricité",
-        "acRepair": "Réparation de climatisation",
-        "beauty": "Beauté",
-        "shifting": "Déménagement"
-      },
       "explore": "Découvrir"
     },
     "listings": {
@@ -504,13 +496,14 @@
       "title": "Parlons de votre prochaine mission.",
       "photoAlt": "Prestataire Handiman vérifiant le stock par rapport à une fiche de mission",
       "badge": "Prestataires vérifiés, missions suivies — chaque demande est prise en charge.",
-      "fullName": "Nom complet*",
+      "firstName": "Prénom*",
+      "lastName": "Nom*",
       "email": "E-mail",
-      "phone": "Téléphone",
-      "serviceLabel": "Service",
       "message": "Message",
       "submit": "Envoyer la demande",
+      "sending": "Envoi…",
       "sent": "Demande envoyée",
+      "success": "Message envoyé — nous vous répondrons rapidement.",
       "replyNote": "Réponse sous 2 heures, 24 h/24 et 7 j/7."
     }
   },
@@ -541,185 +534,8 @@
       "title": "Dites-nous ce dont vous avez besoin et nous vous mettrons en relation avec un professionnel vérifié.",
       "cta": "Contactez-nous"
     },
-    "items": {
-      "furnitureAssembly": {
-        "title": "Montage de meubles en kit",
-        "unit": "2 h"
-      },
-      "wallMounting": {
-        "title": "Fixation murale de TV et étagères",
-        "unit": "1 h"
-      },
-      "interiorPainting": {
-        "title": "Peinture murale intérieure",
-        "unit": "1 jour"
-      },
-      "doorLockRepair": {
-        "title": "Réparation de porte et de serrure",
-        "unit": "1 h"
-      },
-      "sameDayParcel": {
-        "title": "Livraison de colis le jour même",
-        "unit": "3 h"
-      },
-      "documentCourier": {
-        "title": "Coursier de documents dans la ville",
-        "unit": "2 h"
-      },
-      "scheduledPickup": {
-        "title": "Collecte programmée à domicile",
-        "unit": "1 jour"
-      },
-      "intercityDrop": {
-        "title": "Dépôt entre villes",
-        "unit": "2 jours"
-      },
-      "emergencyPlumbing": {
-        "title": "Intervention de plomberie d'urgence",
-        "unit": "1 h"
-      },
-      "leakRepair": {
-        "title": "Réparation de fuite de robinet et de tuyau",
-        "unit": "2 h"
-      },
-      "showerFitting": {
-        "title": "Installation de douche et de mitigeur",
-        "unit": "1 jour"
-      },
-      "drainCleaning": {
-        "title": "Nettoyage de canalisations et d'égouts",
-        "unit": "3 h"
-      },
-      "electricalSafetyCheck": {
-        "title": "Contrôle électrique complet",
-        "unit": "1 jour"
-      },
-      "lightingInstall": {
-        "title": "Installation d'éclairage et de luminaires",
-        "unit": "2 h"
-      },
-      "socketRewiring": {
-        "title": "Recâblage de prises et d'interrupteurs",
-        "unit": "3 h"
-      },
-      "fuseBoxUpgrade": {
-        "title": "Mise à niveau du tableau électrique et des disjoncteurs",
-        "unit": "1 jour"
-      },
-      "acServiceGasRefill": {
-        "title": "Entretien de climatisation et recharge de gaz",
-        "unit": "2 h"
-      },
-      "acInstallation": {
-        "title": "Installation de climatiseur split",
-        "unit": "1 jour"
-      },
-      "acDeepClean": {
-        "title": "Nettoyage en profondeur et changement de filtre de climatisation",
-        "unit": "2 h"
-      },
-      "thermostatFix": {
-        "title": "Diagnostic et réparation de thermostat",
-        "unit": "1 h"
-      },
-      "salonAtHome": {
-        "title": "Séance de salon à domicile",
-        "unit": "2 h"
-      },
-      "bridalPackage": {
-        "title": "Forfait coiffure et maquillage de mariée",
-        "unit": "1 jour"
-      },
-      "maniPedi": {
-        "title": "Manucure et pédicure",
-        "unit": "1 h"
-      },
-      "makeupSession": {
-        "title": "Séance de maquillage pour événement",
-        "unit": "2 h"
-      },
-      "houseShifting": {
-        "title": "Déménagement complet de maison",
-        "unit": "1 jour"
-      },
-      "officeRelocation": {
-        "title": "Déménagement de bureaux",
-        "unit": "2 jours"
-      },
-      "packingService": {
-        "title": "Service d'emballage professionnel",
-        "unit": "3 h"
-      },
-      "furnitureMoving": {
-        "title": "Déplacement d'un seul meuble",
-        "unit": "2 h"
-      }
-    },
-    "lists": {
-      "handyman": {
-        "shelvingBrackets": "Pose d'étagères et de supports",
-        "curtainRails": "Installation de tringles à rideaux",
-        "tileGrout": "Réparation de carrelage et de joints",
-        "windowSeals": "Remplacement de joints de fenêtres",
-        "flatpackBuilds": "Montage de meubles en kit de toutes tailles"
-      },
-      "cleaning": {
-        "kitchenDeepClean": "Nettoyage en profondeur de la cuisine",
-        "bathroomSanitising": "Désinfection de la salle de bains",
-        "carpetShampoo": "Shampoing de tapis et moquettes",
-        "windowWashing": "Lavage des vitres intérieures",
-        "postRenovation": "Nettoyage après travaux"
-      },
-      "delivery": {
-        "doorToDoor": "Collecte de porte à porte",
-        "fragileHandling": "Manipulation d'objets fragiles",
-        "bulkConsignment": "Envois en gros volume",
-        "liveTracking": "Suivi en direct de chaque colis",
-        "returnPickup": "Collecte de retour et d'échange"
-      },
-      "plumbing": {
-        "tapReplacement": "Remplacement de robinet et de mitigeur",
-        "toiletRepairs": "Réparation de toilettes et de chasse d'eau",
-        "pipeInsulation": "Gainage et isolation de tuyauterie",
-        "waterHeaterService": "Entretien de chauffe-eau",
-        "pressureTesting": "Test de pression et de fuite"
-      },
-      "electrics": {
-        "ceilingFans": "Installation de ventilateur de plafond",
-        "outdoorLighting": "Éclairage extérieur et de jardin",
-        "smartSwitches": "Configuration d'interrupteurs connectés",
-        "faultFinding": "Recherche et localisation de pannes",
-        "surgeProtection": "Installation de protection contre les surtensions"
-      },
-      "acRepair": {
-        "splitUnitService": "Entretien de climatiseur split",
-        "ductCleaning": "Nettoyage des gaines",
-        "coolantTopUp": "Appoint de fluide frigorigène",
-        "compressorCheck": "Contrôle de l'état du compresseur",
-        "annualContract": "Contrat d'entretien annuel"
-      },
-      "beauty": {
-        "haircutStyling": "Coupe et coiffure",
-        "facialTreatment": "Soins du visage",
-        "threadingWaxing": "Épilation au fil et à la cire",
-        "hairColouring": "Coloration capillaire",
-        "groomsPackage": "Forfait pour marié"
-      },
-      "shifting": {
-        "loadingUnloading": "Équipe de chargement et déchargement",
-        "storageShortTerm": "Stockage à court terme",
-        "applianceHandling": "Manipulation d'électroménager",
-        "disassemblyRebuild": "Démontage et remontage",
-        "insuranceCover": "Assurance transport"
-      },
-      "mechanics": {
-        "engineTuning": "Réglage moteur",
-        "brakeService": "Entretien de plaquettes et disques de frein",
-        "batteryReplacement": "Test et remplacement de batterie",
-        "wheelAlignment": "Parallélisme et équilibrage des roues",
-        "acRegas": "Recharge de climatisation véhicule"
-      }
-    }
+    "empty": "Aucun service n'est encore proposé.",
+    "vendor": "Prestataire"
   },
   "blogPage": {
     "eyebrow": "De l'équipe",
@@ -1168,6 +984,7 @@
       "placedOn": "Passée le",
       "manage": "Gérer",
       "qty": "Qté :",
+      "more": "de plus",
       "total": "Total",
       "backToList": "Retour aux commandes",
       "itemsTitle": "Ce que vous avez commandé",
@@ -1514,16 +1331,9 @@
     "keepBrowsing": "Continuer mes achats",
     "increase": "Augmenter la quantité",
     "decrease": "Diminuer la quantité",
-    "seed": {
-      "ac": {
-        "title": "Entretien de climatisation et recharge de gaz",
-        "meta": "Aujourd'hui · 14 h – 16 h"
-      },
-      "parcel": {
-        "title": "Collecte de colis — 5 kg",
-        "meta": "Express · Troy"
-      }
-    }
+    "signInFirst": "Connectez-vous pour commander.",
+    "remove": "Retirer",
+    "browse": "Voir les services"
   },
   "vendorsPage": {
     "eyebrow": "Informations prestataires",
@@ -1556,7 +1366,6 @@
     "note": "Note complémentaire",
     "notePlaceholder": "Ce que le livreur doit savoir : un code de portail, une marque préférée, un produit de remplacement que vous accepteriez.",
     "submit": "Continuer",
-    "sent": "Demande envoyée",
     "promises": {
       "verified": "Uniquement des livreurs vérifiés",
       "tracked": "Suivi du magasin à votre porte",
@@ -1575,7 +1384,7 @@
       "brandPlaceholder": "Peu importe",
       "size": "Taille",
       "sizePlaceholder": "Peu importe",
-      "price": "Prix est.",
+      "price": "Prix est. (total)",
       "pricePlaceholder": "0.00",
       "shop": "Magasin préféré",
       "shopPlaceholder": "Laissez vide, on choisira",
@@ -1589,7 +1398,7 @@
       "estimate": "Votre estimation",
       "estimateNote": "Vos propres chiffres, pour les articles chiffrés uniquement. Le livreur confirme le total réel en magasin.",
       "noEstimate": "Indiquez un prix estimé sur un article et le total apparaîtra ici.",
-      "footnote": "Aucun paiement maintenant. Nous confirmons la disponibilité et les frais de livraison avant tout achat."
+      "footnote": "Rien n'est encore débité. Vous choisirez l'heure, l'adresse et le paiement à l'étape suivante."
     }
   },
   "pickupPage": {
@@ -1601,7 +1410,6 @@
     "note": "Note complémentaire",
     "notePlaceholder": "Ce que le livreur doit savoir : où sonner, un carton fragile, le meilleur moment pour passer.",
     "submit": "Continuer",
-    "sent": "Demande envoyée",
     "promises": {
       "sameDay": "Créneaux le jour même",
       "verified": "Uniquement des livreurs vérifiés",
@@ -1626,7 +1434,7 @@
       "weight": "Poids total",
       "weightNote": "Poids unitaire multiplié par la quantité. Le livreur repèse à l'enlèvement et le tarif suit ce poids.",
       "noWeight": "Indiquez un poids par produit et le total se construira ici.",
-      "footnote": "Aucun paiement maintenant. Nous confirmons le créneau et les frais d'enlèvement avant qu'un livreur ne parte."
+      "footnote": "Rien n'est encore débité. Vous choisirez le créneau, l'adresse et le paiement à l'étape suivante."
     }
   },
   "editor": {
@@ -1686,5 +1494,137 @@
     "hour": "Heure",
     "minute": "Min",
     "period": "AM/PM"
+  },
+  "cardPayment": {
+    "title": "Payer par carte",
+    "secure": "Paiement sécurisé",
+    "payable": "Montant à payer",
+    "amount": "Montant de la commande",
+    "charge": "Frais",
+    "rate": "Taux de change",
+    "number": "Numéro de carte",
+    "expiry": "Date d'expiration",
+    "code": "Code de sécurité (CVV/CVC)",
+    "pay": "Payer",
+    "back": "Retour au paiement",
+    "notStored": "Les données de carte ne sont jamais enregistrées",
+    "expired": "Ce paiement a expiré",
+    "expiredHint": "Recommencez le paiement ou retrouvez la commande dans votre historique.",
+    "toOrders": "Voir mes commandes"
+  },
+  "checkout": {
+    "editItems": "Modifier les articles",
+    "notFound": "Commande introuvable",
+    "notFoundHint": "Le lien est peut-être ancien ou la commande a déjà été passée. Lancez une nouvelle demande.",
+    "startOver": "Nouvelle demande",
+    "schedule": {
+      "title": "Créneau",
+      "none": "Aucun créneau choisi",
+      "choose": "Choisir",
+      "change": "Modifier",
+      "dialogTitle": "Choisissez une date et une heure",
+      "date": "Date",
+      "time": "Heure",
+      "noDates": "Aucune date n'est ouverte pour le moment.",
+      "noSlots": "Aucun créneau n'est ouvert pour le moment.",
+      "slotPassed": "Ce créneau est déjà passé aujourd'hui - choisissez-en un plus tard.",
+      "dayFull": "Plus aucun créneau aujourd'hui - choisissez un autre jour."
+    },
+    "myAddress": {
+      "title": "Mon adresse",
+      "placeholder": "Choisissez une adresse enregistrée",
+      "none": "Aucune adresse enregistrée - ajoutez-en une",
+      "add": "Ajouter une adresse"
+    },
+    "deliveryAddress": {
+      "address": "Adresse",
+      "addressPlaceholder": "Quartier, rue ou bâtiment",
+      "fullAddress": "Adresse complète",
+      "fullAddressPlaceholder": "Maison, appartement, étage - tout ce qui aide",
+      "phone": "Téléphone",
+      "phonePlaceholder": "Numéro de téléphone"
+    },
+    "summary": {
+      "title": "Récapitulatif",
+      "quantity": "Qté",
+      "brand": "Marque",
+      "size": "Taille",
+      "shop": "Boutique",
+      "shopAddress": "Adresse de la boutique",
+      "subtotal": "Sous-total",
+      "total": "Montant à payer",
+      "kg": "KG",
+      "weightEach": "Poids unitaire"
+    },
+    "payment": {
+      "title": "Moyen de paiement",
+      "placeholder": "Choisissez comment payer en ligne",
+      "wallet": "Mon portefeuille",
+      "walletSub": "Payez avec votre solde Handiman",
+      "charge": "Frais",
+      "chargeNote": "Cette passerelle ajoute des frais de"
+    },
+    "confirm": "Confirmer la commande",
+    "currency": "USD",
+    "kinds": {
+      "delivery": {
+        "eyebrow": "Paiement",
+        "title": "Planifiez et payez",
+        "lead": "Choisissez quand le livreur passe, où livrer et comment vous souhaitez payer.",
+        "scheduleHint": "Quand le livreur doit apporter vos articles.",
+        "myAddressHint": "Où le livreur apporte vos articles.",
+        "contactTitle": "Adresse de livraison",
+        "contactHint": "Qui le livreur doit contacter à l'arrivée.",
+        "charge": "Frais de livraison"
+      },
+      "pickup": {
+        "eyebrow": "Paiement de l'enlèvement",
+        "title": "Réservez votre enlèvement",
+        "lead": "Choisissez quand le livreur passe récupérer, où, et comment vous souhaitez payer.",
+        "scheduleHint": "Quand le livreur doit passer récupérer.",
+        "myAddressHint": "Où le livreur récupère vos colis.",
+        "contactTitle": "Contact pour l'enlèvement",
+        "contactHint": "Qui le livreur doit voir à la porte.",
+        "charge": "Frais d'enlèvement"
+      }
+    }
+  },
+  "serviceDetail": {
+    "back": "Tous les services",
+    "notFound": "Service introuvable",
+    "notFoundHint": "Il a peut-être été supprimé, ou le lien est incorrect.",
+    "overview": "Aperçu",
+    "reviews": "Avis",
+    "orderTitle": "Commande du service",
+    "perUnit": "par unité",
+    "total": "Total",
+    "addToCart": "Ajouter au panier",
+    "inCart": "Déjà dans votre panier :",
+    "noReviews": "Aucun avis pour l'instant - soyez le premier à donner le vôtre.",
+    "customer": "Client",
+    "writeReview": "Donnez votre impression",
+    "reviewPlaceholder": "Comment cela s'est-il passé ? Qu'avez-vous apprécié ?",
+    "sendReview": "Envoyer l'avis",
+    "signInToReview": "Connectez-vous pour laisser un avis"
+  },
+  "serviceCheckout": {
+    "eyebrow": "Paiement",
+    "title": "Réservez vos services",
+    "lead": "Choisissez l'heure et l'adresse, ajoutez un bon si vous en avez un, et le moyen de paiement.",
+    "keepBrowsing": "Continuer",
+    "empty": "Votre panier est vide",
+    "emptyHint": "Ajoutez un service du catalogue pour le réserver.",
+    "browse": "Voir les services",
+    "scheduleHint": "Quand l'expert doit arriver.",
+    "addressTitle": "Adresse",
+    "addressHint": "Où l'expert viendra.",
+    "fees": "Frais",
+    "discount": "Remise",
+    "removeCoupon": "Retirer le bon",
+    "haveVoucher": "Vous avez un bon de réduction ?",
+    "couponPlaceholder": "Saisissez le code",
+    "apply": "Appliquer",
+    "cash": "Paiement à la livraison",
+    "online": "Paiement en ligne"
   }
 }

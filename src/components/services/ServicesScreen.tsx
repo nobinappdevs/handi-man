@@ -4,14 +4,16 @@ import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { Eyebrow } from "@/components/share/Eyebrow";
-import { CATALOGUE } from "@/components/services/servicesData";
-import { CategoryRail } from "@/components/services/CategoryRail";
-import { ServiceCatalogue } from "@/components/services/ServiceCatalogue";
+import { useCatalogue } from "@/hooks/useCatalogue";
+import { CategoryRail, CategoryRailSkeleton } from "@/components/services/CategoryRail";
+import { CatalogueSkeleton, ServiceCatalogue } from "@/components/services/ServiceCatalogue";
 
 /**
  * The `/services` screen: page head, sticky category rail, then one block per
  * category — featured cards over the full "all services" list, which is the
- * shape of the old catalogue.
+ * shape of the old catalogue. Categories and services are the API's
+ * (`GET /services`); the rail and the catalogue show their own outline until
+ * it answers.
  *
  * No GSAP above the fold. The head uses the CSS `enter-*` classes so it paints
  * with the document (blueprint §6.5); the catalogue below the rail is where
@@ -20,7 +22,8 @@ import { ServiceCatalogue } from "@/components/services/ServiceCatalogue";
 export function ServicesScreen() {
   const { t } = useLang();
 
-  const totalServices = CATALOGUE.reduce((n, c) => n + c.cards.length + c.list.length, 0);
+  const { data: catalogue, isLoading } = useCatalogue();
+  const counting = isLoading ? "··" : null;
 
   return (
     <>
@@ -43,7 +46,7 @@ export function ServicesScreen() {
           <div className="enter-fade flex min-w-0 flex-wrap items-center gap-x-8 gap-y-4 [--enter-delay:0.24s]">
             <span className="flex flex-col gap-1">
               <span className="text-[clamp(26px,2.6vw,34px)] leading-none font-black tracking-[-0.03em] text-brand">
-                {totalServices}+
+                {counting ?? catalogue?.serviceCount ?? 0}
               </span>
               <span className="font-display text-[12px] font-bold tracking-[0.14em] text-muted uppercase">
                 {t("servicesPage.stats.services")}
@@ -52,7 +55,7 @@ export function ServicesScreen() {
             <span aria-hidden className="hidden h-10 w-px bg-border mid:block" />
             <span className="flex flex-col gap-1">
               <span className="text-[clamp(26px,2.6vw,34px)] leading-none font-black tracking-[-0.03em] text-brand">
-                {CATALOGUE.length}
+                {counting ?? catalogue?.categories.length ?? 0}
               </span>
               <span className="font-display text-[12px] font-bold tracking-[0.14em] text-muted uppercase">
                 {t("servicesPage.stats.categories")}
@@ -69,8 +72,21 @@ export function ServicesScreen() {
         </div>
       </section>
 
-      <CategoryRail />
-      <ServiceCatalogue />
+      {isLoading ? (
+        <>
+          <CategoryRailSkeleton />
+          <CatalogueSkeleton />
+        </>
+      ) : catalogue && catalogue.categories.length > 0 ? (
+        <>
+          <CategoryRail categories={catalogue.categories} />
+          <ServiceCatalogue catalogue={catalogue} />
+        </>
+      ) : (
+        <p className="bg-page px-[clamp(18px,3vw,44px)] py-[clamp(48px,6vw,90px)] text-center text-[15px] text-muted">
+          {t("servicesPage.empty")}
+        </p>
+      )}
 
       {/* ── Nothing matched ── the old catalogue ended on a contact prompt and
           so does this, rather than the page just stopping. */}

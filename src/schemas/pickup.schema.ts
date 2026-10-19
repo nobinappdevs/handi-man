@@ -5,9 +5,8 @@ import { z } from "zod";
  * on, so each row is something you already have — a name, how many, and what
  * it weighs.
  *
- * Field names are a first guess at the Laravel payload — confirm them against
- * the Handiman API collection when the pickup endpoint is documented, then add
- * `services/pickup.service.ts` + `hooks/usePickup.ts` behind it.
+ * Sent to `POST /user/pickup/save` by `useSubmitPickup`; `weight` (per unit)
+ * becomes the API's `kg` there, and the note its `details`.
  *
  * Numbers are held as strings for the same reason as in the delivery schema:
  * an empty numeric input coerces to `NaN` and reports "expected number,

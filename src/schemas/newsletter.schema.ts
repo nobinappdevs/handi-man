@@ -1,18 +1,13 @@
 import { z } from "zod";
 
 /* ─────────────────────────── Newsletter ───────────────────────────
- * The footer's subscribe box. Field names are a first guess at the Laravel
- * payload — confirm them against the Handiman API collection when the
- * newsletter endpoint is documented, then add
- * `services/newsletter.service.ts` + `hooks/useNewsletter.ts` behind it.
- *
- * The design's own mock has no validation at all (a click always "succeeds"),
- * but an unchecked email would silently fail once a real endpoint is behind
- * it, so a valid email is required here.
+ * POST /web/subscribe — the footer's subscribe box. Both fields are required
+ * by the API (max 255). The email is also `unique` server-side: subscribing
+ * twice answers 422, which the hook surfaces as a toast.
  */
 export const newsletterSchema = z.object({
-  name: z.string().optional(),
-  email: z.string().min(1, "Email is required").email("Enter a valid email"),
+  name: z.string().trim().min(1, "Name is required").max(255),
+  email: z.string().trim().min(1, "Email is required").email("Enter a valid email").max(255),
 });
 
 export type NewsletterRequest = z.infer<typeof newsletterSchema>;

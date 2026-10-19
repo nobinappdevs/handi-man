@@ -180,7 +180,9 @@
       "namePlaceholder": "Name",
       "emailPlaceholder": "Email",
       "subscribe": "Subscribe",
-      "subscribed": "Subscribed"
+      "subscribing": "Subscribing…",
+      "subscribed": "Subscribed",
+      "success": "You're subscribed. Thanks for joining!"
     },
     "links": {
       "title": "Useful Links",
@@ -237,16 +239,6 @@
     "categories": {
       "eyebrow": "Browse categories",
       "title": "What do you need today?",
-      "items": {
-        "handyman": "Handyman",
-        "cleaning": "Cleaning",
-        "delivery": "Delivery",
-        "plumbing": "Plumbing",
-        "electrics": "Electrics",
-        "acRepair": "AC repair",
-        "beauty": "Beauty",
-        "shifting": "Shifting"
-      },
       "explore": "Explore"
     },
     "listings": {
@@ -504,13 +496,14 @@
       "title": "Let's talk about your next job.",
       "photoAlt": "Handiman vendor checking stock against a job sheet",
       "badge": "Verified vendors, tracked jobs — every request covered.",
-      "fullName": "Full Name*",
+      "firstName": "First Name*",
+      "lastName": "Last Name*",
       "email": "Email",
-      "phone": "Phone",
-      "serviceLabel": "Service",
       "message": "Message",
       "submit": "Submit request",
+      "sending": "Sending…",
       "sent": "Request sent",
+      "success": "Message sent — we'll get back to you soon.",
       "replyNote": "Replies within 2 hours, 24/7."
     }
   },
@@ -541,185 +534,8 @@
       "title": "Tell us what you need and we will match a verified pro.",
       "cta": "Talk to us"
     },
-    "items": {
-      "furnitureAssembly": {
-        "title": "Flat-pack furniture assembly",
-        "unit": "2 hrs"
-      },
-      "wallMounting": {
-        "title": "TV and shelf wall mounting",
-        "unit": "1 hr"
-      },
-      "interiorPainting": {
-        "title": "Interior wall painting",
-        "unit": "1 day"
-      },
-      "doorLockRepair": {
-        "title": "Door and lock repair",
-        "unit": "1 hr"
-      },
-      "sameDayParcel": {
-        "title": "Same-day parcel delivery",
-        "unit": "3 hrs"
-      },
-      "documentCourier": {
-        "title": "Document courier across the city",
-        "unit": "2 hrs"
-      },
-      "scheduledPickup": {
-        "title": "Scheduled door pickup",
-        "unit": "1 day"
-      },
-      "intercityDrop": {
-        "title": "Intercity drop-off",
-        "unit": "2 day"
-      },
-      "emergencyPlumbing": {
-        "title": "Emergency plumbing call-out",
-        "unit": "1 hr"
-      },
-      "leakRepair": {
-        "title": "Tap and pipe leak repair",
-        "unit": "2 hrs"
-      },
-      "showerFitting": {
-        "title": "Shower and mixer fitting",
-        "unit": "1 day"
-      },
-      "drainCleaning": {
-        "title": "Drain and sewer cleaning",
-        "unit": "3 hrs"
-      },
-      "electricalSafetyCheck": {
-        "title": "Full electrical safety check",
-        "unit": "1 day"
-      },
-      "lightingInstall": {
-        "title": "Lighting and fixture install",
-        "unit": "2 hrs"
-      },
-      "socketRewiring": {
-        "title": "Socket and switch rewiring",
-        "unit": "3 hrs"
-      },
-      "fuseBoxUpgrade": {
-        "title": "Fuse box and breaker upgrade",
-        "unit": "1 day"
-      },
-      "acServiceGasRefill": {
-        "title": "AC servicing and gas refill",
-        "unit": "2 hrs"
-      },
-      "acInstallation": {
-        "title": "Split AC installation",
-        "unit": "1 day"
-      },
-      "acDeepClean": {
-        "title": "AC deep clean and filter change",
-        "unit": "2 hrs"
-      },
-      "thermostatFix": {
-        "title": "Thermostat diagnosis and fix",
-        "unit": "1 hr"
-      },
-      "salonAtHome": {
-        "title": "Salon session at home",
-        "unit": "2 hrs"
-      },
-      "bridalPackage": {
-        "title": "Bridal hair and makeup package",
-        "unit": "1 day"
-      },
-      "maniPedi": {
-        "title": "Manicure and pedicure",
-        "unit": "1 hr"
-      },
-      "makeupSession": {
-        "title": "Event makeup session",
-        "unit": "2 hrs"
-      },
-      "houseShifting": {
-        "title": "Full house shifting",
-        "unit": "1 day"
-      },
-      "officeRelocation": {
-        "title": "Office relocation",
-        "unit": "2 day"
-      },
-      "packingService": {
-        "title": "Professional packing service",
-        "unit": "3 hrs"
-      },
-      "furnitureMoving": {
-        "title": "Single furniture item move",
-        "unit": "2 hrs"
-      }
-    },
-    "lists": {
-      "handyman": {
-        "shelvingBrackets": "Shelving and bracket fitting",
-        "curtainRails": "Curtain rail installation",
-        "tileGrout": "Tile and grout repair",
-        "windowSeals": "Window seal replacement",
-        "flatpackBuilds": "Flat-pack builds of any size"
-      },
-      "cleaning": {
-        "kitchenDeepClean": "Kitchen deep clean",
-        "bathroomSanitising": "Bathroom sanitising",
-        "carpetShampoo": "Carpet and rug shampoo",
-        "windowWashing": "Interior window washing",
-        "postRenovation": "Post-renovation clean-up"
-      },
-      "delivery": {
-        "doorToDoor": "Door-to-door collection",
-        "fragileHandling": "Fragile item handling",
-        "bulkConsignment": "Bulk consignment runs",
-        "liveTracking": "Live tracking on every parcel",
-        "returnPickup": "Return and exchange pickup"
-      },
-      "plumbing": {
-        "tapReplacement": "Tap and mixer replacement",
-        "toiletRepairs": "Toilet and cistern repairs",
-        "pipeInsulation": "Pipe lagging and insulation",
-        "waterHeaterService": "Water heater servicing",
-        "pressureTesting": "Pressure and leak testing"
-      },
-      "electrics": {
-        "ceilingFans": "Ceiling fan installation",
-        "outdoorLighting": "Outdoor and garden lighting",
-        "smartSwitches": "Smart switch setup",
-        "faultFinding": "Fault finding and tracing",
-        "surgeProtection": "Surge protection fitting"
-      },
-      "acRepair": {
-        "splitUnitService": "Split unit servicing",
-        "ductCleaning": "Duct cleaning",
-        "coolantTopUp": "Coolant top-up",
-        "compressorCheck": "Compressor health check",
-        "annualContract": "Annual maintenance contract"
-      },
-      "beauty": {
-        "haircutStyling": "Haircut and styling",
-        "facialTreatment": "Facial treatments",
-        "threadingWaxing": "Threading and waxing",
-        "hairColouring": "Hair colouring",
-        "groomsPackage": "Grooms package"
-      },
-      "shifting": {
-        "loadingUnloading": "Loading and unloading crew",
-        "storageShortTerm": "Short-term storage",
-        "applianceHandling": "Appliance handling",
-        "disassemblyRebuild": "Disassembly and rebuild",
-        "insuranceCover": "Transit insurance cover"
-      },
-      "mechanics": {
-        "engineTuning": "Engine tuning",
-        "brakeService": "Brake pad and disc service",
-        "batteryReplacement": "Battery testing and replacement",
-        "wheelAlignment": "Wheel alignment and balancing",
-        "acRegas": "Vehicle AC re-gas"
-      }
-    }
+    "empty": "No services are listed yet.",
+    "vendor": "Vendor"
   },
   "blogPage": {
     "eyebrow": "From the team",
@@ -1168,6 +984,7 @@
       "placedOn": "Placed on",
       "manage": "Manage",
       "qty": "Qty:",
+      "more": "more",
       "total": "Total",
       "backToList": "Back to orders",
       "itemsTitle": "What you ordered",
@@ -1517,16 +1334,9 @@
     "keepBrowsing": "Keep browsing",
     "increase": "Increase quantity",
     "decrease": "Decrease quantity",
-    "seed": {
-      "ac": {
-        "title": "AC service & gas refill",
-        "meta": "Today · 2–4 pm"
-      },
-      "parcel": {
-        "title": "Parcel pickup — 5 kg",
-        "meta": "Express · Troy"
-      }
-    }
+    "signInFirst": "Please sign in to check out.",
+    "remove": "Remove",
+    "browse": "Browse services"
   },
   "vendorsPage": {
     "eyebrow": "Vendor information",
@@ -1559,7 +1369,6 @@
     "note": "Additional note",
     "notePlaceholder": "Anything the rider should know — a gate code, a preferred brand, a substitute you would accept.",
     "submit": "Proceed",
-    "sent": "Request sent",
     "promises": {
       "verified": "Verified riders only",
       "tracked": "Tracked from shop to door",
@@ -1578,7 +1387,7 @@
       "brandPlaceholder": "Any brand",
       "size": "Size",
       "sizePlaceholder": "Any size",
-      "price": "Est. price",
+      "price": "Est. price (total)",
       "pricePlaceholder": "0.00",
       "shop": "Preferred shop",
       "shopPlaceholder": "Leave blank and we will pick",
@@ -1592,7 +1401,7 @@
       "estimate": "Your estimate",
       "estimateNote": "Your own figures, for the priced items only. The rider confirms the real total at the shop.",
       "noEstimate": "Add an estimated price to any item and it will total up here.",
-      "footnote": "No payment now. We confirm availability and the delivery fee before anyone buys anything."
+      "footnote": "Nothing is charged yet. You choose a time, an address and how to pay on the next step."
     }
   },
   "pickupPage": {
@@ -1604,7 +1413,6 @@
     "note": "Additional note",
     "notePlaceholder": "Anything the rider should know — where to knock, a fragile box, the best time to come.",
     "submit": "Proceed",
-    "sent": "Request sent",
     "promises": {
       "sameDay": "Same-day slots available",
       "verified": "Verified riders only",
@@ -1629,7 +1437,7 @@
       "weight": "Total weight",
       "weightNote": "Weight per unit multiplied by quantity. The rider re-weighs at collection and the fee follows that.",
       "noWeight": "Add a weight to each product and the total will build up here.",
-      "footnote": "No payment now. We confirm the slot and the pickup fee before a rider sets off."
+      "footnote": "Nothing is charged yet. You choose a slot, an address and how to pay on the next step."
     }
   },
   "editor": {
@@ -1689,5 +1497,137 @@
     "hour": "Hour",
     "minute": "Min",
     "period": "AM/PM"
+  },
+  "cardPayment": {
+    "title": "Pay with card",
+    "secure": "Secure payment",
+    "payable": "Amount to pay",
+    "amount": "Order amount",
+    "charge": "Charges",
+    "rate": "Exchange rate",
+    "number": "Card number",
+    "expiry": "Expiry date",
+    "code": "Security code (CVV/CVC)",
+    "pay": "Pay",
+    "back": "Back to checkout",
+    "notStored": "Card details are never stored",
+    "expired": "This payment has expired",
+    "expiredHint": "Start the checkout again, or find the order in your history.",
+    "toOrders": "View my orders"
+  },
+  "checkout": {
+    "editItems": "Edit items",
+    "notFound": "This order could not be found",
+    "notFoundHint": "The link may be old, or the order was already placed. Start a new delivery request.",
+    "startOver": "Start a new request",
+    "schedule": {
+      "title": "Schedule",
+      "none": "No time chosen yet",
+      "choose": "Choose",
+      "change": "Change",
+      "dialogTitle": "Choose a date and time",
+      "date": "Date",
+      "time": "Time",
+      "noDates": "No dates are open for booking right now.",
+      "noSlots": "No time slots are open right now.",
+      "slotPassed": "This time has already passed today - choose a later one.",
+      "dayFull": "No times left today - choose another day."
+    },
+    "myAddress": {
+      "title": "My address",
+      "placeholder": "Choose a saved address",
+      "none": "No saved address yet - add one",
+      "add": "Add address"
+    },
+    "deliveryAddress": {
+      "address": "Address",
+      "addressPlaceholder": "Area, road or building",
+      "fullAddress": "Full address",
+      "fullAddressPlaceholder": "House, flat, floor - anything that helps",
+      "phone": "Phone",
+      "phonePlaceholder": "Phone number"
+    },
+    "summary": {
+      "title": "Order summary",
+      "quantity": "Qty",
+      "brand": "Brand",
+      "size": "Size",
+      "shop": "Shop",
+      "shopAddress": "Shop address",
+      "subtotal": "Subtotal",
+      "total": "Amount to be paid",
+      "kg": "KG",
+      "weightEach": "Weight each"
+    },
+    "payment": {
+      "title": "Payment method",
+      "placeholder": "Choose how to pay online",
+      "wallet": "My wallet",
+      "walletSub": "Pay from your Handiman balance",
+      "charge": "Fee",
+      "chargeNote": "This gateway adds a fee of"
+    },
+    "confirm": "Confirm order",
+    "currency": "USD",
+    "kinds": {
+      "delivery": {
+        "eyebrow": "Checkout",
+        "title": "Schedule and pay",
+        "lead": "Pick when the rider should come, where to deliver, and how you would like to pay.",
+        "scheduleHint": "When the rider should bring your items.",
+        "myAddressHint": "Where the rider brings your items.",
+        "contactTitle": "Delivery address",
+        "contactHint": "Who the rider should contact on arrival.",
+        "charge": "Delivery charge"
+      },
+      "pickup": {
+        "eyebrow": "Pickup checkout",
+        "title": "Book your pickup",
+        "lead": "Pick when the rider should collect, where from, and how you would like to pay.",
+        "scheduleHint": "When the rider should come to collect.",
+        "myAddressHint": "Where the rider collects your parcels.",
+        "contactTitle": "Pickup contact",
+        "contactHint": "Who the rider should meet at the door.",
+        "charge": "Pickup charge"
+      }
+    }
+  },
+  "serviceDetail": {
+    "back": "All services",
+    "notFound": "Service not found",
+    "notFoundHint": "It may have been removed, or the link is wrong.",
+    "overview": "Overview",
+    "reviews": "Reviews",
+    "orderTitle": "Service order",
+    "perUnit": "per unit",
+    "total": "Total",
+    "addToCart": "Add to cart",
+    "inCart": "Already in your cart:",
+    "noReviews": "No reviews yet - be the first to share yours.",
+    "customer": "Customer",
+    "writeReview": "Write your impression",
+    "reviewPlaceholder": "How did it go? What stood out?",
+    "sendReview": "Send review",
+    "signInToReview": "Sign in to write a review"
+  },
+  "serviceCheckout": {
+    "eyebrow": "Checkout",
+    "title": "Book your services",
+    "lead": "Pick a time and an address, add a voucher if you have one, and choose how to pay.",
+    "keepBrowsing": "Keep browsing",
+    "empty": "Your cart is empty",
+    "emptyHint": "Add a service from the catalogue to book it.",
+    "browse": "Browse services",
+    "scheduleHint": "When the expert should arrive.",
+    "addressTitle": "Address",
+    "addressHint": "Where the expert will come.",
+    "fees": "Fees charge",
+    "discount": "Discount",
+    "removeCoupon": "Remove coupon",
+    "haveVoucher": "Do you have a voucher?",
+    "couponPlaceholder": "Enter coupon code",
+    "apply": "Apply",
+    "cash": "Cash on delivery",
+    "online": "Online payment"
   }
 }

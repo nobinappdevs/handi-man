@@ -161,6 +161,18 @@ export function getApiWarningMessage(res: unknown): string | undefined {
 }
 
 /**
+ * `message.error[0]` or `message.warning[0]` on a body that arrived as HTTP 200.
+ *
+ * `getApiSuccessMessage` falls back to its default when there is no
+ * `message.success`, so a 200 that is really a refusal would otherwise toast a
+ * cheerful fallback ("Order placed") over an order that was never saved.
+ */
+export function getApiRefusalMessage(res: unknown): string | undefined {
+  const message = (res as { message?: { error?: unknown; warning?: unknown } })?.message;
+  return firstMessage(message?.error) ?? firstMessage(message?.warning);
+}
+
+/**
  * Tokens land in different places per endpoint: `data.user.token` (forgot →
  * send-otp), `data.token` (login, register, forgot → resend), or bare `token`.
  */

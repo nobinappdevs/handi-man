@@ -1,16 +1,3 @@
-import {
-  AirVent,
-  Boxes,
-  Car,
-  Hammer,
-  Scissors,
-  SprayCan,
-  Truck,
-  Wrench,
-  Zap,
-  type LucideIcon,
-} from "lucide-react";
-
 /**
  * The public site's navigation — ONE set of lists, read by both the desktop
  * header and the mobile drawer.
@@ -26,14 +13,14 @@ import {
 export type SiteLink = {
   href: string;
   key: string;
-  /** Renders as a dropdown trigger in the header rather than a plain link. */
-  menu?: boolean;
 };
 
 export const SITE_LINKS: SiteLink[] = [
   { href: "/", key: "nav.home" },
   { href: "/about", key: "nav.about" },
-  { href: "/services", key: "nav.services", menu: true },
+  /* A plain link. It used to open a hover dropdown of categories; the
+     services page has its own category rail, so one click now goes there. */
+  { href: "/services", key: "nav.services" },
   { href: "/pickup", key: "nav.pickup" },
   { href: "/delivery", key: "nav.delivery" },
   { href: "/blog", key: "nav.blog" },
@@ -47,36 +34,6 @@ export const ACCOUNT_LINKS: SiteLink[] = [
 
 /** Vendor recruitment — a conversion path, so the header gives it a button. */
 export const VENDOR_LINK: SiteLink = { href: "/vendors", key: "nav.joinVendor" };
-
-/**
- * The categories behind the header's "Services" dropdown.
- *
- * Labels are the SAME i18n keys the home rail and the catalogue use, so a
- * renamed category renames itself in all three places. Only the icons are
- * chosen here: pulling them from `homeData`/`servicesData` would drag those
- * modules — and every photograph they import — into the header, which every
- * page on the site loads.
- *
- * The `#cat-…` fragments must match `sectionId()` in `services/servicesData`;
- * they are the anchors `ServiceCatalogue` puts on each section.
- */
-export type ServiceMenuItem = { href: string; key: string; icon: LucideIcon };
-
-export const SERVICE_MENU: ServiceMenuItem[] = [
-  { href: "/services#cat-handyman", key: "home.categories.items.handyman", icon: Hammer },
-  { href: "/services#cat-cleaning", key: "home.categories.items.cleaning", icon: SprayCan },
-  { href: "/services#cat-delivery", key: "home.categories.items.delivery", icon: Truck },
-  { href: "/services#cat-plumbing", key: "home.categories.items.plumbing", icon: Wrench },
-  { href: "/services#cat-electrics", key: "home.categories.items.electrics", icon: Zap },
-  { href: "/services#cat-acRepair", key: "home.categories.items.acRepair", icon: AirVent },
-  { href: "/services#cat-beauty", key: "home.categories.items.beauty", icon: Scissors },
-  { href: "/services#cat-shifting", key: "home.categories.items.shifting", icon: Boxes },
-  {
-    href: "/services#cat-mechanics",
-    key: "home.categoryGroups.groups.mechanics.name",
-    icon: Car,
-  },
-];
 
 /**
  * The one breakpoint that decides between the full header nav and the burger.

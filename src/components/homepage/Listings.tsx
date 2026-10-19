@@ -8,6 +8,7 @@ import { useGsapScope } from "@/hooks/useGsap";
 import { useHomeContent, type HomeService } from "@/hooks/useHomeContent";
 import { cn } from "@/components/ui/cn";
 import { money } from "@/lib/money";
+import { SERVICE_ROUTES } from "@/lib/serviceRoutes";
 
 const TABS = ["recommended", "trending"] as const;
 type Tab = (typeof TABS)[number];
@@ -144,7 +145,7 @@ export function Listings() {
             : cards.map((card) => (
                 <Link
                   key={card.id}
-                  href="/services"
+                  href={SERVICE_ROUTES.details(card.id)}
                   className="group flex min-w-0 flex-col border border-border bg-bg transition-[border-color,transform] duration-200 hover:-translate-y-1 hover:border-primary"
                 >
                   <div className="relative aspect-[1.34] overflow-hidden bg-sunk">

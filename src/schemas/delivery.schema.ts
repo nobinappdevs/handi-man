@@ -4,11 +4,12 @@ import { z } from "zod";
  * The `/delivery` shop-and-deliver form: a rider buys the listed items and
  * brings them over, so the order is a LIST of items rather than one parcel.
  *
- * Field names are a first guess at the Laravel payload — confirm them against
- * the Handiman API collection when the delivery endpoint is documented, then
- * add `services/delivery.service.ts` + `hooks/useDelivery.ts` behind it.
+ * Sent to `POST /user/delivery/save` by `useSubmitDelivery`; `brand` becomes
+ * the API's `brand_name` there, and the note its `details`.
  *
- * `price` is a string, not a coerced number. A number field turns an empty
+ * `price` is the estimate for the WHOLE line, not per unit - the checkout's
+ * subtotal adds the prices as given, as the old web checkout did. It is a
+ * string, not a coerced number. A number field turns an empty
  * optional input into `NaN` and reports "expected number, received nan" at the
  * user, which is not a sentence anyone should read. It is validated as a money
  * string here and parsed only where a total is shown.

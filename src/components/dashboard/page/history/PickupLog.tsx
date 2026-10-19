@@ -7,21 +7,20 @@ import {
 import { useLang } from "@/hooks/useLang";
 import { formatDate, money } from "@/lib/money";
 import { useUserTransactions } from "@/hooks/useTransactions";
-import { Field, LogSkeleton, ParcelLog, Section } from "@/components/dashboard/page/history/ParcelLog";
+import { Field, LogSkeleton, ParcelList, ParcelLog, Section } from "@/components/dashboard/page/history/ParcelLog";
 import {
   addressLabelFor, paymentKeyFor, statusFromApi, type PickupOrder,
 } from "@/components/dashboard/page/history/historyData";
 import type { UserTransactionData } from "@/services/transaction.service";
 
 /** `/user/transaction`'s `pickup_orders` mapped into what the table and its
- *  modal read. `pickup_info` is an array in the payload, but a pickup order
- *  has never carried more than one parcel here, so only the first is read. */
+ *  modal read. `pickup_info` is an array — `{ name, quantity, kg }` per
+ *  parcel — and every parcel is kept, not just the first. */
 function buildPickupOrders(data?: UserTransactionData): PickupOrder[] {
   return (data?.pickup_orders ?? []).map((row) => {
     const currency = row.currency ?? "";
     const request = Number(row.request_amount) || 0;
     const payable = Number(row.payable) || 0;
-    const parcel = row.pickup_info?.[0];
 
     return {
       no: row.trx,
@@ -29,13 +28,11 @@ function buildPickupOrders(data?: UserTransactionData): PickupOrder[] {
       placedOn: formatDate(row.date_time),
       schedule: [row.schedule_time, row.schedule_date].filter(Boolean).join(", "),
       payment: paymentKeyFor(row.payment_type, row.gateway_name),
-      parcel: {
-        name: parcel?.name ?? "",
-        quantity: Number(parcel?.quantity) || 0,
-        weight: parcel?.kg ? `${parcel.kg} kg` : "",
-        price: "",
-        details: "",
-      },
+      parcels: (row.pickup_info ?? []).map((parcel) => ({
+        name: parcel.name ?? "",
+        quantity: Number(parcel.quantity) || 0,
+        weight: parcel.kg ? `${parcel.kg} kg` : "",
+      })),
       collect: {
         name: row.name ?? "",
         phone: row.phone ?? "",
@@ -81,13 +78,17 @@ export function PickupLog() {
       routeValue={(order) => order.collect.address || "—"}
       details={(order) => (
         <>
-          <Section title={k("parcelSection")}>
-            <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("parcelName")} value={order.parcel.name} />
-            <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("quantity")} value={order.parcel.quantity} />
-            <Field icon={<Scale size={13} strokeWidth={2} aria-hidden />} label={k("weight")} value={order.parcel.weight} />
-            <Field icon={<Receipt size={13} strokeWidth={2} aria-hidden />} label={k("price")} value={order.parcel.price} />
-            <Field icon={<Receipt size={13} strokeWidth={2} aria-hidden />} label={k("details")} value={order.parcel.details} />
-          </Section>
+          <ParcelList
+            title={k("parcelSection")}
+            parcels={order.parcels}
+            name={(parcel) => parcel.name}
+            fields={(parcel) => (
+              <>
+                <Field icon={<Package size={13} strokeWidth={2} aria-hidden />} label={k("quantity")} value={parcel.quantity} />
+                <Field icon={<Scale size={13} strokeWidth={2} aria-hidden />} label={k("weight")} value={parcel.weight} />
+              </>
+            )}
+          />
 
           <Section title={k("collectSection")}>
             <Field icon={<CalendarClock size={13} strokeWidth={2} aria-hidden />} label={k("schedule")} value={order.schedule} />

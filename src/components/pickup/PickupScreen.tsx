@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { Controller, useFieldArray, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Clock, PackageCheck, ShieldCheck, Truck } from "lucide-react";
+import { ArrowRight, Clock, Loader2, PackageCheck, ShieldCheck, Truck } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
+import { useSubmitPickup } from "@/hooks/usePickup";
 import { Eyebrow } from "@/components/share/Eyebrow";
 import { PickupItemCard } from "@/components/pickup/PickupItemCard";
 import { AddItemButton, LABEL } from "@/components/forms/itemListForm";
@@ -44,13 +44,14 @@ const PROMISES = [
  *     and a form that fades in is a form you cannot yet type into; only the
  *     head uses the CSS `enter-*` classes, which paint with the document.
  *
- * Validation is local (Zod + RHF); on submit the button switches to its sent
- * label. Wire the mutation in when the pickup endpoint exists — the toast, the
- * navigation and `invalidateQueries` belong in that hook, not here.
+ * Proceed saves the parcels (`POST /user/pickup/save`) and moves on to
+ * `/pickup/checkout` with the identifier it returns - the slot, address and
+ * payment are chosen there. The request, the sign-in check and the navigation
+ * live in `useSubmitPickup`.
  */
 export function PickupScreen() {
   const { t } = useLang();
-  const [sent, setSent] = useState(false);
+  const submit = useSubmitPickup();
 
   const {
     control,
@@ -120,7 +121,7 @@ export function PickupScreen() {
       <section className="bg-page px-[clamp(18px,3vw,44px)] py-[clamp(34px,4.5vw,72px)]">
         <form
           noValidate
-          onSubmit={handleSubmit(() => setSent(true))}
+          onSubmit={handleSubmit((values) => submit.mutate(values))}
           className="mx-auto grid max-w-[1240px] grid-cols-1 items-start gap-[clamp(24px,3vw,40px)] wide:grid-cols-[minmax(0,1fr)_340px]"
         >
           <div className="flex min-w-0 flex-col gap-[clamp(20px,2.4vw,32px)]">
@@ -133,10 +134,7 @@ export function PickupScreen() {
                   errors={errors}
                   onRemove={
                     fields.length > 1
-                      ? () => {
-                          remove(index);
-                          setSent(false);
-                        }
+                      ? () => remove(index)
                       : undefined
                   }
                 />
@@ -144,10 +142,7 @@ export function PickupScreen() {
             </ol>
 
             <AddItemButton
-              onClick={() => {
-                append({ ...EMPTY_PICKUP_ITEM });
-                setSent(false);
-              }}
+              onClick={() => append({ ...EMPTY_PICKUP_ITEM })}
             >
               {t("pickupPage.addItem")}
             </AddItemButton>
@@ -168,10 +163,6 @@ export function PickupScreen() {
                     rows={4}
                     placeholder={t("pickupPage.notePlaceholder")}
                     aria-invalid={errors.note ? true : undefined}
-                    onChange={(e) => {
-                      field.onChange(e);
-                      setSent(false);
-                    }}
                     className={cn(
                       "w-full resize-y border bg-surface px-3.5 py-3 text-[14.5px] leading-[1.6] font-medium text-heading outline-none transition-colors placeholder:text-muted focus:border-primary",
                       errors.note ? "border-danger" : "border-border",
@@ -227,10 +218,16 @@ export function PickupScreen() {
 
             <button
               type="submit"
-              className="flex h-14 w-full cursor-pointer items-center justify-center gap-2.5 bg-primary font-display text-[14.5px] font-bold tracking-[0.13em] text-white uppercase transition-colors hover:bg-primary-dark"
+              disabled={submit.isPending}
+              aria-busy={submit.isPending}
+              className="flex h-14 w-full cursor-pointer items-center justify-center gap-2.5 bg-primary font-display text-[14.5px] font-bold tracking-[0.13em] text-white uppercase transition-colors hover:bg-primary-dark disabled:cursor-wait disabled:opacity-70"
             >
-              {t(sent ? "pickupPage.sent" : "pickupPage.submit")}
-              <ArrowRight size={15} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
+              {t("pickupPage.submit")}
+              {submit.isPending ? (
+                <Loader2 size={15} strokeWidth={2.6} aria-hidden className="animate-spin" />
+              ) : (
+                <ArrowRight size={15} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
+              )}
             </button>
 
             {/* The array-level error (an empty list) has nowhere else to

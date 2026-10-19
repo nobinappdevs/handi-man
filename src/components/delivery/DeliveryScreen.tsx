@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { useFieldArray, useForm, useWatch, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, PackagePlus, Receipt, ShieldCheck, Truck } from "lucide-react";
+import { ArrowRight, Loader2, PackagePlus, Receipt, ShieldCheck, Truck } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
+import { useSubmitDelivery } from "@/hooks/useDelivery";
 import { Eyebrow } from "@/components/share/Eyebrow";
 import { OrderItemCard } from "@/components/delivery/OrderItemCard";
 import { AddItemButton, LABEL } from "@/components/forms/itemListForm";
@@ -41,13 +41,14 @@ const PROMISES = [
  *     and a form that fades in is a form you cannot yet type into; only the
  *     head uses the CSS `enter-*` classes, which paint with the document.
  *
- * Validation is local (Zod + RHF); on submit the button switches to its sent
- * label. Wire the mutation in when the delivery endpoint exists — the toast,
- * the navigation and `invalidateQueries` belong in that hook, not here.
+ * Proceed saves the list (`POST /user/delivery/save`) and moves on to
+ * `/delivery/checkout` with the identifier it returns - schedule, address and
+ * payment are chosen there. The request, the sign-in check and the navigation
+ * live in `useSubmitDelivery`.
  */
 export function DeliveryScreen() {
   const { t } = useLang();
-  const [sent, setSent] = useState(false);
+  const submit = useSubmitDelivery();
 
   const {
     control,
@@ -66,13 +67,12 @@ export function DeliveryScreen() {
 
   /* Only the items that carry a price estimate count towards the total, and
      the label below says so — a total that silently ignores half the order
-     would be worse than no total at all. */
+     would be worse than no total at all. The price is the LINE's estimate, so
+     the prices add as given - the same sum the checkout's subtotal makes. */
   const priced = (items ?? []).filter((item) => item?.price);
   const estimate = priced.reduce((sum, item) => {
     const price = Number(item.price);
-    const qty = Number(item.quantity);
-    if (!Number.isFinite(price) || !Number.isFinite(qty)) return sum;
-    return sum + price * qty;
+    return Number.isFinite(price) ? sum + price : sum;
   }, 0);
 
   const units = (items ?? []).reduce((sum, item) => {
@@ -119,7 +119,7 @@ export function DeliveryScreen() {
       <section className="bg-page px-[clamp(18px,3vw,44px)] py-[clamp(34px,4.5vw,72px)]">
         <form
           noValidate
-          onSubmit={handleSubmit(() => setSent(true))}
+          onSubmit={handleSubmit((values) => submit.mutate(values))}
           className="mx-auto grid max-w-[1240px] grid-cols-1 items-start gap-[clamp(24px,3vw,40px)] wide:grid-cols-[minmax(0,1fr)_340px]"
         >
           <div className="flex min-w-0 flex-col gap-[clamp(20px,2.4vw,32px)]">
@@ -132,10 +132,7 @@ export function DeliveryScreen() {
                   errors={errors}
                   onRemove={
                     fields.length > 1
-                      ? () => {
-                          remove(index);
-                          setSent(false);
-                        }
+                      ? () => remove(index)
                       : undefined
                   }
                 />
@@ -143,10 +140,7 @@ export function DeliveryScreen() {
             </ol>
 
             <AddItemButton
-              onClick={() => {
-                append({ ...EMPTY_ORDER_ITEM });
-                setSent(false);
-              }}
+              onClick={() => append({ ...EMPTY_ORDER_ITEM })}
             >
               {t("deliveryPage.addItem")}
             </AddItemButton>
@@ -167,10 +161,6 @@ export function DeliveryScreen() {
                     rows={4}
                     placeholder={t("deliveryPage.notePlaceholder")}
                     aria-invalid={errors.note ? true : undefined}
-                    onChange={(e) => {
-                      field.onChange(e);
-                      setSent(false);
-                    }}
                     className={cn(
                       "w-full resize-y border bg-surface px-3.5 py-3 text-[14.5px] leading-[1.6] font-medium text-heading outline-none transition-colors placeholder:text-muted focus:border-primary",
                       errors.note ? "border-danger" : "border-border",
@@ -226,10 +216,16 @@ export function DeliveryScreen() {
 
             <button
               type="submit"
-              className="flex h-14 w-full cursor-pointer items-center justify-center gap-2.5 bg-primary font-display text-[14.5px] font-bold tracking-[0.13em] text-white uppercase transition-colors hover:bg-primary-dark"
+              disabled={submit.isPending}
+              aria-busy={submit.isPending}
+              className="flex h-14 w-full cursor-pointer items-center justify-center gap-2.5 bg-primary font-display text-[14.5px] font-bold tracking-[0.13em] text-white uppercase transition-colors hover:bg-primary-dark disabled:cursor-wait disabled:opacity-70"
             >
-              {t(sent ? "deliveryPage.sent" : "deliveryPage.submit")}
-              <ArrowRight size={15} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
+              {t("deliveryPage.submit")}
+              {submit.isPending ? (
+                <Loader2 size={15} strokeWidth={2.6} aria-hidden className="animate-spin" />
+              ) : (
+                <ArrowRight size={15} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
+              )}
             </button>
 
             {/* The array-level error (an empty order) has nowhere else to

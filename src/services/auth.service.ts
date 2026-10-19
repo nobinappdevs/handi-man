@@ -170,13 +170,14 @@ function createAuthService(role: AuthRole) {
     },
 
     /**
-     * GET `{base}/logout` — requires auth, and really is a GET in this API.
+     * POST `{base}/logout` — requires auth. It was a GET in earlier versions of
+     * the collection; both the user and vendor routes are POST now.
      *
      * The local state is dropped by the hook, not here: a network failure must
      * not leave the browser holding a session the server has already ended.
      */
     async logout(): Promise<void> {
-      await privateApi.get(`${base}/logout`);
+      await privateApi.post(`${base}/logout`);
     },
   };
 }

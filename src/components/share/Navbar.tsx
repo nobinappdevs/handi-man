@@ -10,7 +10,6 @@ import { useShell } from "@/components/context/ShellContext";
 import { Logo } from "@/components/share/Logo";
 import { ThemeToggle } from "@/components/share/ThemeToggle";
 import { LanguageSwitcher } from "@/components/share/LanguageSwitcher";
-import { ServicesMenu } from "@/components/share/ServicesMenu";
 import { cn } from "@/components/ui/cn";
 import { ACCOUNT_LINKS, NAV_HIDE, NAV_SHOW, SITE_LINKS, VENDOR_LINK } from "@/components/share/navLinks";
 
@@ -285,21 +284,8 @@ export function Navbar() {
               style={{ left: marker.left, width: marker.width, opacity: marker.ready ? 1 : 0 }}
             />
 
-            {SITE_LINKS.map(({ href, key, menu }) => {
+            {SITE_LINKS.map(({ href, key }) => {
               const active = activeHref === href;
-
-              if (menu) {
-                return (
-                  <ServicesMenu
-                    key={href}
-                    href={href}
-                    label={t(key)}
-                    active={active}
-                    className={LINK}
-                    onHover={() => moveMarker(href)}
-                  />
-                );
-              }
 
               return (
                 <Link

@@ -1,10 +1,10 @@
 {
   "info": {
-    "_postman_id": "c31723a9-d0fa-4dd7-b481-b2ffad928899",
+    "_postman_id": "674b807f-d867-4d54-b8cf-0c3a615a5c3f",
     "name": "Handiman",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "54869642",
-    "_collection_link": "https://go.postman.co/collection/54869642-c31723a9-d0fa-4dd7-b481-b2ffad928899?source=collection_link"
+    "_collection_link": "https://go.postman.co/collection/54869642-674b807f-d867-4d54-b8cf-0c3a615a5c3f?source=collection_link"
   },
   "item": [
     {
@@ -278,7 +278,7 @@
               ]
             },
             {
-              "name": "global",
+              "name": "Global Info",
               "request": {
                 "method": "GET",
                 "header": [
@@ -399,6 +399,520 @@
                   ],
                   "cookie": [],
                   "body": "{\n  \"message\": {\n    \"success\": [\n      \"Data fetch Successfully\"\n    ]\n  },\n  \"data\": {\n    \"base_url\": \"https://handiman.test/storage/\",\n    \"site-section\": \"frontend/images/site-section\",\n    \"service_image_path\": \"frontend/images/service\",\n    \"category_image_path\": \"frontend/images/category\",\n    \"blog_image_path\": \"frontend/images/blog\",\n    \"default_image\": \"backend/images/default/default.webp\",\n    \"currency_code\": \"USD\",\n    \"banner_section\": {\n      \"id\": 4,\n      \"key\": \"banner-section\",\n      \"value\": {\n        \"image\": \"17fc7365-e239-454c-84e9-21e1f13b42a8.webp\",\n        \"language\": {\n          \"en\": {\n            \"heading\": \"Your Ultimate On-Demand Service Solution!\",\n            \"sub_heading\": \"Explore the power of simplicity and efficiency as we connect users and vendors seamlessly.\"\n          },\n          \"es\": {\n            \"heading\": \"¡Su solución definitiva de servicio bajo demanda!\",\n            \"sub_heading\": \"Explore el poder de la simplicidad y la eficiencia mientras conectamos a usuarios y proveedores sin problemas.\"\n          },\n          \"ar\": {\n            \"heading\": \"الحل النهائي للخدمة عند الطلب!\",\n            \"sub_heading\": \"اكتشف قوة البساطة والكفاءة بينما نربط المستخدمين والبائعين بسلاسة.\"\n          },\n          \"fr\": {\n            \"heading\": \"Votre solution ultime de service à la demande !\",\n            \"sub_heading\": \"Découvrez le pouvoir de la simplicité et de l’efficacité en connectant les utilisateurs et les fournisseurs de manière transparente.\"\n          },\n          \"hi\": {\n            \"heading\": \"आपका अंतिम ऑन-डिमांड सेवा समाधान!\",\n            \"sub_heading\": \"सादगी और दक्षता की शक्ति का अन्वेषण करें क्योंकि हम उपयोगकर्ताओं और विक्रेताओं को सहजता से जोड़ते हैं।\"\n          }\n        }\n      },\n      \"status\": 1,\n      \"serialize\": null,\n      \"created_at\": \"2023-11-29T23:50:20.000000Z\",\n      \"updated_at\": \"2024-02-12T10:27:37.000000Z\"\n    },\n    \"categories\": [\n      {\n        \"id\": 12,\n        \"name\": \"Test2\",\n        \"slug\": \"test2\",\n        \"image\": \"eabfae97-b107-41bb-96eb-ece0eacb716d.webp\",\n        \"admin_id\": 1,\n        \"status\": 1,\n        \"home\": 0,\n        \"created_at\": \"2026-08-28T06:48:32.000000Z\",\n        \"updated_at\": \"2026-08-28T06:48:32.000000Z\",\n        \"editData\": \"{\\\"id\\\":12,\\\"name\\\":\\\"Test2\\\",\\\"home\\\":0,\\\"states\\\":[{\\\"id\\\":8,\\\"admin_id\\\":1,\\\"name\\\":\\\"Troy\\\",\\\"slug\\\":\\\"troy\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:05:04.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:05:04.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":8,\\\\\\\"name\\\\\\\":\\\\\\\"Troy\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":12,\\\"state_id\\\":8}},{\\\"id\\\":7,\\\"admin_id\\\":1,\\\"name\\\":\\\"Ozark\\\",\\\"slug\\\":\\\"ozark\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:53.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:53.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":7,\\\\\\\"name\\\\\\\":\\\\\\\"Ozark\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":12,\\\"state_id\\\":7}},{\\\"id\\\":6,\\\"admin_id\\\":1,\\\"name\\\":\\\"Jasper\\\",\\\"slug\\\":\\\"jasper\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:27.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:27.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":6,\\\\\\\"name\\\\\\\":\\\\\\\"Jasper\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":12,\\\"state_id\\\":6}},{\\\"id\\\":5,\\\"admin_id\\\":1,\\\"name\\\":\\\"Florence\\\",\\\"slug\\\":\\\"florence\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:17.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:17.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":5,\\\\\\\"name\\\\\\\":\\\\\\\"Florence\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":12,\\\"state_id\\\":5}},{\\\"id\\\":4,\\\"admin_id\\\":1,\\\"name\\\":\\\"Dothan\\\",\\\"slug\\\":\\\"dothan\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":4,\\\\\\\"name\\\\\\\":\\\\\\\"Dothan\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":12,\\\"state_id\\\":4}},{\\\"id\\\":3,\\\"admin_id\\\":1,\\\"name\\\":\\\"California\\\",\\\"slug\\\":\\\"california\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2023-12-26T03:32:38.000000Z\\\",\\\"updated_at\\\":\\\"2023-12-26T03:32:38.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":3,\\\\\\\"name\\\\\\\":\\\\\\\"California\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":12,\\\"state_id\\\":3}},{\\\"id\\\":2,\\\"admin_id\\\":1,\\\"name\\\":\\\"Alaska\\\",\\\"slug\\\":\\\"alaska\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2023-11-01T23:12:36.000000Z\\\",\\\"updated_at\\\":\\\"2023-11-01T23:12:36.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":2,\\\\\\\"name\\\\\\\":\\\\\\\"Alaska\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":12,\\\"state_id\\\":2}},{\\\"id\\\":1,\\\"admin_id\\\":1,\\\"name\\\":\\\"Alabama\\\",\\\"slug\\\":\\\"alabama\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2023-11-01T23:12:20.000000Z\\\",\\\"updated_at\\\":\\\"2023-11-01T23:12:20.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":1,\\\\\\\"name\\\\\\\":\\\\\\\"Alabama\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":12,\\\"state_id\\\":1}}],\\\"image\\\":\\\"eabfae97-b107-41bb-96eb-ece0eacb716d.webp\\\"}\",\n        \"states\": [\n          {\n            \"id\": 8,\n            \"admin_id\": 1,\n            \"name\": \"Troy\",\n            \"slug\": \"troy\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:05:04.000000Z\",\n            \"updated_at\": \"2024-01-25T04:05:04.000000Z\",\n            \"editData\": \"{\\\"id\\\":8,\\\"name\\\":\\\"Troy\\\"}\",\n            \"pivot\": {\n              \"category_id\": 12,\n              \"state_id\": 8\n            }\n          },\n          {\n            \"id\": 7,\n            \"admin_id\": 1,\n            \"name\": \"Ozark\",\n            \"slug\": \"ozark\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:53.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:53.000000Z\",\n            \"editData\": \"{\\\"id\\\":7,\\\"name\\\":\\\"Ozark\\\"}\",\n            \"pivot\": {\n              \"category_id\": 12,\n              \"state_id\": 7\n            }\n          },\n          {\n            \"id\": 6,\n            \"admin_id\": 1,\n            \"name\": \"Jasper\",\n            \"slug\": \"jasper\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:27.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:27.000000Z\",\n            \"editData\": \"{\\\"id\\\":6,\\\"name\\\":\\\"Jasper\\\"}\",\n            \"pivot\": {\n              \"category_id\": 12,\n              \"state_id\": 6\n            }\n          },\n          {\n            \"id\": 5,\n            \"admin_id\": 1,\n            \"name\": \"Florence\",\n            \"slug\": \"florence\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:17.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:17.000000Z\",\n            \"editData\": \"{\\\"id\\\":5,\\\"name\\\":\\\"Florence\\\"}\",\n            \"pivot\": {\n              \"category_id\": 12,\n              \"state_id\": 5\n            }\n          },\n          {\n            \"id\": 4,\n            \"admin_id\": 1,\n            \"name\": \"Dothan\",\n            \"slug\": \"dothan\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"editData\": \"{\\\"id\\\":4,\\\"name\\\":\\\"Dothan\\\"}\",\n            \"pivot\": {\n              \"category_id\": 12,\n              \"state_id\": 4\n            }\n          },\n          {\n            \"id\": 3,\n            \"admin_id\": 1,\n            \"name\": \"California\",\n            \"slug\": \"california\",\n            \"status\": 1,\n            \"created_at\": \"2023-12-26T03:32:38.000000Z\",\n            \"updated_at\": \"2023-12-26T03:32:38.000000Z\",\n            \"editData\": \"{\\\"id\\\":3,\\\"name\\\":\\\"California\\\"}\",\n            \"pivot\": {\n              \"category_id\": 12,\n              \"state_id\": 3\n            }\n          },\n          {\n            \"id\": 2,\n            \"admin_id\": 1,\n            \"name\": \"Alaska\",\n            \"slug\": \"alaska\",\n            \"status\": 1,\n            \"created_at\": \"2023-11-01T23:12:36.000000Z\",\n            \"updated_at\": \"2023-11-01T23:12:36.000000Z\",\n            \"editData\": \"{\\\"id\\\":2,\\\"name\\\":\\\"Alaska\\\"}\",\n            \"pivot\": {\n              \"category_id\": 12,\n              \"state_id\": 2\n            }\n          },\n          {\n            \"id\": 1,\n            \"admin_id\": 1,\n            \"name\": \"Alabama\",\n            \"slug\": \"alabama\",\n            \"status\": 1,\n            \"created_at\": \"2023-11-01T23:12:20.000000Z\",\n            \"updated_at\": \"2023-11-01T23:12:20.000000Z\",\n            \"editData\": \"{\\\"id\\\":1,\\\"name\\\":\\\"Alabama\\\"}\",\n            \"pivot\": {\n              \"category_id\": 12,\n              \"state_id\": 1\n            }\n          }\n        ]\n      },\n      {\n        \"id\": 11,\n        \"name\": \"Test\",\n        \"slug\": \"test\",\n        \"image\": \"d0ba9863-2a40-4e41-b207-4edd72e75955.webp\",\n        \"admin_id\": 1,\n        \"status\": 1,\n        \"home\": 0,\n        \"created_at\": \"2026-08-28T06:48:21.000000Z\",\n        \"updated_at\": \"2026-08-28T06:48:21.000000Z\",\n        \"editData\": \"{\\\"id\\\":11,\\\"name\\\":\\\"Test\\\",\\\"home\\\":0,\\\"states\\\":[{\\\"id\\\":8,\\\"admin_id\\\":1,\\\"name\\\":\\\"Troy\\\",\\\"slug\\\":\\\"troy\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:05:04.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:05:04.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":8,\\\\\\\"name\\\\\\\":\\\\\\\"Troy\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":11,\\\"state_id\\\":8}},{\\\"id\\\":7,\\\"admin_id\\\":1,\\\"name\\\":\\\"Ozark\\\",\\\"slug\\\":\\\"ozark\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:53.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:53.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":7,\\\\\\\"name\\\\\\\":\\\\\\\"Ozark\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":11,\\\"state_id\\\":7}},{\\\"id\\\":6,\\\"admin_id\\\":1,\\\"name\\\":\\\"Jasper\\\",\\\"slug\\\":\\\"jasper\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:27.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:27.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":6,\\\\\\\"name\\\\\\\":\\\\\\\"Jasper\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":11,\\\"state_id\\\":6}},{\\\"id\\\":5,\\\"admin_id\\\":1,\\\"name\\\":\\\"Florence\\\",\\\"slug\\\":\\\"florence\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:17.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:17.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":5,\\\\\\\"name\\\\\\\":\\\\\\\"Florence\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":11,\\\"state_id\\\":5}},{\\\"id\\\":4,\\\"admin_id\\\":1,\\\"name\\\":\\\"Dothan\\\",\\\"slug\\\":\\\"dothan\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":4,\\\\\\\"name\\\\\\\":\\\\\\\"Dothan\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":11,\\\"state_id\\\":4}},{\\\"id\\\":3,\\\"admin_id\\\":1,\\\"name\\\":\\\"California\\\",\\\"slug\\\":\\\"california\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2023-12-26T03:32:38.000000Z\\\",\\\"updated_at\\\":\\\"2023-12-26T03:32:38.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":3,\\\\\\\"name\\\\\\\":\\\\\\\"California\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":11,\\\"state_id\\\":3}},{\\\"id\\\":2,\\\"admin_id\\\":1,\\\"name\\\":\\\"Alaska\\\",\\\"slug\\\":\\\"alaska\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2023-11-01T23:12:36.000000Z\\\",\\\"updated_at\\\":\\\"2023-11-01T23:12:36.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":2,\\\\\\\"name\\\\\\\":\\\\\\\"Alaska\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":11,\\\"state_id\\\":2}},{\\\"id\\\":1,\\\"admin_id\\\":1,\\\"name\\\":\\\"Alabama\\\",\\\"slug\\\":\\\"alabama\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2023-11-01T23:12:20.000000Z\\\",\\\"updated_at\\\":\\\"2023-11-01T23:12:20.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":1,\\\\\\\"name\\\\\\\":\\\\\\\"Alabama\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":11,\\\"state_id\\\":1}}],\\\"image\\\":\\\"d0ba9863-2a40-4e41-b207-4edd72e75955.webp\\\"}\",\n        \"states\": [\n          {\n            \"id\": 8,\n            \"admin_id\": 1,\n            \"name\": \"Troy\",\n            \"slug\": \"troy\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:05:04.000000Z\",\n            \"updated_at\": \"2024-01-25T04:05:04.000000Z\",\n            \"editData\": \"{\\\"id\\\":8,\\\"name\\\":\\\"Troy\\\"}\",\n            \"pivot\": {\n              \"category_id\": 11,\n              \"state_id\": 8\n            }\n          },\n          {\n            \"id\": 7,\n            \"admin_id\": 1,\n            \"name\": \"Ozark\",\n            \"slug\": \"ozark\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:53.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:53.000000Z\",\n            \"editData\": \"{\\\"id\\\":7,\\\"name\\\":\\\"Ozark\\\"}\",\n            \"pivot\": {\n              \"category_id\": 11,\n              \"state_id\": 7\n            }\n          },\n          {\n            \"id\": 6,\n            \"admin_id\": 1,\n            \"name\": \"Jasper\",\n            \"slug\": \"jasper\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:27.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:27.000000Z\",\n            \"editData\": \"{\\\"id\\\":6,\\\"name\\\":\\\"Jasper\\\"}\",\n            \"pivot\": {\n              \"category_id\": 11,\n              \"state_id\": 6\n            }\n          },\n          {\n            \"id\": 5,\n            \"admin_id\": 1,\n            \"name\": \"Florence\",\n            \"slug\": \"florence\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:17.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:17.000000Z\",\n            \"editData\": \"{\\\"id\\\":5,\\\"name\\\":\\\"Florence\\\"}\",\n            \"pivot\": {\n              \"category_id\": 11,\n              \"state_id\": 5\n            }\n          },\n          {\n            \"id\": 4,\n            \"admin_id\": 1,\n            \"name\": \"Dothan\",\n            \"slug\": \"dothan\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"editData\": \"{\\\"id\\\":4,\\\"name\\\":\\\"Dothan\\\"}\",\n            \"pivot\": {\n              \"category_id\": 11,\n              \"state_id\": 4\n            }\n          },\n          {\n            \"id\": 3,\n            \"admin_id\": 1,\n            \"name\": \"California\",\n            \"slug\": \"california\",\n            \"status\": 1,\n            \"created_at\": \"2023-12-26T03:32:38.000000Z\",\n            \"updated_at\": \"2023-12-26T03:32:38.000000Z\",\n            \"editData\": \"{\\\"id\\\":3,\\\"name\\\":\\\"California\\\"}\",\n            \"pivot\": {\n              \"category_id\": 11,\n              \"state_id\": 3\n            }\n          },\n          {\n            \"id\": 2,\n            \"admin_id\": 1,\n            \"name\": \"Alaska\",\n            \"slug\": \"alaska\",\n            \"status\": 1,\n            \"created_at\": \"2023-11-01T23:12:36.000000Z\",\n            \"updated_at\": \"2023-11-01T23:12:36.000000Z\",\n            \"editData\": \"{\\\"id\\\":2,\\\"name\\\":\\\"Alaska\\\"}\",\n            \"pivot\": {\n              \"category_id\": 11,\n              \"state_id\": 2\n            }\n          },\n          {\n            \"id\": 1,\n            \"admin_id\": 1,\n            \"name\": \"Alabama\",\n            \"slug\": \"alabama\",\n            \"status\": 1,\n            \"created_at\": \"2023-11-01T23:12:20.000000Z\",\n            \"updated_at\": \"2023-11-01T23:12:20.000000Z\",\n            \"editData\": \"{\\\"id\\\":1,\\\"name\\\":\\\"Alabama\\\"}\",\n            \"pivot\": {\n              \"category_id\": 11,\n              \"state_id\": 1\n            }\n          }\n        ]\n      },\n      {\n        \"id\": 10,\n        \"name\": \"Fitness\",\n        \"slug\": \"fitness\",\n        \"image\": \"e14d2fa7-0b7d-4e9d-88f3-63f75f8b1c52.webp\",\n        \"admin_id\": 1,\n        \"status\": 1,\n        \"home\": 0,\n        \"created_at\": \"2024-01-25T03:51:12.000000Z\",\n        \"updated_at\": \"2024-01-30T23:41:04.000000Z\",\n        \"editData\": \"{\\\"id\\\":10,\\\"name\\\":\\\"Fitness\\\",\\\"home\\\":0,\\\"states\\\":[{\\\"id\\\":8,\\\"admin_id\\\":1,\\\"name\\\":\\\"Troy\\\",\\\"slug\\\":\\\"troy\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:05:04.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:05:04.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":8,\\\\\\\"name\\\\\\\":\\\\\\\"Troy\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":10,\\\"state_id\\\":8}},{\\\"id\\\":7,\\\"admin_id\\\":1,\\\"name\\\":\\\"Ozark\\\",\\\"slug\\\":\\\"ozark\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:53.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:53.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":7,\\\\\\\"name\\\\\\\":\\\\\\\"Ozark\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":10,\\\"state_id\\\":7}},{\\\"id\\\":6,\\\"admin_id\\\":1,\\\"name\\\":\\\"Jasper\\\",\\\"slug\\\":\\\"jasper\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:27.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:27.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":6,\\\\\\\"name\\\\\\\":\\\\\\\"Jasper\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":10,\\\"state_id\\\":6}},{\\\"id\\\":5,\\\"admin_id\\\":1,\\\"name\\\":\\\"Florence\\\",\\\"slug\\\":\\\"florence\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:17.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:17.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":5,\\\\\\\"name\\\\\\\":\\\\\\\"Florence\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":10,\\\"state_id\\\":5}},{\\\"id\\\":4,\\\"admin_id\\\":1,\\\"name\\\":\\\"Dothan\\\",\\\"slug\\\":\\\"dothan\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":4,\\\\\\\"name\\\\\\\":\\\\\\\"Dothan\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":10,\\\"state_id\\\":4}}],\\\"image\\\":\\\"e14d2fa7-0b7d-4e9d-88f3-63f75f8b1c52.webp\\\"}\",\n        \"states\": [\n          {\n            \"id\": 8,\n            \"admin_id\": 1,\n            \"name\": \"Troy\",\n            \"slug\": \"troy\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:05:04.000000Z\",\n            \"updated_at\": \"2024-01-25T04:05:04.000000Z\",\n            \"editData\": \"{\\\"id\\\":8,\\\"name\\\":\\\"Troy\\\"}\",\n            \"pivot\": {\n              \"category_id\": 10,\n              \"state_id\": 8\n            }\n          },\n          {\n            \"id\": 7,\n            \"admin_id\": 1,\n            \"name\": \"Ozark\",\n            \"slug\": \"ozark\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:53.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:53.000000Z\",\n            \"editData\": \"{\\\"id\\\":7,\\\"name\\\":\\\"Ozark\\\"}\",\n            \"pivot\": {\n              \"category_id\": 10,\n              \"state_id\": 7\n            }\n          },\n          {\n            \"id\": 6,\n            \"admin_id\": 1,\n            \"name\": \"Jasper\",\n            \"slug\": \"jasper\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:27.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:27.000000Z\",\n            \"editData\": \"{\\\"id\\\":6,\\\"name\\\":\\\"Jasper\\\"}\",\n            \"pivot\": {\n              \"category_id\": 10,\n              \"state_id\": 6\n            }\n          },\n          {\n            \"id\": 5,\n            \"admin_id\": 1,\n            \"name\": \"Florence\",\n            \"slug\": \"florence\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:17.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:17.000000Z\",\n            \"editData\": \"{\\\"id\\\":5,\\\"name\\\":\\\"Florence\\\"}\",\n            \"pivot\": {\n              \"category_id\": 10,\n              \"state_id\": 5\n            }\n          },\n          {\n            \"id\": 4,\n            \"admin_id\": 1,\n            \"name\": \"Dothan\",\n            \"slug\": \"dothan\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"editData\": \"{\\\"id\\\":4,\\\"name\\\":\\\"Dothan\\\"}\",\n            \"pivot\": {\n              \"category_id\": 10,\n              \"state_id\": 4\n            }\n          }\n        ]\n      },\n      {\n        \"id\": 9,\n        \"name\": \"Design\",\n        \"slug\": \"design\",\n        \"image\": \"096158c3-3ceb-42b0-bd1f-0d26339aa9ac.webp\",\n        \"admin_id\": 1,\n        \"status\": 1,\n        \"home\": 0,\n        \"created_at\": \"2024-01-25T03:50:48.000000Z\",\n        \"updated_at\": \"2024-01-30T23:41:19.000000Z\",\n        \"editData\": \"{\\\"id\\\":9,\\\"name\\\":\\\"Design\\\",\\\"home\\\":0,\\\"states\\\":[{\\\"id\\\":5,\\\"admin_id\\\":1,\\\"name\\\":\\\"Florence\\\",\\\"slug\\\":\\\"florence\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:17.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:17.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":5,\\\\\\\"name\\\\\\\":\\\\\\\"Florence\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":9,\\\"state_id\\\":5}},{\\\"id\\\":4,\\\"admin_id\\\":1,\\\"name\\\":\\\"Dothan\\\",\\\"slug\\\":\\\"dothan\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":4,\\\\\\\"name\\\\\\\":\\\\\\\"Dothan\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":9,\\\"state_id\\\":4}},{\\\"id\\\":3,\\\"admin_id\\\":1,\\\"name\\\":\\\"California\\\",\\\"slug\\\":\\\"california\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2023-12-26T03:32:38.000000Z\\\",\\\"updated_at\\\":\\\"2023-12-26T03:32:38.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":3,\\\\\\\"name\\\\\\\":\\\\\\\"California\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":9,\\\"state_id\\\":3}},{\\\"id\\\":2,\\\"admin_id\\\":1,\\\"name\\\":\\\"Alaska\\\",\\\"slug\\\":\\\"alaska\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2023-11-01T23:12:36.000000Z\\\",\\\"updated_at\\\":\\\"2023-11-01T23:12:36.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":2,\\\\\\\"name\\\\\\\":\\\\\\\"Alaska\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":9,\\\"state_id\\\":2}}],\\\"image\\\":\\\"096158c3-3ceb-42b0-bd1f-0d26339aa9ac.webp\\\"}\",\n        \"states\": [\n          {\n            \"id\": 5,\n            \"admin_id\": 1,\n            \"name\": \"Florence\",\n            \"slug\": \"florence\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:17.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:17.000000Z\",\n            \"editData\": \"{\\\"id\\\":5,\\\"name\\\":\\\"Florence\\\"}\",\n            \"pivot\": {\n              \"category_id\": 9,\n              \"state_id\": 5\n            }\n          },\n          {\n            \"id\": 4,\n            \"admin_id\": 1,\n            \"name\": \"Dothan\",\n            \"slug\": \"dothan\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"editData\": \"{\\\"id\\\":4,\\\"name\\\":\\\"Dothan\\\"}\",\n            \"pivot\": {\n              \"category_id\": 9,\n              \"state_id\": 4\n            }\n          },\n          {\n            \"id\": 3,\n            \"admin_id\": 1,\n            \"name\": \"California\",\n            \"slug\": \"california\",\n            \"status\": 1,\n            \"created_at\": \"2023-12-26T03:32:38.000000Z\",\n            \"updated_at\": \"2023-12-26T03:32:38.000000Z\",\n            \"editData\": \"{\\\"id\\\":3,\\\"name\\\":\\\"California\\\"}\",\n            \"pivot\": {\n              \"category_id\": 9,\n              \"state_id\": 3\n            }\n          },\n          {\n            \"id\": 2,\n            \"admin_id\": 1,\n            \"name\": \"Alaska\",\n            \"slug\": \"alaska\",\n            \"status\": 1,\n            \"created_at\": \"2023-11-01T23:12:36.000000Z\",\n            \"updated_at\": \"2023-11-01T23:12:36.000000Z\",\n            \"editData\": \"{\\\"id\\\":2,\\\"name\\\":\\\"Alaska\\\"}\",\n            \"pivot\": {\n              \"category_id\": 9,\n              \"state_id\": 2\n            }\n          }\n        ]\n      },\n      {\n        \"id\": 8,\n        \"name\": \"Events\",\n        \"slug\": \"events\",\n        \"image\": \"f95fc403-95fb-465f-9a26-f7607df10a88.webp\",\n        \"admin_id\": 1,\n        \"status\": 1,\n        \"home\": 0,\n        \"created_at\": \"2024-01-25T03:49:23.000000Z\",\n        \"updated_at\": \"2024-01-30T23:42:03.000000Z\",\n        \"editData\": \"{\\\"id\\\":8,\\\"name\\\":\\\"Events\\\",\\\"home\\\":0,\\\"states\\\":[],\\\"image\\\":\\\"f95fc403-95fb-465f-9a26-f7607df10a88.webp\\\"}\",\n        \"states\": []\n      },\n      {\n        \"id\": 7,\n        \"name\": \"Delivery\",\n        \"slug\": \"delivery\",\n        \"image\": \"1217f20b-20d3-4220-be4a-55c117119e8e.webp\",\n        \"admin_id\": 1,\n        \"status\": 1,\n        \"home\": 0,\n        \"created_at\": \"2024-01-25T03:48:32.000000Z\",\n        \"updated_at\": \"2024-01-30T23:42:19.000000Z\",\n        \"editData\": \"{\\\"id\\\":7,\\\"name\\\":\\\"Delivery\\\",\\\"home\\\":0,\\\"states\\\":[{\\\"id\\\":8,\\\"admin_id\\\":1,\\\"name\\\":\\\"Troy\\\",\\\"slug\\\":\\\"troy\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:05:04.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:05:04.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":8,\\\\\\\"name\\\\\\\":\\\\\\\"Troy\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":7,\\\"state_id\\\":8}},{\\\"id\\\":7,\\\"admin_id\\\":1,\\\"name\\\":\\\"Ozark\\\",\\\"slug\\\":\\\"ozark\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:53.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:53.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":7,\\\\\\\"name\\\\\\\":\\\\\\\"Ozark\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":7,\\\"state_id\\\":7}},{\\\"id\\\":4,\\\"admin_id\\\":1,\\\"name\\\":\\\"Dothan\\\",\\\"slug\\\":\\\"dothan\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":4,\\\\\\\"name\\\\\\\":\\\\\\\"Dothan\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":7,\\\"state_id\\\":4}},{\\\"id\\\":1,\\\"admin_id\\\":1,\\\"name\\\":\\\"Alabama\\\",\\\"slug\\\":\\\"alabama\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2023-11-01T23:12:20.000000Z\\\",\\\"updated_at\\\":\\\"2023-11-01T23:12:20.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":1,\\\\\\\"name\\\\\\\":\\\\\\\"Alabama\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":7,\\\"state_id\\\":1}}],\\\"image\\\":\\\"1217f20b-20d3-4220-be4a-55c117119e8e.webp\\\"}\",\n        \"states\": [\n          {\n            \"id\": 8,\n            \"admin_id\": 1,\n            \"name\": \"Troy\",\n            \"slug\": \"troy\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:05:04.000000Z\",\n            \"updated_at\": \"2024-01-25T04:05:04.000000Z\",\n            \"editData\": \"{\\\"id\\\":8,\\\"name\\\":\\\"Troy\\\"}\",\n            \"pivot\": {\n              \"category_id\": 7,\n              \"state_id\": 8\n            }\n          },\n          {\n            \"id\": 7,\n            \"admin_id\": 1,\n            \"name\": \"Ozark\",\n            \"slug\": \"ozark\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:53.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:53.000000Z\",\n            \"editData\": \"{\\\"id\\\":7,\\\"name\\\":\\\"Ozark\\\"}\",\n            \"pivot\": {\n              \"category_id\": 7,\n              \"state_id\": 7\n            }\n          },\n          {\n            \"id\": 4,\n            \"admin_id\": 1,\n            \"name\": \"Dothan\",\n            \"slug\": \"dothan\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"editData\": \"{\\\"id\\\":4,\\\"name\\\":\\\"Dothan\\\"}\",\n            \"pivot\": {\n              \"category_id\": 7,\n              \"state_id\": 4\n            }\n          },\n          {\n            \"id\": 1,\n            \"admin_id\": 1,\n            \"name\": \"Alabama\",\n            \"slug\": \"alabama\",\n            \"status\": 1,\n            \"created_at\": \"2023-11-01T23:12:20.000000Z\",\n            \"updated_at\": \"2023-11-01T23:12:20.000000Z\",\n            \"editData\": \"{\\\"id\\\":1,\\\"name\\\":\\\"Alabama\\\"}\",\n            \"pivot\": {\n              \"category_id\": 7,\n              \"state_id\": 1\n            }\n          }\n        ]\n      },\n      {\n        \"id\": 6,\n        \"name\": \"Beauty\",\n        \"slug\": \"beauty\",\n        \"image\": \"903b9f97-fbab-4e09-bcb4-69f14d93690f.webp\",\n        \"admin_id\": 1,\n        \"status\": 1,\n        \"home\": 0,\n        \"created_at\": \"2024-01-25T03:47:38.000000Z\",\n        \"updated_at\": \"2024-01-30T23:42:35.000000Z\",\n        \"editData\": \"{\\\"id\\\":6,\\\"name\\\":\\\"Beauty\\\",\\\"home\\\":0,\\\"states\\\":[{\\\"id\\\":7,\\\"admin_id\\\":1,\\\"name\\\":\\\"Ozark\\\",\\\"slug\\\":\\\"ozark\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:53.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:53.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":7,\\\\\\\"name\\\\\\\":\\\\\\\"Ozark\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":6,\\\"state_id\\\":7}},{\\\"id\\\":6,\\\"admin_id\\\":1,\\\"name\\\":\\\"Jasper\\\",\\\"slug\\\":\\\"jasper\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:27.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:27.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":6,\\\\\\\"name\\\\\\\":\\\\\\\"Jasper\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":6,\\\"state_id\\\":6}},{\\\"id\\\":4,\\\"admin_id\\\":1,\\\"name\\\":\\\"Dothan\\\",\\\"slug\\\":\\\"dothan\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":4,\\\\\\\"name\\\\\\\":\\\\\\\"Dothan\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":6,\\\"state_id\\\":4}},{\\\"id\\\":3,\\\"admin_id\\\":1,\\\"name\\\":\\\"California\\\",\\\"slug\\\":\\\"california\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2023-12-26T03:32:38.000000Z\\\",\\\"updated_at\\\":\\\"2023-12-26T03:32:38.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":3,\\\\\\\"name\\\\\\\":\\\\\\\"California\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":6,\\\"state_id\\\":3}}],\\\"image\\\":\\\"903b9f97-fbab-4e09-bcb4-69f14d93690f.webp\\\"}\",\n        \"states\": [\n          {\n            \"id\": 7,\n            \"admin_id\": 1,\n            \"name\": \"Ozark\",\n            \"slug\": \"ozark\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:53.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:53.000000Z\",\n            \"editData\": \"{\\\"id\\\":7,\\\"name\\\":\\\"Ozark\\\"}\",\n            \"pivot\": {\n              \"category_id\": 6,\n              \"state_id\": 7\n            }\n          },\n          {\n            \"id\": 6,\n            \"admin_id\": 1,\n            \"name\": \"Jasper\",\n            \"slug\": \"jasper\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:27.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:27.000000Z\",\n            \"editData\": \"{\\\"id\\\":6,\\\"name\\\":\\\"Jasper\\\"}\",\n            \"pivot\": {\n              \"category_id\": 6,\n              \"state_id\": 6\n            }\n          },\n          {\n            \"id\": 4,\n            \"admin_id\": 1,\n            \"name\": \"Dothan\",\n            \"slug\": \"dothan\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"editData\": \"{\\\"id\\\":4,\\\"name\\\":\\\"Dothan\\\"}\",\n            \"pivot\": {\n              \"category_id\": 6,\n              \"state_id\": 4\n            }\n          },\n          {\n            \"id\": 3,\n            \"admin_id\": 1,\n            \"name\": \"California\",\n            \"slug\": \"california\",\n            \"status\": 1,\n            \"created_at\": \"2023-12-26T03:32:38.000000Z\",\n            \"updated_at\": \"2023-12-26T03:32:38.000000Z\",\n            \"editData\": \"{\\\"id\\\":3,\\\"name\\\":\\\"California\\\"}\",\n            \"pivot\": {\n              \"category_id\": 6,\n              \"state_id\": 3\n            }\n          }\n        ]\n      },\n      {\n        \"id\": 5,\n        \"name\": \"Landscaping\",\n        \"slug\": \"landscaping\",\n        \"image\": \"2a7d6d14-c154-425f-a850-58c7a8aee724.webp\",\n        \"admin_id\": 1,\n        \"status\": 1,\n        \"home\": 0,\n        \"created_at\": \"2024-01-25T03:46:34.000000Z\",\n        \"updated_at\": \"2024-01-30T23:42:54.000000Z\",\n        \"editData\": \"{\\\"id\\\":5,\\\"name\\\":\\\"Landscaping\\\",\\\"home\\\":0,\\\"states\\\":[],\\\"image\\\":\\\"2a7d6d14-c154-425f-a850-58c7a8aee724.webp\\\"}\",\n        \"states\": []\n      },\n      {\n        \"id\": 4,\n        \"name\": \"Plumbing\",\n        \"slug\": \"plumbing\",\n        \"image\": \"d962b0fd-4e19-44f8-a4b2-093ff00805c9.webp\",\n        \"admin_id\": 1,\n        \"status\": 1,\n        \"home\": 0,\n        \"created_at\": \"2024-01-25T03:14:45.000000Z\",\n        \"updated_at\": \"2024-01-30T23:43:08.000000Z\",\n        \"editData\": \"{\\\"id\\\":4,\\\"name\\\":\\\"Plumbing\\\",\\\"home\\\":0,\\\"states\\\":[{\\\"id\\\":6,\\\"admin_id\\\":1,\\\"name\\\":\\\"Jasper\\\",\\\"slug\\\":\\\"jasper\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:27.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:27.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":6,\\\\\\\"name\\\\\\\":\\\\\\\"Jasper\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":4,\\\"state_id\\\":6}},{\\\"id\\\":5,\\\"admin_id\\\":1,\\\"name\\\":\\\"Florence\\\",\\\"slug\\\":\\\"florence\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:17.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:17.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":5,\\\\\\\"name\\\\\\\":\\\\\\\"Florence\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":4,\\\"state_id\\\":5}},{\\\"id\\\":4,\\\"admin_id\\\":1,\\\"name\\\":\\\"Dothan\\\",\\\"slug\\\":\\\"dothan\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":4,\\\\\\\"name\\\\\\\":\\\\\\\"Dothan\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":4,\\\"state_id\\\":4}},{\\\"id\\\":3,\\\"admin_id\\\":1,\\\"name\\\":\\\"California\\\",\\\"slug\\\":\\\"california\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2023-12-26T03:32:38.000000Z\\\",\\\"updated_at\\\":\\\"2023-12-26T03:32:38.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":3,\\\\\\\"name\\\\\\\":\\\\\\\"California\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":4,\\\"state_id\\\":3}}],\\\"image\\\":\\\"d962b0fd-4e19-44f8-a4b2-093ff00805c9.webp\\\"}\",\n        \"states\": [\n          {\n            \"id\": 6,\n            \"admin_id\": 1,\n            \"name\": \"Jasper\",\n            \"slug\": \"jasper\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:27.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:27.000000Z\",\n            \"editData\": \"{\\\"id\\\":6,\\\"name\\\":\\\"Jasper\\\"}\",\n            \"pivot\": {\n              \"category_id\": 4,\n              \"state_id\": 6\n            }\n          },\n          {\n            \"id\": 5,\n            \"admin_id\": 1,\n            \"name\": \"Florence\",\n            \"slug\": \"florence\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:17.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:17.000000Z\",\n            \"editData\": \"{\\\"id\\\":5,\\\"name\\\":\\\"Florence\\\"}\",\n            \"pivot\": {\n              \"category_id\": 4,\n              \"state_id\": 5\n            }\n          },\n          {\n            \"id\": 4,\n            \"admin_id\": 1,\n            \"name\": \"Dothan\",\n            \"slug\": \"dothan\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"editData\": \"{\\\"id\\\":4,\\\"name\\\":\\\"Dothan\\\"}\",\n            \"pivot\": {\n              \"category_id\": 4,\n              \"state_id\": 4\n            }\n          },\n          {\n            \"id\": 3,\n            \"admin_id\": 1,\n            \"name\": \"California\",\n            \"slug\": \"california\",\n            \"status\": 1,\n            \"created_at\": \"2023-12-26T03:32:38.000000Z\",\n            \"updated_at\": \"2023-12-26T03:32:38.000000Z\",\n            \"editData\": \"{\\\"id\\\":3,\\\"name\\\":\\\"California\\\"}\",\n            \"pivot\": {\n              \"category_id\": 4,\n              \"state_id\": 3\n            }\n          }\n        ]\n      },\n      {\n        \"id\": 3,\n        \"name\": \"Electrics\",\n        \"slug\": \"electrics\",\n        \"image\": \"dc667f8b-1d06-46c6-b8cd-41087cf53c81.webp\",\n        \"admin_id\": 1,\n        \"status\": 1,\n        \"home\": 0,\n        \"created_at\": \"2024-01-08T04:48:37.000000Z\",\n        \"updated_at\": \"2024-01-30T23:43:25.000000Z\",\n        \"editData\": \"{\\\"id\\\":3,\\\"name\\\":\\\"Electrics\\\",\\\"home\\\":0,\\\"states\\\":[{\\\"id\\\":8,\\\"admin_id\\\":1,\\\"name\\\":\\\"Troy\\\",\\\"slug\\\":\\\"troy\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:05:04.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:05:04.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":8,\\\\\\\"name\\\\\\\":\\\\\\\"Troy\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":3,\\\"state_id\\\":8}},{\\\"id\\\":7,\\\"admin_id\\\":1,\\\"name\\\":\\\"Ozark\\\",\\\"slug\\\":\\\"ozark\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:53.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:53.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":7,\\\\\\\"name\\\\\\\":\\\\\\\"Ozark\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":3,\\\"state_id\\\":7}},{\\\"id\\\":4,\\\"admin_id\\\":1,\\\"name\\\":\\\"Dothan\\\",\\\"slug\\\":\\\"dothan\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"updated_at\\\":\\\"2024-01-25T04:04:07.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":4,\\\\\\\"name\\\\\\\":\\\\\\\"Dothan\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":3,\\\"state_id\\\":4}},{\\\"id\\\":3,\\\"admin_id\\\":1,\\\"name\\\":\\\"California\\\",\\\"slug\\\":\\\"california\\\",\\\"status\\\":1,\\\"created_at\\\":\\\"2023-12-26T03:32:38.000000Z\\\",\\\"updated_at\\\":\\\"2023-12-26T03:32:38.000000Z\\\",\\\"editData\\\":\\\"{\\\\\\\"id\\\\\\\":3,\\\\\\\"name\\\\\\\":\\\\\\\"California\\\\\\\"}\\\",\\\"pivot\\\":{\\\"category_id\\\":3,\\\"state_id\\\":3}}],\\\"image\\\":\\\"dc667f8b-1d06-46c6-b8cd-41087cf53c81.webp\\\"}\",\n        \"states\": [\n          {\n            \"id\": 8,\n            \"admin_id\": 1,\n            \"name\": \"Troy\",\n            \"slug\": \"troy\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:05:04.000000Z\",\n            \"updated_at\": \"2024-01-25T04:05:04.000000Z\",\n            \"editData\": \"{\\\"id\\\":8,\\\"name\\\":\\\"Troy\\\"}\",\n            \"pivot\": {\n              \"category_id\": 3,\n              \"state_id\": 8\n            }\n          },\n          {\n            \"id\": 7,\n            \"admin_id\": 1,\n            \"name\": \"Ozark\",\n            \"slug\": \"ozark\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:53.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:53.000000Z\",\n            \"editData\": \"{\\\"id\\\":7,\\\"name\\\":\\\"Ozark\\\"}\",\n            \"pivot\": {\n              \"category_id\": 3,\n              \"state_id\": 7\n            }\n          },\n          {\n            \"id\": 4,\n            \"admin_id\": 1,\n            \"name\": \"Dothan\",\n            \"slug\": \"dothan\",\n            \"status\": 1,\n            \"created_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"updated_at\": \"2024-01-25T04:04:07.000000Z\",\n            \"editData\": \"{\\\"id\\\":4,\\\"name\\\":\\\"Dothan\\\"}\",\n            \"pivot\": {\n              \"category_id\": 3,\n              \"state_id\": 4\n            }\n          },\n          {\n            \"id\": 3,\n            \"admin_id\": 1,\n            \"name\": \"California\",\n            \"slug\": \"california\",\n            \"status\": 1,\n            \"created_at\": \"2023-12-26T03:32:38.000000Z\",\n            \"updated_at\": \"2023-12-26T03:32:38.000000Z\",\n            \"editData\": \"{\\\"id\\\":3,\\\"name\\\":\\\"California\\\"}\",\n            \"pivot\": {\n              \"category_id\": 3,\n              \"state_id\": 3\n            }\n          }\n        ]\n      },\n      {\n        \"id\": 2,\n        \"name\": \"Mechanics\",\n        \"slug\": \"mechanics\",\n        \"image\": \"9bba7a42-bc41-4bcc-aaa9-98f457332d4b.webp\",\n        \"admin_id\": 1,\n        \"status\": 1,\n        \"home\": 1,\n        \"created_at\": \"2023-11-01T23:17:06.000000Z\",\n        \"updated_at\": \"2024-01-30T23:43:42.000000Z\",\n        \"editData\": \"{\\\"id\\\":2,\\\"name\\\":\\\"Mechanics\\\",\\\"home\\\":1,\\\"states\\\":[],\\\"image\\\":\\\"9bba7a42-bc41-4bcc-aaa9-98f457332d4b.webp\\\"}\",\n        \"states\": []\n      },\n      {\n        \"id\": 1,\n        \"name\": \"Cleaning\",\n        \"slug\": \"cleaning\",\n        \"image\": \"fe128c64-f1bd-4704-97a1-2b3a410ebbcb.webp\",\n        \"admin_id\": 1,\n        \"status\": 1,\n        \"home\": 1,\n        \"created_at\": \"2023-11-01T23:16:03.000000Z\",\n        \"updated_at\": \"2024-01-30T23:43:58.000000Z\",\n        \"editData\": \"{\\\"id\\\":1,\\\"name\\\":\\\"Cleaning\\\",\\\"home\\\":1,\\\"states\\\":[],\\\"image\\\":\\\"fe128c64-f1bd-4704-97a1-2b3a410ebbcb.webp\\\"}\",\n        \"states\": []\n      }\n    ],\n    \"recommended_service\": [\n      {\n        \"id\": 2,\n        \"vendor_id\": 1,\n        \"category_id\": 10,\n        \"state_id\": 8,\n        \"city_id\": 4,\n        \"service_name\": \"Unleashing Your Full Fitness Potential\",\n        \"item\": \"1 item\",\n        \"price\": \"10\",\n        \"details\": \"<p><span style=\\\"color:hsl(0, 0%, 0%);\\\">Unleashing your full fitness potential is a transformative journey that goes beyond mere physical exercise; it encapsulates a holistic approach to well-being. It involves cultivating a mindset that embraces not only the sweat-inducing workouts but also nourishing your body with wholesome nutrition and fostering mental resilience. This journey is about discovering the unique synergy between mind and body, recognizing the interconnectedness of physical and mental health. By committing to a balanced regimen of cardiovascular activities, strength training, flexibility exercises, and mindfulness practices, you empower yourself to reach new heights of vitality and performance. Unleashing your full fitness potential is not just a pursuit of aesthetics; it's a commitment to longevity, energy, and a vibrant life. It's an ongoing process of self-discovery, pushing boundaries, and celebrating the incredible capabilities of the human body when nurtured and challenged appropriately.</span></p>\",\n        \"thumbnail\": \"c31b0333-09b1-4bd6-a04b-a2945096a769.webp\",\n        \"status\": 1,\n        \"recommended\": 1,\n        \"trending\": 1,\n        \"rejected_reason\": null,\n        \"created_at\": \"2023-11-12T01:01:46.000000Z\",\n        \"updated_at\": \"2024-02-16T03:39:28.000000Z\",\n        \"stringStatus\": {\n          \"class\": \"badge badge--info\",\n          \"value\": \"Active\"\n        },\n        \"editData\": \"{\\\"id\\\":2,\\\"service_name\\\":\\\"Unleashing Your Full Fitness Potential\\\",\\\"price\\\":\\\"10\\\",\\\"recommended\\\":1,\\\"trending\\\":1}\"\n      },\n      {\n        \"id\": 1,\n        \"vendor_id\": 1,\n        \"category_id\": 10,\n        \"state_id\": 8,\n        \"city_id\": 4,\n        \"service_name\": \"A Comprehensive Guide to Total Body Fitness\",\n        \"item\": \"1 day\",\n        \"price\": \"15\",\n        \"details\": \"<p><span style=\\\"color:hsl(0, 0%, 0%);\\\">Embarking on a journey toward total body fitness requires a comprehensive approach that addresses every facet of well-being. This guide serves as a roadmap, outlining not only the importance of physical exercise but also the significance of nutrition, mental wellness, and recovery strategies. Total body fitness encompasses cardiovascular endurance, strength training, flexibility exercises, and balance routines, creating a harmonious synergy among various fitness components. Nutrition plays a pivotal role, emphasizing the importance of a well-balanced diet tailored to individual needs. Additionally, mental well-being is integrated through mindfulness practices and stress management techniques, recognizing the profound connection between the mind and body. The guide delves into effective strategies for recovery, highlighting the significance of rest, sleep, and active recovery methods to optimize performance and prevent burnout. By embracing this holistic approach, individuals can unlock their full potential, achieving a state of total body fitness that transcends mere physical prowess, promoting lasting health and vitality.</span></p>\",\n        \"thumbnail\": \"2e0acd4f-6837-418f-8c76-8e86e65d11a1.jpg\",\n        \"status\": 1,\n        \"recommended\": 1,\n        \"trending\": 1,\n        \"rejected_reason\": null,\n        \"created_at\": \"2023-11-01T23:37:21.000000Z\",\n        \"updated_at\": \"2024-02-16T03:39:32.000000Z\",\n        \"stringStatus\": {\n          \"class\": \"badge badge--info\",\n          \"value\": \"Active\"\n        },\n        \"editData\": \"{\\\"id\\\":1,\\\"service_name\\\":\\\"A Comprehensive Guide to Total Body Fitness\\\",\\\"price\\\":\\\"15\\\",\\\"recommended\\\":1,\\\"trending\\\":1}\"\n      }\n    ],\n    \"trending_service\": [\n      {\n        \"id\": 2,\n        \"vendor_id\": 1,\n        \"category_id\": 10,\n        \"state_id\": 8,\n        \"city_id\": 4,\n        \"service_name\": \"Unleashing Your Full Fitness Potential\",\n        \"item\": \"1 item\",\n        \"price\": \"10\",\n        \"details\": \"<p><span style=\\\"color:hsl(0, 0%, 0%);\\\">Unleashing your full fitness potential is a transformative journey that goes beyond mere physical exercise; it encapsulates a holistic approach to well-being. It involves cultivating a mindset that embraces not only the sweat-inducing workouts but also nourishing your body with wholesome nutrition and fostering mental resilience. This journey is about discovering the unique synergy between mind and body, recognizing the interconnectedness of physical and mental health. By committing to a balanced regimen of cardiovascular activities, strength training, flexibility exercises, and mindfulness practices, you empower yourself to reach new heights of vitality and performance. Unleashing your full fitness potential is not just a pursuit of aesthetics; it's a commitment to longevity, energy, and a vibrant life. It's an ongoing process of self-discovery, pushing boundaries, and celebrating the incredible capabilities of the human body when nurtured and challenged appropriately.</span></p>\",\n        \"thumbnail\": \"c31b0333-09b1-4bd6-a04b-a2945096a769.webp\",\n        \"status\": 1,\n        \"recommended\": 1,\n        \"trending\": 1,\n        \"rejected_reason\": null,\n        \"created_at\": \"2023-11-12T01:01:46.000000Z\",\n        \"updated_at\": \"2024-02-16T03:39:28.000000Z\",\n        \"stringStatus\": {\n          \"class\": \"badge badge--info\",\n          \"value\": \"Active\"\n        },\n        \"editData\": \"{\\\"id\\\":2,\\\"service_name\\\":\\\"Unleashing Your Full Fitness Potential\\\",\\\"price\\\":\\\"10\\\",\\\"recommended\\\":1,\\\"trending\\\":1}\"\n      },\n      {\n        \"id\": 1,\n        \"vendor_id\": 1,\n        \"category_id\": 10,\n        \"state_id\": 8,\n        \"city_id\": 4,\n        \"service_name\": \"A Comprehensive Guide to Total Body Fitness\",\n        \"item\": \"1 day\",\n        \"price\": \"15\",\n        \"details\": \"<p><span style=\\\"color:hsl(0, 0%, 0%);\\\">Embarking on a journey toward total body fitness requires a comprehensive approach that addresses every facet of well-being. This guide serves as a roadmap, outlining not only the importance of physical exercise but also the significance of nutrition, mental wellness, and recovery strategies. Total body fitness encompasses cardiovascular endurance, strength training, flexibility exercises, and balance routines, creating a harmonious synergy among various fitness components. Nutrition plays a pivotal role, emphasizing the importance of a well-balanced diet tailored to individual needs. Additionally, mental well-being is integrated through mindfulness practices and stress management techniques, recognizing the profound connection between the mind and body. The guide delves into effective strategies for recovery, highlighting the significance of rest, sleep, and active recovery methods to optimize performance and prevent burnout. By embracing this holistic approach, individuals can unlock their full potential, achieving a state of total body fitness that transcends mere physical prowess, promoting lasting health and vitality.</span></p>\",\n        \"thumbnail\": \"2e0acd4f-6837-418f-8c76-8e86e65d11a1.jpg\",\n        \"status\": 1,\n        \"recommended\": 1,\n        \"trending\": 1,\n        \"rejected_reason\": null,\n        \"created_at\": \"2023-11-01T23:37:21.000000Z\",\n        \"updated_at\": \"2024-02-16T03:39:32.000000Z\",\n        \"stringStatus\": {\n          \"class\": \"badge badge--info\",\n          \"value\": \"Active\"\n        },\n        \"editData\": \"{\\\"id\\\":1,\\\"service_name\\\":\\\"A Comprehensive Guide to Total Body Fitness\\\",\\\"price\\\":\\\"15\\\",\\\"recommended\\\":1,\\\"trending\\\":1}\"\n      }\n    ],\n    \"teams\": {\n      \"id\": 10,\n      \"key\": \"team-section\",\n      \"value\": {\n        \"language\": {\n          \"en\": {\n            \"title\": \"Meet the Team\",\n            \"heading\": \"Our Dedicated Minds Crafting Your Handiman Experience\",\n            \"sub_heading\": \"At Handiman, we are proud to have a passionate and dedicated team working tirelessly to make your on-demand service experience exceptional. Get to know the faces behind the innovation, commitment, and seamless functionality of Handiman\"\n          },\n          \"es\": {\n            \"title\": \"Conoce al equipo\",\n            \"heading\": \"Nuestras mentes dedicadas crean su experiencia Handiman\",\n            \"sub_heading\": \"En Handiman, estamos orgullosos de contar con un equipo apasionado y dedicado que trabaja incansablemente para hacer que su experiencia de servicio a pedido sea excepcional. Conozca las caras detrás de la innovación, el compromiso y la perfecta funcionalidad de Handiman\"\n          },\n          \"ar\": {\n            \"title\": \"تعرف على الفريق\",\n            \"heading\": \"عقولنا المتفانية تصوغ تجربتك اليدوية\",\n            \"sub_heading\": \"في Handiman، نحن فخورون بوجود فريق متحمس ومتفاني يعمل بلا كلل لجعل تجربة الخدمة عند الطلب استثنائية. تعرف على الوجوه التي تقف وراء الابتكار والالتزام والوظائف السلسة لـ Handiman\"\n          },\n          \"fr\": {\n            \"title\": \"Rencontrez l'équipe\",\n            \"heading\": \"Nos esprits dévoués élaborent votre expérience Handiman\",\n            \"sub_heading\": \"Chez Handiman, nous sommes fiers d'avoir une équipe passionnée et dévouée qui travaille sans relâche pour rendre votre expérience de service à la demande exceptionnelle. Apprenez à connaître les visages derrière l'innovation, l'engagement et la fonctionnalité transparente de Handiman\"\n          },\n          \"hi\": {\n            \"title\": \"टीम से मिलो\",\n            \"heading\": \"हमारे समर्पित दिमाग आपके हस्तशिल्प अनुभव को तैयार कर रहे हैं\",\n            \"sub_heading\": \"हैंडीमैन में, हमें आपके ऑन-डिमांड सेवा अनुभव को असाधारण बनाने के लिए अथक प्रयास करने वाली एक भावुक और समर्पित टीम पर गर्व है। हैंडीमैन की नवीनता, प्रतिबद्धता और निर्बाध कार्यक्षमता के पीछे के चेहरों को जानें\"\n          }\n        },\n        \"items\": {\n          \"656daec19af88\": {\n            \"language\": {\n              \"en\": {\n                \"name\": \"Carlos Mendez\",\n                \"team_title\": \"Electrician\"\n              },\n              \"es\": {\n                \"name\": \"Carlos Mendez\",\n                \"team_title\": \"Electricista\"\n              },\n              \"ar\": {\n                \"name\": \"كارلوس منديز\",\n                \"team_title\": \"كهربائي\"\n              },\n              \"fr\": {\n                \"name\": \"Carlos Méndez\",\n                \"team_title\": \"Électricien\"\n              },\n              \"hi\": {\n                \"name\": \"कार्लोस मेंडेज़\",\n                \"team_title\": \"बिजली मिस्त्री\"\n              }\n            },\n            \"id\": \"656daec19af88\",\n            \"image\": \"727c4a10-29b0-45f7-8a71-11b454a5a0c0.webp\",\n            \"social_links\": [\n              {\n                \"icon\": \"fab fa-instagram\",\n                \"link\": \"https://www.instagram.com/\"\n              },\n              {\n                \"icon\": \"fab fa-whatsapp\",\n                \"link\": \"https://www.whatsapp.com/\"\n              },\n              {\n                \"icon\": \"fab fa-facebook-f\",\n                \"link\": \"https://www.facebook.com/\"\n              }\n            ]\n          },\n          \"656ea15333fb5\": {\n            \"language\": {\n              \"en\": {\n                \"name\": \"Maria Lopez\",\n                \"team_title\": \"Plomero\"\n              },\n              \"es\": {\n                \"name\": \"María López\",\n                \"team_title\": \"Plomero\"\n              },\n              \"ar\": {\n                \"name\": \"ماريا لوبيز\",\n                \"team_title\": \"سباك\"\n              },\n              \"fr\": {\n                \"name\": \"Marie López\",\n                \"team_title\": \"Plombier\"\n              },\n              \"hi\": {\n                \"name\": \"मारिया लोपेज़\",\n                \"team_title\": \"प्लंबर\"\n              }\n            },\n            \"id\": \"656ea15333fb5\",\n            \"image\": \"1a58d7d5-3a60-418e-90ab-b90af083768d.webp\",\n            \"social_links\": [\n              {\n                \"icon\": \"fab fa-whatsapp\",\n                \"link\": \"https://www.whatsapp.com/\"\n              },\n              {\n                \"icon\": \"fab fa-instagram\",\n                \"link\": \"https://www.instagram.com/\"\n              },\n              {\n                \"icon\": \"fab fa-facebook-f\",\n                \"link\": \"https://www.facebook.com/\"\n              }\n            ]\n          },\n          \"656ea1bc2e375\": {\n            \"language\": {\n              \"en\": {\n                \"name\": \"David Turner\",\n                \"team_title\": \"Mechanic\"\n              },\n              \"es\": {\n                \"name\": \"David Turner\",\n                \"team_title\": \"Mecánico\"\n              },\n              \"ar\": {\n                \"name\": \"ديفيد تورنر\",\n                \"team_title\": \"ميكانيكي\"\n              },\n              \"fr\": {\n                \"name\": \"David Turner\",\n                \"team_title\": \"Mécanicien\"\n              },\n              \"hi\": {\n                \"name\": \"डेविड टर्नर\",\n                \"team_title\": \"मैकेनिक\"\n              }\n            },\n            \"id\": \"656ea1bc2e375\",\n            \"image\": \"1796b1b1-c234-46a4-b6c0-2e05f7641774.webp\",\n            \"social_links\": [\n              {\n                \"icon\": \"fab fa-instagram\",\n                \"link\": \"https://www.instagram.com/\"\n              },\n              {\n                \"icon\": \"fab fa-whatsapp\",\n                \"link\": \"https://www.whatsapp.com/\"\n              },\n              {\n                \"icon\": \"fab fa-facebook-f\",\n                \"link\": \"https://www.facebook.com/\"\n              }\n            ]\n          },\n          \"656ea4863fd62\": {\n            \"language\": {\n              \"en\": {\n                \"name\": \"Elena Rodriguez\",\n                \"team_title\": \"Cleaning Specialist\"\n              },\n              \"es\": {\n                \"name\": \"elena rodriguez\",\n                \"team_title\": \"Especialista en limpieza\"\n              },\n              \"ar\": {\n                \"name\": \"ايلينا رودريجيز\",\n                \"team_title\": \"أخصائي تنظيف\"\n              },\n              \"fr\": {\n                \"name\": \"Elena Rodríguez\",\n                \"team_title\": \"Spécialiste du nettoyage\"\n              },\n              \"hi\": {\n                \"name\": \"ऐलेना रोड्रिग्ज\",\n                \"team_title\": \"सफाई विशेषज्ञ\"\n              }\n            },\n            \"id\": \"656ea4863fd62\",\n            \"image\": \"1ee21aeb-d2bc-42c5-800a-5903aa302ca4.webp\",\n            \"social_links\": [\n              {\n                \"icon\": \"fab fa-instagram\",\n                \"link\": \"https://www.instagram.com/\"\n              },\n              {\n                \"icon\": \"fab fa-whatsapp\",\n                \"link\": \"https://www.whatsapp.com/\"\n              },\n              {\n                \"icon\": \"fab fa-facebook-f\",\n                \"link\": \"https://www.facebook.com/\"\n              }\n            ]\n          },\n          \"656eb9b9c095e\": {\n            \"language\": {\n              \"en\": {\n                \"name\": \"Andre Walker\",\n                \"team_title\": \"Landscaper\"\n              },\n              \"es\": {\n                \"name\": \"André Walker\",\n                \"team_title\": \"Paisajista\"\n              },\n              \"ar\": {\n                \"name\": \"أندريه ووكر\",\n                \"team_title\": \"تنسيق الحدائق\"\n              },\n              \"fr\": {\n                \"name\": \"André Walker\",\n                \"team_title\": \"Paysagiste\"\n              },\n              \"hi\": {\n                \"name\": \"आंद्रे वॉकर\",\n                \"team_title\": \"भूदृश्य का चित्रण\"\n              }\n            },\n            \"id\": \"656eb9b9c095e\",\n            \"image\": \"dcd64860-e54b-482f-8974-3423b2158f75.webp\",\n            \"social_links\": [\n              {\n                \"icon\": \"fab fa-facebook-f\",\n                \"link\": \"https://www.facebook.com/\"\n              },\n              {\n                \"icon\": \"fab fa-instagram\",\n                \"link\": \"https://www.instagram.com/\"\n              },\n              {\n                \"icon\": \"fab fa-whatsapp\",\n                \"link\": \"https://www.whatsapp.com/\"\n              }\n            ]\n          },\n          \"65b3567dac529\": {\n            \"language\": {\n              \"en\": {\n                \"name\": \"Sophia Chang\",\n                \"team_title\": \"Beauty & Wellness Expert\"\n              },\n              \"es\": {\n                \"name\": \"Sofía Chang\",\n                \"team_title\": \"Experto en belleza y bienestar\"\n              },\n              \"ar\": {\n                \"name\": \"صوفيا تشانغ\",\n                \"team_title\": \"خبير الجمال والعافية\"\n              },\n              \"fr\": {\n                \"name\": \"Sophie Chang\",\n                \"team_title\": \"Experte Beauté & Bien-être\"\n              },\n              \"hi\": {\n                \"name\": \"सोफिया चांग\",\n                \"team_title\": \"सौंदर्य एवं कल्याण विशेषज्ञ\"\n              }\n            },\n            \"id\": \"65b3567dac529\",\n            \"image\": \"1c90f540-fe22-404e-a0df-1b92696b5e87.webp\",\n            \"social_links\": [\n              {\n                \"icon\": \"fab fa-instagram\",\n                \"link\": \"https://www.instagram.com/\"\n              },\n              {\n                \"icon\": \"fab fa-whatsapp\",\n                \"link\": \"https://www.whatsapp.com/\"\n              },\n              {\n                \"icon\": \"fab fa-facebook-f\",\n                \"link\": \"https://www.facebook.com/\"\n              }\n            ]\n          },\n          \"65b3573b85043\": {\n            \"language\": {\n              \"en\": {\n                \"name\": \"Miguel Hernandez\",\n                \"team_title\": \"Delivery Specialist\"\n              },\n              \"es\": {\n                \"name\": \"miguel hernandez\",\n                \"team_title\": \"Especialista en entregas\"\n              },\n              \"ar\": {\n                \"name\": \"ميغيل هيرنانديز\",\n                \"team_title\": \"أخصائي التوصيل\"\n              },\n              \"fr\": {\n                \"name\": \"Miguel Hernández\",\n                \"team_title\": \"Spécialiste de la livraison\"\n              },\n              \"hi\": {\n                \"name\": \"मिगुएल हर्नांडेज़\",\n                \"team_title\": \"वितरण विशेषज्ञ\"\n              }\n            },\n            \"id\": \"65b3573b85043\",\n            \"image\": \"3830f73d-9c38-47da-98be-7a4a4a9569f6.webp\",\n            \"social_links\": [\n              {\n                \"icon\": \"fab fa-instagram\",\n                \"link\": \"https://www.instagram.com/\"\n              },\n              {\n                \"icon\": \"fab fa-whatsapp\",\n                \"link\": \"https://www.whatsapp.com/\"\n              },\n              {\n                \"icon\": \"fab fa-facebook-f\",\n                \"link\": \"https://www.facebook.com/\"\n              }\n            ]\n          },\n          \"65b357f5c5f97\": {\n            \"language\": {\n              \"en\": {\n                \"name\": \"Olivia Bennett\",\n                \"team_title\": \"Event Planner\"\n              },\n              \"es\": {\n                \"name\": \"Olivia Bennet\",\n                \"team_title\": \"Planificador de eventos\"\n              },\n              \"ar\": {\n                \"name\": \"أوليفيا بينيت\",\n                \"team_title\": \"مخطط الحدث\"\n              },\n              \"fr\": {\n                \"name\": \"Olivia Bennett\",\n                \"team_title\": \"Planificateur d'événements\"\n              },\n              \"hi\": {\n                \"name\": \"ओलिविया बेनेट\",\n                \"team_title\": \"घटना योजनाकार\"\n              }\n            },\n            \"id\": \"65b357f5c5f97\",\n            \"image\": \"e88621b1-2135-4a4d-9cb4-6853e391ae06.webp\",\n            \"social_links\": [\n              {\n                \"icon\": \"fab fa-instagram\",\n                \"link\": \"https://www.instagram.com/\"\n              },\n              {\n                \"icon\": \"fab fa-whatsapp\",\n                \"link\": \"https://www.whatsapp.com/\"\n              },\n              {\n                \"icon\": \"fab fa-facebook-f\",\n                \"link\": \"https://www.facebook.com/\"\n              }\n            ]\n          }\n        }\n      },\n      \"status\": 1,\n      \"serialize\": null,\n      \"created_at\": \"2023-12-04T03:30:57.000000Z\",\n      \"updated_at\": \"2024-03-01T14:17:39.000000Z\"\n    },\n    \"itemsData\": [\n      {\n        \"name\": \"Carlos Mendez\",\n        \"team_title\": \"Electrician\",\n        \"image\": \"727c4a10-29b0-45f7-8a71-11b454a5a0c0.webp\"\n      },\n      {\n        \"name\": \"Maria Lopez\",\n        \"team_title\": \"Plomero\",\n        \"image\": \"1a58d7d5-3a60-418e-90ab-b90af083768d.webp\"\n      },\n      {\n        \"name\": \"David Turner\",\n        \"team_title\": \"Mechanic\",\n        \"image\": \"1796b1b1-c234-46a4-b6c0-2e05f7641774.webp\"\n      },\n      {\n        \"name\": \"Elena Rodriguez\",\n        \"team_title\": \"Cleaning Specialist\",\n        \"image\": \"1ee21aeb-d2bc-42c5-800a-5903aa302ca4.webp\"\n      },\n      {\n        \"name\": \"Andre Walker\",\n        \"team_title\": \"Landscaper\",\n        \"image\": \"dcd64860-e54b-482f-8974-3423b2158f75.webp\"\n      },\n      {\n        \"name\": \"Sophia Chang\",\n        \"team_title\": \"Beauty & Wellness Expert\",\n        \"image\": \"1c90f540-fe22-404e-a0df-1b92696b5e87.webp\"\n      },\n      {\n        \"name\": \"Miguel Hernandez\",\n        \"team_title\": \"Delivery Specialist\",\n        \"image\": \"3830f73d-9c38-47da-98be-7a4a4a9569f6.webp\"\n      },\n      {\n        \"name\": \"Olivia Bennett\",\n        \"team_title\": \"Event Planner\",\n        \"image\": \"e88621b1-2135-4a4d-9cb4-6853e391ae06.webp\"\n      }\n    ],\n    \"announcements\": [\n      {\n        \"id\": 6,\n        \"name\": {\n          \"language\": {\n            \"en\": {\n              \"name\": \"Community Connections: The Handiman Lifestyle\"\n            },\n            \"es\": {\n              \"name\": \"Conexiones comunitarias: el estilo de vida Handiman\"\n            },\n            \"ar\": {\n              \"name\": \"اتصالات المجتمع: أسلوب حياة العامل الماهر\"\n            },\n            \"fr\": {\n              \"name\": \"Connexions communautaires : le style de vie Handiman\"\n            },\n            \"hi\": {\n              \"name\": \"सामुदायिक कनेक्शन: द हेंडीमैन लाइफस्टाइल\"\n            }\n          }\n        },\n        \"slug\": \"community-connections-the-handiman-lifestyle\",\n        \"details\": {\n          \"language\": {\n            \"en\": {\n              \"details\": \"<p>At Handiman, it’s more than just services – it’s a lifestyle! Join us as we explore the sense of community and connection that defines the Handiman experience. From user testimonials to vendor success stories, discover how Handiman is creating a thriving community where convenience, innovation, and exceptional experiences come together</p>\"\n            },\n            \"es\": {\n              \"details\": \"<p>En Handiman, es más que solo servicios: ¡es un estilo de vida! Únase a nosotros mientras exploramos el sentido de comunidad y conexión que define la experiencia Handiman. Desde testimonios de usuarios hasta historias de éxito de proveedores, descubra cómo Handiman está creando una comunidad próspera donde se unen la comodidad, la innovación y las experiencias excepcionales</p>\"\n            },\n            \"ar\": {\n              \"details\": \"<p>في هانديمان، الأمر أكثر من مجرد خدمات - إنه أسلوب حياة! انضم إلينا ونحن نستكشف الشعور بالمجتمع والتواصل الذي يحدد تجربة هانديمان. من شهادات المستخدمين إلى قصص نجاح البائعين، اكتشف كيف تقوم شركة Handiman بإنشاء مجتمع مزدهر حيث تجتمع الراحة والابتكار والتجارب الاستثنائية معًا</p>\"\n            },\n            \"fr\": {\n              \"details\": \"<p>Chez Handiman, ce n'est pas que des services, c'est un style de vie ! Rejoignez-nous pour explorer le sentiment de communauté et de connexion qui définit l'expérience Handiman. Des témoignages d'utilisateurs aux histoires de réussite de fournisseurs, découvrez comment Handiman crée une communauté florissante où se rencontrent commodité, innovation et expériences exceptionnelles.</p>\"\n            },\n            \"hi\": {\n              \"details\": \"<p>हैंडीमैन में, यह केवल सेवाओं से कहीं अधिक है - यह एक जीवन शैली है! हमसे जुड़ें क्योंकि हम समुदाय और कनेक्शन की भावना का पता लगाते हैं जो हेंडीमैन अनुभव को परिभाषित करता है। उपयोगकर्ता प्रशंसापत्र से लेकर विक्रेता की सफलता की कहानियों तक, जानें कि कैसे हैंडीमैन एक संपन्न समुदाय बना रहा है जहां सुविधा, नवीनता और असाधारण अनुभव एक साथ आते हैं</p>\"\n            }\n          }\n        },\n        \"tags\": [\n          \"HandimanCommunity\",\n          \"CommunityConnections\",\n          \"UserTestimonials\"\n        ],\n        \"image\": \"64b03829-0a65-448c-b5fd-d9a9111c13fc.webp\",\n        \"created_at\": \"2024-02-28T07:09:04.000000Z\",\n        \"updated_at\": \"2024-02-28T07:09:04.000000Z\"\n      },\n      {\n        \"id\": 5,\n        \"name\": {\n          \"language\": {\n            \"en\": {\n              \"name\": \"Innovation on a Budget: Handiman’s Pricing Philosophy\"\n            },\n            \"es\": {\n              \"name\": \"Innovación con un presupuesto limitado: la filosofía de fijación de precios de Handiman\"\n            },\n            \"ar\": {\n              \"name\": \"الابتكار على الميزانية: فلسفة التسعير لدى هاندمان\"\n            },\n            \"fr\": {\n              \"name\": \"Innover à moindre coût : la philosophie de tarification de Handiman\"\n            },\n            \"hi\": {\n              \"name\": \"बजट पर नवाचार: हैंडीमैन का मूल्य निर्धारण दर्शन\"\n            }\n          }\n        },\n        \"slug\": \"innovation-on-a-budget-handimans-pricing-philosophy\",\n        \"details\": {\n          \"language\": {\n            \"en\": {\n              \"details\": \"<p>Curious about how Handiman offers top-notch services without breaking the bank? Explore our pricing philosophy in this blog, where transparency and affordability take center stage. Learn how Handiman prioritizes budget-friendly solutions while maintaining high-quality service standards, making it the perfect choice for users and vendors</p>\"\n            },\n            \"es\": {\n              \"details\": \"<p>¿Tiene curiosidad por saber cómo Handiman ofrece servicios de primer nivel sin gastar mucho dinero? Explore nuestra filosofía de precios en este blog, donde la transparencia y la asequibilidad ocupan un lugar central. Descubra cómo Handiman prioriza las soluciones económicas y al mismo tiempo mantiene estándares de servicio de alta calidad, lo que lo convierte en la opción perfecta para usuarios y proveedores.</p>\"\n            },\n            \"ar\": {\n              \"details\": \"<p>هل لديك فضول لمعرفة كيفية تقديم شركة Handiman لخدمات رفيعة المستوى دون إنفاق مبالغ مالية كبيرة؟ استكشف فلسفة التسعير الخاصة بنا في هذه المدونة، حيث تحتل الشفافية والقدرة على تحمل التكاليف مركز الصدارة. تعرف على كيفية قيام شركة Handiman بإعطاء الأولوية للحلول الصديقة للميزانية مع الحفاظ على معايير الخدمة عالية الجودة، مما يجعلها الخيار الأمثل للمستخدمين والبائعين</p>\"\n            },\n            \"fr\": {\n              \"details\": \"<p>Curieuse de savoir comment Handiman propose des services de premier ordre sans vous ruiner ? Découvrez notre philosophie de tarification dans ce blog, où la transparence et l'abordabilité occupent une place centrale. Découvrez comment Handiman donne la priorité aux solutions économiques tout en maintenant des normes de service de haute qualité, ce qui en fait le choix idéal pour les utilisateurs et les fournisseurs.</p>\"\n            },\n            \"hi\": {\n              \"details\": \"<p>क्या आप जानना चाहते हैं कि कैसे हैंडीमैन बैंक को नुकसान पहुंचाए बिना शीर्ष पायदान की सेवाएं प्रदान करता है? इस ब्लॉग में हमारे मूल्य निर्धारण दर्शन का अन्वेषण करें, जहां पारदर्शिता और सामर्थ्य केंद्र स्तर पर हैं। जानें कि कैसे हैंडीमैन उच्च गुणवत्ता वाले सेवा मानकों को बनाए रखते हुए बजट-अनुकूल समाधानों को प्राथमिकता देता है, जिससे यह उपयोगकर्ताओं और विक्रेताओं के लिए सही विकल्प बन जाता है</p>\"\n            }\n          }\n        },\n        \"tags\": [\n          \"PricingPhilosophy\",\n          \"AffordableServices\",\n          \"InnovativePricing\"\n        ],\n        \"image\": \"89f9323b-4732-4a4b-8f97-582bac2ca828.webp\",\n        \"created_at\": \"2024-01-26T05:23:11.000000Z\",\n        \"updated_at\": \"2024-01-26T05:23:12.000000Z\"\n      },\n      {\n        \"id\": 4,\n        \"name\": {\n          \"language\": {\n            \"en\": {\n              \"name\": \"Revolutionizing On-Demand: The Handiman Advantage\"\n            },\n            \"es\": {\n              \"name\": \"Revolucionando el servicio bajo demanda: la ventaja de Handiman\"\n            },\n            \"ar\": {\n              \"name\": \"إحداث ثورة عند الطلب: ميزة العامل الماهر\"\n            },\n            \"fr\": {\n              \"name\": \"Révolutionner le service à la demande : l'avantage Handiman\"\n            },\n            \"hi\": {\n              \"name\": \"ऑन-डिमांड में क्रांति लाना: हेंडीमैन एडवांटेज\"\n            }\n          }\n        },\n        \"slug\": \"revolutionizing-on-demand-the-handiman-advantage\",\n        \"details\": {\n          \"language\": {\n            \"en\": {\n              \"details\": \"<p>Discover a new era of on-demand services with Handiman! In this blog, we delve into the innovative features that set Handiman apart. From its user-friendly interface to dedicated teams ensuring top-notch service, explore how Handiman is revolutionizing the way users connect with skilled service providers. Join us on a journey where simplicity meets excellence, making your on-demand service experience extraordinary</p>\"\n            },\n            \"es\": {\n              \"details\": \"<p>¡Descubra una nueva era de servicios bajo demanda con Handiman! En este blog, profundizamos en las características innovadoras que distinguen a Handiman. Desde su interfaz fácil de usar hasta equipos dedicados que garantizan un servicio de primer nivel, explore cómo Handiman está revolucionando la forma en que los usuarios se conectan con proveedores de servicios calificados. Únase a nosotros en un viaje donde la simplicidad se une a la excelencia, haciendo que su experiencia de servicio bajo demanda sea extraordinaria</p>\"\n            },\n            \"ar\": {\n              \"details\": \"<p>اكتشف عصرًا جديدًا من الخدمات حسب الطلب مع Handiman! في هذه المدونة، نتعمق في الميزات المبتكرة التي تميز شركة Handiman. بدءًا من واجهته سهلة الاستخدام ووصولاً إلى الفرق المخصصة التي تضمن تقديم خدمة من الدرجة الأولى، اكتشف كيف تُحدث Handiman ثورة في طريقة تواصل المستخدمين مع مقدمي الخدمات المهرة. انضم إلينا في رحلة حيث تجتمع البساطة مع التميز، مما يجعل تجربة الخدمة عند الطلب غير عادية</p>\"\n            },\n            \"fr\": {\n              \"details\": \"<p>Découvrez une nouvelle ère de services à la demande avec Handiman ! Dans ce blog, nous explorons les fonctionnalités innovantes qui distinguent Handiman. De son interface conviviale à ses équipes dédiées garantissant un service de premier ordre, découvrez comment Handiman révolutionne la façon dont les utilisateurs se connectent avec des prestataires de services qualifiés. Rejoignez-nous dans un voyage où la simplicité rencontre l'excellence, rendant votre expérience de service à la demande extraordinaire.</p>\"\n            },\n            \"hi\": {\n              \"details\": \"<p>हैंडीमैन के साथ ऑन-डिमांड सेवाओं के एक नए युग की खोज करें! इस ब्लॉग में, हम उन नवोन्मेषी विशेषताओं पर प्रकाश डालते हैं जो हैंडीमैन को अलग बनाती हैं। अपने उपयोगकर्ता-अनुकूल इंटरफेस से लेकर शीर्ष स्तर की सेवा सुनिश्चित करने वाली समर्पित टीमों तक, पता लगाएं कि कैसे हैंडीमैन उपयोगकर्ताओं के कुशल सेवा प्रदाताओं के साथ जुड़ने के तरीके में क्रांति ला रहा है। हमारे साथ उस यात्रा में शामिल हों जहां सादगी उत्कृष्टता से मिलती है, जिससे आपकी ऑन-डिमांड सेवा का अनुभव असाधारण हो जाता है</p>\"\n            }\n          }\n        },\n        \"tags\": [\n          \"OnDemandServices\",\n          \"HandimanAdvantage\",\n          \"InnovationInServices\"\n        ],\n        \"image\": \"3636c172-7e50-4250-93ba-cd4962d3564d.webp\",\n        \"created_at\": \"2024-02-28T07:20:05.000000Z\",\n        \"updated_at\": \"2024-02-28T07:20:05.000000Z\"\n      },\n      {\n        \"id\": 3,\n        \"name\": {\n          \"language\": {\n            \"en\": {\n              \"name\": \"Behind the Scenes: Meet the Faces of Handiman\"\n            },\n            \"es\": {\n              \"name\": \"Detrás de escena: conozca las caras de Handiman\"\n            },\n            \"ar\": {\n              \"name\": \"خلف الكواليس: تعرف على وجوه هاندمان\"\n            },\n            \"fr\": {\n              \"name\": \"Dans les coulisses : rencontrez les visages de Handiman\"\n            },\n            \"hi\": {\n              \"name\": \"पर्दे के पीछे: हेंडीमैन के चेहरों से मिलें\"\n            }\n          }\n        },\n        \"slug\": \"behind-the-scenes-meet-the-faces-of-handiman\",\n        \"details\": {\n          \"language\": {\n            \"en\": {\n              \"details\": \"<p>Get to know the dedicated minds shaping your Handiman experience! In this blog, we introduce you to the brilliant team behind the scenes. From our visionary founder to the tech whiz ensuring seamless functionality, meet the people who are passionate about transforming ordinary tasks into extraordinary accomplishments. Learn about their roles, aspirations, and commitment to making Handiman the go-to platform for on-demand services.</p>\"\n            },\n            \"es\": {\n              \"details\": \"<p>¡Conozca las mentes dedicadas que dan forma a su experiencia Handiman! En este blog, le presentamos al brillante equipo detrás de escena. Desde nuestro visionario fundador hasta el genio de la tecnología que garantiza una funcionalidad perfecta, conozca a las personas apasionadas por transformar tareas ordinarias en logros extraordinarios. Conozca sus funciones, aspiraciones y compromiso para hacer de Handiman la plataforma de referencia para servicios bajo demanda.</p>\"\n            },\n            \"ar\": {\n              \"details\": \"<p>تعرف على العقول المتفانية التي تشكل تجربة هانديمان الخاصة بك! في هذه المدونة نقدم لكم الفريق الرائع خلف الكواليس. من مؤسسنا صاحب الرؤية إلى خبير التكنولوجيا الذي يضمن الأداء السلس، تعرف على الأشخاص المتحمسين لتحويل المهام العادية إلى إنجازات غير عادية. تعرف على أدوارهم وتطلعاتهم والتزامهم بجعل Handiman المنصة المفضلة للخدمات حسب الطلب.</p>\"\n            },\n            \"fr\": {\n              \"details\": \"<p>Découvrez les esprits dévoués qui façonnent votre expérience Handiman ! Dans ce blog, nous vous présentons la brillante équipe en coulisses. De notre fondateur visionnaire au génie de la technologie assurant une fonctionnalité transparente, rencontrez des personnes passionnées par la transformation de tâches ordinaires en réalisations extraordinaires. Découvrez leurs rôles, leurs aspirations et leur engagement à faire de Handiman la plateforme incontournable pour les services à la demande.</p>\"\n            },\n            \"hi\": {\n              \"details\": \"<p>अपने हैंडीमैन अनुभव को आकार देने वाले समर्पित दिमागों को जानें! इस ब्लॉग में हम आपको पर्दे के पीछे की शानदार टीम से परिचित कराते हैं। हमारे दूरदर्शी संस्थापक से लेकर निर्बाध कार्यक्षमता सुनिश्चित करने वाले तकनीकी विशेषज्ञ तक, उन लोगों से मिलें जो सामान्य कार्यों को असाधारण उपलब्धियों में बदलने का शौक रखते हैं। हैंडीमैन को ऑन-डिमांड सेवाओं के लिए पसंदीदा मंच बनाने में उनकी भूमिकाओं, आकांक्षाओं और प्रतिबद्धता के बारे में जानें।</p>\"\n            }\n          }\n        },\n        \"tags\": [\n          \"MeetTheTeam\",\n          \"HandimanCulture\",\n          \"BehindTheScenes\"\n        ],\n        \"image\": \"f0b98d24-bf19-4589-9bc7-c80efefdd958.webp\",\n        \"created_at\": \"2024-02-28T07:25:47.000000Z\",\n        \"updated_at\": \"2024-02-28T07:25:48.000000Z\"\n      },\n      {\n        \"id\": 2,\n        \"name\": {\n          \"language\": {\n            \"en\": {\n              \"name\": \"Navigating the Handiman Universe: A User’s Guide\"\n            },\n            \"es\": {\n              \"name\": \"Navegando por el universo Handiman: una guía del usuario\"\n            },\n            \"ar\": {\n              \"name\": \"التنقل في عالم هانديمان: دليل المستخدم\"\n            },\n            \"fr\": {\n              \"name\": \"Naviguer dans l’univers Handiman : un guide de l’utilisateur\"\n            },\n            \"hi\": {\n              \"name\": \"हेंडीमैन यूनिवर्स को नेविगेट करना: एक उपयोगकर्ता की मार्गदर्शिका\"\n            }\n          }\n        },\n        \"slug\": \"navigating-the-handiman-universe-a-users-guide\",\n        \"details\": {\n          \"language\": {\n            \"en\": {\n              \"details\": \"<p>Embark on a journey through the Handiman universe! This blog serves as your guide to navigating the platform effortlessly. From signing up to placing orders and connecting with vendors, we provide a step-by-step walkthrough of how users can make the most out of Handiman’s user-friendly interface. Discover the simplicity and convenience that await you on this on-demand service adventure</p>\"\n            },\n            \"es\": {\n              \"details\": \"<p>¡Embárcate en un viaje por el universo Handiman! Este blog le sirve como guía para navegar por la plataforma sin esfuerzo. Desde registrarse hasta realizar pedidos y conectarse con proveedores, proporcionamos un tutorial paso a paso sobre cómo los usuarios pueden aprovechar al máximo la interfaz fácil de usar de Handiman. Descubra la simplicidad y conveniencia que le esperan en esta aventura de servicio bajo demanda</p>\"\n            },\n            \"ar\": {\n              \"details\": \"<p>انطلق في رحلة عبر عالم هانديمان! تعد هذه المدونة بمثابة دليلك للتنقل في النظام الأساسي دون عناء. بدءًا من التسجيل وحتى تقديم الطلبات والتواصل مع البائعين، نقدم إرشادات خطوة بخطوة حول كيفية قيام المستخدمين بتحقيق أقصى استفادة من واجهة Handiman سهلة الاستخدام. اكتشف البساطة والراحة التي تنتظرك في مغامرة الخدمة عند الطلب هذه</p>\"\n            },\n            \"fr\": {\n              \"details\": \"<p>Embarquez pour un voyage à travers l'univers Handiman ! Ce blog vous sert de guide pour naviguer sans effort sur la plateforme. De l’inscription à la passation de commandes et à la connexion avec les fournisseurs, nous expliquons étape par étape comment les utilisateurs peuvent tirer le meilleur parti de l’interface conviviale de Handiman. Découvrez la simplicité et la commodité qui vous attendent dans cette aventure de service à la demande</p>\"\n            },\n            \"hi\": {\n              \"details\": \"<p>हैंडीमैन ब्रह्मांड की यात्रा पर निकलें! यह ब्लॉग प्लेटफ़ॉर्म पर सहजता से नेविगेट करने के लिए आपके मार्गदर्शक के रूप में कार्य करता है। साइन अप करने से लेकर ऑर्डर देने और विक्रेताओं के साथ जुड़ने तक, हम चरण-दर-चरण पूर्वाभ्यास प्रदान करते हैं कि उपयोगकर्ता हैंडीमैन के उपयोगकर्ता-अनुकूल इंटरफेस का अधिकतम लाभ कैसे उठा सकते हैं। उस सरलता और सुविधा की खोज करें जो इस ऑन-डिमांड सेवा साहसिक कार्य में आपकी प्रतीक्षा कर रही है</p>\"\n            }\n          }\n        },\n        \"tags\": [\n          \"UserGuide\",\n          \"HandimanPlatform\",\n          \"OnDemandNavigation\"\n        ],\n        \"image\": \"ee4fcfa2-eb23-45ee-96aa-252a747ec018.webp\",\n        \"created_at\": \"2024-02-28T07:28:11.000000Z\",\n        \"updated_at\": \"2024-02-28T07:28:11.000000Z\"\n      },\n      {\n        \"id\": 1,\n        \"name\": {\n          \"language\": {\n            \"en\": {\n              \"name\": \"Vendor Spotlight: The Heart of Handiman\"\n            },\n            \"es\": {\n              \"name\": \"Proveedor destacado: el corazón de Handiman\"\n            },\n            \"ar\": {\n              \"name\": \"أضواء كاشفة على البائع: قلب العامل الماهر\"\n            },\n            \"fr\": {\n              \"name\": \"Pleins feux sur les fournisseurs : Le cœur de Handiman\"\n            },\n            \"hi\": {\n              \"name\": \"विक्रेता स्पॉटलाइट: द हार्ट ऑफ़ हेंडीमैन\"\n            }\n          }\n        },\n        \"slug\": \"vendor-spotlight-the-heart-of-handiman\",\n        \"details\": {\n          \"language\": {\n            \"en\": {\n              \"details\": \"<p>Dive into the world of Handiman vendors in this spotlight feature! Meet the skilled professionals who bring their expertise to the platform, from electricians and plumbers to event planners and beauty specialists. Learn about their experiences, their services, and how Handiman empowers them to showcase their skills while providing exceptional service to users</p>\"\n            },\n            \"es\": {\n              \"details\": \"<p>¡Sumérgete en el mundo de los proveedores de Handiman en esta función destacada! Conozca a los profesionales cualificados que aportan su experiencia a la plataforma, desde electricistas y fontaneros hasta planificadores de eventos y especialistas en belleza. Conozca sus experiencias, sus servicios y cómo Handiman les permite mostrar sus habilidades mientras brindan un servicio excepcional a los usuarios</p>\"\n            },\n            \"ar\": {\n              \"details\": \"<p>انغمس في عالم بائعي Handiman في هذه الميزة المميزة! تعرف على المهنيين المهرة الذين يجلبون خبراتهم إلى المنصة، من الكهربائيين والسباكين إلى مخططي الأحداث والمتخصصين في التجميل. تعرف على تجاربهم وخدماتهم وكيف تمكنهم شركة Handiman من عرض مهاراتهم مع تقديم خدمة استثنائية للمستخدمين</p>\"\n            },\n            \"fr\": {\n              \"details\": \"<p>Plongez dans le monde des vendeurs Handiman dans cette fonctionnalité phare ! Rencontrez les professionnels qualifiés qui apportent leur expertise à la plateforme, des électriciens et plombiers aux organisateurs d'événements et spécialistes de la beauté. Découvrez leurs expériences, leurs services et comment Handiman leur permet de mettre en valeur leurs compétences tout en fournissant un service exceptionnel aux utilisateurs.</p>\"\n            },\n            \"hi\": {\n              \"details\": \"<p>इस स्पॉटलाइट फीचर में हैंडीमैन विक्रेताओं की दुनिया में गोता लगाएँ! उन कुशल पेशेवरों से मिलें जो इलेक्ट्रीशियन और प्लंबर से लेकर इवेंट प्लानर और सौंदर्य विशेषज्ञों तक अपनी विशेषज्ञता मंच पर लाते हैं। उनके अनुभवों, उनकी सेवाओं के बारे में जानें और कैसे हैंडीमैन उन्हें उपयोगकर्ताओं को असाधारण सेवा प्रदान करते हुए अपने कौशल का प्रदर्शन करने के लिए सशक्त बनाता है</p>\"\n            }\n          }\n        },\n        \"tags\": [\n          \"VendorSpotlight\",\n          \"ServiceProfessionals\",\n          \"HandimanVendors\"\n        ],\n        \"image\": \"12c3b885-5caa-4fda-8fdd-4a7a054cac07.webp\",\n        \"created_at\": \"2024-01-26T05:15:13.000000Z\",\n        \"updated_at\": \"2024-01-26T05:15:13.000000Z\"\n      }\n    ]\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Subscribe",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Md. Mehedi",
+                      "type": "text",
+                      "description": "required|string|max:255"
+                    },
+                    {
+                      "key": "email",
+                      "value": "mehedi@appdevs.team",
+                      "type": "text",
+                      "description": "required|string|email|max:255|unique"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/web/subscribe?lang=en",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "web",
+                    "subscribe"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Error Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": []
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/web/contact/message/submit?lang=en",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "web",
+                        "contact",
+                        "message",
+                        "submit"
+                      ],
+                      "query": [
+                        {
+                          "key": "lang",
+                          "value": "en"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": "422"
+                    },
+                    {
+                      "key": "server",
+                      "value": "nginx/1.25.4"
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "x-powered-by",
+                      "value": "PHP/8.2.33"
+                    },
+                    {
+                      "key": "cache-control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Mon, 19 Oct 2026 04:50:33 GMT"
+                    },
+                    {
+                      "key": "x-ratelimit-limit",
+                      "value": "60"
+                    },
+                    {
+                      "key": "x-ratelimit-remaining",
+                      "value": "59"
+                    },
+                    {
+                      "key": "phpdebugbar-id",
+                      "value": "01M597YGCDKF6VFZX65625B5ZP"
+                    },
+                    {
+                      "key": "access-control-allow-origin",
+                      "value": "*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"message\": {\n    \"error\": [\n      [\n        \"The first name field is required.\",\n        \"The last name field is required.\",\n        \"The email field is required.\",\n        \"The message field is required.\"\n      ]\n    ]\n  }\n}"
+                },
+                {
+                  "name": "Success Message",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "first_name",
+                          "value": "Md. Mehedi",
+                          "type": "text"
+                        },
+                        {
+                          "key": "last_name",
+                          "value": "Hasan",
+                          "type": "text"
+                        },
+                        {
+                          "key": "email",
+                          "value": "mehedi@appdevs.team",
+                          "type": "text"
+                        },
+                        {
+                          "key": "message",
+                          "value": "Hello Admin",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/web/contact/message/submit?lang=en",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "web",
+                        "contact",
+                        "message",
+                        "submit"
+                      ],
+                      "query": [
+                        {
+                          "key": "lang",
+                          "value": "en"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": "200"
+                    },
+                    {
+                      "key": "server",
+                      "value": "nginx/1.25.4"
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "vary",
+                      "value": "Accept-Encoding"
+                    },
+                    {
+                      "key": "x-powered-by",
+                      "value": "PHP/8.2.33"
+                    },
+                    {
+                      "key": "cache-control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Mon, 19 Oct 2026 04:52:44 GMT"
+                    },
+                    {
+                      "key": "x-ratelimit-limit",
+                      "value": "60"
+                    },
+                    {
+                      "key": "x-ratelimit-remaining",
+                      "value": "58"
+                    },
+                    {
+                      "key": "phpdebugbar-id",
+                      "value": "01M5982G4P7WM21CQGRHS3Z6AM"
+                    },
+                    {
+                      "key": "access-control-allow-origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "content-encoding",
+                      "value": "gzip"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"message\": {\n    \"success\": [\n      \"Message send successfully!\"\n    ]\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Contact Submit",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "first_name",
+                      "value": "Md. Mehedi",
+                      "type": "text",
+                      "description": "required|string|max:255"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Hasan",
+                      "type": "text",
+                      "description": "required|string|max:255"
+                    },
+                    {
+                      "key": "email",
+                      "value": "mehedi@appdevs.team",
+                      "type": "text",
+                      "description": "required|email|string|max:255"
+                    },
+                    {
+                      "key": "message",
+                      "value": "Hello Admin",
+                      "type": "text",
+                      "description": "required|string|max:5000"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/web/contact/message/submit?lang=en",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "web",
+                    "contact",
+                    "message",
+                    "submit"
+                  ],
+                  "query": [
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Error Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": []
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/web/contact/message/submit?lang=en",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "web",
+                        "contact",
+                        "message",
+                        "submit"
+                      ],
+                      "query": [
+                        {
+                          "key": "lang",
+                          "value": "en"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": "422"
+                    },
+                    {
+                      "key": "server",
+                      "value": "nginx/1.25.4"
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "x-powered-by",
+                      "value": "PHP/8.2.33"
+                    },
+                    {
+                      "key": "cache-control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Mon, 19 Oct 2026 04:50:33 GMT"
+                    },
+                    {
+                      "key": "x-ratelimit-limit",
+                      "value": "60"
+                    },
+                    {
+                      "key": "x-ratelimit-remaining",
+                      "value": "59"
+                    },
+                    {
+                      "key": "phpdebugbar-id",
+                      "value": "01M597YGCDKF6VFZX65625B5ZP"
+                    },
+                    {
+                      "key": "access-control-allow-origin",
+                      "value": "*"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"message\": {\n    \"error\": [\n      [\n        \"The first name field is required.\",\n        \"The last name field is required.\",\n        \"The email field is required.\",\n        \"The message field is required.\"\n      ]\n    ]\n  }\n}"
+                },
+                {
+                  "name": "Success Message",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "first_name",
+                          "value": "Md. Mehedi",
+                          "type": "text"
+                        },
+                        {
+                          "key": "last_name",
+                          "value": "Hasan",
+                          "type": "text"
+                        },
+                        {
+                          "key": "email",
+                          "value": "mehedi@appdevs.team",
+                          "type": "text"
+                        },
+                        {
+                          "key": "message",
+                          "value": "Hello Admin",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/web/contact/message/submit?lang=en",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "web",
+                        "contact",
+                        "message",
+                        "submit"
+                      ],
+                      "query": [
+                        {
+                          "key": "lang",
+                          "value": "en"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": "200"
+                    },
+                    {
+                      "key": "server",
+                      "value": "nginx/1.25.4"
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "vary",
+                      "value": "Accept-Encoding"
+                    },
+                    {
+                      "key": "x-powered-by",
+                      "value": "PHP/8.2.33"
+                    },
+                    {
+                      "key": "cache-control",
+                      "value": "no-cache, private"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Mon, 19 Oct 2026 04:52:44 GMT"
+                    },
+                    {
+                      "key": "x-ratelimit-limit",
+                      "value": "60"
+                    },
+                    {
+                      "key": "x-ratelimit-remaining",
+                      "value": "58"
+                    },
+                    {
+                      "key": "phpdebugbar-id",
+                      "value": "01M5982G4P7WM21CQGRHS3Z6AM"
+                    },
+                    {
+                      "key": "access-control-allow-origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "content-encoding",
+                      "value": "gzip"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"message\": {\n    \"success\": [\n      \"Message send successfully!\"\n    ]\n  }\n}"
                 }
               ]
             }
@@ -1366,12 +1880,11 @@
                         }
                       ]
                     },
-                    "method": "GET",
+                    "method": "POST",
                     "header": [
                       {
                         "key": "Accept",
-                        "value": "application/json",
-                        "type": "text"
+                        "value": "application/json"
                       }
                     ],
                     "url": {
@@ -1389,7 +1902,7 @@
                     {
                       "name": "Success Response",
                       "originalRequest": {
-                        "method": "GET",
+                        "method": "POST",
                         "header": [],
                         "url": {
                           "raw": "[object Object]",
@@ -1403,8 +1916,8 @@
                       "_postman_previewlanguage": "json",
                       "header": [
                         {
-                          "value": "application/json",
-                          "key": "Content-Type"
+                          "key": "Content-Type",
+                          "value": "application/json"
                         }
                       ],
                       "cookie": [],
@@ -1413,7 +1926,7 @@
                     {
                       "name": "Error Response",
                       "originalRequest": {
-                        "method": "GET",
+                        "method": "POST",
                         "header": [],
                         "url": {
                           "raw": "[object Object]",
@@ -1427,8 +1940,8 @@
                       "_postman_previewlanguage": "json",
                       "header": [
                         {
-                          "value": "application/json",
-                          "key": "Content-Type"
+                          "key": "Content-Type",
+                          "value": "application/json"
                         }
                       ],
                       "cookie": [],
@@ -4753,13 +5266,11 @@
                     "header": [
                       {
                         "key": "Accept",
-                        "value": "application/json",
-                        "type": "text"
+                        "value": "application/json"
                       },
                       {
                         "key": "Content-Type",
-                        "value": "application/json",
-                        "type": "text"
+                        "value": "application/json"
                       }
                     ],
                     "body": {
@@ -4768,62 +5279,62 @@
                         {
                           "key": "first_name",
                           "value": "Vendor-Appdevs1",
-                          "description": "required|string|max:60",
-                          "type": "text"
+                          "type": "text",
+                          "description": "required|string|max:60"
                         },
                         {
                           "key": "last_name",
                           "value": "vendor",
-                          "description": "required|string|max:60",
-                          "type": "text"
+                          "type": "text",
+                          "description": "required|string|max:60"
                         },
                         {
                           "key": "image",
-                          "description": "nullable|image|mimes:jpg,png,svg,webp|max:10240",
                           "type": "file",
-                          "src": "/C:/Users/Appdevs/Desktop/handiman/assets/images/user/2.jpg"
+                          "description": "nullable|image|mimes:jpg,png,svg,webp|max:10240",
+                          "src": "/Users/mehedihasan/Downloads/stall-images-png-webp/text-stall.png"
                         },
                         {
                           "key": "phone",
                           "value": "0185555590",
-                          "description": "nullable|string|unique:users,mobile",
-                          "type": "text"
+                          "type": "text",
+                          "description": "nullable|string|unique:users,mobile"
                         },
                         {
                           "key": "phone_code",
                           "value": "+880",
-                          "description": "nullable|string",
-                          "type": "text"
+                          "type": "text",
+                          "description": "nullable|string"
                         },
                         {
                           "key": "country",
                           "value": "Bangladesh",
-                          "description": "nullable|string",
-                          "type": "text"
+                          "type": "text",
+                          "description": "nullable|string"
                         },
                         {
                           "key": "city",
                           "value": "Dhaka",
-                          "description": "nullable|string",
-                          "type": "text"
+                          "type": "text",
+                          "description": "nullable|string"
                         },
                         {
                           "key": "state",
                           "value": "Mirpur 1",
-                          "description": "nullable|string",
-                          "type": "text"
+                          "type": "text",
+                          "description": "nullable|string"
                         },
                         {
                           "key": "zip_code",
                           "value": "1053",
-                          "description": "nullable|string",
-                          "type": "text"
+                          "type": "text",
+                          "description": "nullable|string"
                         },
                         {
                           "key": "address",
                           "value": "Mirpur 1, Dhaka, Bangladesh",
-                          "description": "nullable|string",
-                          "type": "text"
+                          "type": "text",
+                          "description": "nullable|string"
                         }
                       ]
                     },
@@ -7829,21 +8340,16 @@
                 },
                 {
                   "name": "Logout",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
                   "request": {
-                    "method": "GET",
+                    "method": "POST",
                     "header": [
                       {
                         "key": "Accept",
-                        "value": "application/json",
-                        "type": "text"
+                        "value": "application/json"
                       },
                       {
                         "key": "Content-Type",
-                        "value": "application/json",
-                        "type": "text"
+                        "value": "application/json"
                       }
                     ],
                     "body": {
@@ -7871,7 +8377,7 @@
                     {
                       "name": "Error Response",
                       "originalRequest": {
-                        "method": "GET",
+                        "method": "POST",
                         "header": [
                           {
                             "key": "Accept",
@@ -7946,7 +8452,7 @@
                     {
                       "name": "Success Response",
                       "originalRequest": {
-                        "method": "GET",
+                        "method": "POST",
                         "header": [
                           {
                             "key": "Accept",
@@ -9847,25 +10353,19 @@
                       "formdata": [
                         {
                           "key": "first_name",
-                          "value": "Mehedi",
+                          "value": "Test",
                           "type": "text",
                           "description": "required|string|max:60"
                         },
                         {
                           "key": "last_name",
-                          "value": "Hasan",
+                          "value": "User",
                           "type": "text",
                           "description": "required|string|max:60"
                         },
                         {
-                          "key": "image",
-                          "type": "file",
-                          "description": "nullable|image|mimes:jpg,png,svg,webp|max:10240",
-                          "value": null
-                        },
-                        {
                           "key": "phone",
-                          "value": "0185555555",
+                          "value": "0185555551",
                           "type": "text",
                           "description": "nullable|string|unique:users,mobile"
                         },
@@ -9904,6 +10404,12 @@
                           "value": "Mirpur 1, Dhaka, Bangladesh",
                           "type": "text",
                           "description": "nullable|string"
+                        },
+                        {
+                          "key": "image",
+                          "type": "file",
+                          "description": "nullable|image|mimes:jpg,png,svg,webp|max:10240",
+                          "src": "/Users/mehedihasan/Downloads/stall-images-png-webp/tech-stall.png"
                         }
                       ]
                     },
@@ -12559,7 +13065,7 @@
                       "formdata": [
                         {
                           "key": "payment_type",
-                          "value": "online_payment",
+                          "value": "cash_on_delivery",
                           "type": "text",
                           "description": "online_payment,cash_on_delivery,"
                         },
@@ -14041,7 +14547,7 @@
                         },
                         {
                           "key": "identifier",
-                          "value": "PO68292785",
+                          "value": "PO28841291",
                           "type": "text"
                         },
                         {
@@ -15964,14 +16470,18 @@
       "value": ""
     },
     {
-      "key": "json_web_token_17cy"
+      "key": "vendor_base_url",
+      "value": ""
     },
     {
-      "key": "json_web_token_13to"
+      "key": "base_url",
+      "value": "",
+      "disabled": true
     },
     {
       "key": "vendor_base_url",
-      "value": ""
+      "value": "",
+      "disabled": true
     }
   ]
 }

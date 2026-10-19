@@ -1,47 +1,69 @@
 "use client";
 
-import Image from "next/image";
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Clock, Check } from "lucide-react";
+import { ArrowRight, Check, Clock, ImageOff } from "lucide-react";
 import { useLang } from "@/hooks/useLang";
 import { useGsapScope } from "@/hooks/useGsap";
-import { cn } from "@/components/ui/cn";
+import { categoryAnchor, type Catalogue, type CatalogueService } from "@/hooks/useCatalogue";
 import { Eyebrow } from "@/components/share/Eyebrow";
-import {
-  CATALOGUE,
-  CARD_PHOTOS,
-  sectionId,
-  type CatalogueCard,
-} from "@/components/services/servicesData";
+import { money } from "@/lib/money";
+import { SERVICE_ROUTES } from "@/lib/serviceRoutes";
+
+/** How many services a category shows as cards before the full list. */
+const FEATURED = 4;
+
+function Photo({ src }: { src: string }) {
+  const [broken, setBroken] = useState(false);
+  if (!src || broken) {
+    return (
+      <span className="absolute inset-0 flex items-center justify-center bg-brand/12 text-brand">
+        <ImageOff size={34} strokeWidth={1.4} aria-hidden />
+      </span>
+    );
+  }
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- remote storage URL in a static-export app
+    <img
+      src={src}
+      alt=""
+      aria-hidden
+      loading="lazy"
+      decoding="async"
+      onError={() => setBroken(true)}
+      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+    />
+  );
+}
 
 /**
- * One catalogue card — the SAME card as `homepage/CategoryListings`: numbered
- * plum spine with the tag set vertically, art, then title over price and unit.
- * Changing one without the other is how the two pages start to look like two
- * products.
- *
- * The one addition is the art slot. Where `CARD_PHOTOS` has no entry the card
- * shows its own icon on a brand-tinted panel instead of a photo, at the same
- * 1.42 aspect — so a section with no photography yet keeps the grid's rhythm
- * rather than collapsing to a different card height.
+ * One catalogue card - the home page's category-rail card: a numbered plum
+ * spine with the category set vertically, the photo, then the name over the
+ * price and the unit.
  */
-function Card({ card, index }: { card: CatalogueCard; index: number }) {
+function Card({
+  service,
+  index,
+  tag,
+  currency,
+}: {
+  service: CatalogueService;
+  index: number;
+  tag: string;
+  currency: string;
+}) {
   const { t } = useLang();
-  const photo = CARD_PHOTOS[card.key];
-  const Icon = card.icon;
-  const ns = card.copyNs ?? "servicesPage.items";
-
   return (
     <Link
-      href={`/services?service=${card.key}`}
-      className="grid min-w-0 grid-cols-[clamp(34px,3.2vw,42px)_minmax(0,1fr)] border border-border bg-bg transition-[border-color,box-shadow] duration-200 hover:border-primary hover:shadow-[0_30px_56px_-34px_rgba(18,16,15,0.45)]"
+      href={SERVICE_ROUTES.details(service.id)}
+      className="group grid min-w-0 grid-cols-[clamp(34px,3.2vw,42px)_minmax(0,1fr)] border border-border bg-bg transition-[border-color,box-shadow] duration-200 hover:border-primary hover:shadow-[0_30px_56px_-34px_rgba(18,16,15,0.45)]"
     >
       <div className="flex flex-col items-center justify-between bg-primary py-3.5">
         <span className="font-display text-xs font-bold tracking-[0.16em] text-white/70">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <span className="rotate-180 font-display text-[11.5px] font-bold tracking-[0.22em] text-white uppercase [writing-mode:vertical-rl]">
-          {card.tag}
+        <span className="max-h-[120px] truncate rotate-180 font-display text-[11.5px] font-bold tracking-[0.22em] text-white uppercase [writing-mode:vertical-rl]">
+          {tag}
         </span>
         <span className="flex h-[22px] w-[22px] items-center justify-center text-white">
           <ArrowRight size={15} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
@@ -49,58 +71,37 @@ function Card({ card, index }: { card: CatalogueCard; index: number }) {
       </div>
 
       <div className="flex min-w-0 flex-col">
-        {/* `bg-form` only when a photo covers it. It is the home card's
-            placeholder colour and is theme-INVARIANT light by design (form
-            fields must not flip) — fine under a photo that always hides it,
-            a glaring white block behind an icon on the dark page. */}
-        <div className={cn("relative aspect-[1.42] overflow-hidden", photo ? "bg-form" : "bg-surface")}>
-          {photo ? (
-            <Image
-              src={photo}
-              alt=""
-              aria-hidden
-              fill
-              sizes="(max-width: 700px) 100vw, (max-width: 980px) 50vw, 25vw"
-              className="object-cover"
-            />
-          ) : (
-            <span className="absolute inset-0 flex items-center justify-center bg-brand/12 text-brand">
-              <Icon size={40} strokeWidth={1.4} aria-hidden />
+        <div className="relative aspect-[1.42] overflow-hidden bg-surface">
+          <Photo src={service.image} />
+          {service.vendorId > 0 && (
+            <span className="absolute bottom-0 start-0 bg-[rgba(18,16,15,0.86)] px-[11px] py-1.5 font-display text-[11px] font-bold tracking-[0.15em] text-white uppercase">
+              {t("servicesPage.vendor")} {service.vendorId}
             </span>
           )}
-          <span className="absolute bottom-0 left-0 bg-[rgba(18,16,15,0.86)] px-[11px] py-1.5 font-display text-[11px] font-bold tracking-[0.15em] text-white uppercase">
-            {card.vendor}
-          </span>
         </div>
 
-        <div className="flex flex-col gap-3.5 p-[clamp(15px,1.6vw,20px)]">
-          <h3 className="text-[clamp(15.5px,1.5vw,17.5px)] leading-[1.26] font-extrabold tracking-[-0.02em] text-pretty">
-            {t(`${ns}.${card.key}.title`)}
+        <div className="flex flex-1 flex-col gap-3.5 p-[clamp(15px,1.6vw,20px)]">
+          <h3
+            title={service.name}
+            className="line-clamp-2 text-[clamp(15.5px,1.5vw,17.5px)] leading-[1.26] font-extrabold tracking-[-0.02em] text-pretty"
+          >
+            {service.name}
           </h3>
-          {/* No trailing padding. It used to reserve ~50px here for something
-              that does not exist — the arrow lives in the plum spine — and that
-              dead gutter was what squeezed "10 USD" and "1 day" into breaking
-              across two lines each. */}
-          <div className="flex items-end justify-between gap-3">
-            {/* `min-w-0` so this column is allowed to shrink at all; without it
-                a flex item refuses to go below its content width and pushes the
-                unit off instead. */}
+          <div className="mt-auto flex items-end justify-between gap-3">
             <span className="flex min-w-0 flex-col gap-0.5">
               <span className="font-display text-[11px] font-bold tracking-[0.16em] text-muted uppercase">
                 {t("home.categoryGroups.startsAt")}
               </span>
-              {/* One text node at one size, so the amount and the currency are
-                  necessarily identical — and `nowrap` keeps them on one line. */}
               <span className="text-[clamp(19px,2vw,24px)] leading-none font-black tracking-[-0.03em] whitespace-nowrap text-brand">
-                {card.price}
+                {money(service.price, currency)}
               </span>
             </span>
-            {/* `flex-none`: the duration is short and fixed, so it should hold
-                its width and let the price column absorb any squeeze. */}
-            <span className="flex flex-none items-center gap-1.5 pb-0.5 font-display text-xs font-bold tracking-[0.12em] whitespace-nowrap text-muted uppercase">
-              <Clock size={13} strokeWidth={2.2} aria-hidden className="shrink-0" />
-              {t(`${ns}.${card.key}.unit`)}
-            </span>
+            {service.item && (
+              <span className="flex min-w-0 items-center gap-1.5 pb-0.5 font-display text-xs font-bold tracking-[0.12em] whitespace-nowrap text-muted uppercase">
+                <Clock size={13} strokeWidth={2.2} aria-hidden className="shrink-0" />
+                <span className="inline truncate">{service.item}</span>
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -108,35 +109,65 @@ function Card({ card, index }: { card: CatalogueCard; index: number }) {
   );
 }
 
-export function ServiceCatalogue() {
+/** The catalogue's outline while `/services` loads. */
+export function CatalogueSkeleton() {
+  return (
+    <div aria-hidden className="bg-page px-[clamp(18px,3vw,44px)] pt-[clamp(34px,4vw,60px)] pb-[clamp(48px,6vw,96px)]">
+      <div className="mx-auto flex max-w-[1240px] flex-col gap-[clamp(48px,6vw,88px)]">
+        {[0, 1].map((s) => (
+          <div key={s} className="flex flex-col gap-[clamp(24px,2.8vw,36px)]">
+            <span className="flex flex-col gap-2">
+              <span className="h-3 w-24 animate-pulse bg-border" />
+              <span className="h-8 w-48 animate-pulse bg-border" />
+            </span>
+            <div className="grid grid-cols-1 gap-[clamp(20px,2.2vw,30px)] mid:grid-cols-2 wide:grid-cols-4">
+              {Array.from({ length: FEATURED }, (_, i) => (
+                <div key={i} className="grid grid-cols-[clamp(34px,3.2vw,42px)_minmax(0,1fr)] border border-border bg-bg">
+                  <span className="animate-pulse bg-border" />
+                  <span className="flex flex-col">
+                    <span className="aspect-[1.42] animate-pulse bg-border/70" />
+                    <span className="flex flex-col gap-3 p-[clamp(15px,1.6vw,20px)]">
+                      <span className="h-4 w-4/5 animate-pulse bg-border" />
+                      <span className="h-6 w-1/2 animate-pulse bg-border" />
+                    </span>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Every category from `GET /services`: its first four services as cards over
+ * the full "All X services" list - the shape of the old catalogue. Each
+ * section carries `#cat-<slug>`, which the rail jumps to.
+ */
+export function ServiceCatalogue({ catalogue }: { catalogue: Catalogue }) {
   const { t } = useLang();
-  const scope = useGsapScope();
+  /* Reset on the data: the sections mount once it has landed, and the scope
+     must run over them or they stay hidden under `.anim-ready`. */
+  const scope = useGsapScope(undefined, catalogue.serviceCount);
 
   return (
     <div ref={scope} className="bg-page px-[clamp(18px,3vw,44px)] pt-[clamp(34px,4vw,60px)] pb-[clamp(48px,6vw,96px)]">
       <div className="mx-auto flex max-w-[1240px] flex-col gap-[clamp(48px,6vw,88px)]">
-        {CATALOGUE.map((cat) => (
+        {catalogue.categories.map((cat) => (
           <section
-            key={cat.key}
+            key={cat.id}
             /* The rail is 56px of sticky chrome; without this the anchor jump
                parks each heading underneath it. */
-            id={sectionId(cat.key)}
+            id={categoryAnchor(cat.slug)}
             className="flex scroll-mt-[72px] flex-col gap-[clamp(24px,2.8vw,36px)]"
           >
             <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
               <div className="flex min-w-0 flex-col gap-2">
-                <Eyebrow
-                  icon={
-                    <span className="flex h-4 w-4 items-center justify-center [&>svg]:h-4 [&>svg]:w-4">
-                      {cat.icon}
-                    </span>
-                  }
-                  data-anim="up"
-                >
-                  {t("servicesPage.category")}
-                </Eyebrow>
+                <Eyebrow data-anim="up">{t("servicesPage.category")}</Eyebrow>
                 <h2 className="text-[clamp(24px,2.6vw,36px)] leading-[1.06]" data-anim-split>
-                  {t(cat.nameKey)}
+                  {cat.name}
                 </h2>
               </div>
               <Link
@@ -155,34 +186,37 @@ export function ServiceCatalogue() {
               data-anim-stagger="rise"
               data-anim-gap="0.09"
             >
-              {cat.cards.map((card, i) => (
-                <Card key={card.key} card={card} index={i} />
+              {cat.services.slice(0, FEATURED).map((service, i) => (
+                <Card key={service.id} service={service} index={i} tag={cat.name} currency={catalogue.currency} />
               ))}
             </div>
 
-            {/* ── "All X services" ── the old catalogue's text list under each
-                grid: everything in the category, not just the four featured. */}
+            {/* ── "All X services" ── everything in the category, the four
+                featured included, as the old catalogue listed it. */}
             <div className="flex flex-col gap-[clamp(12px,1.4vw,16px)]">
               <h4 className="font-display text-[clamp(14px,1.3vw,16px)] font-bold tracking-[0.14em] text-muted uppercase">
-                {t("servicesPage.allOf")} {t(cat.nameKey)} {t("servicesPage.services")}
+                {t("servicesPage.allOf")} {cat.name} {t("servicesPage.services")}
               </h4>
               <ul
                 className="grid grid-cols-1 gap-x-[clamp(16px,2vw,28px)] gap-y-2 mid:grid-cols-2 wide:grid-cols-3"
                 data-anim-stagger="up"
                 data-anim-gap="0.05"
               >
-                {cat.list.map((key) => (
-                  <li key={key}>
+                {cat.services.map((service) => (
+                  <li key={service.id}>
                     <Link
-                      href={`/services?service=${key}`}
+                      href={SERVICE_ROUTES.details(service.id)}
                       className="flex w-full items-center gap-3 border border-border bg-surface px-4 py-3 text-[clamp(13px,1.3vw,15px)] font-medium text-heading transition-colors hover:border-primary hover:bg-card hover:text-brand"
                     >
-                      <span className="flex h-5 w-5 flex-none items-center justify-center bg-brand/14 text-brand">
-                        <Check size={12} strokeWidth={3} aria-hidden />
-                      </span>
-                      <span className="min-w-0 truncate">
-                        {t(`servicesPage.lists.${cat.key}.${key}`)}
-                      </span>
+                    <span className="flex h-5 w-5 flex-none items-center justify-center bg-brand/14 text-brand">
+                      <Check size={12} strokeWidth={3} aria-hidden />
+                    </span>
+                    <span className="min-w-0 flex-1 truncate" title={service.name}>
+                      {service.name}
+                    </span>
+                    <span className="flex-none text-[13px] font-bold text-brand tabular-nums">
+                      {money(service.price, catalogue.currency)}
+                    </span>
                     </Link>
                   </li>
                 ))}

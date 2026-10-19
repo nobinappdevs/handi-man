@@ -19,24 +19,18 @@ import { useGsapScope } from "@/hooks/useGsap";
 import { useRecaptcha } from "@/hooks/useBasicSettings";
 import { Recaptcha } from "@/components/share/Recaptcha";
 import { Eyebrow } from "@/components/share/Eyebrow";
-import { SERVICE_KEYS } from "@/components/homepage/homeData";
 import {
   contactRequestSchema,
   type ContactRequest,
 } from "@/schemas/contact.schema";
+import { useContactSubmit } from "@/hooks/useContact";
 import { cn } from "@/components/ui/cn";
-import { Select } from "@/components/ui/Select";
 import contactPhoto from "@public/assets/home/contact-photo.webp";
 
 /* Fields sit on the plum panel, so they are translucent white rather than the
    `field-*` tokens the booking band uses on its light panel. */
 const FIELD =
   "h-[54px] w-full border bg-white/[0.12] px-4 text-[14.5px] font-medium text-white outline-none transition-colors placeholder:text-white/55 focus:border-white/60";
-
-/* The same glass box for the service picker. Only the trigger sits on plum -
-   its menu portals to <body> and draws on the themed card surface. */
-const SELECT_SKIN =
-  "h-[54px] border border-white/[0.28] bg-white/[0.12] px-4 text-[14.5px] font-semibold text-white hover:border-white/60 focus-visible:border-white/60";
 
 const ERROR_TEXT ="mt-1.5 block text-[12.5px] font-medium text-red-300";
 
@@ -48,9 +42,9 @@ const ERROR_TEXT ="mt-1.5 block text-[12.5px] font-medium text-red-300";
  * card treatment. Below `wide:` it drops the blur/shadow/overlap and just
  * stacks full-width.
  *
- * Validation is local (Zod + RHF); on submit the button switches to its sent
- * label. Wire the mutation in when the contact endpoint exists — toast and
- * navigation belong in that hook, not here.
+ * The fields are the API's (`POST /web/contact/message/submit`): first and
+ * last name, email, message. The toast lives in `useContactSubmit`; on
+ * success the form clears and the button switches to its sent label.
  */
 export function Contact() {
   const { t } = useLang();
@@ -59,23 +53,20 @@ export function Contact() {
   const { enabled: recaptchaEnabled, siteKey } = useRecaptcha();
   const [captchaToken, setCaptchaToken] = useState("");
   const [captchaError, setCaptchaError] = useState("");
-
-  const serviceOptions = SERVICE_KEYS.map((key) => ({
-    value: key,
-    label: t(`home.services.${key}`),
-  }));
+  const [captchaReset, setCaptchaReset] = useState(0);
+  const submit = useContactSubmit(t("home.contact.success"));
 
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ContactRequest>({
     resolver: zodResolver(contactRequestSchema),
     defaultValues: {
-      full_name: "",
+      first_name: "",
+      last_name: "",
       email: "",
-      phone: "",
-      service: SERVICE_KEYS[0],
       message: "",
     },
   });
@@ -152,16 +143,28 @@ export function Contact() {
 
             <form
               noValidate
-              onSubmit={handleSubmit(() => {
-                // No contact endpoint exists in the API collection yet, so this
-                // still ends at the local "sent" state — but the challenge is
-                // enforced now, so wiring a service in later changes one line.
+              onSubmit={handleSubmit((values) => {
                 if (recaptchaEnabled && !captchaToken) {
                   setCaptchaError(t("auth.recaptchaError"));
                   return;
                 }
                 setCaptchaError("");
-                setSent(true);
+                submit.mutate(
+                  { ...values, ...(recaptchaEnabled ? { recaptchaToken: captchaToken } : {}) },
+                  {
+                    onSuccess: () => {
+                      reset();
+                      setSent(true);
+                    },
+                    // A token is single-use, success or not.
+                    onSettled: () => {
+                      if (recaptchaEnabled) {
+                        setCaptchaToken("");
+                        setCaptchaReset((n) => n + 1);
+                      }
+                    },
+                  },
+                );
               })}
               className="flex flex-col gap-3"
             >
@@ -171,10 +174,17 @@ export function Contact() {
                 data-anim-gap="0.07"
               >
                 <Field
-                  name="full_name"
+                  name="first_name"
                   control={control}
                   errors={errors}
-                  placeholder={t("home.contact.fullName")}
+                  placeholder={t("home.contact.firstName")}
+                  onEdit={() => setSent(false)}
+                />
+                <Field
+                  name="last_name"
+                  control={control}
+                  errors={errors}
+                  placeholder={t("home.contact.lastName")}
                   onEdit={() => setSent(false)}
                 />
                 <Field
@@ -184,35 +194,8 @@ export function Contact() {
                   errors={errors}
                   placeholder={t("home.contact.email")}
                   onEdit={() => setSent(false)}
+                  className="mid:col-span-2"
                 />
-                <Field
-                  name="phone"
-                  type="tel"
-                  control={control}
-                  errors={errors}
-                  placeholder={t("home.contact.phone")}
-                  onEdit={() => setSent(false)}
-                />
-
-                <div>
-                  <Controller
-                    name="service"
-                    control={control}
-                    render={({ field }) => (
-                      <Select
-                        value={field.value}
-                        onChange={(value) => {
-                          field.onChange(value);
-                          setSent(false);
-                        }}
-                        options={serviceOptions}
-                        aria-label={t("home.contact.serviceLabel")}
-                        skin={SELECT_SKIN}
-                        chevronClassName="text-white/70"
-                      />
-                    )}
-                  />
-                </div>
               </div>
 
               <div data-anim="up" data-anim-delay="0.1">
@@ -245,6 +228,7 @@ export function Contact() {
                 <div data-anim="up" data-anim-delay="0.14">
                   <Recaptcha
                     siteKey={siteKey}
+                    resetSignal={captchaReset}
                     onVerify={(token) => {
                       setCaptchaToken(token);
                       if (token) setCaptchaError("");
@@ -257,9 +241,16 @@ export function Contact() {
               <div className="flex flex-wrap items-center gap-3.5" data-anim="up" data-anim-delay="0.16">
                 <button
                   type="submit"
-                  className="flex h-14 flex-1 min-w-[200px] cursor-pointer items-center justify-center gap-2.5 bg-ink font-display text-[15px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-white hover:text-ink"
+                  disabled={submit.isPending}
+                  className="flex h-14 flex-1 min-w-[200px] cursor-pointer items-center justify-center gap-2.5 bg-ink font-display text-[15px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-white hover:text-ink disabled:cursor-wait disabled:opacity-70"
                 >
-                  {t(sent ? "home.contact.sent" : "home.contact.submit")}
+                  {t(
+                    submit.isPending
+                      ? "home.contact.sending"
+                      : sent
+                        ? "home.contact.sent"
+                        : "home.contact.submit",
+                  )}
                   <ArrowRight size={15} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
                 </button>
 
@@ -282,18 +273,20 @@ function Field({
   placeholder,
   onEdit,
   type = "text",
+  className,
 }: {
-  name: "full_name" | "email" | "phone";
+  name: "first_name" | "last_name" | "email";
   control: Control<ContactRequest>;
   errors: FieldErrors<ContactRequest>;
   placeholder: string;
   onEdit: () => void;
   type?: string;
+  className?: string;
 }) {
   const error = errors[name];
 
   return (
-    <div>
+    <div className={className}>
       <Controller
         name={name}
         control={control}

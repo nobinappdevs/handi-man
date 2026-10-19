@@ -1,20 +1,15 @@
 import { z } from "zod";
 
 /* ─────────────────────────── Contact request ───────────────────────────
- * The contact section's form. Field names are a first guess at the Laravel
- * payload — confirm them against the Handiman API collection when the contact
- * endpoint is documented, then add `services/contact.service.ts` +
- * `hooks/useContact.ts` behind it.
- *
- * Only the name is marked required in the design (`Full Name*`), but an email
- * is needed to reply at all, so it is required here too.
+ * POST /web/contact/message/submit — the contact section's form. Field names
+ * and limits are the collection's: `first_name` / `last_name` (max 255),
+ * `email` (max 255), `message` (max 5000), all required.
  */
 export const contactRequestSchema = z.object({
-  full_name: z.string().min(2, "Please enter your full name"),
-  email: z.string().min(1, "Email is required").email("Enter a valid email"),
-  phone: z.string().optional(),
-  service: z.string().min(1, "Choose a service"),
-  message: z.string().min(10, "Please describe the job in a little more detail"),
+  first_name: z.string().trim().min(1, "First name is required").max(255),
+  last_name: z.string().trim().min(1, "Last name is required").max(255),
+  email: z.string().trim().min(1, "Email is required").email("Enter a valid email").max(255),
+  message: z.string().trim().min(1, "Please write a message").max(5000),
 });
 
 export type ContactRequest = z.infer<typeof contactRequestSchema>;

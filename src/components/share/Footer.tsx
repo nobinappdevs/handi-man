@@ -16,6 +16,7 @@ import {
 import { Logo } from "@/components/share/Logo";
 import { Eyebrow } from "@/components/share/Eyebrow";
 import { newsletterSchema, type NewsletterRequest } from "@/schemas/newsletter.schema";
+import { useNewsletterSubscribe } from "@/hooks/useNewsletter";
 import { cn } from "@/components/ui/cn";
 
 const CONTACT_ICONS = { phone: Phone, email: Mail, address: MapPin };
@@ -33,11 +34,19 @@ export function Footer() {
   const { enabled: recaptchaEnabled, siteKey } = useRecaptcha();
   const [captchaToken, setCaptchaToken] = useState("");
   const [captchaError, setCaptchaError] = useState("");
+  const [captchaReset, setCaptchaReset] = useState(0);
+  const subscribe = useNewsletterSubscribe(t("footer.newsletter.success"));
 
-  const { control, handleSubmit } = useForm<NewsletterRequest>({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<NewsletterRequest>({
     resolver: zodResolver(newsletterSchema),
     defaultValues: { name: "", email: "" },
   });
+  const fieldError = errors.name?.message ?? errors.email?.message;
 
   return (
     <footer className="mt-[clamp(56px,6vw,90px)] bg-ink text-white">
@@ -90,16 +99,29 @@ export function Footer() {
             </p>
 
             <form
-              onSubmit={handleSubmit(() => {
-                // As with the contact form: no newsletter endpoint exists in
-                // the API collection yet, so this still ends locally — but the
-                // challenge is enforced, ready for a service behind it.
+              noValidate
+              onSubmit={handleSubmit((values) => {
                 if (recaptchaEnabled && !captchaToken) {
                   setCaptchaError(t("auth.recaptchaError"));
                   return;
                 }
                 setCaptchaError("");
-                setSubscribed(true);
+                subscribe.mutate(
+                  { ...values, ...(recaptchaEnabled ? { recaptchaToken: captchaToken } : {}) },
+                  {
+                    onSuccess: () => {
+                      reset();
+                      setSubscribed(true);
+                    },
+                    // A token is single-use, success or not.
+                    onSettled: () => {
+                      if (recaptchaEnabled) {
+                        setCaptchaToken("");
+                        setCaptchaReset((n) => n + 1);
+                      }
+                    },
+                  },
+                );
               })}
               className="flex flex-wrap gap-2.5"
             >
@@ -112,6 +134,7 @@ export function Footer() {
                     type="text"
                     placeholder={t("footer.newsletter.namePlaceholder")}
                     aria-label={t("footer.newsletter.namePlaceholder")}
+                    aria-invalid={errors.name ? true : undefined}
                     onChange={(e) => {
                       field.onChange(e);
                       setSubscribed(false);
@@ -129,6 +152,7 @@ export function Footer() {
                     type="email"
                     placeholder={t("footer.newsletter.emailPlaceholder")}
                     aria-label={t("footer.newsletter.emailPlaceholder")}
+                    aria-invalid={errors.email ? true : undefined}
                     onChange={(e) => {
                       field.onChange(e);
                       setSubscribed(false);
@@ -139,16 +163,28 @@ export function Footer() {
               />
               <button
                 type="submit"
-                className="flex h-[52px] flex-none cursor-pointer items-center gap-2.5 border-0 bg-primary px-[26px] font-display text-[14.5px] font-bold tracking-[0.14em] text-white uppercase transition-colors hover:bg-white hover:text-primary"
+                disabled={subscribe.isPending}
+                className="flex h-[52px] flex-none cursor-pointer items-center gap-2.5 border-0 bg-primary px-[26px] font-display text-[14.5px] font-bold tracking-[0.14em] text-white uppercase transition-colors hover:bg-white hover:text-primary disabled:cursor-wait disabled:opacity-70"
               >
-                {t(subscribed ? "footer.newsletter.subscribed" : "footer.newsletter.subscribe")}
+                {t(
+                  subscribe.isPending
+                    ? "footer.newsletter.subscribing"
+                    : subscribed
+                      ? "footer.newsletter.subscribed"
+                      : "footer.newsletter.subscribe",
+                )}
                 <ArrowRight size={15} strokeWidth={2.6} aria-hidden className="rtl:rotate-180" />
               </button>
+
+              {fieldError && (
+                <span className="basis-full text-[12.5px] font-semibold text-red-300">{fieldError}</span>
+              )}
 
               {recaptchaEnabled && (
                 <div className="basis-full">
                   <Recaptcha
                     siteKey={siteKey}
+                    resetSignal={captchaReset}
                     onVerify={(token) => {
                       setCaptchaToken(token);
                       if (token) setCaptchaError("");
